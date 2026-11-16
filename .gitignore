@@ -1,0 +1,23 @@
+# Gradle & Build outputs
+.gradle/
+.kotlin/
+.build-outputs/
+build/
+app/build/
+captures/
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+local.properties
+
+# Keystores & Secrets
+*.jks
+*.keystore
+*.keystore.base64
+.env
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db

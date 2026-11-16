@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YEME BINGO</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+:root{--bg:#14072a;--card:#1e0f3b;--navy:#e9dcff;--ink:#f1eafc;--mut:#b9a6d9;--line:#3b2468;--gold:#f0c75e;--g2:#d99a1e;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--ink);font-family:Roboto,system-ui,sans-serif;background:radial-gradient(900px 520px at 50% -8%,#5b21b655,transparent 70%),linear-gradient(180deg,#14072a,#0a0316) fixed;background-color:#0a0316;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#2a0f55;z-index:30}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:58px;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:linear-gradient(90deg,#2a0f55,#6d28d9,#2a0f55);color:#f6e7b4;border-bottom:1px solid #f0c75e66}
+.hr{display:flex;align-items:center;gap:8px}#lgb{background:none;border:1px solid #f0c75e88;color:#f6d77a;border-radius:24px;padding:9px 13px;font:700 15px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;min-width:52px}
+.lang{display:flex;gap:6px;padding:10px}.lang button{flex:1;padding:10px 2px;border-radius:8px;border:1px solid #f0c75e66;background:#25124a;color:#e9dcff;font:600 14px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}.lang button[aria-pressed=true]{background:linear-gradient(135deg,#f6d77a,#d99a1e);color:#2a0f55}
+.brand{background:none;border:0;font:700 25px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;cursor:pointer;padding:0}
+#mb{background:none;border:1px solid #f0c75e55;color:#f6d77a;font-size:30px;width:44px;height:44px;border-radius:50%;cursor:pointer}
+#dr{position:fixed;left:0;top:calc(58px + env(safe-area-inset-top,0px));bottom:0;width:min(64%,300px);background:linear-gradient(180deg,#2a0f55,#14072a);z-index:19;transform:translateX(-105%);transition:transform .25s;overflow:auto;box-shadow:6px 0 24px #000a}
+#dr.open{transform:none}
+.logo{padding:26px 10px 14px;text-align:center;font:700 52px/1 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;border-bottom:1px solid #f0c75e66}.logo small{display:block;font-size:15px;letter-spacing:3px;margin-top:8px}
+.who{text-align:center;font-weight:700;padding:14px 8px;border-bottom:1px solid #f0c75e33}
+#dr a{display:flex;gap:10px;align-items:center;padding:15px 14px;font-size:19px;color:#e9dcff;border-bottom:1px solid #ffffff14;cursor:pointer}
+#dr a.act{background:linear-gradient(90deg,#f6d77a,var(--g2));color:#2a0f55;font-weight:700}
+#sc{position:fixed;inset:0;background:#0006;z-index:18;display:none}#sc.show{display:block}
+main{max-width:480px;margin:0 auto;padding:12px 12px 40px}
+.cd{text-align:center;font:700 clamp(34px,12vw,52px) 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;margin:14px 0 4px}.cdl{text-align:center;color:var(--mut);margin-bottom:14px}
+.panel{background:linear-gradient(160deg,#2a1650,#1a0b33);border:1px solid #f0c75e33;border-radius:24px;padding:22px 20px;box-shadow:0 14px 34px #000a;margin-bottom:14px}
+.panel h2{font:700 28px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;text-align:center;margin:0;padding-bottom:10px;border-bottom:1px solid #f0c75e44}
+h4{font:600 20px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;margin:18px 0 8px}
+.fld{position:relative;margin-top:22px}.fld label{position:absolute;top:-11px;left:10px;background:#221244;padding:0 4px;color:var(--mut);font-size:16px}
+.fld input,.gn{width:100%;font:inherit;font-size:19px;padding:14px 10px;border:1.5px solid #5a37a0;border-radius:10px;background:transparent;color:var(--ink)}
+.fld input:focus{border-color:var(--gold);outline:0;box-shadow:0 0 0 3px #f0c75e44}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;font:700 20px Roboto,'Noto Sans Ethiopic',sans-serif;border-radius:12px;padding:16px 10px;border:1px solid #f0c75e88;cursor:pointer;color:#fff;background:linear-gradient(135deg,#9333ea,#5b21b6);margin-top:12px}
+.btn.g{background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;border:0}.btn.o{background:transparent;color:#f6d77a}
+.btn.s{font-size:17px;padding:13px 10px}.btn:disabled{opacity:.45;cursor:default}
+.btn:focus-visible,.nb:focus-visible,.cell:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.err{color:#ff8a9a;font-weight:700;margin-top:10px;min-height:20px}.note{font-size:14px;color:var(--mut);text-align:center}
+.hv{font-size:18px;margin-top:14px}.hv a{color:#f6d77a;font-weight:700;cursor:pointer}
+.wal{background:linear-gradient(135deg,#4b1d8f,#2a0f55);border:1px solid #f0c75e77;border-radius:16px;padding:14px;text-align:center;margin-bottom:12px}.wal small{display:block;color:var(--mut)}.wal b{font:700 36px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a}
+.txl{list-style:none;margin:8px 0;padding:0}.txl li{display:flex;justify-content:space-between;gap:8px;padding:8px 4px;border-bottom:1px solid var(--line);font-size:15px}.cr{color:#7ee2a8}.db{color:#ff8a9a}.pe{color:#f6d77a}
+.rc{background:linear-gradient(160deg,#2a1650,#1a0b33);border:1px solid #f0c75e44;border-radius:18px;padding:12px;margin-bottom:14px;box-shadow:0 10px 26px #0008}
+.rh{display:flex;align-items:center;gap:12px}.bd{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font:700 19px Roboto,'Noto Sans Ethiopic',sans-serif;color:#2a0f55;flex:none;box-shadow:0 4px 10px #0005}
+.rn{flex:1;min-width:0}.rn b{display:block;font-size:16px;color:#f6d77a}.rn small{color:var(--mut);font-size:12px}
+.rs{background:#14072a;border:1px solid #f0c75e55;color:#f6d77a;font-size:13px;font-weight:700;padding:7px 11px;border-radius:8px;white-space:nowrap}
+.rp{display:flex;justify-content:space-between;align-items:center;background:#0e0520;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:14px;color:var(--mut)}.rp b{color:#f6d77a}
+.rb{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font:700 15px Roboto,'Noto Sans Ethiopic',sans-serif;letter-spacing:.5px;cursor:pointer}.rb:disabled{background:#25124a;border:1px solid var(--line);color:var(--mut);opacity:.7;cursor:default}
+.wcard{background:#20103f;border:1.5px solid #8a6d3b;border-radius:30px;padding:22px 16px;margin-bottom:14px;text-align:center}
+.wcard>small{display:block;color:#b9a6d9;font-size:16px}.wbig{display:block;font:700 54px/1.2 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#efc45d;margin:2px 0}
+.wtab{display:flex;gap:12px;margin:18px 0}.wt{flex:1;padding:18px 6px;border-radius:40px;border:2px solid #efc45d;background:transparent;color:#efc45d;font:700 21px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}.wt.on{background:#efc45d;color:#2a0f55}
+.wpan{background:#27124d;border-radius:26px;padding:20px 16px;text-align:left}.wpan h4{margin:0 0 12px;font:700 22px Roboto,'Noto Sans Ethiopic',sans-serif;color:#efc45d}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.chip{padding:18px 2px;border-radius:16px;border:2px solid #5a37a0;background:#0a0516;color:#fff;font:700 15px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}.chip.on{background:#efc45d;border-color:#efc45d;color:#2a0f55}
+.rcv{background:#0a0516;border:2px solid #6b5a3b;border-radius:22px;padding:16px;margin:16px 0;line-height:1.7;font:700 17px Roboto,'Noto Sans Ethiopic',sans-serif;color:#fff}.rcv .g1{color:#efc45d;font-size:20px;display:block}.rcv .g2{color:#7ee2a8;font-size:19px}.rcv p{margin:8px 0 0;font:500 15px/1.8 Roboto,'Noto Sans Ethiopic',sans-serif;color:#cdbfe8}
+.pw{width:100%;padding:22px 8px;border:0;border-radius:40px;background:#efc45d;color:#2a0f55;font:700 26px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;box-shadow:0 6px 18px #0006}
+.sub2{width:100%;padding:20px 8px;border:0;border-radius:40px;background:linear-gradient(135deg,#9333ea,#6d28d9);color:#fff;font:700 22px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;margin-top:14px;box-shadow:0 6px 18px #0006}.sub2.gd{background:#efc45d;color:#2a0f55}.sub2:disabled{opacity:.5}
+.n2{color:#b9a6d9;font-size:16px;line-height:1.8;margin:16px 0 4px}.n2.s{font-size:15px;margin:6px 0 0 8px}
+.wpan .fld label{background:#27124d}.fld textarea{width:100%;min-height:92px;font:inherit;font-size:19px;padding:14px 120px 14px 14px;border:1.5px solid #5a37a0;border-radius:18px;background:transparent;color:var(--ink);resize:none}
+.pst{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:#3b2a45;border:1.5px solid #efc45d;color:#efc45d;border-radius:14px;padding:12px 14px;font:700 16px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}
+.ac{background:linear-gradient(160deg,#2a1650,#1a0b33);border:1px solid #f0c75e33;border-radius:14px;padding:14px;margin-bottom:12px;font-size:15px;line-height:1.55}
+.ac small{display:block;color:var(--mut);word-break:break-all}.ac a{color:#f6d77a}.ac .tm{float:right;font-weight:700;color:#7ee2a8}
+.ar{display:flex;gap:8px;margin-top:10px}.ar input{flex:1;min-width:0;font:inherit;font-size:17px;padding:9px;border:1.5px solid #5a37a0;border-radius:10px;background:transparent;color:var(--ink)}
+.ab{border:0;border-radius:10px;padding:10px 14px;font:700 15px Roboto,'Noto Sans Ethiopic',sans-serif;color:#fff;cursor:pointer;background:#6d28d9}.ab.ok{background:#1f9d6b}.ab.no{background:#c0392b}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.tabs button{flex:1 1 30%;padding:11px 3px;border-radius:10px;border:1px solid #5a37a0;background:#25124a;color:#e9dcff;font:700 13px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}.tabs button[aria-pressed=true]{background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55}
+.nums{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;max-height:250px;overflow-y:auto;padding:3px}
+.nb{min-height:36px;border:1px solid #5a37a0;background:#25124a;color:#e9dcff;border-radius:8px;font:500 13px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;padding:0}
+.nb[aria-pressed=true]{background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font-weight:700}
+.nb.occ{background:#4a1f2e;border-color:#c0392b;color:#ff9aa8;text-decoration:line-through}
+.pcard{background:#25124a;border:1px solid #f0c75e33;border-radius:20px;padding:14px}
+.gcard{background:linear-gradient(160deg,#4b1d8f,#2a0f55);border:1px solid #f0c75e66;border-radius:20px;padding:14px 12px 16px;margin-top:14px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.hdr{text-align:center;font:700 26px/1.4 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a}
+.cell{aspect-ratio:1;border:0;border-radius:10px;background:#25124a;color:#fff;font:700 clamp(18px,6vw,26px) Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+div.cell{cursor:default}.cell.on,.cell.free{background:linear-gradient(135deg,#a855f7,#6d28d9);box-shadow:inset 0 0 0 2px var(--gold)}.cell.free{color:#f6d77a;cursor:default}
+.cell.win{background:linear-gradient(135deg,#fff3c9,var(--gold));color:#2a0f55}.cell.sh{animation:sh .3s}@keyframes sh{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.goal{display:flex;justify-content:space-between;gap:10px;background:linear-gradient(90deg,#3b1d73,#2a1650);border:1px solid #f0c75e66;border-radius:10px;padding:12px 16px;font:500 17px Roboto,'Noto Sans Ethiopic',sans-serif}.goal b{color:#f6d77a}
+.board{background:#0e0520;border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}.bgr{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.bn{aspect-ratio:1;display:grid;place-items:center;border-radius:5px;background:#25124a;color:#a995cf;font:500 clamp(11px,3.3vw,14px) Roboto,'Noto Sans Ethiopic',sans-serif}.bn.c{background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font-weight:700}.bn.l{outline:2px solid #fff;outline-offset:1px}
+.last{text-align:center;color:var(--mut);margin:10px 0 0;font-size:15px}
+.bingo{width:100%;border:0;border-radius:50px;background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font:700 24px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;letter-spacing:3px;text-transform:uppercase;padding:16px;margin:16px 0 6px;cursor:pointer}
+.opt{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;margin-top:8px}.opt button{background:#25124a;border:1px solid #5a37a0;color:#f6d77a;border-radius:10px;padding:10px 16px;font:500 16px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer}
+#msg{text-align:center;font-weight:700;min-height:22px;margin:8px 0;color:#ff9ab0}
+#over,#pm{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:20px;z-index:40}#over.show,#pm.show{display:grid}
+#over>div,#pm>div{background:linear-gradient(160deg,#2a1650,#1a0b33);border:1px solid #f0c75e66;border-radius:22px;padding:26px;text-align:center;max-width:340px;width:100%}
+#over h2{font:700 40px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;margin:0}#pt{white-space:pre-line;line-height:1.6;font-size:18px}
+.toast{position:fixed;left:12px;right:12px;top:calc(70px + env(safe-area-inset-top,0px));z-index:70;max-width:456px;margin:0 auto;background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font:700 17px Roboto,'Noto Sans Ethiopic',sans-serif;border-radius:14px;padding:14px 16px;text-align:center;box-shadow:0 10px 30px #000a}
+.sq{width:100%;font:inherit;font-size:17px;padding:12px;border:1.5px solid #5a37a0;border-radius:10px;background:transparent;color:var(--ink);margin-bottom:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header class="top"><button class="brand" data-go="home">▦ YEME BINGO</button><div class="hr"><button id="lgb" aria-label="Language">EN</button><button id="mb" aria-label="Menu">☰</button></div></header>
+<nav id="dr" aria-label="Menu"></nav><div id="sc"></div>
+<main id="view"></main>
+<div id="over"><div><h2 id="oh">BINGO!</h2><p id="op"></p><div id="ocard"></div><button class="btn g" id="again">Back to rooms</button></div></div>
+<div id="pm" role="alertdialog"><div><p id="pt"></p><button class="btn" id="pk">OK</button></div></div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var PAY_BIRR=30,PAY_NAME='Yemane',PAY_NUM='0939383425';
+var ADMIN_HASH="479784c9aa0ca8dfe80ddad12ace91cc49c717f96a92f6c8f5a5b14721bc2f8b";
+var ROOMS=[[10,'Mini Starter',30],[20,'Standard Room',60],[50,'High Roller Suite',60],[100,'Mega Addis Jackpot',100],[200,'Habesha VIP Club',150]];
+var RCYC=600000,RWAIT=180000,INT=5000,LEAD=5000,PCT=.8;
+function lg(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+function ls(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function sha256(str){var m=unescape(encodeURIComponent(str)),W=Math.pow(2,32),h=[],k=[],pc=0,comp={},i,j,w=[],out='',bl=m.length*8,R=function(x,n){return(x>>>n)|(x<<(32-n))};
+  for(var c=2;pc<64;c++)if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=1;if(pc<8)h[pc]=(Math.pow(c,.5)*W)|0;k[pc++]=(Math.pow(c,1/3)*W)|0}
+  m+='\x80';while(m.length%64-56)m+='\x00';
+  for(i=0;i<m.length;i++)w[i>>2]|=m.charCodeAt(i)<<((3-i%4)*8);
+  w.push((bl/W)|0);w.push(bl|0);
+  for(j=0;j<w.length;j+=16){var x=w.slice(j,j+16),o=h.slice(0,8),v=h.slice(0,8);
+    for(i=0;i<64;i++){if(i>=16){var a15=x[i-15],a2=x[i-2];x[i]=(x[i-16]+(R(a15,7)^R(a15,18)^(a15>>>3))+x[i-7]+(R(a2,17)^R(a2,19)^(a2>>>10)))|0}
+      var e=v[4],a=v[0],t1=(v[7]+(R(e,6)^R(e,11)^R(e,25))+((e&v[5])^(~e&v[6]))+k[i]+x[i])|0,t2=((R(a,2)^R(a,13)^R(a,22))+((a&v[1])^(a&v[2])^(v[1]&v[2])))|0;
+      v=[(t1+t2)|0,v[0],v[1],v[2],(v[3]+t1)|0,v[4],v[5],v[6]]}
+    for(i=0;i<8;i++)h[i]=(o[i]+v[i])|0}
+  for(i=0;i<8;i++)out+=('00000000'+(h[i]>>>0).toString(16)).slice(-8);return out}
+async function hash(s){try{var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('sb:'+s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}catch(e){return btoa(unescape(encodeURIComponent(s)))}}
+
+/* ===== data layer: Firebase, falls back to this browser ===== */
+var FBCFG={apiKey:"AIzaSyDrYOOePFsUCPHCPdNHwB05FPna-F_thvA",authDomain:"wow-878fc.firebaseapp.com",databaseURL:"https://wow-878fc-default-rtdb.firebaseio.com",projectId:"wow-878fc",storageBucket:"wow-878fc.firebasestorage.app",messagingSenderId:"498780669062",appId:"1:498780669062:web:4610c2fba867f2c2a63d07"};
+var DB=null,READY=false,OFF=0,RT0=0,C={users:{},pay:[],wd:[],wh:[],ends:{},games:{},rooms:{}},LEFT=null;
+function now(){return Date.now()+OFF}
+function ukey(n){return encodeURIComponent(n).replace(/\./g,'%2E')}
+function session(){return lg('sb_session',null)}
+function users(){return DB?C.users:lg('sb_users',{})}
+function pays(){return DB?C.pay:lg('sb_pay',[])}
+function wds(){return DB?C.wd:lg('sb_wd',[])}
+function isAdm(){return lg('sb_as',false)===ADMIN_HASH}
+function bal(r){return r.wallet||0}
+function me(){var u=session();return u?users()[u]:null}
+function refresh(){clearTimeout(RT0);RT0=setTimeout(function(){if(!READY)return;var v=location.hash.slice(1)||'home',a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;if(v==='admin'||v==='wallet'||v==='home'){if(v==='wallet')wsv();var y=scrollY;route();scrollTo(0,y)}},200)}
+function initFB(cb){var fin=false,seen={},tm;
+  function off(){if(fin)return;fin=true;clearTimeout(tm);DB=null;C.ends=lg('sb_ends',{});C.games=lg('sb_games',{});C.rooms=lg('sb_rooms',{});cb()}
+  function got(k){if(!fin){seen[k]=1;if(seen.u&&seen.p){fin=true;clearTimeout(tm);cb()}}else refresh()}
+  tm=setTimeout(off,8000);if(!window.firebase)return off();
+  try{firebase.initializeApp(FBCFG);DB=firebase.database();
+    DB.ref('users').on('value',function(sn){var v=sn.val()||{},o={};Object.keys(v).forEach(function(k){var r=v[k];if(!r||!r.name)return;r.tx=Array.isArray(r.tx)?r.tx:Object.values(r.tx||{});o[r.name]=r});C.users=o;got('u')},off);
+    DB.ref('pays').on('value',function(sn){var v=sn.val()||{};C.pay=Object.keys(v).map(function(k){return v[k]}).sort(function(a,b){return a.ts-b.ts});got('p')},off);
+    DB.ref('wds').on('value',function(sn){var v=sn.val()||{};C.wd=Object.keys(v).map(function(k){return v[k]}).sort(function(a,b){return a.ts-b.ts});if(READY)refresh()});
+    DB.ref('games').on('value',function(sn){C.games=sn.val()||{}});
+    DB.ref('winners').on('value',function(sn){var v=sn.val()||{};C.wh=Object.keys(v).map(function(k){return v[k]}).filter(function(x){return x&&x.at}).sort(function(a,b){return a.at-b.at});if(READY)refresh()},function(){});
+    DB.ref('cartelas').on('value',function(sn){C.rooms=sn.val()||{}},function(){});
+    DB.ref('.info/serverTimeOffset').on('value',function(sn){OFF=sn.val()||0})
+  }catch(e){off()}}
+function setBal(us,u,v,l,a,cb){var r=us[u];r.wallet=v;r.tx=(r.tx||[]).concat([{l:l,a:a}]).slice(-20);
+  if(!DB){ls('sb_users',us);if(cb)cb(true);return}
+  DB.ref('users/'+ukey(u)).transaction(function(c){if(!c)return c;var nb=bal(c)+a;if(nb<0)return;c.wallet=nb;c.tx=(Array.isArray(c.tx)?c.tx:Object.values(c.tx||{})).concat([{l:l,a:a}]).slice(-20);return c},function(e,ok){if(cb)cb(!e&&!!ok)})}
+function newUser(n,rec){rec.name=n;return new Promise(function(res){
+  if(!DB){var us=users();us[n]=rec;ls('sb_users',us);res(true);return}
+  DB.ref('users/'+ukey(n)).transaction(function(c){return c?undefined:rec},function(e,ok){if(!e&&ok)C.users[n]=rec;res(!e&&!!ok)})})}
+function delUser(us,n){delete us[n];if(DB)DB.ref('users/'+ukey(n)).remove();else ls('sb_users',us)}
+function addPay(x){if(DB){C.pay.push(x);return DB.ref('pays/'+x.id).set(x)}var l=pays();l.push(x);ls('sb_pay',l);return Promise.resolve()}
+function addWd(x){if(DB){C.wd.push(x);return DB.ref('wds/'+x.id).set(x)}var l=wds();l.push(x);ls('sb_wd',l);return Promise.resolve()}
+function decide(col,key,l,r,st,amt,done){var at=Date.now();r.st=st;r.at=at;if(amt)r.amt=amt;
+  if(!DB){ls(key,l);if(done)done();return}
+  DB.ref(col+'/'+r.id).transaction(function(c){if(!c||c.st!=='pending')return;c.st=st;c.at=at;if(amt)c.amt=amt;return c},function(e,ok){if(!e&&ok&&done)done()})}
+function live(x){return x.st==='pending'||(x.st!=='used'&&now()-(x.at||x.ts)<72*36e5)}
+function purgePays(){var n=now(),l=pays(),old=l.filter(function(x){return (x.st==='approved'||x.st==='declined')&&n-(x.at||x.ts)>=72*36e5});if(!old.length)return;
+  var tomb=old.filter(function(x){return x.st==='approved'}).map(function(x){return {id:'r_'+x.rid,u:'-',amt:0,rid:x.rid,link:'',ts:n,st:'used'}}),gone={};old.forEach(function(x){gone[x.id]=1});
+  var keep=l.filter(function(x){return !gone[x.id]}).filter(function(x){return !tomb.some(function(t){return t.id===x.id})}).concat(tomb);
+  if(DB){old.forEach(function(x){DB.ref('pays/'+x.id).remove()});tomb.forEach(function(t){DB.ref('pays/'+t.id).set(t)});C.pay=keep}else ls('sb_pay',keep)}
+function wins(){var n=now();return (DB?C.wh:lg('sb_wh',[])).filter(function(x){return n-x.at<864e5})}
+function addWin(x){if(DB){C.wh.push(x);DB.ref('winners/'+x.id).set(x)}else{var l=lg('sb_wh',[]).filter(function(y){return y.id!==x.id});l.push(x);ls('sb_wh',l)}}
+function purgeWins(){var n=now(),D=864e5;if(DB){C.wh.forEach(function(x){if(n-x.at>=D)DB.ref('winners/'+x.id).remove()});C.wh=C.wh.filter(function(x){return n-x.at<D})}else{var l=lg('sb_wh',[]),k=l.filter(function(x){return n-x.at<D});if(k.length!==l.length)ls('sb_wh',k)}}
+function pcount(g){return ((C.games[g]||{}).cartelas)||0}
+function addPool(g){if(DB)DB.ref('games/'+g+'/cartelas').transaction(function(c){return (c||0)+1});else{C.games[g]=C.games[g]||{};C.games[g].cartelas=pcount(g)+1;ls('sb_games',C.games)}}
+function taken(g,n){return !!C.rooms[g+'t'+n]}
+function claimT(g,n,u,cb){var k=g+'t'+n;if(DB)DB.ref('cartelas/'+k).transaction(function(c){return c?undefined:{u:u}},function(e,ok){cb(!e&&!!ok,e)});else{if(C.rooms[k]){cb(false);return}C.rooms[k]={u:u};ls('sb_rooms',C.rooms);cb(true)}}
+function unclaimT(g,n){var k=g+'t'+n;if(DB)DB.ref('cartelas/'+k).remove();else{delete C.rooms[k];ls('sb_rooms',C.rooms)}}
+function declareWin(g,rec,cb){if(!DB){if(C.ends[g]){cb(false);return}C.ends[g]=rec;ls('sb_ends',C.ends);cb(true);return}
+  var tryP=function(path,next){DB.ref(path).transaction(function(c){return c?undefined:rec},function(e,ok){if(e&&next){next();return}cb(!e&&!!ok,e)})};
+  tryP('ends/'+g,function(){tryP('games/'+g+'/win',null)})}
+function clean(){if(!DB)return;var cc=rcyc().c-3;['cartelas','games','ends'].forEach(function(p){DB.ref(p).once('value',function(sn){var v=sn.val()||{};Object.keys(v).forEach(function(k){if(+k.slice(1).split('_')[0]<cc)DB.ref(p+'/'+k).remove()})})})}
+setInterval(function(){if(READY&&isAdm()){clean();purgeWins();purgePays()}},6e4);
+
+/* ===== rooms ===== */
+function rcyc(){var n=now(),c=Math.floor(n/RCYC);return{n:n,c:c,s:c*RCYC,st:c*RCYC+RWAIT}}
+function gid(a,c){return 'c'+c+'_'+a}
+function mmss(ms){var s=Math.max(0,Math.ceil(ms/1000));return ('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)}
+function toast(t){var d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},8000)}
+function note(t){$('pt').textContent=t;$('pm').classList.add('show');$('pk').focus()}
+$('pk').onclick=function(){$('pm').classList.remove('show')};
+function refund(j){var u=session(),pay=function(){var us=users();if(us[u])setBal(us,u,bal(us[u])+j.a,'Room refund',j.a,function(){toast('Not enough players in the '+j.a+' ETB room. Stake refunded.')})};
+  if(DB)DB.ref('games/'+j.gid+'/rf/'+ukey(u)).transaction(function(c){return c?undefined:1},function(e,ok){if(!e&&ok)pay()});else pay()}
+function RJ(){var u=session();if(!u)return null;var j=lg('sb_rj_'+u,null);if(!j)return null;var st=j.c*RCYC+RWAIT,n=now();
+  if(n>=st&&!j.ok){if(pcount(j.gid)<2){ls('sb_rj_'+u,null);refund(j);return null}j.ok=1;ls('sb_rj_'+u,j)}
+  if(n>=st+LEAD+75*INT+2000){ls('sb_rj_'+u,null);return null}
+  return j}
+var RP=null,RIV=null;
+function rdraw(){var v=$('rv');if(!v)return;var rec=me();
+  if(!rec){v.dataset.m='';v.innerHTML='<div class="panel"><h2>Stake Rooms</h2><p class="note">Log in to join a room.</p><button class="btn" data-go="home">Login</button></div>';return}
+  if(RP){rpick();return}
+  var R=rcyc(),j=RJ(),wt=R.n<R.st;
+  if(v.dataset.m!=='lobby'){v.dataset.m='lobby';var BC=['#e9dcff','#f6d77a','#f0c75e','#e5b53a','#d99a1e'],h='<div class="wal"><small>Wallet</small><b id="wb"></b><button class="ab" id="dep" style="margin-top:8px;background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55">+ Deposit</button></div>';
+    ROOMS.forEach(function(r,i){var a=r[0];h+='<div class="rc"><div class="rh"><div class="bd" style="background:'+BC[i]+'">'+a+'</div><div class="rn"><b>'+r[1]+'</b><small>Stake: '+a+' ETB / Ticket</small></div><span class="rs" id="rs'+a+'"></span></div><div class="rp"><span id="rn'+a+'"></span><b id="rz'+a+'"></b></div><button class="rb" id="rb'+a+'" data-rm="'+a+'"></button></div>'});
+    v.innerHTML=h;$('dep').onclick=function(){PANEL='d';go('wallet')}}
+  $('wb').textContent=bal(rec)+' ETB';
+  ROOMS.forEach(function(r){var a=r[0],g=gid(a,R.c),t=pcount(g),mine=j&&j.gid===g;
+    $('rs'+a).textContent=mine?'Joined #'+j.n:wt?'⏳ '+mmss(R.st-R.n):'Running';
+    $('rn'+a).textContent='👥 '+t+'/'+r[2]+' Players';$('rz'+a).textContent='Prize: '+Math.floor(t*a*PCT)+' ETB';
+    var b=$('rb'+a);b.disabled=!wt||!!j||t>=r[2];b.textContent=mine?'✔ JOINED':'JOIN ROOM'})}
+function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,
+  h='<button class="btn o s" data-rx="1">‹ Back</button><h4>'+r[1]+' · '+RP.a+' ETB · starts in <span id="rt">'+mmss(R.st-R.n)+'</span></h4><div class="nums">';
+  for(var n=1;n<=r[2];n++)h+='<button class="nb'+(taken(RP.g,n)?' occ':'')+'" aria-pressed="'+(n===RP.n)+'" data-rn="'+n+'">'+n+'</button>';
+  v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+bal(rec)+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1">Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert"></div>';
+  o=v.querySelector('.nums');if(o)o.scrollTop=y}
+function rpup(){var R=rcyc(),t=$('rt');if(t)t.textContent=mmss(R.st-R.n);document.querySelectorAll('#rv .nb').forEach(function(b){b.classList.toggle('occ',taken(RP.g,+b.dataset.rn))})}
+function rmsg(t){var m=$('rm');if(m)m.textContent=t}
+function rjoin(){var u=session(),us=users(),r=us[u],a=RP.a,n=RP.n,g=RP.g,R=rcyc();
+  if(R.n>=R.st||gid(a,R.c)!==g)return rmsg('This round has already started.');
+  if(RJ())return rmsg('You already joined a room.');
+  if(taken(g,n))return rmsg('Ticket #'+n+' is taken. Choose another.');
+  if(bal(r)<a)return rmsg('Not enough balance. Deposit first.');
+  claimT(g,n,u,function(ok,err){if(!ok){rpick();rmsg(err?'Could not reserve the ticket ('+(err.code||err.message)+'). Check your connection and Firebase rules.':'Ticket #'+n+' was just taken.');return}
+    setBal(us,u,bal(r)-a,'Room '+a+' ETB (#'+n+')',-a,function(ok2){if(!ok2){unclaimT(g,n);rmsg('Not enough balance.');return}
+      addPool(g);ls('sb_rj_'+u,{gid:g,a:a,n:n,c:R.c});RP=null;rdraw();note('✔ Joined with ticket #'+n+'. The game starts automatically when the countdown ends.')})})}
+function rtick(){if(!$('rv'))return;if(RP){var R=rcyc();if(R.n>=R.st||gid(RP.a,R.c)!==RP.g){RP=null;rdraw()}else rpup()}else rdraw()}
+document.addEventListener('click',function(e){if(e.target.closest('[data-dep]')){PANEL='d';go('wallet')}});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-rm],[data-rx],[data-rn],[data-rj]');if(!b||!$('rv'))return;var d=b.dataset;
+  if(d.rm){var a=+d.rm,R=rcyc();RP={a:a,g:gid(a,R.c),n:1};rpick()}
+  else if(d.rx){RP=null;rdraw()}
+  else if(d.rn){RP.n=+d.rn;rpick();if(taken(RP.g,RP.n))rmsg('Ticket #'+RP.n+' is taken.')}
+  else if(d.rj)rjoin()});
+setInterval(function(){var j=READY&&RJ();if(j&&location.hash!=='#game'&&now()>=j.c*RCYC+RWAIT&&LEFT!==j.gid)go('game')},1000);
+
+/* ===== cards & game ===== */
+function rg(a,b){var r=[];for(var i=a;i<=b;i++)r.push(i);return r}
+function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(a,r){for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function cardFor(n,seed){var r=rng(seed*1000+n*7919+13),c=[];for(var i=0;i<5;i++)c.push(shuf(rg(i*15+1,i*15+15),r).slice(0,5));c[2][2]=0;return c}
+function cellsHTML(card,m,tag,k){var h='';for(var r=0;r<5;r++)for(var c=0;c<5;c++){var n=card[c][r],cl='cell';if(!n)cl+=' free';else if(m&&m[c+','+r])cl+=' on';
+  h+='<'+tag+' class="'+cl+'"'+(tag==='button'?' data-c="'+c+'" data-r="'+r+'" aria-label="'+(n?'BINGO'[c]+' '+n:'Free space')+'"':'')+'>'+(n||'★')+'</'+tag+'>'}return h}
+var GOALS=(function(){var L=[],i,j,a,b,d1=[],d2=[];for(i=0;i<5;i++){a=[];b=[];for(j=0;j<5;j++){a.push([j,i]);b.push([i,j])}L.push(a,b)}
+  for(j=0;j<5;j++){d1.push([j,j]);d2.push([j,4-j])}L.push(d1,d2);
+  var cl=function(f){var o=[];for(var c=0;c<5;c++)for(var r=0;r<5;r++)if(f(c,r))o.push([c,r]);return o};
+  return [{n:'Any Line',s:L},{n:'Four Corners',s:[cl(function(c,r){return c%4===0&&r%4===0})]},{n:'Both Diagonals',s:[d1.concat(d2)]},{n:'Plus Sign',s:[cl(function(c,r){return c===2||r===2})]},{n:'Letter T',s:[cl(function(c,r){return r===0||c===2})]},{n:'Full House',s:[cl(function(){return true})]}]})();
+var G={},SND=lg('sb_snd',true);
+var VL=lg('sb_vl','am'),AMV=null,WARNED=false,ONES=['','አንድ','ሁለት','ሦስት','አራት','አምስት','ስድስት','ሰባት','ስምንት','ዘጠኝ'],TENS=['','አስር','ሃያ','ሠላሳ','አርባ','ሃምሳ','ስድሳ','ሰባ'],BLET=['ቢ','አይ','ኤን','ጂ','ኦ'];
+function amNum(n){var t=Math.floor(n/10),u=n%10;if(n<10)return ONES[n];if(t===1)return u?'አስራ '+ONES[u]:'አስር';return TENS[t]+(u?' '+ONES[u]:'')}
+function amCall(n){return BLET[Math.floor((n-1)/15)]+'፣ '+amNum(n)}
+function pickAm(){try{AMV=speechSynthesis.getVoices().filter(function(v){return /^am/i.test(v.lang)})[0]||null}catch(e){AMV=null}}
+try{if(window.speechSynthesis){speechSynthesis.onvoiceschanged=pickAm;pickAm()}}catch(e){}
+function speak(am,en){if(!SND||!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;
+  try{var useAm=VL==='am',u;pickAm();
+    if(useAm&&speechSynthesis.getVoices().length&&!AMV){useAm=false;if(!WARNED){WARNED=true;toast('Amharic voice is not installed on this phone, so numbers are called in English. Install it in Settings, Text-to-speech (Google), then reopen the app.')}}
+    u=new SpeechSynthesisUtterance(useAm?am:(en||am));if(useAm){u.lang=AMV?AMV.lang:'am-ET';if(AMV)u.voice=AMV}else u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function stopT(){clearInterval(RIV);RIV=null;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
+function drawBoard(){var b=$('bd');if(!b)return;var t=G.called[G.called.length-1],x='';for(var n=1;n<=75;n++)x+='<div class="bn'+(G.called.indexOf(n)>-1?' c':'')+(n===t?' l':'')+'">'+n+'</div>';b.innerHTML=x;
+  $('lst').textContent=G.called.length?'Called '+G.called.length+' of 75 · Last: '+'BINGO'[Math.floor((t-1)/15)]+' '+t:'Waiting for the first call…'}
+function drawCard(){var hd='';'BINGO'.split('').forEach(function(l){hd+='<div class="hdr">'+l+'</div>'});$('cg').innerHTML='<div class="gcard"><p class="last" style="margin:0 0 6px;color:#f6d77a">Ticket #'+G.n+'</p><div class="grid">'+hd+cellsHTML(G.card,G.m,'button',0)+'</div></div>';drawBoard()}
+function endOver(h,p,wn){G.over=true;if(G.t){clearInterval(G.t);G.t=null}$('oh').textContent=h;$('op').textContent=p;
+  var oc=$('ocard');if(wn){var cd=cardFor(wn,1),m={'2,2':1};for(var c=0;c<5;c++)for(var r=0;r<5;r++)if(cd[c][r]&&G.called.indexOf(cd[c][r])>-1)m[c+','+r]=1;oc.innerHTML='<div class="grid" style="margin-top:14px">'+cellsHTML(cd,m,'div',0)+'</div>'}else oc.innerHTML='';
+  $('over').classList.add('show')}
+function loop(){var n=now(),el=n-G.start-LEAD,c=el<0?0:Math.min(75,Math.floor(el/INT)+1),ch=false,rd=$('rd');
+  if(el<0)rd.textContent='Get ready… '+Math.ceil(-el/1000)+'s';else if(!G.over)rd.textContent=G.a+' ETB room';
+  while(G.called.length<c){G.called.push(G.seq[G.called.length]);ch=true;if(!G.over){var cn=G.called[G.called.length-1];speak(amCall(cn),'BINGO'[Math.floor((cn-1)/15)]+', '+cn)}}
+  if($('au').checked)G.called.forEach(function(x){for(var a=0;a<5;a++)for(var b=0;b<5;b++)if(G.card[a][b]===x&&!G.m[a+','+b]){G.m[a+','+b]=1;ch=true}});
+  if(ch)drawCard();
+  if(G.called.length>=75&&!G.over){$('msg').textContent='All 75 balls called. No winner this round.';endOver('Game over','No winner in this game.')}}
+function claimWin(){if(G.over||G.cl)return;var w=null;
+  G.goal.s.some(function(l){if(l.every(function(p){return G.m[p[0]+','+p[1]]})){w=l;return true}});
+  if(!w){$('msg').textContent='Not yet. Mark every called number for: '+G.goal.n;return}
+  if(Object.keys(G.m).some(function(k){var q=k.split(','),x=G.card[+q[0]][+q[1]];return x&&G.called.indexOf(x)<0})){$('msg').textContent='A marked number has not been called yet.';return}
+  G.cl=true;var u=session(),pz=Math.floor(pcount(G.gid)*G.a*PCT),v={gid:G.gid,u:u,n:G.n,calls:G.called.length,at:now(),k:1,prize:pz};
+  declareWin(G.gid,v,function(ok,err){G.cl=false;if(!ok){$('msg').textContent=err?'Could not record your win ('+(err.code||err.message)+'). Check Firebase rules for ends/games and press Bingo again.':'Too late: another player already won.';return}
+    var us=users();if(pz>0&&us[u])setBal(us,u,bal(us[u])+pz,'Room win (#'+G.n+')',pz);
+    addWin({id:G.gid,u:u,phone:(us[u]||{}).phone||'',time:'Room '+G.a+' ETB',k:1,reward:pz,n:G.n,calls:G.called.length,at:now()});
+    var cs=document.querySelectorAll('#cg .cell');w.forEach(function(p){cs[p[1]*5+p[0]].classList.add('win')});
+    $('msg').textContent='';endOver('BINGO! You won','Ticket #'+G.n+' won in '+G.called.length+' calls. Reward: '+pz+' ETB added to your wallet.',G.n);speak('ቢንጎ! አሸንፈዋል!','Bingo! You win!')})}
+function initGame(){var j=RJ(),st=j&&j.c*RCYC+RWAIT;
+  if(!j||now()<st||now()>=st+LEAD+75*INT){go('rooms');return}
+  var seed=j.c*131+j.a;G={gid:j.gid,a:j.a,n:j.n,start:st,seq:shuf(rg(1,75),rng(seed)),goal:GOALS[(j.c+j.a)%GOALS.length],card:cardFor(j.n,1),m:{'2,2':1},called:[],over:false,cl:false};
+  $('gl').textContent=G.goal.n;var setR=function(t){$('pz').textContent='Reward : '+Math.floor(t*G.a*PCT)+' ETB'};setR(pcount(j.gid));
+  if(DB){var r1=DB.ref('games/'+j.gid+'/cartelas'),f1=function(sn){setR(sn.val()||0)};r1.on('value',f1);
+    var r2=DB.ref('ends/'+j.gid),r3=DB.ref('games/'+j.gid+'/win'),f2=function(sn){var v=sn.val();if(v&&v.u!==session()&&!G.over){speak('ቢንጎ! '+v.u+' አሸነፈ','Bingo! '+v.u+' wins the game');endOver('BINGO! '+v.u+' wins','🏆 Ticket #'+v.n+' won after '+v.calls+' calls.'+(v.prize?' Reward: '+v.prize+' ETB.':''),v.n)}};r2.on('value',f2);r3.on('value',f2);
+    G.off=function(){r1.off('value',f1);r2.off('value',f2);r3.off('value',f2)}}
+  drawCard();
+  $('cg').onclick=function(e){var b=e.target.closest('.cell');if(!b||!b.dataset.c||G.over)return;var c=+b.dataset.c,r=+b.dataset.r,n=G.card[c][r];if(!n)return;
+    if(G.called.indexOf(n)<0){b.classList.add('sh');setTimeout(function(){b.classList.remove('sh')},300);$('msg').textContent=n+' has not been called yet.';return}
+    var k=c+','+r;if(G.m[k])delete G.m[k];else G.m[k]=1;b.classList.toggle('on');$('msg').textContent=''};
+  var sb=$('snd');sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';sb.onclick=function(){SND=!SND;ls('sb_snd',SND);sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';if(!SND&&window.speechSynthesis)speechSynthesis.cancel()};
+  var vb=$('vl'),vt=function(){vb.textContent=VL==='am'?'ድምጽ: አማርኛ':'Voice: English'};vt();vb.onclick=function(){VL=VL==='am'?'en':'am';ls('sb_vl',VL);vt();speak(amCall(23),'N, 23')};
+  $('bg').onclick=claimWin;$('bk').onclick=function(){LEFT=G.gid;go('rooms')};G.t=setInterval(loop,250);loop()}
+$('again').onclick=function(){LEFT=G.gid||null;go('rooms')};
+
+/* ===== menu & router ===== */
+var NAV=[['home','⌂','Home'],['rooms','◈','Stake Rooms'],['wallet','$','Wallet'],['register','✚','Register','in'],['how','ⓘ','How to Play'],['faq','?','FAQs'],['admin','⚙','Admin'],['out','⇤','Sign Out','auth']];
+function menu(v){var u=session(),h='<div class="logo">YEME<small>BINGO</small></div><div class="who">'+(u?'◉ '+esc(u):'☰ Menu')+'</div><div class="lang" role="group" aria-label="Language">'+[['en','English'],['am','አማርኛ'],['ti','ትግርኛ']].map(function(x){return '<button data-l="'+x[0]+'" aria-pressed="'+(LANG===x[0])+'">'+x[1]+'</button>'}).join('')+'</div><p class="note" style="padding:8px">'+(DB?'☁ Cloud connected':'⚠ Local mode (no cloud)')+'</p>';
+  NAV.forEach(function(n){if(n[3]==='in'&&u)return;if(n[3]==='auth'&&!u)return;h+='<a data-go="'+n[0]+'" class="'+(n[0]===v?'act':'')+'" tabindex="0"><span>'+n[1]+'</span>'+n[2]+'</a>'});$('dr').innerHTML=h}
+function toggle(o){var open=o===undefined?!$('dr').classList.contains('open'):o;$('dr').classList.toggle('open',open);$('sc').classList.toggle('show',open);$('mb').textContent=open?'×':'☰'}
+$('mb').onclick=function(){toggle()};$('sc').onclick=function(){toggle(false)};
+document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(!t)return;var g=t.dataset.go;if(g==='out'){ls('sb_session',null);go('home')}else go(g)});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches('#dr a'))e.target.click()});
+function go(v){toggle(false);if(location.hash==='#'+v)route();else location.hash=v}
+
+var PANEL=null,AT='pay',DM='telebirr',WM='telebirr',DV={a:'',l:'',wa:'',wt:''},MK=['telebirr','cbe','cbebirr','ebirr'];
+var METHODS={telebirr:{n:'Telebirr',u:'*127#',t:'Transfer to Telebirr merchant '+PAY_NUM+' ('+PAY_NAME+') via app or *127#'},cbe:{n:'CBE',u:'*889#',t:'Transfer via CBE Mobile Banking (*889#) to account holder '+PAY_NAME+' ('+PAY_NUM+')'},cbebirr:{n:'CBE Birr',u:'*847#',t:'Transfer via CBE Birr (*847#) to mobile number '+PAY_NUM+' ('+PAY_NAME+')'},ebirr:{n:'E-Birr',u:'*841#',t:'Transfer via E-Birr app or USSD (*841#) to account holder '+PAY_NAME+' ('+PAY_NUM+')'}};
+function chips(cur,at){return '<div class="chips">'+MK.map(function(k){return '<button type="button" class="chip'+(k===cur?' on':'')+'" '+at+'="'+k+'">'+METHODS[k].n+'</button>'}).join('')+'</div>'}
+function rcid(t){var m=t.match(/receipt\/([A-Za-z0-9]{8,14})/i),u;if(m)return m[1].toUpperCase();u=t.toUpperCase().match(/\b(?=[A-Z0-9]*\d)(?=[A-Z0-9]*[A-Z])[A-Z0-9]{8,14}\b/);return u?u[0]:sha256('rc:'+t.trim().toLowerCase()).slice(0,14).toUpperCase()}
+function mOf(l){var m=/^(Telebirr|CBE Birr|CBE|E-Birr) · /.exec(l||'');return m?m[1]:''}
+function linkify(t){return esc(t).replace(/(https:\/\/[^\s<]+)/,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')}
+function wsv(){if($('ra'))DV.a=$('ra').value;if($('rl'))DV.l=$('rl').value;if($('wa'))DV.wa=$('wa').value;if($('wt'))DV.wt=$('wt').value}
+function when(t){var d=new Date(t);return d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+var STX={pending:['Pending approval','pe'],approved:['Approved','cr'],declined:['Declined','db']};
+function reqHTML(u){var l=pays().filter(function(x){return x.u===u&&live(x)}).slice(-5).reverse(),w=wds().filter(function(x){return x.u===u}).slice(-5).reverse(),h='';
+  if(l.length)h+='<h4>Payment requests</h4><ul class="txl">'+l.map(function(x){return '<li><span>'+x.amt+' birr · '+esc(mOf(x.link)||x.rid)+'</span><b class="'+STX[x.st][1]+'">'+STX[x.st][0]+'</b></li>'}).join('')+'</ul>';
+  if(w.length)h+='<h4>Withdrawals</h4><ul class="txl">'+w.map(function(x){var s=x.st==='pending'?['Pending approval','pe']:x.st==='approved'?['Paid','cr']:['Declined (refunded)','db'];return '<li><span>'+x.amt+' birr · '+esc(x.acct)+'</span><b class="'+s[1]+'">'+s[0]+'</b></li>'}).join('')+'</ul>';return h}
+var USERSVG='<svg viewBox="0 0 24 24" fill="#f0c75e" style="width:70px;height:70px;display:block;margin:0 auto 6px"><circle cx="12" cy="7.5" r="4.5"/><path d="M3 21c0-5 4-7.5 9-7.5s9 2.5 9 7.5z"/></svg>';
+var P={
+home:function(){var u=session(),rec=u&&users()[u];
+  var body=rec?'<div class="panel"><h2>Welcome, '+esc(u)+'</h2><p class="note" style="font-size:18px">Wallet: '+bal(rec)+' ETB</p><button class="btn" data-go="rooms">▶ Play in Stake Rooms</button></div>':
+  '<div class="panel">'+USERSVG+'<h2>⇥ Login</h2><form id="lf" novalidate><div class="fld"><label for="lu">Username</label><input id="lu" autocomplete="username" placeholder="Enter Username"></div><div class="fld"><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" placeholder="Enter Password"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">⇥ Login</button></form></div><button class="btn g" data-go="register">✚ Register</button>';
+  return '<div class="cd" id="cd"></div><div class="cdl" id="cdl"></div>'+body},
+register:function(){return '<div class="panel">'+USERSVG+'<h2>User Registration</h2><form id="rf" novalidate><div class="fld"><label for="ru">Username</label><input id="ru" autocomplete="username" placeholder="Enter Username"></div><div class="fld"><label for="rph">Phone No</label><input id="rph" type="tel" inputmode="tel" placeholder="Enter Phone Number"></div><div class="fld"><label for="rp">Password</label><input id="rp" type="password" autocomplete="new-password" placeholder="Enter Password"></div><div class="fld"><label for="rp2">Confirm Password</label><input id="rp2" type="password" autocomplete="new-password" placeholder="Enter Password Again"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">✚ Register</button></form><div class="hv">ⓘ Have an account <a data-go="home">Login</a></div></div>'},
+rooms:function(){return '<div id="rv"></div>'},
+wallet:function(){var u=session(),rec=u&&users()[u];if(!rec)return '<div class="panel"><h2>Wallet</h2><p class="note">Log in to see your wallet.</p><button class="btn" data-go="home">Login</button></div>';
+  var d=PANEL!=='w',M=METHODS[d?DM:WM],h='<div class="wcard"><small>Wallet balance</small><b class="wbig">'+bal(rec)+' birr</b><small>Stake rooms from 10 birr</small><div class="wtab"><button class="wt'+(d?' on':'')+'" id="bdp">Deposit</button><button class="wt'+(d?'':' on')+'" id="bwd">Withdraw</button></div>';
+  if(d)h+='<div class="wpan"><h4>Select Payment Method</h4>'+chips(DM,'data-dm')+'<div class="rcv"><b class="g1">'+M.n+' Official Receiver</b><div>Account Holder: '+esc(PAY_NAME)+'</div><div class="g2">Account / Number: '+PAY_NUM+'</div><p>'+M.t+'</p></div><button type="button" class="pw" id="pay">Pay with '+M.n+'</button><p class="n2">Enter amount and paste your payment receipt / SMS confirmation:</p><div class="fld"><label for="ra">Amount (birr)</label><input id="ra" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.a)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="rl">Receipt</label><textarea id="rl" placeholder="'+M.n+' receipt, Tx ID, or SMS" autocapitalize="off">'+esc(DV.l)+'</textarea><button type="button" class="pst" id="pst">📋 Paste</button></div><p class="n2 s">Press &amp; hold space to paste link</p><p class="n2">Minimum '+PAY_BIRR+' birr. The admin checks your receipt and adds the money to your wallet once approved.</p><button type="button" class="sub2" id="pd">Submit '+M.n+' Payment</button></div>';
+  else h+='<div class="wpan"><h4>Select Withdrawal Method</h4>'+chips(WM,'data-wm')+'<h4 style="margin-top:18px">Withdraw to '+M.n+'</h4><div class="fld"><label for="wa">Amount to withdraw (birr)</label><input id="wa" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.wa)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="wt">'+M.n+' Account / Phone</label><input id="wt" type="tel" inputmode="tel" value="'+esc(DV.wt)+'" placeholder="'+M.n+' Account / Phone"></div><p class="n2">Amount is deducted from wallet now. Admin sends it to your '+M.n+' account.</p><button type="button" class="sub2 gd" id="wsub">Request '+M.n+' Withdrawal</button></div>';
+  h+='</div><div id="msg" role="status"></div>'+(rec.tx&&rec.tx.length?'<ul class="txl">'+rec.tx.slice(-6).reverse().map(function(x){return '<li><span>'+esc(x.l)+'</span><b class="'+(x.a>0?'cr':'db')+'">'+(x.a>0?'+':'')+x.a+'</b></li>'}).join('')+'</ul>':'')+reqHTML(u);
+  return h},
+how:function(){return '<div class="panel"><h2>How to Play</h2><ol style="line-height:1.6;font-size:17px"><li>Register, then deposit money in your Wallet with Telebirr.</li><li>Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.</li><li>Choose a ticket number and press Join. Your stake is taken from your wallet.</li><li>When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.</li><li>Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.</li><li>Complete the Target Goal and press Bingo. The first player to do it wins 80% of the pool.</li></ol></div>'},
+faq:function(){return '<div class="panel"><h2>FAQs</h2><details><summary>What if nobody else joins?</summary><p>Rooms need 2 or more players. If fewer join, your stake is refunded automatically.</p></details><details><summary>How big is the prize?</summary><p>The winner gets 80% of the room pool. 20% is the house share.</p></details><details><summary>Can I leave after joining?</summary><p>Your stake is held for the round. Leaving the game page does not refund it.</p></details><details><summary>Where is my account stored?</summary><p>Online, so you can log in from any device. If the app is offline it is kept in this browser only.</p></details></div>'},
+admin:function(){
+  if(!isAdm())return '<div class="panel"><h2>Admin Login</h2><form id="al" novalidate><div class="fld"><label for="ae">Email</label><input id="ae" type="email" autocomplete="username" autocapitalize="off" placeholder="Enter admin email"></div><div class="fld"><label for="ap">Password</label><input id="ap" type="password" autocomplete="current-password" placeholder="Enter password"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">Login</button></form></div>';
+  return adminPanel()},
+game:function(){return '<div class="goal"><span>Target Goal:</span><b id="gl"></b></div><p class="last" id="rd" style="margin:8px 0 0"></p><p class="last" id="pz" style="margin:6px 0 0;color:#f6d77a;font-weight:700;font-size:19px"></p><div class="board"><div class="bgr" id="bd"></div><p class="last" id="lst" aria-live="polite"></p></div><div id="cg"></div><div id="msg" role="status"></div><button class="bingo" id="bg">Bingo!</button><div class="opt"><label><input type="checkbox" id="au"> Auto-mark</label><button id="snd"></button><button id="vl"></button><button id="bk">‹ Back</button></div>'}
+};
+function adminPanel(){var ps=pays(),us=users(),wl=wds(),pend=ps.filter(function(x){return x.st==='pending'}),pw=wl.filter(function(x){return x.st==='pending'}),tot=0;ps.forEach(function(x){if(x.st==='approved')tot+=x.amt});
+  var h='<div id="adm"><div class="tabs"><button data-t="pay" aria-pressed="'+(AT==='pay')+'">Payments'+(pend.length?' ('+pend.length+')':'')+'</button><button data-t="wd" aria-pressed="'+(AT==='wd')+'">Withdrawals'+(pw.length?' ('+pw.length+')':'')+'</button><button data-t="users" aria-pressed="'+(AT==='users')+'">Users ('+Object.keys(us).length+')</button><button data-t="wins" aria-pressed="'+(AT==='wins')+'">Winners ('+wins().length+')</button><button data-t="out">Logout</button></div><div id="amsg" class="err" role="status"></div>';
+  if(AT==='pay'){h+='<h4>Pending ('+pend.length+') · Approved total '+tot+' birr</h4>';if(!pend.length)h+='<p class="note">No pending payments.</p>';
+    pend.forEach(function(x){h+='<div class="ac"><b>'+esc(x.u)+'</b> · '+esc((us[x.u]||{}).phone||'–')+'<small>'+when(x.ts)+'</small>Receipt: '+esc(x.rid)+'<small>'+linkify(x.link)+'</small><div class="ar"><input id="amt-'+x.id+'" type="number" inputmode="numeric" min="1" value="'+x.amt+'" aria-label="Amount in birr"><button class="ab ok" data-a="ok" data-id="'+x.id+'">Approve</button><button class="ab no" data-a="no" data-id="'+x.id+'">Decline</button></div></div>'});
+    var hi=ps.filter(function(x){return x.st!=='pending'&&live(x)}).slice(-15).reverse();if(hi.length)h+='<h4>History</h4><ul class="txl">'+hi.map(function(x){return '<li><span>'+esc(x.u)+' · '+x.amt+' birr</span><b class="'+STX[x.st][1]+'">'+STX[x.st][0]+'</b></li>'}).join('')+'</ul>'}
+  else if(AT==='wd'){h+='<h4>Withdrawals pending ('+pw.length+')</h4>';if(!pw.length)h+='<p class="note">No pending withdrawals.</p>';
+    pw.forEach(function(x){h+='<div class="ac"><b>'+esc(x.u)+'</b> · '+esc((us[x.u]||{}).phone||'–')+'<small>'+when(x.ts)+'</small>Send <b>'+x.amt+' birr</b> to <b>'+esc(x.acct)+'</b><div class="ar"><button class="ab ok" data-a="wok" data-id="'+x.id+'">Mark paid</button><button class="ab no" data-a="wno" data-id="'+x.id+'">Decline &amp; refund</button></div></div>'})}
+  else if(AT==='wins'){var wn=wins().slice().sort(function(a,b){return b.at-a.at}),tw=0;wn.forEach(function(x){tw+=x.reward||0});
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><h4 style="margin:0">Real Game Winners ('+wn.length+')</h4><small style="color:#b9a6d9">Live Firebase backend registry · last 24 hours</small></div><button class="ab" data-a="sync" style="background:#25124a;border:1.5px solid #efc45d;color:#efc45d">⟳ Sync</button></div>';
+    if(wn.length)h+='<p class="note" style="margin:10px 0">Total rewards paid: <b style="color:#f6d77a">'+tw+' birr</b></p>';
+    if(!wn.length)h+='<div class="ac" style="text-align:center;margin-top:16px;padding:30px 10px;color:#b9a6d9">No winners recorded yet in Firebase backend.</div>';
+    wn.forEach(function(x){h+='<div class="ac"><b>'+esc(x.u)+'</b> · '+esc(x.phone||'–')+'<small>'+when(x.at)+'</small>Game: <b>'+esc(x.time||'–')+'</b><br>Reward: <b>'+(x.reward||0)+' birr</b> · Ticket #'+x.n+' · '+x.calls+' calls</div>'})}
+  else{h+='<input class="sq" id="sq" placeholder="Search username or phone" aria-label="Search users">';var ks=Object.keys(us);if(!ks.length)h+='<p class="note">No registered users yet.</p>';
+    ks.forEach(function(n){var r=us[n];h+='<div class="ac uc" data-n="'+esc((n+' '+r.phone).toLowerCase())+'"><b>'+esc(n)+'</b> · '+esc(r.phone)+'<br>Wallet: <b>'+bal(r)+' birr</b><div class="ar"><input type="number" inputmode="numeric" min="1" placeholder="birr" aria-label="Amount for '+esc(n)+'"><button class="ab ok" data-a="add" data-u="'+esc(n)+'">Add</button><button class="ab" data-a="sub" data-u="'+esc(n)+'" style="background:#b8860b">Deduct</button></div><div class="ar"><button class="ab no" data-a="del" data-u="'+esc(n)+'">Delete user</button></div></div>'})}
+  return h+'</div>'}
+function rr(){var y=scrollY;route();scrollTo(0,y)}
+function bindForms(){
+  var lf=$('lf');if(lf)lf.onsubmit=async function(e){e.preventDefault();var n=$('lu').value.trim(),p=$('lp').value,us=users(),k=Object.keys(us).filter(function(x){return x.toLowerCase()===n.toLowerCase()})[0];
+    if(!n||!p){$('err').textContent='Enter your username and password.';return}
+    if(!k||us[k].pw!==await hash(p)){$('err').textContent='Wrong username or password.';return}ls('sb_session',k);go('rooms')};
+  var rf=$('rf');if(rf)rf.onsubmit=async function(e){e.preventDefault();var n=$('ru').value.trim(),ph=$('rph').value.replace(/[\s-]/g,''),p=$('rp').value,p2=$('rp2').value,us=users(),er='';
+    if(n.length<3)er='Username must be at least 3 characters.';
+    else if(Object.keys(us).some(function(x){return x.toLowerCase()===n.toLowerCase()}))er='That username is taken.';
+    else if(!/^\+?\d{9,13}$/.test(ph))er='Enter a valid phone number.';
+    else if(p.length<4)er='Password must be at least 4 characters.';
+    else if(p!==p2)er='Passwords do not match.';
+    if(er){$('err').textContent=er;return}
+    if(!await newUser(n,{phone:ph,pw:await hash(p),wallet:0,tx:[]})){$('err').textContent='That username is taken.';return}ls('sb_session',n);go('rooms')};
+  var al=$('al');if(al)al.onsubmit=function(e){e.preventDefault();if(sha256('sb:admin:'+$('ae').value.trim().toLowerCase()+':'+$('ap').value)!==ADMIN_HASH){$('err').textContent='Wrong email or password.';return}ls('sb_as',ADMIN_HASH);route()};
+  var u=session(),bdp=$('bdp'),bwd=$('bwd');
+  if(bdp){bdp.onclick=function(){wsv();PANEL='d';rr()};bwd.onclick=function(){wsv();PANEL='w';rr()};
+    document.querySelectorAll('[data-dm]').forEach(function(b){b.onclick=function(){wsv();DM=b.dataset.dm;rr()}});
+    document.querySelectorAll('[data-wm]').forEach(function(b){b.onclick=function(){wsv();WM=b.dataset.wm;rr()}});
+    var py=$('pay');if(py)py.onclick=function(){var M=METHODS[DM];try{navigator.clipboard.writeText(PAY_NUM)}catch(e){}toast('Account number '+PAY_NUM+' copied. Complete the payment, then submit your receipt.');setTimeout(function(){location.href='tel:'+M.u.replace('#','%23')},900)};
+    var ps=$('pst');if(ps)ps.onclick=function(){try{navigator.clipboard.readText().then(function(t){$('rl').value=(t||'').trim()}).catch(function(){$('msg').textContent='Press and hold inside the box to paste.'})}catch(e){$('msg').textContent='Press and hold inside the box to paste.'}};
+    var pd=$('pd');if(pd)pd.onclick=function(){var M=METHODS[DM],raw=$('rl').value.trim(),amt=Math.floor(Number($('ra').value)),ms=$('msg');
+      if(!(amt>=PAY_BIRR)){ms.textContent='Payment below '+PAY_BIRR+' birr is not confirmed.';return}
+      if(raw.length<6){ms.textContent='Paste your '+M.n+' receipt, Tx ID or SMS.';return}
+      var id=rcid(raw);if(pays().some(function(x){return x.rid===id&&x.st!=='declined'})){ms.textContent='This receipt was already submitted.';return}
+      pd.disabled=true;addPay({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),u:u,amt:amt,rid:id,link:M.n+' · '+raw.slice(0,300),ts:Date.now(),st:'pending'}).then(function(){DV.a='';DV.l='';route();note('Payment received. The admin will check it and add '+amt+' birr to your wallet.')})};
+    var ws=$('wsub');if(ws)ws.onclick=function(){var M=METHODS[WM],amt=Math.floor(Number($('wa').value)),ac=$('wt').value.replace(/[\s-]/g,''),ms=$('msg'),r=users()[u];
+      if(!(amt>=PAY_BIRR)){ms.textContent='Minimum withdrawal is '+PAY_BIRR+' birr.';return}
+      if(!/^\+?\d{9,16}$/.test(ac)){ms.textContent='Enter a valid '+M.n+' account or phone number.';return}
+      if(amt>bal(r)){ms.textContent='You cannot withdraw more than your wallet balance.';return}
+      ws.disabled=true;setBal(users(),u,bal(r)-amt,'Withdrawal',-amt,function(ok){if(!ok){ws.disabled=false;ms.textContent='You cannot withdraw more than your wallet balance.';return}
+        addWd({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),u:u,amt:amt,acct:M.n+' · '+ac,ts:Date.now(),st:'pending'}).then(function(){DV.wa='';DV.wt='';route();note('✔ Withdrawal requested. The admin will send '+amt+' birr to your '+M.n+' account '+ac+'.')})})}}
+  var a=$('adm');if(!a)return;var sq=$('sq');
+  if(sq)sq.oninput=function(){var q=sq.value.trim().toLowerCase();document.querySelectorAll('.uc').forEach(function(c){c.hidden=!!q&&c.dataset.n.indexOf(q)<0})};
+  a.onclick=function(e){var b=e.target.closest('button');if(!b)return;var t=b.dataset.t,k=b.dataset.a,m=$('amsg');m.textContent='';
+    if(t){if(t==='out')ls('sb_as',false);else AT=t;if(t==='wins')purgeWins();if(t==='pay')purgePays();rr();return}
+    if(k==='sync'){if(DB)DB.ref('winners').once('value',function(sn){var v=sn.val()||{};C.wh=Object.keys(v).map(function(q){return v[q]}).filter(function(x){return x&&x.at}).sort(function(a,b){return a.at-b.at});purgeWins();rr();toast('Winners synced.')},function(e){m.textContent='Could not read winners ('+(e.code||e.message)+'). Check Firebase rules for winners.'});else rr();return}
+    if(k==='wok'||k==='wno'){var wl=wds(),w=wl.filter(function(x){return x.id===b.dataset.id})[0];if(!w||w.st!=='pending')return;
+      decide('wds','sb_wd',wl,w,k==='wok'?'approved':'declined',0,k==='wno'?function(){var u3=users();if(u3[w.u])setBal(u3,w.u,bal(u3[w.u])+w.amt,'Withdrawal refund',w.amt)}:null);rr();return}
+    if(k==='ok'||k==='no'){var ps=pays(),r=ps.filter(function(x){return x.id===b.dataset.id})[0];if(!r||r.st!=='pending')return;
+      if(k==='ok'){var amt=Math.floor(Number($('amt-'+r.id).value)),us=users();if(!(amt>0)){m.textContent='Enter a valid amount.';return}if(!us[r.u]){m.textContent='This user no longer exists.';return}
+        decide('pays','sb_pay',ps,r,'approved',amt,function(){setBal(us,r.u,bal(us[r.u])+amt,'Top-up',amt)})}else decide('pays','sb_pay',ps,r,'declined',0);
+      rr();return}
+    var n=b.dataset.u,us2=users();if(!us2[n])return;
+    if(k==='del'){if(!b.dataset.c){b.dataset.c=1;b.textContent='Tap again to confirm';return}delUser(us2,n);if(session()===n)ls('sb_session',null);rr();return}
+    var v=Math.floor(Number(b.parentNode.querySelector('input').value));if(!(v>0)){m.textContent='Enter an amount.';return}
+    if(k==='sub'){if(v>bal(us2[n])){m.textContent='Not enough balance to deduct.';return}setBal(us2,n,bal(us2[n])-v,'Admin deduction',-v)}else setBal(us2,n,bal(us2[n])+v,'Admin credit',v);rr()}}
+function tick(){var el=$('cd');if(!el)return;var R=rcyc();el.textContent=R.n<R.st?mmss(R.st-R.n):mmss(R.s+RCYC-R.n);$('cdl').textContent=R.n<R.st?'Rooms are open · join now':'Round running · next rooms open in'}
+setInterval(function(){tick();if(location.hash==='#rooms')rtick()},1000);
+/* ===== Language: English / አማርኛ / ትግርኛ ===== */
+var LANG=lg('sb_lang','en');
+var ROWS=[
+["Home","መነሻ","ገዛ"],["Stake Rooms","የጨዋታ ክፍሎች","ክፍልታት ጸወታ"],["Wallet","ቦርሳ","ቦርሳ"],["Register","ተመዝገብ","ተመዝገብ"],["How to Play","አጨዋወት","ከመይ ይጻወት"],["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["Admin","አስተዳዳሪ","ኣመሓዳሪ"],["Sign Out","ውጣ","ውጻእ"],["☰ Menu","☰ ምናሌ","☰ ሜኑ"],
+["☁ Cloud connected","☁ ከክላውድ ጋር ተገናኝቷል","☁ ምስ ክላውድ ተራኺቡ"],["⚠ Local mode (no cloud)","⚠ የአካባቢ ሁነታ (ያለ ክላውድ)","⚠ ናይ ከባቢ ኩነታት (ብዘይ ክላውድ)"],
+["Rooms are open · join now","ክፍሎች ክፍት ናቸው · አሁን ይቀላቀሉ","ክፍልታት ክፉታት እዮም · ሕጂ ተሳተፉ"],["Round running · next rooms open in","ዙሩ እየተካሄደ ነው · ቀጣይ ክፍሎች የሚከፈቱት በ","ዙር ይካየድ ኣሎ · ዝቕጽሉ ክፍልታት ዝኽፈቱ ኣብ"],
+["▶ Play in Stake Rooms","▶ በጨዋታ ክፍሎች ተጫወት","▶ ኣብ ክፍልታት ጸወታ ጻወት"],["⇥ Login","⇥ ግባ","⇥ እቶ"],["Login","ግባ","እቶ"],["Username","የተጠቃሚ ስም","ስም ተጠቃሚ"],["Password","የይለፍ ቃል","መሕለፊ ቃል"],["Enter Username","የተጠቃሚ ስም ያስገቡ","ስም ተጠቃሚ ኣእትው"],["Enter Password","የይለፍ ቃል ያስገቡ","መሕለፊ ቃል ኣእትው"],["✚ Register","✚ ተመዝገብ","✚ ተመዝገብ"],
+["Wrong username or password.","የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል።","ጌጋ ስም ተጠቃሚ ወይ መሕለፊ ቃል።"],["Enter your username and password.","የተጠቃሚ ስምዎን እና የይለፍ ቃልዎን ያስገቡ።","ስም ተጠቃሚን መሕለፊ ቃልን ኣእትው።"],
+["User Registration","የተጠቃሚ ምዝገባ","ምዝገባ ተጠቃሚ"],["Phone No","ስልክ ቁጥር","ቁጽሪ ተሌፎን"],["Enter Phone Number","ስልክ ቁጥር ያስገቡ","ቁጽሪ ተሌፎን ኣእትው"],["Confirm Password","የይለፍ ቃል ያረጋግጡ","መሕለፊ ቃል ኣረጋግጽ"],["Enter Password Again","የይለፍ ቃል በድጋሚ ያስገቡ","መሕለፊ ቃል ዳግማይ ኣእትው"],["ⓘ Have an account","ⓘ መለያ አለዎት?","ⓘ ሕሳብ ኣለኩም?"],
+["Username must be at least 3 characters.","የተጠቃሚ ስም ቢያንስ 3 ፊደላት መሆን አለበት።","ስም ተጠቃሚ እንተወሓደ 3 ፊደላት ክኸውን ኣለዎ።"],["That username is taken.","ይህ የተጠቃሚ ስም ተወስዷል።","እዚ ስም ተጠቃሚ ተወሲዱ ኣሎ።"],["Enter a valid phone number.","ትክክለኛ ስልክ ቁጥር ያስገቡ።","ቅኑዕ ቁጽሪ ተሌፎን ኣእትው።"],["Password must be at least 4 characters.","የይለፍ ቃል ቢያንስ 4 ፊደላት መሆን አለበት።","መሕለፊ ቃል እንተወሓደ 4 ፊደላት ክኸውን ኣለዎ።"],["Passwords do not match.","የይለፍ ቃሎቹ አይመሳሰሉም።","መሕለፊ ቃላት ኣይማዕረዩን።"],
+["Log in to join a room.","ክፍል ለመቀላቀል ይግቡ።","ናብ ክፍሊ ንምስታፍ እቶ።"],["Log in to see your wallet.","ቦርሳዎን ለማየት ይግቡ።","ቦርሳኹም ንምርኣይ እቶ።"],["+ Deposit","+ ገንዘብ አስገባ","+ ገንዘብ ኣእቱ"],["JOIN ROOM","ክፍሉን ተቀላቀል","ናብ ክፍሊ ተሳተፍ"],["✔ JOINED","✔ ተቀላቅለዋል","✔ ተሳቲፍኩም"],["Running","በመካሄድ ላይ","ይካየድ ኣሎ"],["‹ Back","‹ ተመለስ","‹ ተመለስ"],["Deposit money","ገንዘብ አስገባ","ገንዘብ ኣእቱ"],
+["This round has already started.","ይህ ዙር ቀድሞ ተጀምሯል።","እዚ ዙር ጀሚሩ ኣሎ።"],["You already joined a room.","ቀድሞ ክፍል ተቀላቅለዋል።","ቅድሚ ሕጂ ናብ ክፍሊ ተሳቲፍኩም ኣለኹም።"],["Not enough balance. Deposit first.","በቂ ሂሳብ የለም። መጀመሪያ ገንዘብ ያስገቡ።","ዝኣክል ሚዛን የለን። ቅድሚ ኩሉ ገንዘብ ኣእትዉ።"],["Not enough balance.","በቂ ሂሳብ የለም።","ዝኣክል ሚዛን የለን።"],["Room refund","የክፍል ተመላሽ","ተመላሽ ክፍሊ"],["Top-up","ገቢ","ምምላእ"],["Admin credit","በአስተዳዳሪ የተጨመረ","ብኣመሓዳሪ ዝወሰኸ"],["Admin deduction","በአስተዳዳሪ የተቀነሰ","ብኣመሓዳሪ ዝተቐንሰ"],["Withdrawal","ገንዘብ ማውጣት","ምውጻእ ገንዘብ"],["Withdrawal refund","የማውጣት ተመላሽ","ተመላሽ ምውጻእ"],
+["Wallet balance","የቦርሳ ቀሪ ሂሳብ","ሚዛን ቦርሳ"],["Stake rooms from 10 birr","ክፍሎች ከ10 ብር ይጀምራሉ","ክፍልታት ካብ 10 ብር ይጅምሩ"],["Deposit","ገንዘብ አስገባ","ገንዘብ ኣእቱ"],["Withdraw","ገንዘብ አውጣ","ገንዘብ ኣውጽእ"],["Select Payment Method","የክፍያ መንገድ ይምረጡ","ኣገባብ ክፍሊት ሕረዩ"],
+["Enter amount and paste your payment receipt / SMS confirmation:","መጠኑን ያስገቡ እና የክፍያ ደረሰኝዎን / የኤስኤምኤስ ማረጋገጫ ይለጥፉ፡","መጠን ኣእትዉ ከምኡውን ናይ ክፍሊት ርሲት / ናይ SMS ምርግጋጽ ለጥፉ፡"],["Amount (birr)","መጠን (ብር)","መጠን (ብር)"],["Receipt","ደረሰኝ","ርሲት"],["📋 Paste","📋 ለጥፍ","📋 ለጥፍ"],["Press & hold space to paste link","ሊንክ ለመለጠፍ ቦታውን ተጭነው ይያዙ","ሊንክ ንምልጣፍ ቦታ ጠውቅኩም ሓዙ"],
+["Select Withdrawal Method","የማውጫ መንገድ ይምረጡ","ኣገባብ ምውጻእ ሕረዩ"],["Amount to withdraw (birr)","የሚወጣ መጠን (ብር)","ዝወጽእ መጠን (ብር)"],["This receipt was already submitted.","ይህ ደረሰኝ ቀደም ሲል ገብቷል።","እዚ ርሲት ቅድሚ ሕጂ ተኣቲዩ ኣሎ።"],["Press and hold inside the box to paste.","ለመለጠፍ በሳጥኑ ውስጥ ተጭነው ይያዙ።","ንምልጣፍ ኣብ ውሽጢ እቲ ሳጹን ጠውቅኩም ሓዙ።"],["You cannot withdraw more than your wallet balance.","ከቦርሳዎ ቀሪ ሂሳብ በላይ ማውጣት አይችሉም።","ካብ ሚዛን ቦርሳኹም ዝበዝሕ ክትወጽእ ኣይትኽእሉን።"],
+["Payment requests","የክፍያ ጥያቄዎች","ሕቶታት ክፍሊት"],["Withdrawals","ገንዘብ ማውጣቶች","ምውጻኣት ገንዘብ"],["Pending approval","ማረጋገጫ በመጠባበቅ ላይ","ምጽዳቕ ይጽበ"],["Approved","ጸድቋል","ጸዲቑ"],["Declined","ውድቅ ተደርጓል","ተነጺጉ"],["Paid","ተከፍሏል","ተኸፊሉ"],["Declined (refunded)","ውድቅ ተደርጓል (ተመልሷል)","ተነጺጉ (ተመሊሱ)"],["OK","እሺ","ሕራይ"],["Connecting…","በመገናኘት ላይ…","ይራኸብ ኣሎ…"],
+["How to Play","አጨዋወት","ከመይ ይጻወት"],
+["Register, then deposit money in your Wallet with Telebirr.","ይመዝገቡ፣ ከዚያ በቴሌብር በቦርሳዎ ገንዘብ ያስገቡ።","ተመዝገቡ፣ ድሕሪኡ ብቴሌብር ናብ ቦርሳኹም ገንዘብ ኣእትዉ።"],
+["Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.","የጨዋታ ክፍሎችን ከፍተው ክፍል ይምረጡ፡ 10፣ 20፣ 50፣ 100 ወይም 200 ብር።","ክፍልታት ጸወታ ከፊትኩም ክፍሊ ሕረዩ፡ 10፣ 20፣ 50፣ 100 ወይ 200 ብር።"],
+["Choose a ticket number and press Join. Your stake is taken from your wallet.","የትኬት ቁጥር ይምረጡ እና ተቀላቀል ይጫኑ። መጠኑ ከቦርሳዎ ይቀነሳል።","ቁጽሪ ትኬት ሕረዩ ከምኡውን ተሳተፍ ጠውቑ። እቲ መጠን ካብ ቦርሳኹም ይቕነስ።"],
+["When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.","የክፍሉ ቆጠራ ሲያበቃ ጨዋታው ለሁሉም ይጀምራል። አንድ ክፍል ቢያንስ 2 ተጫዋቾች ያስፈልገዋል፣ አለበለዚያ ሁሉም ገንዘብ ይመለሳል።","ቆጸራ ክፍሊ ምስ ተወዲአ እቲ ጸወታ ንኹሉ ይጅምር። ሓደ ክፍሊ እንተወሓደ 2 ተጻዋትቲ የድልዮ፣ እንተዘይኮይኑ ኩሉ ገንዘብ ይምለስ።"],
+["Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.","ቁጥሮች በየ5 ሰከንድ ይጠራሉ። በካርድዎ ላይ የተጠሩትን ቁጥሮች ይንኩ፣ ወይም ራስ-ሰር ምልክትን ይጠቀሙ።","ቁጽርታት ኣብ ነፍሲ ወከፍ 5 ሰከንድ ይጽዋዑ። ኣብ ካርድኩም ዝተጸዋዑ ቁጽርታት ጠውቑ፣ ወይ ባዕሉ ምልክት ምግባር ተጠቀሙ።"],
+["Complete the Target Goal and press Bingo. The first player to do it wins 80% of the pool.","የዒላማ ግቡን ይሙሉ እና ቢንጎ ይጫኑ። ይህን የመጀመሪያ የሚያደርግ ተጫዋች 80% የገንዘብ ክምችቱን ያሸንፋል።","ዕላማ ኣማልኡ ከምኡውን ቢንጎ ጠውቑ። ቀዳማይ ዝገብር ተጻዋታይ 80% ናይ ገንዘብ ክምችት ይስዕር።"],
+["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["What if nobody else joins?","ሌላ ማንም ካልተቀላቀለስ?","ካልእ ዋላ ሓደ እንተዘይተሳተፈኸ?"],
+["Rooms need 2 or more players. If fewer join, your stake is refunded automatically.","ክፍሎች 2 ወይም ከዚያ በላይ ተጫዋቾች ያስፈልጋቸዋል። ከዚያ ያነሱ ከተቀላቀሉ ገንዘብዎ በራስ-ሰር ይመለሳል።","ክፍልታት 2 ወይ ልዕሊኡ ተጻዋትቲ የድልዮም። ካብኡ ዝሑሱ እንተተሳተፉ ገንዘብኩም ብባዕሉ ይምለስ።"],
+["How big is the prize?","ሽልማቱ ምን ያህል ነው?","ሽልማት ክንደይ እዩ?"],["The winner gets 80% of the room pool. 20% is the house share.","አሸናፊው 80% የክፍሉን ገንዘብ ክምችት ያገኛል። 20% የአስተዳደር ድርሻ ነው።","እቲ ዕዉት 80% ናይ ክፍሊ ገንዘብ ክምችት ይረክብ። 20% ናይ ኣመሓዳሪ ክፍሊ እዩ።"],
+["Can I leave after joining?","ከተቀላቀልኩ በኋላ መውጣት እችላለሁ?","ድሕሪ ምስታፈይ ክወጽእ ይኽእል ድየ?"],["Your stake is held for the round. Leaving the game page does not refund it.","ገንዘብዎ ለዙሩ ተይዟል። የጨዋታ ገጹን መልቀቅ አይመልሰውም።","ገንዘብኩም ንዙር ተታሒዙ። ገጽ ጸወታ ምግዳፍ ኣይመልሶን።"],
+["Where is my account stored?","መለያዬ የት ነው የሚቀመጠው?","ሕሳበይ ኣበይ እዩ ዝዕቆብ?"],["Online, so you can log in from any device. If the app is offline it is kept in this browser only.","በመስመር ላይ ስለሚቀመጥ ከማንኛውም መሳሪያ መግባት ይችላሉ። መተግበሪያው ከመስመር ውጭ ከሆነ በዚህ አሳሽ ላይ ብቻ ይቀመጣል።","ኣብ መስመር ስለዝዕቆብ ካብ ዝኾነ መሳርሒ ክትኣትዉ ትኽእሉ። እቲ ኣፕ ካብ መስመር ወጻኢ እንተኾይኑ ኣብዚ ብሮውዘር ጥራይ ይዕቆብ።"],
+["Target Goal:","የዒላማ ግብ፡","ዕላማ፡"],["Waiting for the first call…","የመጀመሪያው ቁጥር እየተጠበቀ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽበ ኣሎ…"],["Bingo!","ቢንጎ!","ቢንጎ!"],["BINGO!","ቢንጎ!","ቢንጎ!"],["Auto-mark","ራስ-ሰር ምልክት","ባዕሉ ምልክት ምግባር"],["🔊 Sound on","🔊 ድምጽ በርቷል","🔊 ድምጺ ተኸፊቱ"],["🔇 Sound off","🔇 ድምጽ ጠፍቷል","🔇 ድምጺ ተዓጽዩ"],
+["Too late: another player already won.","ዘግይተዋል፤ ሌላ ተጫዋች ጨዋታውን አሸንፏል።","ደንጉዩ፤ ካልእ ተጻዋታይ ነዚ ጸወታ ሰዒሩ ኣሎ።"],["A marked number has not been called yet.","ምልክት የተደረገበት ቁጥር ገና አልተጠራም።","ምልክት ዝተገበረሉ ቁጽሪ ገና ኣይተጸዋዕን።"],["All 75 balls called. No winner this round.","ሁሉም 75 ቁጥሮች ተጠርተዋል። በዚህ ዙር አሸናፊ የለም።","ኩሎም 75 ቁጽርታት ተጸዊዖም። ኣብዚ ዙር ዕዉት የለን።"],
+["Game over","ጨዋታው አብቅቷል","ጸወታ ተወዲኡ"],["No winner in this game.","በዚህ ጨዋታ አሸናፊ የለም።","ኣብዚ ጸወታ ዕዉት የለን።"],["BINGO! You won","ቢንጎ! አሸንፈዋል","ቢንጎ! ሰዒርኩም"],["Back to rooms","ወደ ክፍሎች ተመለስ","ናብ ክፍልታት ተመለስ"]
+];
+var RX=[
+[/^Welcome, (.*)$/,"እንኳን ደህና መጡ፣ $1","እንኳዕ ደሓን መጻእኩም፣ $1"],
+[/^Wallet: (\d+) ETB$/,"ቦርሳ፡ $1 ብር","ቦርሳ፡ $1 ብር"],
+[/^Joined #(\d+)$/,"ተቀላቅለዋል #$1","ተሳቲፍኩም #$1"],
+[/^Stake: (\d+) ETB \/ Ticket$/,"ዋጋ፡ $1 ብር / ትኬት","ዋጋ፡ $1 ብር / ትኬት"],
+[/^👥 (\d+)\/(\d+) Players$/,"👥 $1/$2 ተጫዋቾች","👥 $1/$2 ተጻዋትቲ"],
+[/^Prize: (\d+) ETB$/,"ሽልማት፡ $1 ብር","ሽልማት፡ $1 ብር"],
+[/^(.*) · (\d+) ETB · starts in$/,"$1 · $2 ብር · የሚጀምረው በ","$1 · $2 ብር · ዝጅምር ኣብ"],
+[/^Card preview · #(\d+)$/,"የካርድ ቅድመ እይታ · #$1","ቅድሚ ርእይቶ ካርድ · #$1"],
+[/^Stake (\d+) ETB is taken from your wallet \((\d+) ETB\)\.$/,"$1 ብር ከቦርሳዎ ይቀነሳል ($2 ብር)።","$1 ብር ካብ ቦርሳኹም ይቕነስ ($2 ብር)።"],
+[/^Join \((\d+) ETB\)$/,"ተቀላቀል ($1 ብር)","ተሳተፍ ($1 ብር)"],
+[/^Ticket #(\d+) is taken\. Choose another\.$/,"ትኬት #$1 ተይዟል። ሌላ ይምረጡ።","ትኬት #$1 ተታሒዙ ኣሎ። ካልእ ሕረዩ።"],
+[/^Ticket #(\d+) was just taken\.$/,"ትኬት #$1 አሁን ተወስዷል።","ትኬት #$1 ሕጂ ተወሲዱ።"],
+[/^Could not reserve the ticket \((.*)\)\. Check your connection and Firebase rules\.$/,"ትኬቱን መያዝ አልተቻለም ($1)። ግንኙነትዎን እና የFirebase ደንቦችን ይፈትሹ።","ትኬት ምሓዝ ኣይከኣለን ($1)። ርክብኩምን ሕጊታት Firebaseን ፈትሹ።"],
+[/^✔ Joined with ticket #(\d+)\. The game starts automatically when the countdown ends\.$/,"✔ በትኬት #$1 ተቀላቅለዋል። ቆጠራው ሲያበቃ ጨዋታው በራስ-ሰር ይጀምራል።","✔ ብትኬት #$1 ተሳቲፍኩም። ቆጸራ ምስ ተወዲአ ጸወታ ብባዕሉ ይጅምር።"],
+[/^Not enough players in the (\d+) ETB room\. Stake refunded\.$/,"በ$1 ብር ክፍል በቂ ተጫዋቾች የሉም። ገንዘብዎ ተመልሷል።","ኣብ ናይ $1 ብር ክፍሊ ዝኣክል ተጻዋትቲ የለዉን። ገንዘብኩም ተመሊሱ።"],
+[/^Room (\d+) ETB \(#(\d+)\)$/,"ክፍል $1 ብር (#$2)","ክፍሊ $1 ብር (#$2)"],
+[/^Room win \(#(\d+)\)$/,"የክፍል ሽልማት (#$1)","ሽልማት ክፍሊ (#$1)"],
+[/^(.*) Official Receiver$/,"$1 ይፋዊ ተቀባይ","$1 ወግዓዊ ተቐባሊ"],
+[/^Account Holder: (.*)$/,"የሂሳብ ባለቤት፡ $1","ናይ ሕሳብ ወናኒ፡ $1"],
+[/^Account \/ Number: (.*)$/,"አካውንት / ቁጥር፡ $1","ኣካውንት / ቁጽሪ፡ $1"],
+[/^Transfer to Telebirr merchant (\S+) \((.*)\) via app or \*127#$/,"በመተግበሪያ ወይም *127# ወደ ቴሌብር ነጋዴ $1 ($2) ያስተላልፉ","ብኣፕ ወይ *127# ናብ ነጋዳይ ቴሌብር $1 ($2) ኣሰጋግሩ"],
+[/^Transfer via CBE Mobile Banking \(\*889#\) to account holder (.*) \((\S+)\)$/,"በCBE ሞባይል ባንኪንግ (*889#) ወደ የሂሳብ ባለቤት $1 ($2) ያስተላልፉ","ብCBE ሞባይል ባንኪንግ (*889#) ናብ ወናኒ ሕሳብ $1 ($2) ኣሰጋግሩ"],
+[/^Transfer via CBE Birr \(\*847#\) to mobile number (\S+) \((.*)\)$/,"በCBE ብር (*847#) ወደ ሞባይል ቁጥር $1 ($2) ያስተላልፉ","ብCBE ብር (*847#) ናብ ቁጽሪ ሞባይል $1 ($2) ኣሰጋግሩ"],
+[/^Transfer via E-Birr app or USSD \(\*841#\) to account holder (.*) \((\S+)\)$/,"በE-Birr መተግበሪያ ወይም USSD (*841#) ወደ የሂሳብ ባለቤት $1 ($2) ያስተላልፉ","ብE-Birr ኣፕ ወይ USSD (*841#) ናብ ወናኒ ሕሳብ $1 ($2) ኣሰጋግሩ"],
+[/^Pay with (.*)$/,"በ$1 ክፈል","ብ$1 ክፈል"],
+[/^Minimum (\d+) birr$/,"ዝቅተኛ $1 ብር","እንተወሓደ $1 ብር"],
+[/^(.*) receipt, Tx ID, or SMS$/,"$1 ደረሰኝ፣ የግብይት መለያ ወይም SMS","$1 ርሲት፣ መለለይ ግብይት ወይ SMS"],
+[/^Minimum (\d+) birr\. The admin checks your receipt and adds the money to your wallet once approved\.$/,"ዝቅተኛ $1 ብር። አስተዳዳሪው ደረሰኝዎን ይፈትሻል፣ ሲጸድቅም ገንዘቡ ወደ ቦርሳዎ ይጨመራል።","እንተወሓደ $1 ብር። እቲ ኣመሓዳሪ ርሲትኩም ይፈትሽ፣ ምስ ጸደቐ ድማ ገንዘብ ናብ ቦርሳኹም ይውሰኽ።"],
+[/^Submit (.*) Payment$/,"$1 ክፍያ ላክ","$1 ክፍሊት ስደድ"],
+[/^Withdraw to (.*)$/,"ወደ $1 አውጣ","ናብ $1 ኣውጽእ"],
+[/^(.*) Account \/ Phone$/,"$1 አካውንት / ስልክ","$1 ኣካውንት / ተሌፎን"],
+[/^Amount is deducted from wallet now\. Admin sends it to your (.*) account\.$/,"መጠኑ አሁን ከቦርሳዎ ይቀነሳል። አስተዳዳሪው ወደ $1 አካውንትዎ ይልካል።","እቲ መጠን ሕጂ ካብ ቦርሳኹም ይቕነስ። እቲ ኣመሓዳሪ ናብ $1 ኣካውንትኩም ይልእኽ።"],
+[/^Request (.*) Withdrawal$/,"$1 ገንዘብ ማውጣት ጠይቅ","$1 ምውጻእ ገንዘብ ሕተት"],
+[/^Payment below (\d+) birr is not confirmed\.$/,"ከ$1 ብር በታች የሆነ ክፍያ አይረጋገጥም።","ካብ $1 ብር ትሕቲ ዝኾነ ክፍሊት ኣይጸድቕን።"],
+[/^Paste your (.*) receipt, Tx ID or SMS\.$/,"የ$1 ደረሰኝዎን፣ የግብይት መለያ ወይም SMS ይለጥፉ።","ናይ $1 ርሲትኩም፣ መለለይ ግብይት ወይ SMS ለጥፉ።"],
+[/^Minimum withdrawal is (\d+) birr\.$/,"ዝቅተኛው የማውጣት መጠን $1 ብር ነው።","እንተወሓደ ዝውጻእ $1 ብር እዩ።"],
+[/^Enter a valid (.*) account or phone number\.$/,"ትክክለኛ የ$1 አካውንት ወይም ስልክ ቁጥር ያስገቡ።","ቅኑዕ ናይ $1 ኣካውንት ወይ ቁጽሪ ተሌፎን ኣእትዉ።"],
+[/^Account number (\S+) copied\. Complete the payment, then submit your receipt\.$/,"የሂሳብ ቁጥር $1 ተቀድቷል። ክፍያውን ያጠናቅቁ፣ ከዚያ ደረሰኝዎን ይላኩ።","ቁጽሪ ሕሳብ $1 ተቐዲሑ። ክፍሊት ኣዛምዱ፣ ድሕሪኡ ርሲትኩም ስደዱ።"],
+[/^Payment received\. The admin will check it and add (\d+) birr to your wallet\.$/,"ክፍያዎ ደርሷል። አስተዳዳሪው ይፈትሻል እና $1 ብር ወደ ቦርሳዎ ይጨምራል።","ክፍሊትኩም በጺሑ። እቲ ኣመሓዳሪ ይፈትሸ ከምኡውን $1 ብር ናብ ቦርሳኹም ይውስኽ።"],
+[/^✔ Withdrawal requested\. The admin will send (\d+) birr to your (.*) account (\S+)\.$/,"✔ ጥያቄዎ ተልኳል። አስተዳዳሪው $1 ብር ወደ $2 አካውንትዎ $3 ይልካል።","✔ ሕቶኹም ተላኢኹ። እቲ ኣመሓዳሪ $1 ብር ናብ $2 ኣካውንትኩም $3 ይልእኽ።"],
+[/^Get ready… (\d+)s$/,"ተዘጋጁ… $1 ሰከንድ","ተዳለዉ… $1 ሰከንድ"],
+[/^(\d+) ETB room$/,"$1 ብር ክፍል","$1 ብር ክፍሊ"],
+[/^Reward : (\d+) ETB$/,"ሽልማት፡ $1 ብር","ሽልማት፡ $1 ብር"],
+[/^Called (\d+) of 75 · Last: (.*)$/,"ከ75 $1 ተጠርተዋል · የመጨረሻ፡ $2","ካብ 75 $1 ተጸዊዖም · ናይ መወዳእታ፡ $2"],
+[/^Ticket #(\d+)$/,"ትኬት #$1","ትኬት #$1"],
+[/^Not yet\. Mark every called number for: (.*)$/,"ገና አልተሟላም። ለ$1 የተጠሩትን ሁሉንም ቁጥሮች ምልክት ያድርጉ።","ገና ኣይተማልአን። ን$1 ዝተጸውዑ ቁጽርታት ኩሎም ምልክት ግበሩ።"],
+[/^(\d+) has not been called yet\.$/,"$1 ገና አልተጠራም።","$1 ገና ኣይተጸዋዕን።"],
+[/^Could not record your win \((.*)\)\. Check Firebase rules for ends\/games and press Bingo again\.$/,"ድልዎን መመዝገብ አልተቻለም ($1)። የFirebase ደንቦችን ይፈትሹ እና ቢንጎ ዳግመኛ ይጫኑ።","ዓወትኩም ምምዝጋብ ኣይከኣለን ($1)። ሕጊታት Firebase ፈትሹ ከምኡውን ቢንጎ ዳግማይ ጠውቑ።"],
+[/^Ticket #(\d+) won in (\d+) calls\. Reward: (\d+) ETB added to your wallet\.$/,"ትኬት #$1 በ$2 ጥሪዎች አሸነፈ። ሽልማት፡ $3 ብር ወደ ቦርሳዎ ተጨምሯል።","ትኬት #$1 ኣብ $2 ጥሪታት ሰዒሩ። ሽልማት፡ $3 ብር ናብ ቦርሳኹም ተወሲኹ።"],
+[/^BINGO! (.*) wins$/,"ቢንጎ! $1 አሸነፈ","ቢንጎ! $1 ሰዒሩ"],
+[/^🏆 Ticket #(\d+) won after (\d+) calls\.(.*)$/,"🏆 ትኬት #$1 ከ$2 ጥሪዎች በኋላ አሸነፈ።$3","🏆 ትኬት #$1 ድሕሪ $2 ጥሪታት ሰዒሩ።$3"]
+];
+var PH=[[" ETB"," ብር"," ብር"],[" birr"," ብር"," ብር"],[" Reward: "," ሽልማት፡ "," ሽልማት፡ "],["Any Line","ማንኛውም መስመር","ዝኾነ መስመር"],["Four Corners","አራቱ ማዕዘኖች","ኣርባዕተ ማዕዘናት"],["Both Diagonals","ሁለቱም ሰያፎች","ክልቲኡ ሰያፍ"],["Plus Sign","የመደመር ምልክት","ምልክት ምውሳኽ"],["Letter T","ፊደል T","ፊደል T"],["Full House","ሙሉ ቤት","ምሉእ ገዛ"]];
+var EX=Object.create(null);ROWS.forEach(function(r){EX[r[0]]=[r[1],r[2]]});
+function trs(s){if(LANG==='en')return s;var t=s.trim();if(!/[A-Za-z]/.test(t))return s;var k=LANG==='am'?0:1,out=null,r=EX[t],i;
+  if(r)out=r[k];else for(i=0;i<RX.length;i++)if(RX[i][0].test(t)){out=t.replace(RX[i][0],RX[i][k+1]);break}
+  if(out===null)out=t;PH.forEach(function(p){out=out.split(p[0]).join(p[k+1])});
+  return out===t?s:s.replace(t,function(){return out})}
+function skipN(n){var p=n.nodeType===1?n:n.parentNode;return !!p&&location.hash==='#admin'&&!!p.closest&&!!p.closest('#view')}
+function xtext(n){var v=n.nodeValue,r=n.__r;if(!r&&!/[A-Za-z]/.test(v))return;if(skipN(n))return;if(!r||v!==r.t)r=n.__r={o:v,t:v};var out=trs(r.o);if(out!==v){r.t=out;n.nodeValue=out}}
+function xattr(e){if(skipN(e))return;['placeholder','aria-label'].forEach(function(a){var v=e.getAttribute(a);if(v===null)return;var m=e.__a||(e.__a={}),r=m[a];if(!r||v!==r.t)r=m[a]={o:v,t:v};var out=trs(r.o);if(out!==v){r.t=out;e.setAttribute(a,out)}})}
+function walk(n){if(n.nodeType===3){xtext(n);return}if(n.nodeType!==1||/^(SCRIPT|STYLE)$/.test(n.tagName))return;xattr(n);for(var c=n.firstChild;c;c=c.nextSibling)walk(c)}
+var OB=new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='childList')m.addedNodes.forEach(walk);else if(m.type==='characterData')xtext(m.target);else xattr(m.target)});OB.takeRecords()});
+OB.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label']});
+function setLang(l,save){LANG=l;if(save!==false)ls('sb_lang',l);document.documentElement.lang=l;$('lgb').textContent={en:'EN',am:'አማ',ti:'ትግ'}[l];menu((location.hash||'#home').slice(1));walk(document.body);OB.takeRecords()}
+$('lgb').onclick=function(){setLang({en:'am',am:'ti',ti:'en'}[LANG])};
+document.addEventListener('click',function(e){var b=e.target.closest('[data-l]');if(b)setLang(b.dataset.l)});
+function route(){if(!READY)return;var v=(location.hash||'#home').slice(1);if(!P[v])v='home';stopT();
+  if(v==='admin'&&isAdm()){purgeWins();purgePays()}
+  $('view').innerHTML=P[v]();menu(v);bindForms();$('over').classList.remove('show');
+  if(v==='rooms'){RP=null;rdraw()}if(v==='game')initGame();tick();scrollTo(0,0)}
+try{history.scrollRestoration='manual'}catch(e){}
+window.addEventListener('hashchange',route);
+setLang(LANG,false);
+$('view').innerHTML='<p class="note" style="padding:60px 0">Connecting…</p>';initFB(function(){READY=true;route()});
+})();
+</script></body></html>

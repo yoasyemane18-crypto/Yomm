@@ -180,11 +180,18 @@ function note(t){$('pt').textContent=t;$('pm').classList.add('show');$('pk').foc
 $('pk').onclick=function(){$('pm').classList.remove('show')};
 function refund(j){var u=session(),pay=function(){var us=users();if(us[u])setBal(us,u,bal(us[u])+j.a,'Room refund',j.a,function(){toast('Not enough players in the '+j.a+' ETB room. Stake refunded.')})};
   if(DB)DB.ref('games/'+j.gid+'/rf/'+ukey(u)).transaction(function(c){return c?undefined:1},function(e,ok){if(!e&&ok)pay()});else pay()}
-function RJ(){var u=session();if(!u)return null;var j=lg('sb_rj_'+u,null);if(!j)return null;var st=j.c*RCYC+RWAIT,n=now();
+function RJ(){var u=session();if(!u)return null;var j=lg('sb_rj_'+u,null),n=now();
+  if(!j){var R=rcyc(),uk=ukey(u);Object.keys(C.rooms).some(function(k){var rec=C.rooms[k],m=/^(c(\d+)_(\d+))t(\d+)$/.exec(k);
+    if(!rec||rec.u!==u||!m)return false;var g=m[1],c=+m[2],a=+m[3],tn=+m[4],st=c*RCYC+RWAIT;
+    if(c<R.c-1||n>=st+LEAD+75*INT+2000)return false;
+    if(((C.games[g]||{}).rf||{})[uk])return false;
+    j={gid:g,a:a,n:tn,c:c};if(n>=st&&pcount(g)>=2)j.ok=1;ls('sb_rj_'+u,j);return true})}
+  if(!j)return null;var st=j.c*RCYC+RWAIT;
   if(n>=st&&!j.ok){if(pcount(j.gid)<2){ls('sb_rj_'+u,null);refund(j);return null}j.ok=1;ls('sb_rj_'+u,j)}
   if(n>=st+LEAD+75*INT+2000){ls('sb_rj_'+u,null);return null}
   return j}
-var RP=null,RIV=null;
+var RP=null,RIV=null,JOINING=false;
+function firstFree(g,max){for(var i=1;i<=max;i++)if(!taken(g,i))return i;return 1}
 function rdraw(){var v=$('rv');if(!v)return;var rec=me();
   if(!rec){v.dataset.m='';v.innerHTML='<div class="panel"><h2>Stake Rooms</h2><p class="note">Log in to join a room.</p><button class="btn" data-go="home">Login</button></div>';return}
   if(RP){rpick();return}
@@ -197,27 +204,29 @@ function rdraw(){var v=$('rv');if(!v)return;var rec=me();
     $('rs'+a).textContent=mine?'Joined #'+j.n:wt?'⏳ '+mmss(R.st-R.n):'Running';
     $('rn'+a).textContent='👥 '+t+'/'+r[2]+' Players';$('rz'+a).textContent='Prize: '+Math.floor(t*a*PCT)+' ETB';
     var b=$('rb'+a);b.disabled=!wt||!!j||t>=r[2];b.textContent=mine?'✔ JOINED':'JOIN ROOM'})}
-function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,
+function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,tk=taken(RP.g,RP.n),
   h='<button class="btn o s" data-rx="1">‹ Back</button><h4>'+r[1]+' · '+RP.a+' ETB · starts in <span id="rt">'+mmss(R.st-R.n)+'</span></h4><div class="nums">';
   for(var n=1;n<=r[2];n++)h+='<button class="nb'+(taken(RP.g,n)?' occ':'')+'" aria-pressed="'+(n===RP.n)+'" data-rn="'+n+'">'+n+'</button>';
-  v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+bal(rec)+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1">Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert"></div>';
+  v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+bal(rec)+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1"'+((tk||JOINING)?' disabled':'')+'>Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert">'+(tk?'Ticket #'+RP.n+' is taken. Choose another.':'')+'</div>';
   o=v.querySelector('.nums');if(o)o.scrollTop=y}
-function rpup(){var R=rcyc(),t=$('rt');if(t)t.textContent=mmss(R.st-R.n);document.querySelectorAll('#rv .nb').forEach(function(b){b.classList.toggle('occ',taken(RP.g,+b.dataset.rn))})}
+function rpup(){var R=rcyc(),t=$('rt');if(t)t.textContent=mmss(R.st-R.n);document.querySelectorAll('#rv .nb').forEach(function(b){b.classList.toggle('occ',taken(RP.g,+b.dataset.rn))});
+  var tk=taken(RP.g,RP.n),jb=$('rv').querySelector('[data-rj]');if(jb)jb.disabled=tk||JOINING;if(tk&&!JOINING)rmsg('Ticket #'+RP.n+' is taken. Choose another.')}
 function rmsg(t){var m=$('rm');if(m)m.textContent=t}
-function rjoin(){var u=session(),us=users(),r=us[u],a=RP.a,n=RP.n,g=RP.g,R=rcyc();
+function rjoin(){if(JOINING)return;var u=session(),us=users(),r=us[u],a=RP.a,n=RP.n,g=RP.g,R=rcyc();
   if(R.n>=R.st||gid(a,R.c)!==g)return rmsg('This round has already started.');
   if(RJ())return rmsg('You already joined a room.');
   if(taken(g,n))return rmsg('Ticket #'+n+' is taken. Choose another.');
   if(bal(r)<a)return rmsg('Not enough balance. Deposit first.');
-  claimT(g,n,u,function(ok,err){if(!ok){rpick();rmsg(err?'Could not reserve the ticket ('+(err.code||err.message)+'). Check your connection and Firebase rules.':'Ticket #'+n+' was just taken.');return}
-    setBal(us,u,bal(r)-a,'Room '+a+' ETB (#'+n+')',-a,function(ok2){if(!ok2){unclaimT(g,n);rmsg('Not enough balance.');return}
-      addPool(g);ls('sb_rj_'+u,{gid:g,a:a,n:n,c:R.c});RP=null;rdraw();note('✔ Joined with ticket #'+n+'. The game starts automatically when the countdown ends.')})})}
-function rtick(){if(!$('rv'))return;if(RP){var R=rcyc();if(R.n>=R.st||gid(RP.a,R.c)!==RP.g){RP=null;rdraw()}else rpup()}else rdraw()}
+  JOINING=true;var jb=$('rv').querySelector('[data-rj]');if(jb)jb.disabled=true;
+  claimT(g,n,u,function(ok,err){if(!ok){JOINING=false;rpick();rmsg(err?'Could not reserve the ticket ('+(err.code||err.message)+'). Check your connection and Firebase rules.':'Ticket #'+n+' was just taken.');return}
+    setBal(us,u,bal(r)-a,'Room '+a+' ETB (#'+n+')',-a,function(ok2){if(!ok2){JOINING=false;unclaimT(g,n);rpick();rmsg('Not enough balance.');return}
+      JOINING=false;addPool(g);ls('sb_rj_'+u,{gid:g,a:a,n:n,c:R.c});RP=null;rdraw();note('✔ Joined with ticket #'+n+'. The game starts automatically when the countdown ends.')})})}
+function rtick(){if(!$('rv'))return;if(RP){var R=rcyc();if(R.n>=R.st||gid(RP.a,R.c)!==RP.g){RP=null;JOINING=false;rdraw()}else rpup()}else rdraw()}
 document.addEventListener('click',function(e){if(e.target.closest('[data-dep]')){PANEL='d';go('wallet')}});
 document.addEventListener('click',function(e){var b=e.target.closest('[data-rm],[data-rx],[data-rn],[data-rj]');if(!b||!$('rv'))return;var d=b.dataset;
-  if(d.rm){var a=+d.rm,R=rcyc();RP={a:a,g:gid(a,R.c),n:1};rpick()}
-  else if(d.rx){RP=null;rdraw()}
-  else if(d.rn){RP.n=+d.rn;rpick();if(taken(RP.g,RP.n))rmsg('Ticket #'+RP.n+' is taken.')}
+  if(d.rm){var a=+d.rm,R=rcyc(),g=gid(a,R.c),rm=ROOMS.filter(function(x){return x[0]===a})[0];JOINING=false;RP={a:a,g:g,n:firstFree(g,rm[2])};rpick()}
+  else if(d.rx){JOINING=false;RP=null;rdraw()}
+  else if(d.rn){RP.n=+d.rn;rpick()}
   else if(d.rj)rjoin()});
 setInterval(function(){var j=READY&&RJ();if(j&&location.hash!=='#game'&&now()>=j.c*RCYC+RWAIT&&LEFT!==j.gid)go('game')},1000);
 

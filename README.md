@@ -26,6 +26,7 @@
    ```
    The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
-## Web Deployment (GitHub Pages)
+## GitHub Actions Workflows
 
-Because `index.html` is a self-contained single-file web app at the repository root, you can also publish it directly by enabling **Settings → Pages → Deploy from branch** in your GitHub repository.
+- **Android CI & APK Build (`.github/workflows/android.yml`)**: Automatically runs on every push/PR to `main` or `master` (and manually via `workflow_dispatch`). Verifies `index.html` and `app/src/main/assets/index.html` are identical, builds `app-debug.apk` with JDK 21 and Gradle `9.3.1`, and uploads it as a downloadable artifact (`yeme-bingo-debug-apk`).
+- **Deploy Web App to GitHub Pages (`.github/workflows/pages.yml`)**: Enable **Settings → Pages → Source: GitHub Actions** and run this workflow from the **Actions** tab to publish the root `index.html`.

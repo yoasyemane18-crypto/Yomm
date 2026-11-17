@@ -240,7 +240,41 @@ function cellsHTML(card,m,tag,k){var h='';for(var r=0;r<5;r++)for(var c=0;c<5;c+
 var GOALS=(function(){var L=[],i,j,a,b,d1=[],d2=[];for(i=0;i<5;i++){a=[];b=[];for(j=0;j<5;j++){a.push([j,i]);b.push([i,j])}L.push(a,b)}
   for(j=0;j<5;j++){d1.push([j,j]);d2.push([j,4-j])}L.push(d1,d2);
   var cl=function(f){var o=[];for(var c=0;c<5;c++)for(var r=0;r<5;r++)if(f(c,r))o.push([c,r]);return o};
-  return [{n:'Any Line',s:L},{n:'Four Corners',s:[cl(function(c,r){return c%4===0&&r%4===0})]},{n:'Both Diagonals',s:[d1.concat(d2)]},{n:'Plus Sign',s:[cl(function(c,r){return c===2||r===2})]},{n:'Letter T',s:[cl(function(c,r){return r===0||c===2})]},{n:'Full House',s:[cl(function(){return true})]}]})();
+  var dedup=function(arr){var s={},o=[];arr.forEach(function(p){var k=p[0]+','+p[1];if(!s[k]){s[k]=1;o.push(p)}});return o};
+  var box=function(x,y,w,h){return cl(function(c,r){return c>=x&&c<x+w&&r>=y&&r<y+h})};
+  var rect=[],r0,c0;
+  for(r0=0;r0<=3;r0++)for(c0=0;c0<=2;c0++)rect.push(box(c0,r0,3,2));
+  for(r0=0;r0<=2;r0++)for(c0=0;c0<=3;c0++)rect.push(box(c0,r0,2,3));
+  var sq2=[[0,0],[3,0],[0,3],[3,3]].map(function(o){return box(o[0],o[1],2,2)});
+  var half=[],addHalf=function(side,mid){for(var p=0;p<mid.length;p++)for(var q=p+1;q<mid.length;q++)half.push(side.concat([[2,2],mid[p],mid[q]]))};
+  addHalf(cl(function(c,r){return r<2}),[[0,2],[1,2],[3,2],[4,2]]);
+  addHalf(cl(function(c,r){return r>2}),[[0,2],[1,2],[3,2],[4,2]]);
+  addHalf(cl(function(c,r){return c<2}),[[2,0],[2,1],[2,3],[2,4]]);
+  addHalf(cl(function(c,r){return c>2}),[[2,0],[2,1],[2,3],[2,4]]);
+  addHalf(cl(function(c,r){return c>r}),[[0,0],[1,1],[3,3],[4,4]]);
+  addHalf(cl(function(c,r){return c<r}),[[0,0],[1,1],[3,3],[4,4]]);
+  addHalf(cl(function(c,r){return c+r<4}),[[0,4],[1,3],[3,1],[4,0]]);
+  addHalf(cl(function(c,r){return c+r>4}),[[0,4],[1,3],[3,1],[4,0]]);
+  var twoSq=[];
+  for(i=0;i<L.length;i++)for(j=i+1;j<L.length;j++)sq2.forEach(function(sq){twoSq.push(dedup(L[i].concat(L[j],sq)))});
+  return [
+    {n:'Any Line',s:L},
+    {n:'Four Corners',s:[cl(function(c,r){return c%4===0&&r%4===0})]},
+    {n:'Both Diagonals',s:[dedup(d1.concat(d2))]},
+    {n:'Plus Sign',s:[cl(function(c,r){return c===2||r===2})]},
+    {n:'Letter T',s:[cl(function(c,r){return r===0||c===2})]},
+    {n:'Letter H',s:[cl(function(c,r){return c===0||c===4||r===2})]},
+    {n:'Letter L',s:[cl(function(c,r){return c===0||r===4})]},
+    {n:'Letter Z',s:[cl(function(c,r){return r===0||r===4||c+r===4})]},
+    {n:'Large Square',s:[cl(function(c,r){return c===0||c===4||r===0||r===4})]},
+    {n:'Small Rectangle',s:rect},
+    {n:'Diamond',s:[[[0,2],[1,1],[1,3],[2,0],[2,4],[3,1],[3,3],[4,2]]]},
+    {n:'Half House',s:half},
+    {n:'Two Lines + Small Square',s:twoSq},
+    {n:'Left + Right Columns',s:[cl(function(c,r){return c===0||c===4})]},
+    {n:'Top + Bottom Rows',s:[cl(function(c,r){return r===0||r===4})]},
+    {n:'Full House',s:[cl(function(){return true})]}
+  ]})();
 var G={},SND=lg('sb_snd',true);
 var VL=lg('sb_vl','am'),AMV=null,WARNED=false,ONES=['','አንድ','ሁለት','ሦስት','አራት','አምስት','ስድስት','ሰባት','ስምንት','ዘጠኝ'],TENS=['','አስር','ሃያ','ሠላሳ','አርባ','ሃምሳ','ስድሳ','ሰባ'],BLET=['ቢ','አይ','ኤን','ጂ','ኦ'];
 function amNum(n){var t=Math.floor(n/10),u=n%10;if(n<10)return ONES[n];if(t===1)return u?'አስራ '+ONES[u]:'አስር';return TENS[t]+(u?' '+ONES[u]:'')}
@@ -268,8 +302,8 @@ function loop(){var n=now(),el=n-G.start-LEAD,c=el<0?0:Math.min(75,Math.floor(el
   if($('au').checked)G.called.forEach(function(x){for(var a=0;a<5;a++)for(var b=0;b<5;b++)if(G.card[a][b]===x&&!G.m[a+','+b]){G.m[a+','+b]=1;ch=true}});
   if(ch)drawCard();
   if(G.called.length>=75&&!G.over){$('msg').textContent='All 75 balls called. No winner this round.';endOver('Game over','No winner in this game.')}}
-function claimWin(){if(G.over||G.cl)return;var w=null;
-  G.goal.s.some(function(l){if(l.every(function(p){return G.m[p[0]+','+p[1]]})){w=l;return true}});
+function checkGoal(m,goal){var w=null;(goal.s||[]).some(function(l){if(l.every(function(p){return m[p[0]+','+p[1]]})){w=l;return true}});return w}
+function claimWin(){if(G.over||G.cl)return;var w=checkGoal(G.m,G.goal);
   if(!w){$('msg').textContent='Not yet. Mark every called number for: '+G.goal.n;return}
   if(Object.keys(G.m).some(function(k){var q=k.split(','),x=G.card[+q[0]][+q[1]];return x&&G.called.indexOf(x)<0})){$('msg').textContent='A marked number has not been called yet.';return}
   G.cl=true;var u=session(),pz=Math.floor(pcount(G.gid)*G.a*PCT),v={gid:G.gid,u:u,n:G.n,calls:G.called.length,at:now(),k:1,prize:pz};
@@ -296,7 +330,7 @@ $('again').onclick=function(){LEFT=G.gid||null;go('rooms')};
 
 /* ===== menu & router ===== */
 var NAV=[['home','⌂','Home'],['rooms','◈','Stake Rooms'],['wallet','$','Wallet'],['register','✚','Register','in'],['how','ⓘ','How to Play'],['faq','?','FAQs'],['admin','⚙','Admin'],['out','⇤','Sign Out','auth']];
-function menu(v){var u=session(),h='<div class="logo">YEME<small>BINGO</small></div><div class="who">'+(u?'◉ '+esc(u):'☰ Menu')+'</div><div class="lang" role="group" aria-label="Language">'+[['en','English'],['am','አማርኛ'],['ti','ትግርኛ']].map(function(x){return '<button data-l="'+x[0]+'" aria-pressed="'+(LANG===x[0])+'">'+x[1]+'</button>'}).join('')+'</div><p class="note" style="padding:8px">'+(DB?'☁ Cloud connected':'⚠ Local mode (no cloud)')+'</p>';
+function menu(v){var u=session(),h='<div class="logo">YEME<small>BINGO</small></div><div class="who">'+(u?'◉ '+esc(u):'☰ Menu')+'</div><div class="lang" role="group" aria-label="Language">'+[['en','English'],['am','አማርኛ'],['ti','ትግርኛ']].map(function(x){return '<button data-l="'+x[0]+'" aria-pressed="'+(LANG===x[0])+'">'+x[1]+'</button>'}).join('')+'</div><p class="note" style="padding:8px">'+(DB?'☁ Connected':'⚠ Local mode (no cloud)')+'</p>';
   NAV.forEach(function(n){if(n[3]==='in'&&u)return;if(n[3]==='auth'&&!u)return;h+='<a data-go="'+n[0]+'" class="'+(n[0]===v?'act':'')+'" tabindex="0"><span>'+n[1]+'</span>'+n[2]+'</a>'});$('dr').innerHTML=h}
 function toggle(o){var open=o===undefined?!$('dr').classList.contains('open'):o;$('dr').classList.toggle('open',open);$('sc').classList.toggle('show',open);$('mb').textContent=open?'×':'☰'}
 $('mb').onclick=function(){toggle()};$('sc').onclick=function(){toggle(false)};
@@ -330,8 +364,8 @@ wallet:function(){var u=session(),rec=u&&users()[u];if(!rec)return '<div class="
   else h+='<div class="wpan"><h4>Select Withdrawal Method</h4>'+chips(WM,'data-wm')+'<h4 style="margin-top:18px">Withdraw to '+M.n+'</h4><div class="fld"><label for="wa">Amount to withdraw (birr)</label><input id="wa" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.wa)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="wt">'+M.n+' Account / Phone</label><input id="wt" type="tel" inputmode="tel" value="'+esc(DV.wt)+'" placeholder="'+M.n+' Account / Phone"></div><p class="n2">Amount is deducted from wallet now. Admin sends it to your '+M.n+' account.</p><button type="button" class="sub2 gd" id="wsub">Request '+M.n+' Withdrawal</button></div>';
   h+='</div><div id="msg" role="status"></div>'+(rec.tx&&rec.tx.length?'<ul class="txl">'+rec.tx.slice(-6).reverse().map(function(x){return '<li><span>'+esc(x.l)+'</span><b class="'+(x.a>0?'cr':'db')+'">'+(x.a>0?'+':'')+x.a+'</b></li>'}).join('')+'</ul>':'')+reqHTML(u);
   return h},
-how:function(){return '<div class="panel"><h2>How to Play</h2><ol style="line-height:1.6;font-size:17px"><li>Register, then deposit money in your Wallet with Telebirr.</li><li>Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.</li><li>Choose a ticket number and press Join. Your stake is taken from your wallet.</li><li>When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.</li><li>Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.</li><li>Complete the Target Goal and press Bingo. The first player to do it wins 80% of the pool.</li></ol></div>'},
-faq:function(){return '<div class="panel"><h2>FAQs</h2><details><summary>What if nobody else joins?</summary><p>Rooms need 2 or more players. If fewer join, your stake is refunded automatically.</p></details><details><summary>How big is the prize?</summary><p>The winner gets 80% of the room pool. 20% is the house share.</p></details><details><summary>Can I leave after joining?</summary><p>Your stake is held for the round. Leaving the game page does not refund it.</p></details><details><summary>Where is my account stored?</summary><p>Online, so you can log in from any device. If the app is offline it is kept in this browser only.</p></details></div>'},
+how:function(){return '<div class="panel"><h2>How to Play</h2><ol style="line-height:1.6;font-size:17px"><li>Register, then deposit money in your Wallet with Telebirr.</li><li>Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.</li><li>Choose a ticket number and press Join. Your stake is taken from your wallet.</li><li>When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.</li><li>Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.</li><li>Complete the Target Goal and press Bingo. The first player to do it wins the room prize.</li></ol></div>'},
+faq:function(){return '<div class="panel"><h2>FAQs</h2><details><summary>What if nobody else joins?</summary><p>Rooms need 2 or more players. If fewer join, your stake is refunded automatically.</p></details><details><summary>Can I leave after joining?</summary><p>Your stake is held for the round. Leaving the game page does not refund it.</p></details><details><summary>Where is my account stored?</summary><p>Online, so you can log in from any device. If the app is offline it is kept in this browser only.</p></details></div>'},
 admin:function(){
   if(!isAdm())return '<div class="panel"><h2>Admin Login</h2><form id="al" novalidate><div class="fld"><label for="ae">Email</label><input id="ae" type="email" autocomplete="username" autocapitalize="off" placeholder="Enter admin email"></div><div class="fld"><label for="ap">Password</label><input id="ap" type="password" autocomplete="current-password" placeholder="Enter password"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">Login</button></form></div>';
   return adminPanel()},
@@ -404,7 +438,7 @@ setInterval(function(){tick();if(location.hash==='#rooms')rtick()},1000);
 var LANG=lg('sb_lang','en');
 var ROWS=[
 ["Home","መነሻ","ገዛ"],["Stake Rooms","የጨዋታ ክፍሎች","ክፍልታት ጸወታ"],["Wallet","ቦርሳ","ቦርሳ"],["Register","ተመዝገብ","ተመዝገብ"],["How to Play","አጨዋወት","ከመይ ይጻወት"],["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["Admin","አስተዳዳሪ","ኣመሓዳሪ"],["Sign Out","ውጣ","ውጻእ"],["☰ Menu","☰ ምናሌ","☰ ሜኑ"],
-["☁ Cloud connected","☁ ከክላውድ ጋር ተገናኝቷል","☁ ምስ ክላውድ ተራኺቡ"],["⚠ Local mode (no cloud)","⚠ የአካባቢ ሁነታ (ያለ ክላውድ)","⚠ ናይ ከባቢ ኩነታት (ብዘይ ክላውድ)"],
+["☁ Connected","☁ ተገናኝቷል","☁ ተራኺቡ"],["⚠ Local mode (no cloud)","⚠ የአካባቢ ሁነታ (ያለ ክላውድ)","⚠ ናይ ከባቢ ኩነታት (ብዘይ ክላውድ)"],
 ["Rooms are open · join now","ክፍሎች ክፍት ናቸው · አሁን ይቀላቀሉ","ክፍልታት ክፉታት እዮም · ሕጂ ተሳተፉ"],["Round running · next rooms open in","ዙሩ እየተካሄደ ነው · ቀጣይ ክፍሎች የሚከፈቱት በ","ዙር ይካየድ ኣሎ · ዝቕጽሉ ክፍልታት ዝኽፈቱ ኣብ"],
 ["▶ Play in Stake Rooms","▶ በጨዋታ ክፍሎች ተጫወት","▶ ኣብ ክፍልታት ጸወታ ጻወት"],["⇥ Login","⇥ ግባ","⇥ እቶ"],["Login","ግባ","እቶ"],["Username","የተጠቃሚ ስም","ስም ተጠቃሚ"],["Password","የይለፍ ቃል","መሕለፊ ቃል"],["Enter Username","የተጠቃሚ ስም ያስገቡ","ስም ተጠቃሚ ኣእትው"],["Enter Password","የይለፍ ቃል ያስገቡ","መሕለፊ ቃል ኣእትው"],["✚ Register","✚ ተመዝገብ","✚ ተመዝገብ"],
 ["Wrong username or password.","የተሳሳተ የተጠቃሚ ስም ወይም የይለፍ ቃል።","ጌጋ ስም ተጠቃሚ ወይ መሕለፊ ቃል።"],["Enter your username and password.","የተጠቃሚ ስምዎን እና የይለፍ ቃልዎን ያስገቡ።","ስም ተጠቃሚን መሕለፊ ቃልን ኣእትው።"],
@@ -422,10 +456,9 @@ var ROWS=[
 ["Choose a ticket number and press Join. Your stake is taken from your wallet.","የትኬት ቁጥር ይምረጡ እና ተቀላቀል ይጫኑ። መጠኑ ከቦርሳዎ ይቀነሳል።","ቁጽሪ ትኬት ሕረዩ ከምኡውን ተሳተፍ ጠውቑ። እቲ መጠን ካብ ቦርሳኹም ይቕነስ።"],
 ["When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.","የክፍሉ ቆጠራ ሲያበቃ ጨዋታው ለሁሉም ይጀምራል። አንድ ክፍል ቢያንስ 2 ተጫዋቾች ያስፈልገዋል፣ አለበለዚያ ሁሉም ገንዘብ ይመለሳል።","ቆጸራ ክፍሊ ምስ ተወዲአ እቲ ጸወታ ንኹሉ ይጅምር። ሓደ ክፍሊ እንተወሓደ 2 ተጻዋትቲ የድልዮ፣ እንተዘይኮይኑ ኩሉ ገንዘብ ይምለስ።"],
 ["Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.","ቁጥሮች በየ5 ሰከንድ ይጠራሉ። በካርድዎ ላይ የተጠሩትን ቁጥሮች ይንኩ፣ ወይም ራስ-ሰር ምልክትን ይጠቀሙ።","ቁጽርታት ኣብ ነፍሲ ወከፍ 5 ሰከንድ ይጽዋዑ። ኣብ ካርድኩም ዝተጸዋዑ ቁጽርታት ጠውቑ፣ ወይ ባዕሉ ምልክት ምግባር ተጠቀሙ።"],
-["Complete the Target Goal and press Bingo. The first player to do it wins 80% of the pool.","የዒላማ ግቡን ይሙሉ እና ቢንጎ ይጫኑ። ይህን የመጀመሪያ የሚያደርግ ተጫዋች 80% የገንዘብ ክምችቱን ያሸንፋል።","ዕላማ ኣማልኡ ከምኡውን ቢንጎ ጠውቑ። ቀዳማይ ዝገብር ተጻዋታይ 80% ናይ ገንዘብ ክምችት ይስዕር።"],
+["Complete the Target Goal and press Bingo. The first player to do it wins the room prize.","የዒላማ ግቡን ይሙሉ እና ቢንጎ ይጫኑ። ይህን የመጀመሪያ የሚያደርግ ተጫዋች የክፍሉን ሽልማት ያሸንፋል።","ዕላማ ኣማልኡ ከምኡውን ቢንጎ ጠውቑ። ቀዳማይ ዝገብር ተጻዋታይ ናይ ክፍሊ ሽልማት ይስዕር።"],
 ["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["What if nobody else joins?","ሌላ ማንም ካልተቀላቀለስ?","ካልእ ዋላ ሓደ እንተዘይተሳተፈኸ?"],
 ["Rooms need 2 or more players. If fewer join, your stake is refunded automatically.","ክፍሎች 2 ወይም ከዚያ በላይ ተጫዋቾች ያስፈልጋቸዋል። ከዚያ ያነሱ ከተቀላቀሉ ገንዘብዎ በራስ-ሰር ይመለሳል።","ክፍልታት 2 ወይ ልዕሊኡ ተጻዋትቲ የድልዮም። ካብኡ ዝሑሱ እንተተሳተፉ ገንዘብኩም ብባዕሉ ይምለስ።"],
-["How big is the prize?","ሽልማቱ ምን ያህል ነው?","ሽልማት ክንደይ እዩ?"],["The winner gets 80% of the room pool. 20% is the house share.","አሸናፊው 80% የክፍሉን ገንዘብ ክምችት ያገኛል። 20% የአስተዳደር ድርሻ ነው።","እቲ ዕዉት 80% ናይ ክፍሊ ገንዘብ ክምችት ይረክብ። 20% ናይ ኣመሓዳሪ ክፍሊ እዩ።"],
 ["Can I leave after joining?","ከተቀላቀልኩ በኋላ መውጣት እችላለሁ?","ድሕሪ ምስታፈይ ክወጽእ ይኽእል ድየ?"],["Your stake is held for the round. Leaving the game page does not refund it.","ገንዘብዎ ለዙሩ ተይዟል። የጨዋታ ገጹን መልቀቅ አይመልሰውም።","ገንዘብኩም ንዙር ተታሒዙ። ገጽ ጸወታ ምግዳፍ ኣይመልሶን።"],
 ["Where is my account stored?","መለያዬ የት ነው የሚቀመጠው?","ሕሳበይ ኣበይ እዩ ዝዕቆብ?"],["Online, so you can log in from any device. If the app is offline it is kept in this browser only.","በመስመር ላይ ስለሚቀመጥ ከማንኛውም መሳሪያ መግባት ይችላሉ። መተግበሪያው ከመስመር ውጭ ከሆነ በዚህ አሳሽ ላይ ብቻ ይቀመጣል።","ኣብ መስመር ስለዝዕቆብ ካብ ዝኾነ መሳርሒ ክትኣትዉ ትኽእሉ። እቲ ኣፕ ካብ መስመር ወጻኢ እንተኾይኑ ኣብዚ ብሮውዘር ጥራይ ይዕቆብ።"],
 ["Target Goal:","የዒላማ ግብ፡","ዕላማ፡"],["Waiting for the first call…","የመጀመሪያው ቁጥር እየተጠበቀ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽበ ኣሎ…"],["Bingo!","ቢንጎ!","ቢንጎ!"],["BINGO!","ቢንጎ!","ቢንጎ!"],["Auto-mark","ራስ-ሰር ምልክት","ባዕሉ ምልክት ምግባር"],["🔊 Sound on","🔊 ድምጽ በርቷል","🔊 ድምጺ ተኸፊቱ"],["🔇 Sound off","🔇 ድምጽ ጠፍቷል","🔇 ድምጺ ተዓጽዩ"],
@@ -485,7 +518,7 @@ var RX=[
 [/^BINGO! (.*) wins$/,"ቢንጎ! $1 አሸነፈ","ቢንጎ! $1 ሰዒሩ"],
 [/^🏆 Ticket #(\d+) won after (\d+) calls\.(.*)$/,"🏆 ትኬት #$1 ከ$2 ጥሪዎች በኋላ አሸነፈ።$3","🏆 ትኬት #$1 ድሕሪ $2 ጥሪታት ሰዒሩ።$3"]
 ];
-var PH=[[" ETB"," ብር"," ብር"],[" birr"," ብር"," ብር"],[" Reward: "," ሽልማት፡ "," ሽልማት፡ "],["Any Line","ማንኛውም መስመር","ዝኾነ መስመር"],["Four Corners","አራቱ ማዕዘኖች","ኣርባዕተ ማዕዘናት"],["Both Diagonals","ሁለቱም ሰያፎች","ክልቲኡ ሰያፍ"],["Plus Sign","የመደመር ምልክት","ምልክት ምውሳኽ"],["Letter T","ፊደል T","ፊደል T"],["Full House","ሙሉ ቤት","ምሉእ ገዛ"]];
+var PH=[[" ETB"," ብር"," ብር"],[" birr"," ብር"," ብር"],[" Reward: "," ሽልማት፡ "," ሽልማት፡ "],["Any Line","ማንኛውም መስመር","ዝኾነ መስመር"],["Four Corners","አራቱ ማዕዘኖች","ኣርባዕተ ማዕዘናት"],["Both Diagonals","ሁለቱም ሰያፎች","ክልቲኡ ሰያፍ"],["Plus Sign","የመደመር ምልክት","ምልክት ምውሳኽ"],["Letter T","ፊደል T","ፊደል T"],["Letter H","ፊደል H","ፊደል H"],["Letter L","ፊደል L","ፊደል L"],["Letter Z","ፊደል Z","ፊደል Z"],["Large Square","ትልቅ ካሬ","ዓቢ ካሬ"],["Small Rectangle","ትንሽ አራት ማዕዘን","ንእሽቶ ኣርባዕተ ኩርናዕ"],["Diamond","ዳይመንድ","ዳይመንድ"],["Half House","ግማሽ ቤት","ፍርቂ ገዛ"],["Two Lines + Small Square","ሁለት መስመር + ትንሽ ካሬ","ክልተ መስመር + ንእሽቶ ካሬ"],["Left + Right Columns","ግራ + ቀኝ አምዶች","ጸጋም + የማን ዓምድታት"],["Top + Bottom Rows","ላይ + ታች ረድፎች","ላዕሊ + ታሕቲ መስመራት"],["Full House","ሙሉ ቤት","ምሉእ ገዛ"]];
 var EX=Object.create(null);ROWS.forEach(function(r){EX[r[0]]=[r[1],r[2]]});
 function trs(s){if(LANG==='en')return s;var t=s.trim();if(!/[A-Za-z]/.test(t))return s;var k=LANG==='am'?0:1,out=null,r=EX[t],i;
   if(r)out=r[k];else for(i=0;i<RX.length;i++)if(RX[i][0].test(t)){out=t.replace(RX[i][0],RX[i][k+1]);break}

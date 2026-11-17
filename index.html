@@ -247,11 +247,15 @@ function amNum(n){var t=Math.floor(n/10),u=n%10;if(n<10)return ONES[n];if(t===1)
 function amCall(n){return BLET[Math.floor((n-1)/15)]+'፣ '+amNum(n)}
 function pickAm(){try{AMV=speechSynthesis.getVoices().filter(function(v){return /^am/i.test(v.lang)})[0]||null}catch(e){AMV=null}}
 try{if(window.speechSynthesis){speechSynthesis.onvoiceschanged=pickAm;pickAm()}}catch(e){}
-function speak(am,en){if(!SND||!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;
-  try{var useAm=VL==='am',u;pickAm();
-    if(useAm&&speechSynthesis.getVoices().length&&!AMV){useAm=false;if(!WARNED){WARNED=true;toast('Amharic voice is not installed on this phone, so numbers are called in English. Install it in Settings, Text-to-speech (Google), then reopen the app.')}}
+var AUD=null;
+function stopAud(){if(AUD){try{AUD.pause();AUD.currentTime=0}catch(e){}AUD=null}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
+function speakTTS(am,en){if(!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;
+  try{var useAm=VL==='am',u;pickAm();if(useAm&&!AMV)useAm=false;
     u=new SpeechSynthesisUtterance(useAm?am:(en||am));if(useAm){u.lang=AMV?AMV.lang:'am-ET';if(AMV)u.voice=AMV}else u.lang='en-US';u.rate=.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
-function stopT(){clearInterval(RIV);RIV=null;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
+function speak(am,en,num){if(!SND)return;stopAud();
+  if(VL==='am'&&num>=1&&num<=75){try{var a=new Audio('am/'+num+'.mp3');AUD=a;a.onended=function(){if(AUD===a)AUD=null};a.onerror=function(){if(AUD===a){AUD=null;speakTTS(am,en)}};var p=a.play();if(p&&p.catch)p.catch(function(){if(AUD===a){AUD=null;speakTTS(am,en)}});return}catch(e){AUD=null}}
+  speakTTS(am,en)}
+function stopT(){clearInterval(RIV);RIV=null;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}stopAud()}
 function drawBoard(){var b=$('bd');if(!b)return;var t=G.called[G.called.length-1],x='';for(var n=1;n<=75;n++)x+='<div class="bn'+(G.called.indexOf(n)>-1?' c':'')+(n===t?' l':'')+'">'+n+'</div>';b.innerHTML=x;
   $('lst').textContent=G.called.length?'Called '+G.called.length+' of 75 · Last: '+'BINGO'[Math.floor((t-1)/15)]+' '+t:'Waiting for the first call…'}
 function drawCard(){var hd='';'BINGO'.split('').forEach(function(l){hd+='<div class="hdr">'+l+'</div>'});$('cg').innerHTML='<div class="gcard"><p class="last" style="margin:0 0 6px;color:#f6d77a">Ticket #'+G.n+'</p><div class="grid">'+hd+cellsHTML(G.card,G.m,'button',0)+'</div></div>';drawBoard()}
@@ -260,7 +264,7 @@ function endOver(h,p,wn){G.over=true;if(G.t){clearInterval(G.t);G.t=null}$('oh')
   $('over').classList.add('show')}
 function loop(){var n=now(),el=n-G.start-LEAD,c=el<0?0:Math.min(75,Math.floor(el/INT)+1),ch=false,rd=$('rd');
   if(el<0)rd.textContent='Get ready… '+Math.ceil(-el/1000)+'s';else if(!G.over)rd.textContent=G.a+' ETB room';
-  while(G.called.length<c){G.called.push(G.seq[G.called.length]);ch=true;if(!G.over){var cn=G.called[G.called.length-1];speak(amCall(cn),'BINGO'[Math.floor((cn-1)/15)]+', '+cn)}}
+  var nc=null;while(G.called.length<c){nc=G.seq[G.called.length];G.called.push(nc);ch=true}if(nc!==null&&!G.over)speak(amCall(nc),'BINGO'[Math.floor((nc-1)/15)]+', '+nc,nc);
   if($('au').checked)G.called.forEach(function(x){for(var a=0;a<5;a++)for(var b=0;b<5;b++)if(G.card[a][b]===x&&!G.m[a+','+b]){G.m[a+','+b]=1;ch=true}});
   if(ch)drawCard();
   if(G.called.length>=75&&!G.over){$('msg').textContent='All 75 balls called. No winner this round.';endOver('Game over','No winner in this game.')}}
@@ -285,8 +289,8 @@ function initGame(){var j=RJ(),st=j&&j.c*RCYC+RWAIT;
   $('cg').onclick=function(e){var b=e.target.closest('.cell');if(!b||!b.dataset.c||G.over)return;var c=+b.dataset.c,r=+b.dataset.r,n=G.card[c][r];if(!n)return;
     if(G.called.indexOf(n)<0){b.classList.add('sh');setTimeout(function(){b.classList.remove('sh')},300);$('msg').textContent=n+' has not been called yet.';return}
     var k=c+','+r;if(G.m[k])delete G.m[k];else G.m[k]=1;b.classList.toggle('on');$('msg').textContent=''};
-  var sb=$('snd');sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';sb.onclick=function(){SND=!SND;ls('sb_snd',SND);sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';if(!SND&&window.speechSynthesis)speechSynthesis.cancel()};
-  var vb=$('vl'),vt=function(){vb.textContent=VL==='am'?'ድምጽ: አማርኛ':'Voice: English'};vt();vb.onclick=function(){VL=VL==='am'?'en':'am';ls('sb_vl',VL);vt();speak(amCall(23),'N, 23')};
+  var sb=$('snd');sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';sb.onclick=function(){SND=!SND;ls('sb_snd',SND);sb.textContent=SND?'🔊 Sound on':'🔇 Sound off';if(!SND)stopAud()};
+  var vb=$('vl'),vt=function(){vb.textContent=VL==='am'?'ድምጽ: አማርኛ':'Voice: English'};vt();vb.onclick=function(){VL=VL==='am'?'en':'am';ls('sb_vl',VL);vt();speak(amCall(23),'N, 23',23)};
   $('bg').onclick=claimWin;$('bk').onclick=function(){LEFT=G.gid;go('rooms')};G.t=setInterval(loop,250);loop()}
 $('again').onclick=function(){LEFT=G.gid||null;go('rooms')};
 

@@ -620,7 +620,8 @@ function users(){return DB?C.users:lg('sb_users',{})}
 function pays(){return DB?C.pay:lg('sb_pay',[])}
 function wds(){return DB?C.wd:lg('sb_wd',[])}
 function isAdm(){return lg('sb_as',false)===ADMIN_HASH}
-function bal(r){return r.wallet||0}
+function bal(r){return Math.round((Number(r&&r.wallet)||0)*100)/100}
+function balFmt(x){var v=Math.round((Number(x)||0)*10)/10;return (v===0?0:v).toFixed(1)}
 function me(){var u=session();return u?users()[u]:null}
 function refresh(){clearTimeout(RT0);RT0=setTimeout(function(){if(!READY)return;var v=location.hash.slice(1)||'home',a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;if(v==='admin'||v==='wallet'||v==='home'||v==='alerts'||(v==='settings'&&STAB==='alerts')){if(v==='wallet')wsv();var y=scrollY;route();scrollTo(0,y)}},200)}
 function initFB(cb){var fin=false,seen={},tm;
@@ -639,9 +640,9 @@ function initFB(cb){var fin=false,seen={},tm;
     DB.ref('pushBroadcasts').limitToLast(5).on('child_added',function(sn){var v=sn.val();if(READY&&v&&window.YemePush)window.YemePush.handleLiveEvent(v)},function(){});
     DB.ref('.info/serverTimeOffset').on('value',function(sn){OFF=sn.val()||0})
   }catch(e){off()}}
-function setBal(us,u,v,l,a,cb){var r=us[u];r.wallet=v;r.tx=(r.tx||[]).concat([{l:l,a:a}]).slice(-20);
+function setBal(us,u,v,l,a,cb){var r=us[u],nv=Math.round((Number(v)||0)*100)/100,na=Math.round((Number(a)||0)*100)/100;r.wallet=nv;r.tx=(r.tx||[]).concat([{l:l,a:na}]).slice(-20);
   if(!DB){ls('sb_users',us);if(cb)cb(true);return}
-  DB.ref('users/'+ukey(u)).transaction(function(c){if(!c)return c;var nb=bal(c)+a;if(nb<0)return;c.wallet=nb;c.tx=(Array.isArray(c.tx)?c.tx:Object.values(c.tx||{})).concat([{l:l,a:a}]).slice(-20);return c},function(e,ok){if(cb)cb(!e&&!!ok)})}
+  DB.ref('users/'+ukey(u)).transaction(function(c){if(!c)return c;var nb=Math.round((bal(c)+na)*100)/100;if(nb<0)return;c.wallet=nb;c.tx=(Array.isArray(c.tx)?c.tx:Object.values(c.tx||{})).concat([{l:l,a:na}]).slice(-20);return c},function(e,ok){if(cb)cb(!e&&!!ok)})}
 function normPhone(p){
   var d=String(p||'').replace(/[^\d]/g,'');
   if(!d)return '';
@@ -1072,7 +1073,7 @@ function rdraw(){var v=$('rv');if(!v)return;var rec=me();
   if(v.dataset.m!=='lobby'){v.dataset.m='lobby';var BC=['#e9dcff','#f6d77a','#f0c75e','#e5b53a','#d99a1e'],h='<div class="wal"><small>Wallet</small><b id="wb"></b><button class="ab" id="dep" style="margin-top:8px;background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55">+ Deposit</button></div><div class="hub-cd" style="margin-bottom:12px"><span id="cdl"></span><b id="cd"></b></div>';
     ROOMS.forEach(function(r,i){var a=r[0];h+='<div class="rc"><div class="rh"><div class="bd" style="background:'+BC[i]+'">'+a+'</div><div class="rn"><b>'+r[1]+'</b><small>Stake: '+a+' ETB / Ticket</small></div><span class="rs" id="rs'+a+'"></span></div><div class="rp"><span id="rn'+a+'"></span><b id="rz'+a+'"></b></div><button class="rb" id="rb'+a+'" data-rm="'+a+'"></button></div>'});
     v.innerHTML=h;$('dep').onclick=function(){PANEL='d';go('wallet')};tick()}
-  $('wb').textContent=bal(rec)+' ETB';
+  $('wb').textContent=balFmt(bal(rec))+' ETB';
   ROOMS.forEach(function(r){var a=r[0],g=gid(a,R.c),t=pcount(g),mine=j&&j.gid===g;
     $('rs'+a).textContent=mine?'Joined #'+j.n:wt?'⏳ '+mmss(R.st-R.n):'Running';
     $('rn'+a).textContent='👥 '+t+'/'+r[2]+' Players';$('rz'+a).textContent='Prize: '+Math.floor(t*a*PCT)+' ETB';
@@ -1080,7 +1081,7 @@ function rdraw(){var v=$('rv');if(!v)return;var rec=me();
 function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,tk=taken(RP.g,RP.n),rmGoal=GOALS[(R.c+RP.a)%GOALS.length],
   h='<button class="btn o s" data-rx="1">‹ Back</button><h4>'+r[1]+' · '+RP.a+' ETB · starts in <span id="rt">'+mmss(R.st-R.n)+'</span></h4><div class="goal" style="margin:8px 0 10px"><div class="goal-info"><small>Target Goal:</small><b>'+esc(rmGoal.n)+'</b></div><button type="button" class="ghelp" data-gh="'+esc(rmGoal.n)+'">🏅 How to win</button></div><div class="nums">';
   for(var n=1;n<=r[2];n++)h+='<button class="nb'+(taken(RP.g,n)?' occ':'')+'" aria-pressed="'+(n===RP.n)+'" data-rn="'+n+'">'+n+'</button>';
-  v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+bal(rec)+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1"'+((tk||JOINING)?' disabled':'')+'>Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert">'+(tk?'Ticket #'+RP.n+' is taken. Choose another.':'')+'</div>';
+  v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+balFmt(bal(rec))+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1"'+((tk||JOINING)?' disabled':'')+'>Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert">'+(tk?'Ticket #'+RP.n+' is taken. Choose another.':'')+'</div>';
   o=v.querySelector('.nums');if(o)o.scrollTop=y}
 function rpup(){var R=rcyc(),t=$('rt');if(t)t.textContent=mmss(R.st-R.n);document.querySelectorAll('#rv .nb').forEach(function(b){b.classList.toggle('occ',taken(RP.g,+b.dataset.rn))});
   var tk=taken(RP.g,RP.n),jb=$('rv').querySelector('[data-rj]');if(jb)jb.disabled=tk||JOINING;if(tk&&!JOINING)rmsg('Ticket #'+RP.n+' is taken. Choose another.')}
@@ -1389,7 +1390,7 @@ var GART={
 };
 var P={
 home:function(){var u=session(),rec=u&&users()[u];
-  if(rec)return '<div class="hub-bal"><div><small>Balance</small><b>'+bal(rec)+' ETB</b></div><button class="hub-dep" id="hdep">+ Deposit</button></div><div class="gg"><div class="gc g1"><div class="gart">'+GART.fast+'</div><h3>Fast Bingo</h3><p>75-ball · pick your stake</p><button class="gplay" data-go="fast">Play</button></div><div class="gc g2"><div class="gart">'+GART.classic+'</div><h3>Classic Bingo</h3><p>Scheduled · bigger pots</p><button class="gplay" data-go="rooms">Play</button></div><div class="gc g3"><span class="gnew">NEW</span><div class="gart">'+GART.keno+'</div><h3>Keno</h3><p>80-ball · pick 1–10 spots</p><button class="gplay" data-go="keno">Play</button></div><div class="gc g4"><span class="gnew">NEW</span><div class="gart">'+GART.slots+'</div><h3>Lucky Coins</h3><p>Fruit reels · jackpots</p><button class="gplay" data-go="slots">Play</button></div><div class="gc g5"><span class="gnew">NEW</span><div class="gart">'+GART.ludo+'</div><h3>Ludo</h3><p>2 or 4 players · win the pot</p><button class="gplay" data-go="ludo">Play</button></div><div class="gc g6"><span class="gnew">NEW</span><div class="gart">'+GART.hilo+'</div><h3>Hi-Lo</h3><p>Deal any time · up to ×5,000</p><button class="gplay" data-go="hilo">Play</button></div><div class="gc g7"><span class="gnew">NEW</span><div class="gart">'+GART.c8+'</div><h3>Crazy 8</h3><p>2, 3 or 4 players · win the pot</p><button class="gplay" data-go="c8">Play</button></div><div class="gc g8"><span class="gnew">NEW</span><div class="gart">'+GART.buna+'</div><h3>Buna Time</h3><p>243 ways · free spins up to ×3</p><button class="gplay" data-go="buna">Play</button></div></div>';
+  if(rec)return '<div class="hub-bal"><div><small>Balance</small><b>'+balFmt(bal(rec))+' ETB</b></div><button class="hub-dep" id="hdep">+ Deposit</button></div><div class="gg"><div class="gc g1"><div class="gart">'+GART.fast+'</div><h3>Fast Bingo</h3><p>75-ball · pick your stake</p><button class="gplay" data-go="fast">Play</button></div><div class="gc g2"><div class="gart">'+GART.classic+'</div><h3>Classic Bingo</h3><p>Scheduled · bigger pots</p><button class="gplay" data-go="rooms">Play</button></div><div class="gc g3"><span class="gnew">NEW</span><div class="gart">'+GART.keno+'</div><h3>Keno</h3><p>80-ball · pick 1–10 spots</p><button class="gplay" data-go="keno">Play</button></div><div class="gc g4"><span class="gnew">NEW</span><div class="gart">'+GART.slots+'</div><h3>Lucky Coins</h3><p>Fruit reels · jackpots</p><button class="gplay" data-go="slots">Play</button></div><div class="gc g5"><span class="gnew">NEW</span><div class="gart">'+GART.ludo+'</div><h3>Ludo</h3><p>2 or 4 players · win the pot</p><button class="gplay" data-go="ludo">Play</button></div><div class="gc g6"><span class="gnew">NEW</span><div class="gart">'+GART.hilo+'</div><h3>Hi-Lo</h3><p>Deal any time · up to ×5,000</p><button class="gplay" data-go="hilo">Play</button></div><div class="gc g7"><span class="gnew">NEW</span><div class="gart">'+GART.c8+'</div><h3>Crazy 8</h3><p>2, 3 or 4 players · win the pot</p><button class="gplay" data-go="c8">Play</button></div><div class="gc g8"><span class="gnew">NEW</span><div class="gart">'+GART.buna+'</div><h3>Buna Time</h3><p>243 ways · free spins up to ×3</p><button class="gplay" data-go="buna">Play</button></div></div>';
   return '<div class="panel">'+USERSVG+'<h2>⇥ Login</h2><form id="lf" novalidate><div class="fld"><label for="lu">Username</label><input id="lu" autocomplete="username" placeholder="Enter Username"></div><div class="fld"><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" placeholder="Enter Password"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">⇥ Login</button><button type="button" class="btn o s" id="fpbtn" data-go="forgot">🔑 Forgot Password?</button></form></div><button class="btn g" data-go="register">✚ Register</button>'},
 forgot:function(){return '<div class="panel">'+USERSVG+'<h2>Reset Password</h2><form id="ff" novalidate><div class="fld"><label for="fpu">Username</label><input id="fpu" autocomplete="username" placeholder="Enter Username"></div><div class="fld"><label for="fpph">Registered Phone No</label><input id="fpph" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter Phone Number"></div><div class="fld"><label for="fpp">New Password</label><input id="fpp" type="password" autocomplete="new-password" placeholder="Enter New Password"></div><div class="fld"><label for="fpp2">Confirm New Password</label><input id="fpp2" type="password" autocomplete="new-password" placeholder="Enter Password Again"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit" id="fpsub">🔑 Reset Password</button></form><div class="hv"><a data-go="home">‹ Back to Login</a></div></div>'},
 register:function(){return '<div class="panel">'+USERSVG+'<h2>User Registration</h2><form id="rf" novalidate><div class="fld"><label for="ru">Username</label><input id="ru" autocomplete="username" placeholder="Enter Username"></div><div class="fld"><label for="rph">Phone No</label><input id="rph" type="tel" inputmode="tel" placeholder="Enter Phone Number"></div><div class="fld"><label for="rp">Password</label><input id="rp" type="password" autocomplete="new-password" placeholder="Enter Password"></div><div class="fld"><label for="rp2">Confirm Password</label><input id="rp2" type="password" autocomplete="new-password" placeholder="Enter Password Again"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">✚ Register</button></form><div class="hv">ⓘ Have an account <a data-go="home">Login</a></div></div>'},
@@ -1402,7 +1403,7 @@ hilo:function(){return '<div id="hlv"></div>'},
 c8:function(){return '<div id="c8v"></div>'},
 buna:function(){return '<div id="bnv"></div>'},
 wallet:function(){var u=session(),rec=u&&users()[u];if(!rec)return '<div class="panel"><h2>Wallet</h2><p class="note">Log in to see your wallet.</p><button class="btn" data-go="home">Login</button></div>';
-  var d=PANEL!=='w',M=METHODS[d?DM:WM],h='<div class="wcard"><small>Wallet balance</small><b class="wbig">'+bal(rec)+' birr</b><small>Stake rooms from 10 birr</small><div class="wtab"><button class="wt'+(d?' on':'')+'" id="bdp">Deposit</button><button class="wt'+(d?'':' on')+'" id="bwd">Withdraw</button></div>';
+  var d=PANEL!=='w',M=METHODS[d?DM:WM],h='<div class="wcard"><small>Wallet balance</small><b class="wbig">'+balFmt(bal(rec))+' birr</b><small>Stake rooms from 10 birr</small><div class="wtab"><button class="wt'+(d?' on':'')+'" id="bdp">Deposit</button><button class="wt'+(d?'':' on')+'" id="bwd">Withdraw</button></div>';
   if(d)h+='<div class="wpan"><h4>Select Payment Method</h4>'+chips(DM,'data-dm')+'<div class="rcv"><b class="g1">'+M.n+' Official Receiver</b><div>Account Holder: '+esc(PAY_NAME)+'</div><div class="g2">Account / Number: '+PAY_NUM+'</div><p>'+M.t+'</p></div><button type="button" class="pw" id="pay">Pay with '+M.n+'</button><p class="n2">Enter amount and paste your payment receipt / SMS confirmation:</p><div class="fld"><label for="ra">Amount (birr)</label><input id="ra" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.a)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="rl">Receipt</label><textarea id="rl" placeholder="'+M.n+' receipt, Tx ID, or SMS" autocapitalize="off">'+esc(DV.l)+'</textarea><button type="button" class="pst" id="pst">📋 Paste</button></div><p class="n2 s">Press &amp; hold space to paste link</p><p class="n2">Minimum '+PAY_BIRR+' birr. The admin checks your receipt and adds the money to your wallet once approved.</p><button type="button" class="sub2" id="pd">Submit '+M.n+' Payment</button></div>';
   else h+='<div class="wpan"><h4>Select Withdrawal Method</h4>'+chips(WM,'data-wm')+'<h4 style="margin-top:18px">Withdraw to '+M.n+'</h4><div class="fld"><label for="wa">Amount to withdraw (birr)</label><input id="wa" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.wa)+'" placeholder="Minimum '+WD_BIRR+' birr"></div><div class="fld"><label for="wt">'+M.n+' Account / Phone</label><input id="wt" type="tel" inputmode="tel" value="'+esc(DV.wt)+'" placeholder="'+M.n+' Account / Phone"></div><p class="n2">Amount is deducted from wallet now. Admin sends it to your '+M.n+' account.</p><button type="button" class="sub2 gd" id="wsub">Request '+M.n+' Withdrawal</button></div>';
   h+='</div><div id="msg" role="status"></div>'+(rec.tx&&rec.tx.length?'<ul class="txl">'+rec.tx.slice(-6).reverse().map(function(x){return '<li><span>'+esc(x.l)+'</span><b class="'+(x.a>0?'cr':'db')+'">'+(x.a>0?'+':'')+x.a+'</b></li>'}).join('')+'</ul>':'')+reqHTML(u);
@@ -1493,7 +1494,7 @@ function adminPanel(){var ps=pays(),us=users(),wl=wds(),pend=ps.filter(function(
       (qList.length?qList.map(function(q){return '<div class="ac"><b>'+esc((q.copy&&q.copy.en&&q.copy.en.title)||q.template||'Push')+'</b><small>'+when(q.createdAt||Date.now())+' · topic: '+esc(q.topic||'all')+' · screen: '+esc(q.screen||'home')+'</small>Status: <b style="color:#f6d77a">'+esc(q.status||'queued')+'</b>'+(q.sentCount!=null?' · Sent: '+q.sentCount+', Cleaned: '+(q.cleanedTokens||0):'')+'</div>'}).join(''):'<p class="note">No notifications queued yet.</p>');
   }
   else{h+='<input class="sq" id="sq" placeholder="Search username or phone" aria-label="Search users">';var ks=Object.keys(us);if(!ks.length)h+='<p class="note">No registered users yet.</p>';
-    ks.forEach(function(n){var r=us[n];h+='<div class="ac uc" data-n="'+esc((n+' '+r.phone).toLowerCase())+'"><b>'+esc(n)+'</b> · '+esc(r.phone)+'<br>Wallet: <b>'+bal(r)+' birr</b><div class="ar"><input type="number" inputmode="numeric" min="1" placeholder="birr" aria-label="Amount for '+esc(n)+'"><button class="ab ok" data-a="add" data-u="'+esc(n)+'">Add</button><button class="ab" data-a="sub" data-u="'+esc(n)+'" style="background:#b8860b">Deduct</button></div><div class="ar"><input type="password" minlength="4" placeholder="New password" aria-label="New password for '+esc(n)+'"><button class="ab" data-a="pw" data-u="'+esc(n)+'" style="background:#5b21b6">Reset PW</button><button class="ab no" data-a="del" data-u="'+esc(n)+'">Delete user</button></div></div>'})}
+    ks.forEach(function(n){var r=us[n];h+='<div class="ac uc" data-n="'+esc((n+' '+r.phone).toLowerCase())+'"><b>'+esc(n)+'</b> · '+esc(r.phone)+'<br>Wallet: <b>'+balFmt(bal(r))+' birr</b><div class="ar"><input type="number" inputmode="numeric" min="1" placeholder="birr" aria-label="Amount for '+esc(n)+'"><button class="ab ok" data-a="add" data-u="'+esc(n)+'">Add</button><button class="ab" data-a="sub" data-u="'+esc(n)+'" style="background:#b8860b">Deduct</button></div><div class="ar"><input type="password" minlength="4" placeholder="New password" aria-label="New password for '+esc(n)+'"><button class="ab" data-a="pw" data-u="'+esc(n)+'" style="background:#5b21b6">Reset PW</button><button class="ab no" data-a="del" data-u="'+esc(n)+'">Delete user</button></div></div>'})}
   return h+'</div>'}
 function rr(){var y=scrollY;route();scrollTo(0,y)}
 function bindForms(){
@@ -1639,7 +1640,7 @@ function initFast(){var v=$('fv');if(!v)return;var rec=me();
   function draw(){var b=bal(me()||rec);
     if(!FST.run){
       FST.card=cardFor(FST.seed,77);
-      v.innerHTML='<div class="ghdr"><button data-go="home">‹ Back</button><div class="gbal">'+b+' ETB</div><button id="fsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
+      v.innerHTML='<div class="ghdr"><button data-go="home">‹ Back</button><div class="gbal">'+balFmt(b)+' ETB</div><button id="fsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
         '<div class="panel"><h2>Fast Bingo</h2><p class="note">Complete Any Line within 40 calls</p>'+
         '<div class="ftiers"><span>1–22 calls: <b>5×</b></span><span>23–32: <b>2.5×</b></span><span>33–40: <b>1.5×</b></span></div>'+
         '<div class="schips">'+STAKES.map(function(s){return '<button class="schip'+(FST.stake===s?' on':'')+'" data-fs="'+s+'">'+s+'</button>'}).join('')+'</div>'+
@@ -1656,7 +1657,7 @@ function initFast(){var v=$('fv');if(!v)return;var rec=me();
     var t=FST.called[FST.called.length-1],bx='',hd='';
     for(var n=1;n<=75;n++)bx+='<div class="bn'+(FST.called.indexOf(n)>-1?' c':'')+(n===t?' l':'')+'">'+n+'</div>';
     'BINGO'.split('').forEach(function(l){hd+='<div class="hdr">'+l+'</div>'});
-    v.innerHTML='<div class="ghdr"><button id="fbk">‹ Back</button><div class="gbal">'+b+' ETB</div><button id="fsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
+    v.innerHTML='<div class="ghdr"><button id="fbk">‹ Back</button><div class="gbal">'+balFmt(b)+' ETB</div><button id="fsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
       '<div class="goal"><span>Target Goal:</span><b>Any Line</b></div>'+
       '<div class="ftiers"><span>Calls: <b>'+FST.called.length+'/40</b></span><span>Prize: <b>'+Math.floor(FST.stake*fTier(Math.max(1,FST.called.length)))+' ETB</b></span></div>'+
       '<div class="board"><div class="bgr">'+bx+'</div><p class="last">'+(FST.called.length?'Called '+FST.called.length+' of 40 · Last: '+'BINGO'[Math.floor((t-1)/15)]+' '+t:'Calling first ball…')+'</p></div>'+
@@ -1829,7 +1830,7 @@ function initKeno(){var v=$('kv');if(!v)return;var rec=me();
       if($('kcd'))$('kcd').textContent=('0'+cur.shown).slice(-2)+' / 20';
       if($('kcnt'))$('kcnt').textContent=('0'+cur.shown).slice(-2)+' / 20';
       if($('kdrawbtn'))$('kdrawbtn').textContent='Drawing… '+('0'+cur.shown).slice(-2)+' / 20';
-      if($('kbal'))$('kbal').textContent=b+' ETB';
+      if($('kbal'))$('kbal').textContent=balFmt(b)+' ETB';
       $('kstgw').innerHTML=drawStageHTML(cur);
       $('kdtray').innerHTML=drawTrayHTML(cur);
       if($('ktbody')&&(KST.tab==='game'||KST.tab==='history')){$('ktbody').innerHTML=tabBodyHTML(cur,st);bindTabActions()}
@@ -1837,12 +1838,12 @@ function initKeno(){var v=$('kv');if(!v)return;var rec=me();
     var bkey=cur.id+'|'+(cur.bet?'B':'D')+'|'+KST.picks.join(',')+'|'+KST.tab+'|'+KST.flt+'|'+KST.busy+'|'+KST.msg+'|'+KST.stake;
     if(mode!=='all'&&bkey===lastKey&&cur.shown===lastShown){
       if($('kcd'))$('kcd').textContent=cur.bet?mmss(cur.rem):('0'+cur.shown).slice(-2)+' / 20';
-      if($('kbal'))$('kbal').textContent=b+' ETB';
+      if($('kbal'))$('kbal').textContent=balFmt(b)+' ETB';
       if($('krid'))$('krid').textContent='ID: '+cur.id+' ✔';
       return}
     lastKey=bkey;lastShown=cur.shown;lastRid=cur.id;
     var sp=KST.picks.length,low=b<KST.stake;
-    v.innerHTML='<div class="kwrap"><div class="khdr"><button type="button" class="kback" data-go="home">‹</button><div class="kpill" id="kpill"><b id="kbal">'+b+' ETB</b><span id="krid">ID: '+cur.id+' ✔</span></div><button type="button" class="ksnd" id="ksnd">'+(SND?'🔊':'🔇')+'</button></div>'+
+    v.innerHTML='<div class="kwrap"><div class="khdr"><button type="button" class="kback" data-go="home">‹</button><div class="kpill" id="kpill"><b id="kbal">'+balFmt(b)+' ETB</b><span id="krid">ID: '+cur.id+' ✔</span></div><button type="button" class="ksnd" id="ksnd">'+(SND?'🔊':'🔇')+'</button></div>'+
       '<div class="kcd" id="kcd">'+(cur.bet?mmss(cur.rem):('0'+cur.shown).slice(-2)+' / 20')+'</div>'+
       heroHTML(cur)+
       (cur.bet?'<div class="kgrid">'+boardHTML(cur,st)+'</div>'+
@@ -1988,7 +1989,7 @@ function initSlots(){var v=$('sv');if(!v)return;var rec=me();
       var cell=SST.grid[c][r],k=c+','+r,cl='scell'+(SST.sp[c]?' sp':'')+(SST.winCells[k]?' win':'')+(SST.locked[k]?' lock':'')+(cell.t==='MAGNET'&&!SST.sp[c]?' mag':'');
       var lbl=cell.t==='COIN'&&!SST.sp[c]?'<span class="cval">'+(typeof cell.v==='string'?cell.v:cell.v)+'</span>':'';
       cells+='<div class="'+cl+'">'+slCellSVG(cell,bet)+lbl+'</div>'}
-    v.innerHTML='<div class="swrap"><div class="shdr"><button type="button" class="sic" data-go="home" aria-label="Back">‹</button><button type="button" class="sic" id="sinfo" aria-label="How to play">i</button><button type="button" class="sic" id="ssnd" aria-label="Sound">'+(SND?'🔊':'🔇')+'</button><div class="sbalp"><b>'+slFmt(b)+' ETB</b><button type="button" class="splus" data-dep="1" aria-label="Deposit">+</button></div></div>'+
+    v.innerHTML='<div class="swrap"><div class="shdr"><button type="button" class="sic" data-go="home" aria-label="Back">‹</button><button type="button" class="sic" id="sinfo" aria-label="How to play">i</button><button type="button" class="sic" id="ssnd" aria-label="Sound">'+(SND?'🔊':'🔇')+'</button><div class="sbalp"><b>'+balFmt(b)+' ETB</b><button type="button" class="splus" data-dep="1" aria-label="Deposit">+</button></div></div>'+
       '<div class="sjp"><div class="sjp-c gr"><small>GRAND</small><div class="sjp-v">'+(bet*250).toLocaleString()+'</div></div><div class="sjp-c mj"><small>MAJOR</small><div class="sjp-v">'+(bet*50).toLocaleString()+'</div></div><div class="sjp-c mn"><small>MINOR</small><div class="sjp-v">'+(bet*25).toLocaleString()+'</div></div><div class="sjp-c mi"><small>MINI</small><div class="sjp-v">'+(bet*10).toLocaleString()+'</div></div></div>'+
       '<div class="spile"><span class="spile-b">🪙 '+pile+'/60</span><div class="spile-t"><div class="spile-f" style="width:'+pct+'%"></div></div></div>'+
       '<div class="scab'+(SST.bonusOn?' bon':'')+'"><div class="sgrid">'+cells+'</div></div>'+
@@ -2441,7 +2442,7 @@ function initLudo(){
   function startMatchmaking(){
     if(LST.busy)return;
     var r=me(),stk=LST.stk;
-    if(bal(r)<stk){LST.msg='Not enough balance ('+bal(r)+' ETB). Deposit first.';render();return}
+    if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     LST.busy=true;LST.msg='';
     var us=users(),u=session();
     setBal(us,u,bal(r)-stk,'Ludo stake ('+LST.np+'P · '+stk+' ETB)',-stk,function(ok){
@@ -2502,7 +2503,7 @@ function initLudo(){
   function openPrivate(){
     if(LST.busy)return;
     var r=me(),stk=LST.stk;
-    if(bal(r)<stk){LST.msg='Not enough balance ('+bal(r)+' ETB). Deposit first.';render();return}
+    if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     LST.busy=true;LST.msg='';
     var us=users(),u=session(),code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='ldp_'+code+'_'+now();
     setBal(us,u,bal(r)-stk,'Ludo private ('+code+')',-stk,function(ok){
@@ -2595,7 +2596,7 @@ function initLudo(){
   }
   function render(){
     var b=bal(me()||rec),pot=ldPot(LST.np,LST.stk);
-    var hdr='<div class="lhdr"><button type="button" class="kback" id="ldbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+b+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="ldsnd">'+(SND?'🔊':'🔇')+'</button></div>';
+    var hdr='<div class="lhdr"><button type="button" class="kback" id="ldbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="ldsnd">'+(SND?'🔊':'🔇')+'</button></div>';
     if(LST.mode==='lobby'){
       var dots=function(n){var d='';for(var i=0;i<n;i++)d+='<i></i>';return '<div class="ldots">'+d+'</div>'};
       v.innerHTML='<div class="lwrap">'+hdr+
@@ -2814,7 +2815,7 @@ function initHiLo(){
       '<button type="button" class="hl-step" id="hlsup"'+(HST.stkIdx>=HL_STAKES.length-1||HST.busy?' disabled':'')+'>+</button>'+
       '<button type="button" class="hl-deal" id="hldeal"'+(HST.busy?' disabled':'')+'>'+(HST.outcome?'DEAL AGAIN':'DEAL')+'</button></div>';
     v.innerHTML='<div class="hl-wrap">'+
-      '<div class="lhdr"><button type="button" class="kback" id="hlbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+hlFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="hlsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
+      '<div class="lhdr"><button type="button" class="kback" id="hlbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="hlsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
       '<div class="ltopacts"><button type="button" class="lpillbtn" id="hlhow">? How to play</button><button type="button" class="lpillbtn" id="hlres">🧾 Results</button></div>'+
       '<div class="hl-stage">'+
       '<div class="hl-top"><div class="hl-logo">HI<span>♦</span>LO</div><div class="hl-mwrap"><b>'+HST.mult.toFixed(2)+'×</b><small>'+sub+'</small></div></div>'+
@@ -2848,7 +2849,7 @@ function initHiLo(){
   function startDeal(){
     if(HST.active||HST.busy)return;
     var u=session(),us=users(),r=us[u],stk=HL_STAKES[HST.stkIdx];
-    if(!r||bal(r)<stk){HST.mtype='err';HST.msg='Not enough balance ('+bal(r)+' ETB). Deposit first.';render();return}
+    if(!r||bal(r)<stk){HST.mtype='err';HST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     HST.busy=true;
     setBal(us,u,bal(r)-stk,'Hi-Lo stake ('+stk+' ETB)',-stk,function(ok){
       HST.busy=false;
@@ -3253,7 +3254,7 @@ function initCrazy8(){
   function startMatchmaking(){
     if(C8ST.busy)return;
     var r=me(),stk=C8ST.stk;
-    if(bal(r)<stk){C8ST.msg='Not enough balance ('+bal(r)+' ETB). Deposit first.';render();return}
+    if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     C8ST.busy=true;C8ST.msg='';
     var us=users(),u=session();
     setBal(us,u,bal(r)-stk,'Crazy 8 stake ('+C8ST.np+'P · '+stk+' ETB)',-stk,function(ok){
@@ -3310,7 +3311,7 @@ function initCrazy8(){
   function openPrivate(){
     if(C8ST.busy)return;
     var r=me(),stk=C8ST.stk;
-    if(bal(r)<stk){C8ST.msg='Not enough balance ('+bal(r)+' ETB). Deposit first.';render();return}
+    if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     C8ST.busy=true;C8ST.msg='';
     var us=users(),u=session(),code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='c8p_'+code+'_'+now();
     setBal(us,u,bal(r)-stk,'Crazy 8 private ('+code+')',-stk,function(ok){
@@ -3395,7 +3396,7 @@ function initCrazy8(){
   }
   function render(){
     var b=bal(me()||rec),pot=c8Pot(C8ST.np,C8ST.stk);
-    var hdr='<div class="lhdr"><button type="button" class="kback" id="c8bk">‹ Back</button><div class="kpill" data-dep="1"><b>'+b+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="c8snd">'+(SND?'🔊':'🔇')+'</button></div>';
+    var hdr='<div class="lhdr"><button type="button" class="kback" id="c8bk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="c8snd">'+(SND?'🔊':'🔇')+'</button></div>';
     if(C8ST.mode==='lobby'){
       var hero='<div class="c8hero"><svg viewBox="0 0 180 112" width="160" height="100"><g transform="rotate(-14 55 58)"><rect x="26" y="16" width="54" height="78" rx="8" fill="#fffdf7" stroke="#f6d77a" stroke-width="2"/><text x="34" y="34" font-size="15" font-weight="900" fill="#1e1b4b">2</text><text x="34" y="47" font-size="13" fill="#1e1b4b">♣</text><rect x="33" y="55" width="32" height="15" rx="4" fill="#f6d77a" stroke="#1e0a3c" stroke-width="1"/><text x="49" y="66" text-anchor="middle" font-size="10" font-weight="900" fill="#1e0a3c">+2</text></g><g transform="rotate(14 125 58)"><rect x="100" y="16" width="54" height="78" rx="8" fill="#fffdf7" stroke="#f6d77a" stroke-width="2"/><text x="142" y="34" text-anchor="end" font-size="14" font-weight="900" fill="#b45309">★</text></g><g><rect x="61" y="10" width="58" height="84" rx="9" fill="#fffdf7" stroke="#f6d77a" stroke-width="2.4"/><text x="69" y="27" font-size="15" font-weight="900" fill="#d97706">8</text><text x="90" y="42" text-anchor="middle" font-size="18" fill="#dc2626">♥</text><rect x="69" y="47" width="42" height="17" rx="5" fill="#dc2626" stroke="#fff" stroke-width="1.2"/><text x="90" y="59" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff">WILD</text><text x="90" y="80" text-anchor="middle" font-size="16" fill="#dc2626">♥</text></g></svg></div>';
       v.innerHTML='<div class="c8wrap">'+hdr+
@@ -3771,7 +3772,7 @@ function initBuna(){
       '<g transform="translate(262,40)"><ellipse cx="18" cy="8" rx="16" ry="5" fill="#292524" stroke="#57534e"/><path d="M34 8 L50 5" stroke="#1c1917" stroke-width="3" stroke-linecap="round"/><circle cx="12" cy="7" r="2.2" fill="#78350f"/><circle cx="18" cy="8" r="2.2" fill="#78350f"/><circle cx="24" cy="7" r="2.2" fill="#78350f"/></g>'+
       '<g transform="translate(314,22)"><rect x="10" y="0" width="4" height="22" rx="1.5" fill="#92400e"/><path d="M4 16 L20 16 L17 30 L7 30 Z" fill="#78350f"/></g></svg>';
     v.innerHTML='<div class="bnwrap">'+
-      '<div class="lhdr"><button type="button" class="kback" id="bnbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+b.toLocaleString()+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="bnsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
+      '<div class="lhdr"><button type="button" class="kback" id="bnbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="bnsnd">'+(SND?'🔊':'🔇')+'</button></div>'+
       '<div class="ltopacts"><button type="button" class="lpillbtn" id="bnhow">? How to play</button><button type="button" class="lpillbtn" id="bnres">🧾 Results</button></div>'+
       '<div class="bnframe"><div class="bncab">'+
         '<div class="bnhead"><span class="bnbadge">ቡና</span><h2 class="bnttl">BUNA TIME</h2></div>'+
@@ -3967,14 +3968,14 @@ var ROWS=[
 ];
 var RX=[
 [/^Welcome, (.*)$/,"እንኳን ደህና መጡ፣ $1","እንኳዕ ደሓን መጻእኩም፣ $1"],
-[/^Wallet: (\d+) ETB$/,"ቦርሳ፡ $1 ብር","ቦርሳ፡ $1 ብር"],
+[/^Wallet: ([\d.,]+) ETB$/,"ቦርሳ፡ $1 ብር","ቦርሳ፡ $1 ብር"],
 [/^Joined #(\d+)$/,"ተቀላቅለዋል #$1","ተሳቲፍኩም #$1"],
 [/^Stake: (\d+) ETB \/ Ticket$/,"ዋጋ፡ $1 ብር / ትኬት","ዋጋ፡ $1 ብር / ትኬት"],
 [/^👥 (\d+)\/(\d+) Players$/,"👥 $1/$2 ተጫዋቾች","👥 $1/$2 ተጻዋትቲ"],
 [/^Prize: (\d+) ETB$/,"ሽልማት፡ $1 ብር","ሽልማት፡ $1 ብር"],
 [/^(.*) · (\d+) ETB · starts in$/,"$1 · $2 ብር · የሚጀምረው በ","$1 · $2 ብር · ዝጅምር ኣብ"],
 [/^Card preview · #(\d+)$/,"የካርድ ቅድመ እይታ · #$1","ቅድሚ ርእይቶ ካርድ · #$1"],
-[/^Stake (\d+) ETB is taken from your wallet \((\d+) ETB\)\.$/,"$1 ብር ከቦርሳዎ ይቀነሳል ($2 ብር)።","$1 ብር ካብ ቦርሳኹም ይቕነስ ($2 ብር)።"],
+[/^Stake (\d+) ETB is taken from your wallet \(([\d.,]+) ETB\)\.$/,"$1 ብር ከቦርሳዎ ይቀነሳል ($2 ብር)።","$1 ብር ካብ ቦርሳኹም ይቕነስ ($2 ብር)።"],
 [/^Join \((\d+) ETB\)$/,"ተቀላቀል ($1 ብር)","ተሳተፍ ($1 ብር)"],
 [/^Ticket #(\d+) is taken\. Choose another\.$/,"ትኬት #$1 ተይዟል። ሌላ ይምረጡ።","ትኬት #$1 ተታሒዙ ኣሎ። ካልእ ሕረዩ።"],
 [/^Ticket #(\d+) was just taken\.$/,"ትኬት #$1 አሁን ተወስዷል።","ትኬት #$1 ሕጂ ተወሲዱ።"],

@@ -73,7 +73,32 @@ h4{font:600 20px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6
 .cell{aspect-ratio:1;border:0;border-radius:10px;background:#25124a;color:#fff;font:700 clamp(18px,6vw,26px) Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
 div.cell{cursor:default}.cell.on,.cell.free{background:linear-gradient(135deg,#a855f7,#6d28d9);box-shadow:inset 0 0 0 2px var(--gold)}.cell.free{color:#f6d77a;cursor:default}
 .cell.win{background:linear-gradient(135deg,#fff3c9,var(--gold));color:#2a0f55}.cell.sh{animation:sh .3s}@keyframes sh{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.goal{display:flex;justify-content:space-between;gap:10px;background:linear-gradient(90deg,#3b1d73,#2a1650);border:1px solid #f0c75e66;border-radius:10px;padding:12px 16px;font:500 17px Roboto,'Noto Sans Ethiopic',sans-serif}.goal b{color:#f6d77a}
+.goal{display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(90deg,#3b1d73,#2a1650);border:1px solid #f0c75e66;border-radius:12px;padding:10px 14px;font:500 16px Roboto,'Noto Sans Ethiopic',sans-serif}.goal-info{min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px}.goal-info small,.goal>span{color:var(--mut);font-size:14px}.goal b{color:#f6d77a;font-size:16px}
+.ghelp{flex:none;display:inline-flex;align-items:center;gap:5px;border:1.5px solid #f0c75eaa;background:#14072a;color:#f6d77a;border-radius:20px;padding:8px 13px;min-height:42px;font:700 13px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;white-space:nowrap;box-shadow:0 3px 10px #0006}.ghelp:active{transform:scale(.96)}
+#gmodal{position:fixed;inset:0;background:#0a0316eb;z-index:60;display:none;overflow:auto;padding:14px 12px;place-items:center}#gmodal.show{display:grid}
+.gh-card{width:100%;max-width:400px;background:linear-gradient(180deg,#2a1650,#14072a);border:1.5px solid #f0c75e88;border-radius:26px;padding:18px 16px;box-shadow:0 18px 44px #000d;color:var(--ink)}
+.gh-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.gh-ttl{display:flex;align-items:center;gap:8px;font:700 20px 'Playfair Display','Noto Sans Ethiopic',Georgia,serif;color:#f6d77a;margin:0}
+.gh-next{border:1.5px solid #f0c75e99;background:#1e0f3b;color:#f6d77a;border-radius:18px;padding:8px 14px;min-height:40px;font:700 13px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;white-space:nowrap}.gh-next:active{transform:scale(.96)}
+.gh-badge{display:inline-flex;align-items:center;gap:7px;background:#120628;border:1px solid #f0c75e55;border-radius:12px;padding:6px 12px;font:700 15px Roboto,'Noto Sans Ethiopic',sans-serif;color:#f6d77a;margin-bottom:10px}
+.gh-desc{background:#120628;border:1px solid #3b2468;border-radius:14px;padding:11px 13px;font:400 13.5px/1.5 Roboto,'Noto Sans Ethiopic',sans-serif;color:#e9dcff;margin-bottom:14px}
+.gh-stage{background:#120628;border:1px solid #3b2468;border-radius:18px;padding:14px 12px 12px}
+.gh-bhead,.gh-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:286px;margin:0 auto}
+.gh-bhead{margin-bottom:10px;text-align:center;font:900 16px Roboto,sans-serif;letter-spacing:1px}
+.gh-b0{color:#38bdf8}.gh-b1{color:#fb7185}.gh-b2{color:#4ade80}.gh-b3{color:#fbbf24}.gh-b4{color:#c084fc}
+.gh-dot{aspect-ratio:1;border-radius:50%;border:2px solid #492a85;background:#1c0d38;display:grid;place-items:center;font:800 15px Roboto,sans-serif;color:#fff;transform:scale(.92);opacity:.55;transition:transform .24s cubic-bezier(.22,1.35,.36,1),opacity .22s ease,box-shadow .22s ease,border-color .22s ease}
+.gh-dot.free{border-color:#22c55e88;background:#14532d66;color:#fef08a;opacity:.92}
+.gh-dot.on{opacity:1;transform:scale(1);border-color:#ffffffb8;box-shadow:0 4px 12px #0007}
+.gh-dot.miss{opacity:1;transform:scale(.96);border-color:#ef4444;border-style:dashed;background:#450a0a99;color:#fca5a5}
+.gh-pdots{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:13px}
+.gh-pdot{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#492a85;cursor:pointer;transition:width .2s,background .2s}.gh-pdot.on{width:22px;background:#f0c75e}
+.gh-badwrap{margin-top:14px;border:1px solid #7f1d1d88;background:#1a0922;border-radius:16px;overflow:hidden}
+.gh-badbtn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;min-height:46px;border:0;background:transparent;color:#fca5a5;font:700 12.5px Roboto,'Noto Sans Ethiopic',sans-serif;letter-spacing:.7px;text-transform:uppercase;cursor:pointer}
+.gh-badico{display:inline-flex;align-items:center;gap:8px}.gh-badsq{width:14px;height:14px;border-radius:4px;background:#ef4444;display:inline-block;flex:none}
+.gh-badbody{display:none;padding:0 14px 14px;border-top:1px solid #7f1d1d55}.gh-badbody.open{display:block}
+.gh-badgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:190px;margin:12px auto 8px}
+.gh-badcap{margin:0;text-align:center;font:500 12.5px/1.45 Roboto,'Noto Sans Ethiopic',sans-serif;color:#fecaca}
+.gh-close{width:100%;margin-top:14px;border:0;border-radius:30px;padding:14px;min-height:48px;background:linear-gradient(135deg,#f6d77a,#d99a1e);color:#2a0f55;font:800 16px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;box-shadow:0 6px 18px #0008}
 .board{background:#0e0520;border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}.bgr{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
 .bn{aspect-ratio:1;display:grid;place-items:center;border-radius:5px;background:#25124a;color:#a995cf;font:500 clamp(11px,3.3vw,14px) Roboto,'Noto Sans Ethiopic',sans-serif}.bn.c{background:linear-gradient(135deg,#f6d77a,var(--g2));color:#2a0f55;font-weight:700}.bn.l{outline:2px solid #fff;outline-offset:1px}
 .last{text-align:center;color:var(--mut);margin:10px 0 0;font-size:15px}
@@ -552,13 +577,14 @@ div.cell{cursor:default}.cell.on,.cell.free{background:linear-gradient(135deg,#a
 <main id="view"></main>
 <div id="over"><div><h2 id="oh">BINGO!</h2><p id="op"></p><div id="ocard"></div><button class="btn g" id="again">Back to rooms</button></div></div>
 <div id="pm" role="alertdialog"><div><p id="pt"></p><button class="btn" id="pk">OK</button></div></div>
+<div id="gmodal" role="dialog" aria-modal="true" aria-labelledby="ghtitle"></div>
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-var PAY_BIRR=30,PAY_NAME='Yemane',PAY_NUM='0939383425';
+var PAY_BIRR=30,WD_BIRR=200,PAY_NAME='Yemane',PAY_NUM='0939383425';
 var ADMIN_HASH="479784c9aa0ca8dfe80ddad12ace91cc49c717f96a92f6c8f5a5b14721bc2f8b";
 var ROOMS=[[10,'Mini Starter',30],[20,'Standard Room',60],[50,'High Roller Suite',60],[100,'Mega Addis Jackpot',100],[200,'Habesha VIP Club',150]];
-var RCYC=600000,RWAIT=180000,INT=5000,LEAD=5000,PCT=.8;
+var RCYC=600000,RWAIT=180000,INT=5000,LEAD=5000,PCT=.9;
 function lg(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
 function ls(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -596,7 +622,7 @@ function wds(){return DB?C.wd:lg('sb_wd',[])}
 function isAdm(){return lg('sb_as',false)===ADMIN_HASH}
 function bal(r){return r.wallet||0}
 function me(){var u=session();return u?users()[u]:null}
-function refresh(){clearTimeout(RT0);RT0=setTimeout(function(){if(!READY)return;var v=location.hash.slice(1)||'home',a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;if(v==='admin'||v==='wallet'||v==='home'||v==='alerts'){if(v==='wallet')wsv();var y=scrollY;route();scrollTo(0,y)}},200)}
+function refresh(){clearTimeout(RT0);RT0=setTimeout(function(){if(!READY)return;var v=location.hash.slice(1)||'home',a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;if(v==='admin'||v==='wallet'||v==='home'||v==='alerts'||(v==='settings'&&STAB==='alerts')){if(v==='wallet')wsv();var y=scrollY;route();scrollTo(0,y)}},200)}
 function initFB(cb){var fin=false,seen={},tm;
   function off(){if(fin)return;fin=true;clearTimeout(tm);DB=null;C.ends=lg('sb_ends',{});C.games=lg('sb_games',{});C.rooms=lg('sb_rooms',{});cb()}
   function got(k){if(!fin){seen[k]=1;if(seen.u&&seen.p){fin=true;clearTimeout(tm);cb()}}else refresh()}
@@ -608,7 +634,7 @@ function initFB(cb){var fin=false,seen={},tm;
     DB.ref('games').on('value',function(sn){C.games=sn.val()||{};if(READY&&location.hash==='#keno'&&KENORENDER)KENORENDER('bets')});
     DB.ref('winners').on('value',function(sn){var v=sn.val()||{};C.wh=Object.keys(v).map(function(k){return v[k]}).filter(function(x){return x&&x.at}).sort(function(a,b){return a.at-b.at});if(READY)refresh()},function(){});
     DB.ref('cartelas').on('value',function(sn){C.rooms=sn.val()||{}},function(){});
-    DB.ref('pushTokens').on('value',function(sn){C.tokens=sn.val()||{};if(READY&&(location.hash==='#admin'||location.hash==='#alerts'))refresh()},function(){});
+    DB.ref('pushTokens').on('value',function(sn){C.tokens=sn.val()||{};if(READY&&(location.hash==='#admin'||location.hash==='#alerts'||(location.hash==='#settings'&&STAB==='alerts')))refresh()},function(){});
     DB.ref('notificationQueue').limitToLast(25).on('value',function(sn){var v=sn.val()||{};C.nq=Object.keys(v).map(function(k){return v[k]}).filter(Boolean).sort(function(a,b){return (b.createdAt||0)-(a.createdAt||0)});if(READY&&location.hash==='#admin')refresh()},function(){});
     DB.ref('pushBroadcasts').limitToLast(5).on('child_added',function(sn){var v=sn.val();if(READY&&v&&window.YemePush)window.YemePush.handleLiveEvent(v)},function(){});
     DB.ref('.info/serverTimeOffset').on('value',function(sn){OFF=sn.val()||0})
@@ -1051,8 +1077,8 @@ function rdraw(){var v=$('rv');if(!v)return;var rec=me();
     $('rs'+a).textContent=mine?'Joined #'+j.n:wt?'⏳ '+mmss(R.st-R.n):'Running';
     $('rn'+a).textContent='👥 '+t+'/'+r[2]+' Players';$('rz'+a).textContent='Prize: '+Math.floor(t*a*PCT)+' ETB';
     var b=$('rb'+a);b.disabled=!wt||!!j||t>=r[2];b.textContent=mine?'✔ JOINED':'JOIN ROOM'})}
-function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,tk=taken(RP.g,RP.n),
-  h='<button class="btn o s" data-rx="1">‹ Back</button><h4>'+r[1]+' · '+RP.a+' ETB · starts in <span id="rt">'+mmss(R.st-R.n)+'</span></h4><div class="nums">';
+function rpick(){var v=$('rv');v.dataset.m='pick';var o=v.querySelector('.nums'),y=o?o.scrollTop:0,r=ROOMS.filter(function(x){return x[0]===RP.a})[0],R=rcyc(),rec=me(),low=bal(rec)<RP.a,tk=taken(RP.g,RP.n),rmGoal=GOALS[(R.c+RP.a)%GOALS.length],
+  h='<button class="btn o s" data-rx="1">‹ Back</button><h4>'+r[1]+' · '+RP.a+' ETB · starts in <span id="rt">'+mmss(R.st-R.n)+'</span></h4><div class="goal" style="margin:8px 0 10px"><div class="goal-info"><small>Target Goal:</small><b>'+esc(rmGoal.n)+'</b></div><button type="button" class="ghelp" data-gh="'+esc(rmGoal.n)+'">🏅 How to win</button></div><div class="nums">';
   for(var n=1;n<=r[2];n++)h+='<button class="nb'+(taken(RP.g,n)?' occ':'')+'" aria-pressed="'+(n===RP.n)+'" data-rn="'+n+'">'+n+'</button>';
   v.innerHTML=h+'</div><h4>Card preview · #'+RP.n+'</h4><div class="pcard"><div class="grid">'+cellsHTML(cardFor(RP.n,1),null,'div',0)+'</div></div><p class="note" style="margin:12px 0 0">Stake '+RP.a+' ETB is taken from your wallet ('+bal(rec)+' ETB).</p>'+(low?'<button class="btn g" data-dep="1">Deposit money</button>':'<button class="btn" data-rj="1"'+((tk||JOINING)?' disabled':'')+'>Join ('+RP.a+' ETB)</button>')+'<div class="err" id="rm" role="alert">'+(tk?'Ticket #'+RP.n+' is taken. Choose another.':'')+'</div>';
   o=v.querySelector('.nums');if(o)o.scrollTop=y}
@@ -1070,7 +1096,7 @@ function rjoin(){if(JOINING)return;var u=session(),us=users(),r=us[u],a=RP.a,n=R
       JOINING=false;addPool(g);ls('sb_rj_'+u,{gid:g,a:a,n:n,c:R.c});RP=null;rdraw();note('✔ Joined with ticket #'+n+'. The game starts automatically when the countdown ends.')})})}
 function rtick(){if(!$('rv'))return;if(RP){var R=rcyc();if(R.n>=R.st||gid(RP.a,R.c)!==RP.g){RP=null;JOINING=false;rdraw()}else rpup()}else rdraw()}
 document.addEventListener('click',function(e){if(e.target.closest('[data-dep]')){PANEL='d';go('wallet')}});
-document.addEventListener('click',function(e){var b=e.target.closest('[data-rm],[data-rx],[data-rn],[data-rj]');if(!b||!$('rv'))return;var d=b.dataset;
+document.addEventListener('click',function(e){var gb=e.target.closest('[data-gh]');if(gb){openGoalHelp(gb.dataset.gh);return}var b=e.target.closest('[data-rm],[data-rx],[data-rn],[data-rj]');if(!b||!$('rv'))return;var d=b.dataset;
   if(d.rm){var a=+d.rm,R=rcyc(),g=gid(a,R.c),rm=ROOMS.filter(function(x){return x[0]===a})[0];JOINING=false;RP={a:a,g:g,n:firstFree(g,rm[2])};rpick()}
   else if(d.rx){JOINING=false;RP=null;rdraw()}
   else if(d.rn){RP.n=+d.rn;rpick()}
@@ -1122,6 +1148,156 @@ var GOALS=(function(){var L=[],i,j,a,b,d1=[],d2=[];for(i=0;i<5;i++){a=[];b=[];fo
     {n:'Top + Bottom Rows',s:[cl(function(c,r){return r===0||r===4})]},
     {n:'Full House',s:[cl(function(){return true})]}
   ]})();
+var GOAL_GUIDE=(function(){
+  var row=function(r,k){var a=[];for(var c=0;c<5;c++)a.push([c,r,k]);return a};
+  var col=function(c,k){var a=[];for(var r=0;r<5;r++)a.push([c,r,k]);return a};
+  var box=function(x,y,w,h,k){var a=[];for(var c=x;c<x+w;c++)for(var r=y;r<y+h;r++)a.push([c,r,k]);return a};
+  var d1=function(k){return [[0,0,k],[1,1,k],[2,2,k],[3,3,k],[4,4,k]]};
+  var d2=function(k){return [[4,0,k],[3,1,k],[2,2,k],[1,3,k],[0,4,k]]};
+  var halfSide=function(pred,k){var a=[];for(var c=0;c<5;c++)for(var r=0;r<5;r++)if(pred(c,r))a.push([c,r,k]);return a};
+  var all=function(k){return box(0,0,5,5,k)};
+  return {
+    'Any Line':{
+      desc:'Mark any 5 squares in a straight line — any horizontal row, any vertical column, or either main diagonal (center ★ is free).',
+      ex:[row(0,'b'),col(2,'g'),d1('o'),row(3,'p')],
+      bad:{pts:[[0,3,'r'],[1,3,'r'],[2,3,'r'],[3,3,'r']],miss:[[4,3]],cap:'Only 4 squares in a row does NOT win — you need all 5.'}
+    },
+    'Four Corners':{
+      desc:'Mark all 4 corner squares of the card (top-left B, top-right O, bottom-left B, bottom-right O).',
+      ex:[[[0,0,'o'],[4,0,'o'],[0,4,'o'],[4,4,'o']]],
+      bad:{pts:[[0,0,'o'],[4,0,'o'],[0,4,'o']],miss:[[4,4]],cap:'3 corners plus center ★ does NOT win — all 4 outer corners are required.'}
+    },
+    'Both Diagonals':{
+      desc:'Mark both full corner-to-corner diagonals intersecting as an X through center ★.',
+      ex:[d1('g').concat(d2('b'))],
+      bad:{pts:d1('g'),miss:[[4,0],[3,1],[1,3],[0,4]],cap:'A single diagonal does NOT win — both diagonals must form a complete X.'}
+    },
+    'Plus Sign':{
+      desc:'Mark the entire middle row across and the entire middle (N) column down, forming a + through center ★.',
+      ex:[row(2,'r').concat(col(2,'b'))],
+      bad:{pts:d1('r').concat(d2('r')),miss:[],cap:'An X (Both Diagonals) does NOT win — mark the middle row and middle N column.'}
+    },
+    'Letter T':{
+      desc:'Mark the entire top row across and the entire middle (N) column down through ★.',
+      ex:[row(0,'r').concat(col(2,'o'))],
+      bad:{pts:row(4,'r').concat(col(2,'r')),miss:[[0,0],[1,0],[3,0],[4,0]],cap:'Upside-down or sideways T does NOT win — only the top row plus N column.'}
+    },
+    'Letter H':{
+      desc:'Mark the entire B (left) column, the entire O (right) column, and the middle row across ★.',
+      ex:[col(0,'b').concat(col(4,'b'),row(2,'g'))],
+      bad:{pts:col(0,'b').concat(col(4,'b')),miss:[[1,2],[3,2]],cap:'Left + Right columns without the middle crossbar does NOT win Letter H.'}
+    },
+    'Letter L':{
+      desc:'Mark the entire B (left) column and the entire bottom row to form a big L.',
+      ex:[col(0,'g').concat(row(4,'o'))],
+      bad:{pts:col(4,'r').concat(row(4,'r')),miss:[[0,0],[0,1],[0,2],[0,3]],cap:'Reversed or upside-down L does NOT win — left B column + bottom row only.'}
+    },
+    'Letter Z':{
+      desc:'Mark the top row, the diagonal from O top-right to B bottom-left (through ★), and the bottom row.',
+      ex:[row(0,'r').concat(d2('o'),row(4,'r'))],
+      bad:{pts:row(0,'r').concat(d1('r'),row(4,'r')),miss:[[3,1],[1,3]],cap:'Using the opposite diagonal (B1 to O5) does NOT win Letter Z.'}
+    },
+    'Large Square':{
+      desc:'Mark all 16 outer border squares around the edge of the card (B column, O column, top row, and bottom row).',
+      ex:[row(0,'b').concat(row(4,'b'),col(0,'g'),col(4,'g'))],
+      bad:{pts:[[1,1,'r'],[2,1,'r'],[3,1,'r'],[1,2,'r'],[3,2,'r'],[1,3,'r'],[2,3,'r'],[3,3,'r']],miss:[[0,0],[4,0],[0,4],[4,4]],cap:'An inner 3×3 ring around ★ does NOT win — all 16 outer border cells are required.'}
+    },
+    'Small Rectangle':{
+      desc:'Mark any filled 3×2 or 2×3 block (6 squares) anywhere on the card.',
+      ex:[box(0,0,3,2,'b'),box(1,1,2,3,'g'),box(2,3,3,2,'o'),box(3,0,2,3,'p')],
+      bad:{pts:box(0,0,2,2,'r'),miss:[[2,0],[2,1]],cap:'A 2×2 square (only 4 cells) does NOT win — you need a 3×2 or 2×3 block (6 cells).'}
+    },
+    'Diamond':{
+      desc:'Mark the 8 outer-ring diamond squares touching the midpoint of all 4 edges.',
+      ex:[[[2,0,'p'],[1,1,'p'],[3,1,'p'],[0,2,'p'],[4,2,'p'],[1,3,'p'],[3,3,'p'],[2,4,'p']]],
+      bad:{pts:[[2,1,'r'],[1,2,'r'],[3,2,'r'],[2,3,'r']],miss:[[2,0],[0,2],[4,2],[2,4]],cap:'A tight inner 4-cell diamond around ★ does NOT win — mark the outer 8-cell diamond.'}
+    },
+    'Half House':{
+      desc:'Mark one complete side of a center line/diagonal (10 squares), plus ★ and any 2 squares on that dividing line (13 total).',
+      ex:[
+        halfSide(function(c,r){return r<2},'b').concat([[2,2,'g'],[0,2,'g'],[4,2,'g']]),
+        halfSide(function(c,r){return c<2},'o').concat([[2,2,'g'],[2,0,'g'],[2,3,'g']]),
+        halfSide(function(c,r){return r>2},'r').concat([[2,2,'b'],[1,2,'b'],[3,2,'b']]),
+        halfSide(function(c,r){return c>r},'p').concat([[2,2,'o'],[0,0,'o'],[4,4,'o']])
+      ],
+      bad:{pts:halfSide(function(c,r){return r<2},'r').concat([[2,2,'r']]),miss:[[0,2],[4,2]],cap:'10 side squares + ★ without 2 extra squares on the center dividing line does NOT win.'}
+    },
+    'Two Lines + Small Square':{
+      desc:'Mark any 2 complete lines (rows, columns, or diagonals) plus one 2×2 corner square in any of the four corners.',
+      ex:[
+        row(0,'r').concat(col(2,'o'),box(3,3,2,2,'b')),
+        d1('g').concat(row(4,'r'),box(3,0,2,2,'b')),
+        col(0,'o').concat(row(2,'g'),box(3,3,2,2,'b')),
+        row(1,'b').concat(d2('r'),box(0,0,2,2,'o')),
+        col(4,'p').concat(row(0,'r'),box(0,3,2,2,'g'))
+      ],
+      bad:{pts:row(0,'r').concat(col(4,'b'),box(1,1,2,2,'o')),miss:[[3,3],[3,4]],cap:'A middle 2×2 block (not in one of the 4 corners) or only 1 line does NOT win.'}
+    },
+    'Left + Right Columns':{
+      desc:'Mark the entire leftmost (B) column and the entire rightmost (O) column.',
+      ex:[col(0,'b').concat(col(4,'g'))],
+      bad:{pts:row(0,'r').concat(row(4,'r')),miss:[[0,2],[4,2]],cap:'Top + Bottom rows does NOT win — mark vertical B and O columns.'}
+    },
+    'Top + Bottom Rows':{
+      desc:'Mark the entire top row and the entire bottom row across all columns.',
+      ex:[row(0,'r').concat(row(4,'o'))],
+      bad:{pts:col(0,'r').concat(col(4,'r')),miss:[[2,0],[2,4]],cap:'Left + Right columns does NOT win — mark horizontal top and bottom rows.'}
+    },
+    'Full House':{
+      desc:'Mark all 25 squares across the entire card (every number plus center ★).',
+      ex:[all('g')],
+      bad:{pts:all('r').filter(function(p){return !(p[0]===4&&p[1]===0)}),miss:[[4,0]],cap:'Missing even 1 square (24 of 25 marked) does NOT win Full House.'}
+    }
+  };
+})();
+var GHT=null,GHST=[],GH_COL={r:'#ef4444',b:'#2563eb',g:'#16a34a',o:'#f59e0b',p:'#9333ea'};
+function stopGH(){if(GHT){clearInterval(GHT);GHT=null}while(GHST.length)clearTimeout(GHST.pop())}
+function closeGoalHelp(){stopGH();var gm=$('gmodal');if(gm){gm.classList.remove('show');gm.innerHTML=''}}
+function ghColorStyle(cols){if(!cols||!cols.length)return '';var u=[];cols.forEach(function(c){if(u.indexOf(c)<0)u.push(c)});if(u.length===1)return 'background:'+GH_COL[u[0]];return 'background:linear-gradient(90deg,'+GH_COL[u[0]]+' 50%,'+GH_COL[u[1]]+' 50%)'}
+function openGoalHelp(goalName){
+  stopGH();
+  var gm=$('gmodal');if(!gm)return;
+  var name=goalName&&GOAL_GUIDE[goalName]?goalName:(G&&G.goal&&G.goal.n)||'Any Line';
+  var g=GOAL_GUIDE[name]||GOAL_GUIDE['Any Line'];
+  var idx=0,exList=g.ex&&g.ex.length?g.ex:[[]];
+  var dotsHTML=exList.map(function(_,i){return '<button type="button" class="gh-pdot'+(i===0?' on':'')+'" data-ghdot="'+i+'" aria-label="Example '+(i+1)+'"></button>'}).join('');
+  var bCells='';for(var r=0;r<5;r++)for(var c=0;c<5;c++)bCells+='<div class="gh-dot'+(c===2&&r===2?' free':'')+'" data-bc="'+c+','+r+'">'+(c===2&&r===2?'★':'')+'</div>';
+  gm.innerHTML='<div class="gh-card">'+
+    '<div class="gh-top"><h3 class="gh-ttl" id="ghtitle">🏅 How to win</h3><button type="button" class="gh-next" id="ghnext">'+(exList.length>1?'Next example':'↻ Replay')+'</button></div>'+
+    '<div class="gh-badge">🎯 <span>'+esc(name)+'</span></div>'+
+    '<div class="gh-desc">'+esc(g.desc)+'</div>'+
+    '<div class="gh-stage"><div class="gh-bhead"><span class="gh-b0">B</span><span class="gh-b1">I</span><span class="gh-b2">N</span><span class="gh-b3">G</span><span class="gh-b4">O</span></div><div class="gh-grid" id="ghgrid"></div>'+(exList.length>1?'<div class="gh-pdots" id="ghpdots">'+dotsHTML+'</div>':'')+'</div>'+
+    '<div class="gh-badwrap"><button type="button" class="gh-badbtn" id="ghbadbtn" aria-expanded="false"><span class="gh-badico"><span class="gh-badsq"></span><span>SHOW WHAT DOES NOT WIN</span></span><span id="ghchev">▾</span></button>'+
+      '<div class="gh-badbody" id="ghbadbody"><div class="gh-badgrid" id="ghbadgrid">'+bCells+'</div><p class="gh-badcap">'+esc(g.bad.cap)+'</p></div>'+
+    '</div>'+
+    '<button type="button" class="gh-close" id="ghcls">✕ Close</button>'+
+  '</div>';
+  var bgMap={};(g.bad.pts||[]).forEach(function(p){var k=p[0]+','+p[1];if(!bgMap[k])bgMap[k]=[];bgMap[k].push(p[2]||'r')});
+  Object.keys(bgMap).forEach(function(k){var el=gm.querySelector('[data-bc="'+k+'"]');if(el){el.classList.add('on');el.setAttribute('style',ghColorStyle(bgMap[k]))}});
+  (g.bad.miss||[]).forEach(function(p){var el=gm.querySelector('[data-bc="'+p[0]+','+p[1]+'"]');if(el){el.classList.add('miss');if(!(p[0]===2&&p[1]===2))el.textContent='✕'}});
+  function paintEx(targetIdx,animated){
+    while(GHST.length)clearTimeout(GHST.pop());
+    idx=((targetIdx%exList.length)+exList.length)%exList.length;
+    var grid=$('ghgrid');if(!grid)return;
+    var h='';for(var rr=0;rr<5;rr++)for(var cc=0;cc<5;cc++)h+='<div class="gh-dot'+(cc===2&&rr===2?' free':'')+'" data-gc="'+cc+','+rr+'">'+(cc===2&&rr===2?'★':'')+'</div>';
+    grid.innerHTML=h;
+    var cMap={},order=[];
+    (exList[idx]||[]).forEach(function(p){var k=p[0]+','+p[1];if(!cMap[k]){cMap[k]=[];order.push(k)}cMap[k].push(p[2]||'g')});
+    gm.querySelectorAll('[data-ghdot]').forEach(function(d,i){d.classList.toggle('on',i===idx)});
+    order.forEach(function(k,step){
+      var apply=function(){var el=grid.querySelector('[data-gc="'+k+'"]');if(el){el.classList.add('on');el.setAttribute('style',ghColorStyle(cMap[k]))}};
+      if(animated)GHST.push(setTimeout(apply,step*52));else apply();
+    });
+  }
+  function resetCycle(){if(GHT){clearInterval(GHT);GHT=null}if(exList.length>1)GHT=setInterval(function(){if(!$('gmodal').classList.contains('show')){stopGH();return}paintEx(idx+1,true)},3800)}
+  paintEx(0,true);resetCycle();
+  $('ghnext').onclick=function(){paintEx(exList.length>1?idx+1:0,true);resetCycle()};
+  gm.querySelectorAll('[data-ghdot]').forEach(function(d){d.onclick=function(){paintEx(+d.dataset.ghdot,true);resetCycle()}});
+  $('ghbadbtn').onclick=function(){var bd=$('ghbadbody'),op=bd.classList.toggle('open');this.setAttribute('aria-expanded',op?'true':'false');$('ghchev').textContent=op?'▴':'▾'};
+  $('ghcls').onclick=closeGoalHelp;
+  gm.onclick=function(e){if(e.target===gm)closeGoalHelp()};
+  gm.classList.add('show');
+}
 var G={},SND=lg('sb_snd',true);
 var VL=lg('sb_vl','am'),AMV=null,WARNED=false,ONES=['','አንድ','ሁለት','ሦስት','አራት','አምስት','ስድስት','ሰባት','ስምንት','ዘጠኝ'],TENS=['','አስር','ሃያ','ሠላሳ','አርባ','ሃምሳ','ስድሳ','ሰባ'],BLET=['ቢ','አይ','ኤን','ጂ','ኦ'];
 function amNum(n){var t=Math.floor(n/10),u=n%10;if(n<10)return ONES[n];if(t===1)return u?'አስራ '+ONES[u]:'አስር';return TENS[t]+(u?' '+ONES[u]:'')}
@@ -1139,7 +1315,7 @@ function speak(am,en,num){if(!SND)return;stopAud();
 var FT=null,KT=null,HT=null,LT=null,LUDO_OFF=null,C8T=null,C8_OFF=null,BN_CYC=null,ST=[];
 function tone(f,d,t){if(!SND)return;try{var A=window.AudioContext||window.webkitAudioContext;if(!A)return;var x=tone.c||(tone.c=new A()),o=x.createOscillator(),g=x.createGain();o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(.07,x.currentTime);g.gain.exponentialRampToValueAtTime(.001,x.currentTime+(d||.08));o.connect(g);g.connect(x.destination);o.start();o.stop(x.currentTime+(d||.08))}catch(e){}}
 var KENORENDER=null;
-function stopT(){clearInterval(RIV);RIV=null;if(FT){clearInterval(FT);FT=null}if(KT){clearInterval(KT);KT=null}if(HT){clearInterval(HT);HT=null}if(LT){clearInterval(LT);LT=null}if(LUDO_OFF){try{LUDO_OFF()}catch(e){}LUDO_OFF=null}if(C8T){clearInterval(C8T);C8T=null}if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(BN_CYC){clearInterval(BN_CYC);BN_CYC=null}KENORENDER=null;['kmodal','smodal','amodal','lmodal','c8modal','bmodal'].forEach(function(i){var e=$(i);if(e)e.classList.remove('show')});while(ST.length)clearTimeout(ST.pop());KST.busy=false;SST.busy=false;SST.autoRun=0;SST.sp=[0,0,0];BUNAST.busy=false;BUNAST.autoRun=0;BUNAST.sp=[0,0,0,0,0];BUNAST.fsLeft=0;FST.busy=false;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}stopAud()}
+function stopT(){clearInterval(RIV);RIV=null;stopGH();if(FT){clearInterval(FT);FT=null}if(KT){clearInterval(KT);KT=null}if(HT){clearInterval(HT);HT=null}if(LT){clearInterval(LT);LT=null}if(LUDO_OFF){try{LUDO_OFF()}catch(e){}LUDO_OFF=null}if(C8T){clearInterval(C8T);C8T=null}if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(BN_CYC){clearInterval(BN_CYC);BN_CYC=null}KENORENDER=null;['kmodal','smodal','amodal','lmodal','c8modal','bmodal','gmodal'].forEach(function(i){var e=$(i);if(e)e.classList.remove('show')});while(ST.length)clearTimeout(ST.pop());KST.busy=false;SST.busy=false;SST.autoRun=0;SST.sp=[0,0,0];BUNAST.busy=false;BUNAST.autoRun=0;BUNAST.sp=[0,0,0,0,0];BUNAST.fsLeft=0;FST.busy=false;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}stopAud()}
 function drawBoard(){var b=$('bd');if(!b)return;var t=G.called[G.called.length-1],x='';for(var n=1;n<=75;n++)x+='<div class="bn'+(G.called.indexOf(n)>-1?' c':'')+(n===t?' l':'')+'">'+n+'</div>';b.innerHTML=x;
   $('lst').textContent=G.called.length?'Called '+G.called.length+' of 75 · Last: '+'BINGO'[Math.floor((t-1)/15)]+' '+t:'Waiting for the first call…'}
 function drawCard(){var hd='';'BINGO'.split('').forEach(function(l){hd+='<div class="hdr">'+l+'</div>'});$('cg').innerHTML='<div class="gcard"><p class="last" style="margin:0 0 6px;color:#f6d77a">Ticket #'+G.n+'</p><div class="grid">'+hd+cellsHTML(G.card,G.m,'button',0)+'</div></div>';drawBoard()}
@@ -1165,7 +1341,7 @@ function claimWin(){if(G.over||G.cl)return;var w=checkGoal(G.m,G.goal);
 function initGame(){var j=RJ(),st=j&&j.c*RCYC+RWAIT;
   if(!j||now()<st||now()>=st+LEAD+75*INT){go('rooms');return}
   var seed=j.c*131+j.a;G={gid:j.gid,a:j.a,n:j.n,start:st,seq:shuf(rg(1,75),rng(seed)),goal:GOALS[(j.c+j.a)%GOALS.length],card:cardFor(j.n,1),m:{'2,2':1},called:[],over:false,cl:false};
-  $('gl').textContent=G.goal.n;var setR=function(t){$('pz').textContent='Reward : '+Math.floor(t*G.a*PCT)+' ETB'};setR(pcount(j.gid));
+  $('gl').textContent=G.goal.n;if($('ghelp'))$('ghelp').onclick=function(){openGoalHelp(G.goal.n)};var setR=function(t){$('pz').textContent='Reward : '+Math.floor(t*G.a*PCT)+' ETB'};setR(pcount(j.gid));
   if(DB){var r1=DB.ref('games/'+j.gid+'/cartelas'),f1=function(sn){setR(sn.val()||0)};r1.on('value',f1);
     var r2=DB.ref('ends/'+j.gid),r3=DB.ref('games/'+j.gid+'/win'),f2=function(sn){var v=sn.val();if(v&&v.u!==session()&&!G.over){speak('ቢንጎ! '+v.u+' አሸነፈ','Bingo! '+v.u+' wins the game');endOver('BINGO! '+v.u+' wins','🏆 Ticket #'+v.n+' won after '+v.calls+' calls.'+(v.prize?' Reward: '+v.prize+' ETB.':''),v.n)}};r2.on('value',f2);r3.on('value',f2);
     G.off=function(){r1.off('value',f1);r2.off('value',f2);r3.off('value',f2)}}
@@ -1179,9 +1355,9 @@ function initGame(){var j=RJ(),st=j&&j.c*RCYC+RWAIT;
 $('again').onclick=function(){LEFT=G.gid||null;go('rooms')};
 
 /* ===== menu & router ===== */
-var NAV=[['home','⌂','Home'],['wallet','$','Wallet'],['alerts','🔔','Notifications'],['register','✚','Register','in'],['how','ⓘ','How to Play'],['faq','?','FAQs'],['admin','⚙','Admin'],['out','⇤','Sign Out','auth']];
-function menu(v){var u=session(),pst=YemePush.getState(),perm=YemePush.permStatus(),h='<div class="logo">YEME<small>BINGO</small></div><div class="who">'+(u?'◉ '+esc(u):'☰ Menu')+'</div><div class="lang" role="group" aria-label="Language">'+[['en','English'],['am','አማርኛ'],['ti','ትግርኛ']].map(function(x){return '<button data-l="'+x[0]+'" aria-pressed="'+(LANG===x[0])+'">'+x[1]+'</button>'}).join('')+'</div><p class="note" style="padding:8px">'+(DB?'☁ Connected':'⚠ Local mode (no cloud)')+'</p><div style="padding:0 10px 8px;display:flex;justify-content:center"><span class="np-pill '+(perm==='granted'&&pst.optedIn?'ok':'')+'">'+(perm==='granted'&&pst.optedIn?'🔔 Alerts Active':'🔕 Alerts Off')+' · '+(YemePush.notifLang()==='am'?'AM':'EN')+'</span></div>';
-  NAV.forEach(function(n){if(n[3]==='in'&&u)return;if(n[3]==='auth'&&!u)return;h+='<a data-go="'+n[0]+'" class="'+(n[0]===v?'act':'')+'" tabindex="0"><span>'+n[1]+'</span>'+n[2]+'</a>'});$('dr').innerHTML=h}
+var NAV=[['home','⌂','Home'],['wallet','$','Wallet'],['register','✚','Register','in'],['settings','⚙','Settings'],['admin','🛡','Admin'],['out','⇤','Sign Out','auth']];
+function menu(v){var u=session(),pst=YemePush.getState(),perm=YemePush.permStatus(),mv=(v==='alerts'||v==='how'||v==='faq')?'settings':v,h='<div class="logo">YEME<small>BINGO</small></div><div class="who">'+(u?'◉ '+esc(u):'☰ Menu')+'</div><div class="lang" role="group" aria-label="Language">'+[['en','English'],['am','አማርኛ'],['ti','ትግርኛ']].map(function(x){return '<button data-l="'+x[0]+'" aria-pressed="'+(LANG===x[0])+'">'+x[1]+'</button>'}).join('')+'</div><p class="note" style="padding:8px">'+(DB?'☁ Connected':'⚠ Local mode (no cloud)')+'</p><div style="padding:0 10px 8px;display:flex;justify-content:center"><span class="np-pill '+(perm==='granted'&&pst.optedIn?'ok':'')+'">'+(perm==='granted'&&pst.optedIn?'🔔 Alerts Active':'🔕 Alerts Off')+' · '+(YemePush.notifLang()==='am'?'AM':'EN')+'</span></div>';
+  NAV.forEach(function(n){if(n[3]==='in'&&u)return;if(n[3]==='auth'&&!u)return;h+='<a data-go="'+n[0]+'" class="'+(n[0]===mv?'act':'')+'" tabindex="0"><span>'+n[1]+'</span>'+n[2]+'</a>'});$('dr').innerHTML=h}
 function toggle(o){var open=o===undefined?!$('dr').classList.contains('open'):o;$('dr').classList.toggle('open',open);$('sc').classList.toggle('show',open);$('mb').textContent=open?'×':'☰'}
 $('mb').onclick=function(){toggle()};$('sc').onclick=function(){toggle(false)};
 document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(!t)return;var g=t.dataset.go;if(g==='out'){ls('sb_session',null);go('home')}else go(g)});
@@ -1228,17 +1404,30 @@ buna:function(){return '<div id="bnv"></div>'},
 wallet:function(){var u=session(),rec=u&&users()[u];if(!rec)return '<div class="panel"><h2>Wallet</h2><p class="note">Log in to see your wallet.</p><button class="btn" data-go="home">Login</button></div>';
   var d=PANEL!=='w',M=METHODS[d?DM:WM],h='<div class="wcard"><small>Wallet balance</small><b class="wbig">'+bal(rec)+' birr</b><small>Stake rooms from 10 birr</small><div class="wtab"><button class="wt'+(d?' on':'')+'" id="bdp">Deposit</button><button class="wt'+(d?'':' on')+'" id="bwd">Withdraw</button></div>';
   if(d)h+='<div class="wpan"><h4>Select Payment Method</h4>'+chips(DM,'data-dm')+'<div class="rcv"><b class="g1">'+M.n+' Official Receiver</b><div>Account Holder: '+esc(PAY_NAME)+'</div><div class="g2">Account / Number: '+PAY_NUM+'</div><p>'+M.t+'</p></div><button type="button" class="pw" id="pay">Pay with '+M.n+'</button><p class="n2">Enter amount and paste your payment receipt / SMS confirmation:</p><div class="fld"><label for="ra">Amount (birr)</label><input id="ra" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.a)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="rl">Receipt</label><textarea id="rl" placeholder="'+M.n+' receipt, Tx ID, or SMS" autocapitalize="off">'+esc(DV.l)+'</textarea><button type="button" class="pst" id="pst">📋 Paste</button></div><p class="n2 s">Press &amp; hold space to paste link</p><p class="n2">Minimum '+PAY_BIRR+' birr. The admin checks your receipt and adds the money to your wallet once approved.</p><button type="button" class="sub2" id="pd">Submit '+M.n+' Payment</button></div>';
-  else h+='<div class="wpan"><h4>Select Withdrawal Method</h4>'+chips(WM,'data-wm')+'<h4 style="margin-top:18px">Withdraw to '+M.n+'</h4><div class="fld"><label for="wa">Amount to withdraw (birr)</label><input id="wa" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.wa)+'" placeholder="Minimum '+PAY_BIRR+' birr"></div><div class="fld"><label for="wt">'+M.n+' Account / Phone</label><input id="wt" type="tel" inputmode="tel" value="'+esc(DV.wt)+'" placeholder="'+M.n+' Account / Phone"></div><p class="n2">Amount is deducted from wallet now. Admin sends it to your '+M.n+' account.</p><button type="button" class="sub2 gd" id="wsub">Request '+M.n+' Withdrawal</button></div>';
+  else h+='<div class="wpan"><h4>Select Withdrawal Method</h4>'+chips(WM,'data-wm')+'<h4 style="margin-top:18px">Withdraw to '+M.n+'</h4><div class="fld"><label for="wa">Amount to withdraw (birr)</label><input id="wa" type="number" inputmode="numeric" min="0" step="1" value="'+esc(DV.wa)+'" placeholder="Minimum '+WD_BIRR+' birr"></div><div class="fld"><label for="wt">'+M.n+' Account / Phone</label><input id="wt" type="tel" inputmode="tel" value="'+esc(DV.wt)+'" placeholder="'+M.n+' Account / Phone"></div><p class="n2">Amount is deducted from wallet now. Admin sends it to your '+M.n+' account.</p><button type="button" class="sub2 gd" id="wsub">Request '+M.n+' Withdrawal</button></div>';
   h+='</div><div id="msg" role="status"></div>'+(rec.tx&&rec.tx.length?'<ul class="txl">'+rec.tx.slice(-6).reverse().map(function(x){return '<li><span>'+esc(x.l)+'</span><b class="'+(x.a>0?'cr':'db')+'">'+(x.a>0?'+':'')+x.a+'</b></li>'}).join('')+'</ul>':'')+reqHTML(u);
   return h},
-how:function(){return '<div class="panel"><h2>How to Play</h2><ol style="line-height:1.6;font-size:17px"><li>Register, then deposit money in your Wallet with Telebirr.</li><li>Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.</li><li>Choose a ticket number and press Join. Your stake is taken from your wallet.</li><li>When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.</li><li>Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.</li><li>Complete the Target Goal and press Bingo. The first player to do it wins the room prize.</li></ol></div>'},
-faq:function(){return '<div class="panel"><h2>FAQs</h2><details><summary>What if nobody else joins?</summary><p>Rooms need 2 or more players. If fewer join, your stake is refunded automatically.</p></details><details><summary>Can I leave after joining?</summary><p>Your stake is held for the round. Leaving the game page does not refund it.</p></details><details><summary>Where is my account stored?</summary><p>Online, so you can log in from any device. If the app is offline it is kept in this browser only.</p></details></div>'},
-alerts:function(){return alertsPanel()},
+how:function(){STAB='how';return settingsPanel()},
+faq:function(){STAB='faq';return settingsPanel()},
+alerts:function(){STAB='alerts';return settingsPanel()},
+settings:function(){return settingsPanel()},
 admin:function(){
   if(!isAdm())return '<div class="panel"><h2>Admin Login</h2><form id="al" novalidate><div class="fld"><label for="ae">Email</label><input id="ae" type="email" autocomplete="username" autocapitalize="off" placeholder="Enter admin email"></div><div class="fld"><label for="ap">Password</label><input id="ap" type="password" autocomplete="current-password" placeholder="Enter password"></div><div class="err" id="err" role="alert"></div><button class="btn" type="submit">Login</button></form></div>';
   return adminPanel()},
-game:function(){return '<div class="goal"><span>Target Goal:</span><b id="gl"></b></div><p class="last" id="rd" style="margin:8px 0 0"></p><p class="last" id="pz" style="margin:6px 0 0;color:#f6d77a;font-weight:700;font-size:19px"></p><div class="board"><div class="bgr" id="bd"></div><p class="last" id="lst" aria-live="polite"></p></div><div id="cg"></div><div id="msg" role="status"></div><button class="bingo" id="bg">Bingo!</button><div class="opt"><label><input type="checkbox" id="au"> Auto-mark</label><button id="snd"></button><button id="vl"></button><button id="bk">‹ Back</button></div>'}
+game:function(){return '<div class="goal"><div class="goal-info"><small>Target Goal:</small><b id="gl"></b></div><button type="button" class="ghelp" id="ghelp" aria-label="How to win target goal">🏅 How to win</button></div><p class="last" id="rd" style="margin:8px 0 0"></p><p class="last" id="pz" style="margin:6px 0 0;color:#f6d77a;font-weight:700;font-size:19px"></p><div class="board"><div class="bgr" id="bd"></div><p class="last" id="lst" aria-live="polite"></p></div><div id="cg"></div><div id="msg" role="status"></div><button class="bingo" id="bg">Bingo!</button><div class="opt"><label><input type="checkbox" id="au"> Auto-mark</label><button id="snd"></button><button id="vl"></button><button id="bk">‹ Back</button></div>'}
 };
+var STAB='alerts';
+function howHTML(){return '<div class="panel"><h2>How to Play</h2><ol style="line-height:1.6;font-size:17px"><li>Register, then deposit money in your Wallet with Telebirr.</li><li>Open Stake Rooms and pick a room: 10, 20, 50, 100 or 200 ETB.</li><li>Choose a ticket number and press Join. Your stake is taken from your wallet.</li><li>When the room countdown ends, the game starts for everyone. A room needs at least 2 players, otherwise all stakes are refunded.</li><li>Numbers are called every 5 seconds. Tap called numbers on your card, or use Auto-mark.</li><li>Complete the Target Goal and press Bingo. The first player to do it wins the room prize.</li></ol></div>'}
+function faqHTML(){return '<div class="panel"><h2>FAQs</h2><details><summary>What if nobody else joins?</summary><p>Rooms need 2 or more players. If fewer join, your stake is refunded automatically.</p></details><details><summary>Can I leave after joining?</summary><p>Your stake is held for the round. Leaving the game page does not refund it.</p></details><details><summary>Where is my account stored?</summary><p>Online, so you can log in from any device. If the app is offline it is kept in this browser only.</p></details></div>'}
+function settingsPanel(){
+  var body=STAB==='how'?howHTML():(STAB==='faq'?faqHTML():alertsPanel());
+  return '<div id="setview"><div class="panel" style="padding:16px 14px;margin-bottom:12px"><h2 style="margin-bottom:12px">⚙ Settings</h2>'+
+    '<div class="tabs" style="margin-bottom:0">'+
+      '<button type="button" data-stab="alerts" aria-pressed="'+(STAB==='alerts')+'" style="min-height:46px">🔔 Notifications</button>'+
+      '<button type="button" data-stab="how" aria-pressed="'+(STAB==='how')+'" style="min-height:46px">ⓘ How to Play</button>'+
+      '<button type="button" data-stab="faq" aria-pressed="'+(STAB==='faq')+'" style="min-height:46px">? FAQs</button>'+
+    '</div></div>'+body+'</div>';
+}
 function alertsPanel(){
   var st=YemePush.getState(),perm=YemePush.permStatus(),nl=YemePush.notifLang()==='am'?'አማርኛ (am)':'English (en)';
   var statusBadge=perm==='granted'&&st.optedIn?'<span class="np-pill ok">● Enabled</span>':(perm==='denied'?'<span class="np-pill no">✕ Blocked</span>':'<span class="np-pill">○ Off / Setup</span>');
@@ -1356,12 +1545,13 @@ function bindForms(){
       var id=rcid(raw);if(pays().some(function(x){return x.rid===id&&x.st!=='declined'})){ms.textContent='This receipt was already submitted.';return}
       pd.disabled=true;addPay({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),u:u,amt:amt,rid:id,link:M.n+' · '+raw.slice(0,300),ts:Date.now(),st:'pending'}).then(function(){DV.a='';DV.l='';route();note('Payment received. The admin will check it and add '+amt+' birr to your wallet.')})};
     var ws=$('wsub');if(ws)ws.onclick=function(){var M=METHODS[WM],amt=Math.floor(Number($('wa').value)),ac=$('wt').value.replace(/[\s-]/g,''),ms=$('msg'),r=users()[u];
-      if(!(amt>=PAY_BIRR)){ms.textContent='Minimum withdrawal is '+PAY_BIRR+' birr.';return}
+      if(!(amt>=WD_BIRR)){ms.textContent='Minimum withdrawal is '+WD_BIRR+' birr.';return}
       if(!/^\+?\d{9,16}$/.test(ac)){ms.textContent='Enter a valid '+M.n+' account or phone number.';return}
       if(amt>bal(r)){ms.textContent='You cannot withdraw more than your wallet balance.';return}
       ws.disabled=true;setBal(users(),u,bal(r)-amt,'Withdrawal',-amt,function(ok){if(!ok){ws.disabled=false;ms.textContent='You cannot withdraw more than your wallet balance.';return}
         addWd({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),u:u,amt:amt,acct:M.n+' · '+ac,ts:Date.now(),st:'pending'}).then(function(){DV.wa='';DV.wt='';route();note('✔ Withdrawal requested. The admin will send '+amt+' birr to your '+M.n+' account '+ac+'.')})})}}
   var hd=$('hdep');if(hd)hd.onclick=function(){PANEL='d';go('wallet')};
+  var setv=$('setview');if(setv)setv.querySelectorAll('[data-stab]').forEach(function(b){b.onclick=function(){STAB=b.dataset.stab;if(location.hash!=='#settings')go('settings');else rr()}});
   var alv=$('alview');
   if(alv){
     $('npopt').onclick=function(){
@@ -3714,7 +3904,7 @@ setInterval(function(){tick();if(READY)settleKeno();if(location.hash==='#rooms')
 /* ===== Language: English / አማርኛ / ትግርኛ ===== */
 var LANG=lg('sb_lang','en');
 var ROWS=[
-["Home","መነሻ","ገዛ"],["Stake Rooms","የጨዋታ ክፍሎች","ክፍልታት ጸወታ"],["Fast Bingo","ፈጣን ቢንጎ","ቅልጡፍ ቢንጎ"],["Keno","ኬኖ","ኬኖ"],["Lucky Coins","ዕድለኛ ሳንቲሞች","ዕድለኛ ሳንቲም"],["Ludo","ሉዶ","ሉዶ"],["Hi-Lo","ከፍ-ዝቅ","ላዕሊ-ታሕቲ"],["Crazy 8","ክሬዚ 8","ክሬዚ 8"],["Buna Time","ቡና ታይም","ቡና ታይም"],["Notifications","ማሳወቂያዎች","መፍለጢታት"],["Notification Alerts","የማሳወቂያ ቅንብሮች","ምርጫታት መፍለጢ"],["Push Notifications","የፑሽ ማሳወቂያዎች","ናይ ፑሽ መፍለጢታት"],["Device token active · automatic refresh","የመሣሪያ ቶከን ንቁ ነው · ራስ-ሰር እድሳት","ናይ መሳርሒ ቶከን ንጡፍ እዩ · ባዕሉ ይሕደስ"],["Enable real-time round, win & bonus alerts","የዙር፣ የድል እና የቦነስ ማሳወቂያዎችን ያብሩ","ናይ ዙር፣ ዓወትን ቦነስን መፍለጢታት ወልዑ"],["🔔 Enable Push Notifications","🔔 ማሳወቂያዎችን አብራ","🔔 መፍለጢታት ወልዕ"],["↻ Refresh Device Token","↻ ቶከን አድስ","↻ ቶከን ኣሕድስ"],["▶ Send Test Deep-Link Alert","▶ የሙከራ ማሳወቂያ ላክ","▶ ናይ ፈተነ መፍለጢ ስደድ"],["Alert Categories","የማሳወቂያ ምድቦች","ምድባት መፍለጢ"],["Round Alerts","የዙር ማሳወቂያዎች","መፍለጢታት ዙር"],["Fast Bingo 60s countdown, Classic Bingo pots & Keno draws","የፈጣን ቢንጎ 60 ሰከንድ፣ የክላሲክ ቢንጎ እና የኬኖ ዕጣዎች","ናይ ቅልጡፍ ቢንጎ 60 ሰከንድ፣ ክላሲክ ቢንጎን ኬኖን ዕጣታት"],["Game & Promo Alerts","የጨዋታ እና የፕሮሞ ማሳወቂያዎች","መፍለጢታት ጸወታን ፕሮሞን"],["Buna Time free spins, Lucky Coins, Ludo, Hi-Lo, Crazy 8 & Peak Hours","ቡና ታይም፣ ዕድለኛ ሳንቲሞች፣ ሉዶ፣ Hi-Lo፣ ክሬዚ 8 እና ምርጥ ሰዓቶች","ቡና ታይም፣ ዕድለኛ ሳንቲም፣ ሉዶ፣ Hi-Lo፣ ክሬዚ 8ን ብሉጽ ሰዓታትን"],["Win & Wallet Credit Alerts","የድል እና የቦርሳ ገቢ ማሳወቂያዎች","መፍለጢታት ዓወትን ቦርሳን"],["Deposit approvals & instant payout notifications","የገቢ ማረጋገጫ እና የድል ክፍያ ማሳወቂያዎች","ምጽዳቕ ገቢን መፍለጢ ክፍሊት ዓወትን"],["Game & Topic Subscriptions","የጨዋታ እና ርዕስ ምርጫዎች","ምርጫታት ጸወታን ኣርእስትን"],["Tap topics to opt in or out without spam:","ያለ አላስፈላጊ መልዕክት የሚፈልጉትን ርዕስ ይምረጡ፡","ብዘይ ረብሻ ትደልይዎ ኣርእስቲ ሕረዩ፡"],["All Alerts","ሁሉም ማሳወቂያዎች","ኩሎም መፍለጢታት"],["Fast Bingo & Keno","ፈጣን ቢንጎ እና ኬኖ","ቅልጡፍ ቢንጎን ኬኖን"],["Classic Bingo","ክላሲክ ቢንጎ","ክላሲክ ቢንጎ"],["Promos & Comeback","ፕሮሞ እና መመለሻ","ፕሮሞን ምምላስን"],["Wallet & Wins","ቦርሳ እና ድሎች","ቦርሳን ዓወታትን"],["Push notifications enabled!","የፑሽ ማሳወቂያዎች በርተዋል!","ናይ ፑሽ መፍለጢታት ተወሊዖም!"],["Permission dismissed.","ፈቃዱ አልተሰጠም።","ፍቓድ ኣይተዋህበን።"],["243 ways · free spins up to ×3","243 መንገዶች · ነጻ ዙር እስከ ×3","243 መንገድታት · ነጻ ዙር ክሳብ ×3"],["243 ways to win","243 የማሸነፊያ መንገዶች","243 ናይ ምስዓር መንገድታት"],["Log in to play Buna Time.","ቡና ታይም ለመጫወት ይግቡ።","ቡና ታይም ንምጽዋት እቶ።"],["Classic Bingo","ክላሲክ ቢንጎ","ክላሲክ ቢንጎ"],["Balance","ቀሪ ሂሳብ","ሚዛን"],["Play","ተጫወት","ጻወት"],["NEW","አዲስ","ሓዱሽ"],["75-ball · pick your stake","75 ኳሶች · መጠን ይምረጡ","75 ኩዕሶ · መጠን ሕረዩ"],["Scheduled · bigger pots","በሰዓቱ · ትልቅ ሽልማት","ብሰዓቱ · ዓቢ ሽልማት"],["80-ball · pick 1–10 spots","80 ቁጥሮች · 1–10 ይምረጡ","80 ቁጽርታት · 1–10 ሕረዩ"],["Fruit reels · jackpots","የፍራፍሬ ሪል · ጃክፖት","ፍረታት ሪል · ጃክፖት"],["Classic Ludo against other players. Get your tokens home first and win the pot.","ከሌሎች ተጫዋቾች ጋር ክላሲክ ሉዶ ይጫወቱ። ቶከኖችዎን ቀድመው ቤት ያስገቡና ሽልማቱን ያሸንፉ።","ምስ ካልኦት ተጻዋትቲ ክላሲክ ሉዶ ተጻወቱ። ቶከናትኩም ቅድሚ ኩሉ ናብ ገዛ ኣእትዉ እሞ ሽልማት ስዓሩ።"],["2 or 4 players · win the pot","2 ወይ 4 ተጫዋቾች · ሽልማቱን ያሸንፉ","2 ወይ 4 ተጻዋትቲ · ሽልማት ስዓሩ"],["2, 3 or 4 players · win the pot","2፣ 3 ወይ 4 ተጫዋቾች · ሽልማቱን ያሸንፉ","2፣ 3 ወይ 4 ተጻዋትቲ · ሽልማት ስዓሩ"],["Empty your hand first and win the pot","መጀመሪያ እጅዎን ባዶ ያድርጉና ሽልማቱን ያሸንፉ","ቅድሚ ኩሉ ኢድኩም ባዶ ግበሩ እሞ ሽልማት ስዓሩ"],["Log in to play Crazy 8.","ክሬዚ 8 ለመጫወት ይግቡ።","ክሬዚ 8 ንምጽዋት እቶ።"],["Higher or lower? Call the next card. Every right guess raises your win.","ከፍ ወይስ ዝቅ? ቀጣዩን ካርድ ይገምቱ። እያንዳንዱ ትክክለኛ ግምት ድልዎን ያሳድጋል።","ልዕሊ ወይስ ትሕቲ? ዝቕጽል ካርድ ገምቱ። ነፍሲ ወከፍ ቅኑዕ ግምት ዓወትኩም ይውስኽ።"],["Deal any time · up to ×5,000","በማንኛውም ጊዜ ያውጡ · እስከ ×5,000","ኣብ ዝኾነ እዋን ተጻወቱ · ክሳብ ×5,000"],["Log in to play Hi-Lo.","Hi-Lo ለመጫወት ይግቡ።","Hi-Lo ንምጽዋት እቶ።"],["Choose your stake and deal the first card.","መጠንዎን ይምረጡ እና የመጀመሪያውን ካርድ ያውጡ።","ውርርድኹም ሕረዩ እሞ ቀዳማይ ካርድ ኣውጽኡ።"],["DEAL","ካርድ አውጣ","ካርድ ኣውጽእ"],["DEAL AGAIN","ዳግም አውጣ","ዳግማይ ኣውጽእ"],["Log in to play Ludo.","ሉዶ ለመጫወት ይግቡ።","ሉዶ ንምጽዋት እቶ።"],["Play other players for the pot","ለሽልማቱ ከሌሎች ተጫዋቾች ጋር ይጫወቱ","ንሽልማት ምስ ካልኦት ተጻዋትቲ ተጻወቱ"],["FIND A GAME","ጨዋታ ፈልግ","ጸወታ ድለ"],["Results","ውጤቶች","ውጽኢታት"],["PLAYERS","ተጫዋቾች","ተጻዋትቲ"],["TOKENS HOME TO WIN","ለማሸነፍ ቤት የሚገቡ ቶከኖች","ንምስዓር ናብ ገዛ ዝኣትዉ ቶከናት"],["STAKE","ውርርድ","ውርርድ"],["Complete Any Line within 40 calls","በ40 ጥሪ ውስጥ ማንኛውንም መስመር ይሙሉ","ኣብ ውሽጢ 40 ጥሪ ዝኾነ መስመር ኣማልኡ"],["↻ New Card","↻ አዲስ ካርድ","↻ ሓዱሽ ካርድ"],["Calling first ball…","የመጀመሪያው ቁጥር እየተጠራ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽዋዕ ኣሎ…"],["Skip","ዝለል","ዝለል"],["Play Again","ዳግመኛ ተጫወት","ዳግማይ ጻወት"],["40 balls called. Better luck next round!","40 ቁጥሮች ተጠርተዋል። በሚቀጥለው ዙር መልካም ዕድል!","40 ቁጽርታት ተጸዊዖም። ኣብ ዝቕጽል ዙር ጽቡቕ ዕድል!"],["Not yet. Mark every called number for Any Line.","ገና አልተሟላም። ለማንኛውም መስመር የተጠሩትን ሁሉንም ቁጥሮች ምልክት ያድርጉ።","ገና ኣይተማልአን። ንዝኾነ መስመር ዝተጸውዑ ቁጽርታት ኩሎም ምልክት ግበሩ።"],["Log in to play Fast Bingo.","ፈጣን ቢንጎ ለመጫወት ይግቡ።","ቅልጡፍ ቢንጎ ንምጽዋት እቶ።"],["Log in to play Keno.","ኬኖ ለመጫወት ይግቡ።","ኬኖ ንምጽዋት እቶ።"],["Log in to play Lucky Coins.","ዕድለኛ ሳንቲሞች ለመጫወት ይግቡ።","ዕድለኛ ሳንቲም ንምጽዋት እቶ።"],["Choose up to 10 numbers","እስከ 10 ቁጥሮችን ይምረጡ","ክሳብ 10 ቁጽርታት ሕረዩ"],["From 1 to 80","ከ1 እስከ 80","ካብ 1 ክሳብ 80"],["✕ Clear","✕ አጽዳ","✕ ኣጽሪ"],["BET","ውርርድ","ውርርድ"],["GAME","ጨዋታ","ጸወታ"],["HISTORY","ታሪክ","ታሪኽ"],["RESULTS","ውጤቶች","ውጽኢታት"],["STATISTICS","ስታቲስቲክስ","ስታቲስቲክስ"],["TOP","ከፍተኛ","ላዕለዋይ"],["Waiting","በመጠባበቅ ላይ","ይጽበ ኣሎ"],["Over the last 50 draws","ባለፉት 50 ዕጣዎች","ኣብ ዝሓለፉ 50 ዕጣታት"],["● Hot numbers","● ትኩስ ቁጥሮች","● ውዑያት ቁጽርታት"],["● Cold numbers","● ቀዝቃዛ ቁጥሮች","● ዝሑላት ቁጽርታት"],["Biggest wins in the last 24 hours","ባለፉት 24 ሰዓታት ትልልቅ ድሎች","ኣብ ዝሓለፉ 24 ሰዓታት ዓበይቲ ዓወታት"],["No Keno tickets yet.","እስካሁን የኬኖ ትኬት የለም።","ክሳብ ሕጂ ትኬት ኬኖ የለን።"],["No Keno wins recorded yet in the last 24 hours.","ባለፉት 24 ሰዓታት የተመዘገበ የኬኖ ድል የለም።","ኣብ ዝሓለፉ 24 ሰዓታት ዝተመዝገበ ዓወት ኬኖ የለን።"],["How to play","አጨዋወት","ከመይ ይጻወት"],["✕ Close","✕ ዝጋ","✕ ዕጾ"],["Back to Games","ወደ ጨዋታዎች ተመለስ","ናብ ጸወታታት ተመለስ"],["ALL PAYOUTS (× YOUR BET)","ሁሉም ሽልማቶች (× ውርርድዎ)","ኩሎም ሽልማታት (× ውርርድኹም)"],["PAYTABLE","የሽልማት ሰንጠረዥ","ሰንጠረዥ ሽልማት"],["FAIRNESS","ፍትሃዊነት","ፍትሓውነት"],["Maximum 10 spots allowed.","ከ10 በላይ ቁጥሮች መምረጥ አይቻልም።","ልዕሊ 10 ቁጽርታት ምምራጽ ኣይከኣልን።"],["Choose 1 to 10 numbers.","ከ1 እስከ 10 ቁጥሮችን ይምረጡ።","ካብ 1 ክሳብ 10 ቁጽርታት ሕረዩ።"],["Wait for next round countdown.","ቀጣዩ ዙር እስኪጀምር ይጠብቁ።","ዝቕጽል ዙር ክሳብ ዝጅምር ተጸበዩ።"],["Match 3 symbols or lucky pairs to win","ለማሸነፍ 3 ምልክቶችን ወይም ዕድለኛ ጥንዶችን ያዛምዱ","ንምስዓር 3 ምልክታት ወይ ዕድለኛ ጽምዲ ኣዛምዱ"],["Spinning…","በማሽከርከር ላይ…","ይዘውር ኣሎ…"],["No match. Spin again!","አልተመሳሰለም። ዳግመኛ ያሽከርክሩ!","ኣይተማዓረየን። ዳግማይ ኣዙሩ!"],["GOOD LUCK!","መልካም ዕድል!","ጽቡቕ ዕድል!"],["TURBO","ፈጣን","ቅልጡፍ"],["SPIN","አሽከርክር","ኣዙር"],["AUTO","ራስ-ሰር","ባዕሉ"],["TOTAL BET","ጠቅላላ ውርርድ","ጠቕላላ ውርርድ"],["AUTOPLAY","ራስ-ሰር ጨዋታ","ባዕሉ ዝጻወት"],["NUMBER OF SPINS","የዙሮች ብዛት","ብዝሒ ዙራት"],["STOP IF ONE WIN IS AT LEAST","አንድ ድል ቢያንስ ሲደርስ አቁም","ሓደ ዓወት እንተወሓደ ምስ በጽሐ ኣቋርጽ"],["STOP IF LOSSES REACH","ኪሳራ ሲደርስ አቁም","ክሳራ ምስ በጽሐ ኣቋርጽ"],["Off","ዝጋ","ዕጹው"],["Stop when the coin bonus starts","የሳንቲም ቦነስ ሲጀምር አቁም","ናይ ሳንቲም ቦነስ ምስ ጀመረ ኣቋርጽ"],["Autoplay stopped.","ራስ-ሰር ጨዋታ ቆሟል።","ባዕሉ ዝጻወት ደው ኢሉ።"],["COIN BONUS JACKPOTS AT THIS BET","በዚህ ውርርድ የሳንቲም ቦነስ ጃክፖቶች","ኣብዚ ውርርድ ጃክፖታት ሳንቲም ቦነስ"],["THE 5 LINES","5ቱ መስመሮች","እቶም 5 መስመራት"],["Close","ዝጋ","ዕጾ"],["Other coins carry 1, 2, 3, 5, 8 × your bet.","ሌሎች ሳንቲሞች ከውርርድዎ 1፣ 2፣ 3፣ 5፣ 8 × ይይዛሉ።","ካልኦት ሳንቲማት 1፣ 2፣ 3፣ 5፣ 8 × ውርርድኹም ይሕዙ።"],["Coins pay when a magnet pulls them in, and in the coin bonus.","ሳንቲሞች የሚከፍሉት ማግኔት ሲስባቸው እና በሳንቲም ቦነስ ውስጥ ነው።","ሳንቲማት ዝኸፍሉ ማግኔት ምስ ሰሓቦምን ኣብ ሳንቲም ቦነስን እዩ።"],["Wallet","ቦርሳ","ቦርሳ"],["Register","ተመዝገብ","ተመዝገብ"],["How to Play","አጨዋወት","ከመይ ይጻወት"],["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["Admin","አስተዳዳሪ","ኣመሓዳሪ"],["Sign Out","ውጣ","ውጻእ"],["☰ Menu","☰ ምናሌ","☰ ሜኑ"],
+["Home","መነሻ","ገዛ"],["Stake Rooms","የጨዋታ ክፍሎች","ክፍልታት ጸወታ"],["Fast Bingo","ፈጣን ቢንጎ","ቅልጡፍ ቢንጎ"],["Keno","ኬኖ","ኬኖ"],["Lucky Coins","ዕድለኛ ሳንቲሞች","ዕድለኛ ሳንቲም"],["Ludo","ሉዶ","ሉዶ"],["Hi-Lo","ከፍ-ዝቅ","ላዕሊ-ታሕቲ"],["Crazy 8","ክሬዚ 8","ክሬዚ 8"],["Buna Time","ቡና ታይም","ቡና ታይም"],["Notifications","ማሳወቂያዎች","መፍለጢታት"],["Notification Alerts","የማሳወቂያ ቅንብሮች","ምርጫታት መፍለጢ"],["Push Notifications","የፑሽ ማሳወቂያዎች","ናይ ፑሽ መፍለጢታት"],["Device token active · automatic refresh","የመሣሪያ ቶከን ንቁ ነው · ራስ-ሰር እድሳት","ናይ መሳርሒ ቶከን ንጡፍ እዩ · ባዕሉ ይሕደስ"],["Enable real-time round, win & bonus alerts","የዙር፣ የድል እና የቦነስ ማሳወቂያዎችን ያብሩ","ናይ ዙር፣ ዓወትን ቦነስን መፍለጢታት ወልዑ"],["🔔 Enable Push Notifications","🔔 ማሳወቂያዎችን አብራ","🔔 መፍለጢታት ወልዕ"],["↻ Refresh Device Token","↻ ቶከን አድስ","↻ ቶከን ኣሕድስ"],["▶ Send Test Deep-Link Alert","▶ የሙከራ ማሳወቂያ ላክ","▶ ናይ ፈተነ መፍለጢ ስደድ"],["Alert Categories","የማሳወቂያ ምድቦች","ምድባት መፍለጢ"],["Round Alerts","የዙር ማሳወቂያዎች","መፍለጢታት ዙር"],["Fast Bingo 60s countdown, Classic Bingo pots & Keno draws","የፈጣን ቢንጎ 60 ሰከንድ፣ የክላሲክ ቢንጎ እና የኬኖ ዕጣዎች","ናይ ቅልጡፍ ቢንጎ 60 ሰከንድ፣ ክላሲክ ቢንጎን ኬኖን ዕጣታት"],["Game & Promo Alerts","የጨዋታ እና የፕሮሞ ማሳወቂያዎች","መፍለጢታት ጸወታን ፕሮሞን"],["Buna Time free spins, Lucky Coins, Ludo, Hi-Lo, Crazy 8 & Peak Hours","ቡና ታይም፣ ዕድለኛ ሳንቲሞች፣ ሉዶ፣ Hi-Lo፣ ክሬዚ 8 እና ምርጥ ሰዓቶች","ቡና ታይም፣ ዕድለኛ ሳንቲም፣ ሉዶ፣ Hi-Lo፣ ክሬዚ 8ን ብሉጽ ሰዓታትን"],["Win & Wallet Credit Alerts","የድል እና የቦርሳ ገቢ ማሳወቂያዎች","መፍለጢታት ዓወትን ቦርሳን"],["Deposit approvals & instant payout notifications","የገቢ ማረጋገጫ እና የድል ክፍያ ማሳወቂያዎች","ምጽዳቕ ገቢን መፍለጢ ክፍሊት ዓወትን"],["Game & Topic Subscriptions","የጨዋታ እና ርዕስ ምርጫዎች","ምርጫታት ጸወታን ኣርእስትን"],["Tap topics to opt in or out without spam:","ያለ አላስፈላጊ መልዕክት የሚፈልጉትን ርዕስ ይምረጡ፡","ብዘይ ረብሻ ትደልይዎ ኣርእስቲ ሕረዩ፡"],["All Alerts","ሁሉም ማሳወቂያዎች","ኩሎም መፍለጢታት"],["Fast Bingo & Keno","ፈጣን ቢንጎ እና ኬኖ","ቅልጡፍ ቢንጎን ኬኖን"],["Classic Bingo","ክላሲክ ቢንጎ","ክላሲክ ቢንጎ"],["Promos & Comeback","ፕሮሞ እና መመለሻ","ፕሮሞን ምምላስን"],["Wallet & Wins","ቦርሳ እና ድሎች","ቦርሳን ዓወታትን"],["Push notifications enabled!","የፑሽ ማሳወቂያዎች በርተዋል!","ናይ ፑሽ መፍለጢታት ተወሊዖም!"],["Permission dismissed.","ፈቃዱ አልተሰጠም።","ፍቓድ ኣይተዋህበን።"],["243 ways · free spins up to ×3","243 መንገዶች · ነጻ ዙር እስከ ×3","243 መንገድታት · ነጻ ዙር ክሳብ ×3"],["243 ways to win","243 የማሸነፊያ መንገዶች","243 ናይ ምስዓር መንገድታት"],["Log in to play Buna Time.","ቡና ታይም ለመጫወት ይግቡ።","ቡና ታይም ንምጽዋት እቶ።"],["Classic Bingo","ክላሲክ ቢንጎ","ክላሲክ ቢንጎ"],["Balance","ቀሪ ሂሳብ","ሚዛን"],["Play","ተጫወት","ጻወት"],["NEW","አዲስ","ሓዱሽ"],["75-ball · pick your stake","75 ኳሶች · መጠን ይምረጡ","75 ኩዕሶ · መጠን ሕረዩ"],["Scheduled · bigger pots","በሰዓቱ · ትልቅ ሽልማት","ብሰዓቱ · ዓቢ ሽልማት"],["80-ball · pick 1–10 spots","80 ቁጥሮች · 1–10 ይምረጡ","80 ቁጽርታት · 1–10 ሕረዩ"],["Fruit reels · jackpots","የፍራፍሬ ሪል · ጃክፖት","ፍረታት ሪል · ጃክፖት"],["Classic Ludo against other players. Get your tokens home first and win the pot.","ከሌሎች ተጫዋቾች ጋር ክላሲክ ሉዶ ይጫወቱ። ቶከኖችዎን ቀድመው ቤት ያስገቡና ሽልማቱን ያሸንፉ።","ምስ ካልኦት ተጻዋትቲ ክላሲክ ሉዶ ተጻወቱ። ቶከናትኩም ቅድሚ ኩሉ ናብ ገዛ ኣእትዉ እሞ ሽልማት ስዓሩ።"],["2 or 4 players · win the pot","2 ወይ 4 ተጫዋቾች · ሽልማቱን ያሸንፉ","2 ወይ 4 ተጻዋትቲ · ሽልማት ስዓሩ"],["2, 3 or 4 players · win the pot","2፣ 3 ወይ 4 ተጫዋቾች · ሽልማቱን ያሸንፉ","2፣ 3 ወይ 4 ተጻዋትቲ · ሽልማት ስዓሩ"],["Empty your hand first and win the pot","መጀመሪያ እጅዎን ባዶ ያድርጉና ሽልማቱን ያሸንፉ","ቅድሚ ኩሉ ኢድኩም ባዶ ግበሩ እሞ ሽልማት ስዓሩ"],["Log in to play Crazy 8.","ክሬዚ 8 ለመጫወት ይግቡ።","ክሬዚ 8 ንምጽዋት እቶ።"],["Higher or lower? Call the next card. Every right guess raises your win.","ከፍ ወይስ ዝቅ? ቀጣዩን ካርድ ይገምቱ። እያንዳንዱ ትክክለኛ ግምት ድልዎን ያሳድጋል።","ልዕሊ ወይስ ትሕቲ? ዝቕጽል ካርድ ገምቱ። ነፍሲ ወከፍ ቅኑዕ ግምት ዓወትኩም ይውስኽ።"],["Deal any time · up to ×5,000","በማንኛውም ጊዜ ያውጡ · እስከ ×5,000","ኣብ ዝኾነ እዋን ተጻወቱ · ክሳብ ×5,000"],["Log in to play Hi-Lo.","Hi-Lo ለመጫወት ይግቡ።","Hi-Lo ንምጽዋት እቶ።"],["Choose your stake and deal the first card.","መጠንዎን ይምረጡ እና የመጀመሪያውን ካርድ ያውጡ።","ውርርድኹም ሕረዩ እሞ ቀዳማይ ካርድ ኣውጽኡ።"],["DEAL","ካርድ አውጣ","ካርድ ኣውጽእ"],["DEAL AGAIN","ዳግም አውጣ","ዳግማይ ኣውጽእ"],["Log in to play Ludo.","ሉዶ ለመጫወት ይግቡ።","ሉዶ ንምጽዋት እቶ።"],["Play other players for the pot","ለሽልማቱ ከሌሎች ተጫዋቾች ጋር ይጫወቱ","ንሽልማት ምስ ካልኦት ተጻዋትቲ ተጻወቱ"],["FIND A GAME","ጨዋታ ፈልግ","ጸወታ ድለ"],["Results","ውጤቶች","ውጽኢታት"],["PLAYERS","ተጫዋቾች","ተጻዋትቲ"],["TOKENS HOME TO WIN","ለማሸነፍ ቤት የሚገቡ ቶከኖች","ንምስዓር ናብ ገዛ ዝኣትዉ ቶከናት"],["STAKE","ውርርድ","ውርርድ"],["Complete Any Line within 40 calls","በ40 ጥሪ ውስጥ ማንኛውንም መስመር ይሙሉ","ኣብ ውሽጢ 40 ጥሪ ዝኾነ መስመር ኣማልኡ"],["↻ New Card","↻ አዲስ ካርድ","↻ ሓዱሽ ካርድ"],["Calling first ball…","የመጀመሪያው ቁጥር እየተጠራ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽዋዕ ኣሎ…"],["Skip","ዝለል","ዝለል"],["Play Again","ዳግመኛ ተጫወት","ዳግማይ ጻወት"],["40 balls called. Better luck next round!","40 ቁጥሮች ተጠርተዋል። በሚቀጥለው ዙር መልካም ዕድል!","40 ቁጽርታት ተጸዊዖም። ኣብ ዝቕጽል ዙር ጽቡቕ ዕድል!"],["Not yet. Mark every called number for Any Line.","ገና አልተሟላም። ለማንኛውም መስመር የተጠሩትን ሁሉንም ቁጥሮች ምልክት ያድርጉ።","ገና ኣይተማልአን። ንዝኾነ መስመር ዝተጸውዑ ቁጽርታት ኩሎም ምልክት ግበሩ።"],["Log in to play Fast Bingo.","ፈጣን ቢንጎ ለመጫወት ይግቡ።","ቅልጡፍ ቢንጎ ንምጽዋት እቶ።"],["Log in to play Keno.","ኬኖ ለመጫወት ይግቡ።","ኬኖ ንምጽዋት እቶ።"],["Log in to play Lucky Coins.","ዕድለኛ ሳንቲሞች ለመጫወት ይግቡ።","ዕድለኛ ሳንቲም ንምጽዋት እቶ።"],["Choose up to 10 numbers","እስከ 10 ቁጥሮችን ይምረጡ","ክሳብ 10 ቁጽርታት ሕረዩ"],["From 1 to 80","ከ1 እስከ 80","ካብ 1 ክሳብ 80"],["✕ Clear","✕ አጽዳ","✕ ኣጽሪ"],["BET","ውርርድ","ውርርድ"],["GAME","ጨዋታ","ጸወታ"],["HISTORY","ታሪክ","ታሪኽ"],["RESULTS","ውጤቶች","ውጽኢታት"],["STATISTICS","ስታቲስቲክስ","ስታቲስቲክስ"],["TOP","ከፍተኛ","ላዕለዋይ"],["Waiting","በመጠባበቅ ላይ","ይጽበ ኣሎ"],["Over the last 50 draws","ባለፉት 50 ዕጣዎች","ኣብ ዝሓለፉ 50 ዕጣታት"],["● Hot numbers","● ትኩስ ቁጥሮች","● ውዑያት ቁጽርታት"],["● Cold numbers","● ቀዝቃዛ ቁጥሮች","● ዝሑላት ቁጽርታት"],["Biggest wins in the last 24 hours","ባለፉት 24 ሰዓታት ትልልቅ ድሎች","ኣብ ዝሓለፉ 24 ሰዓታት ዓበይቲ ዓወታት"],["No Keno tickets yet.","እስካሁን የኬኖ ትኬት የለም።","ክሳብ ሕጂ ትኬት ኬኖ የለን።"],["No Keno wins recorded yet in the last 24 hours.","ባለፉት 24 ሰዓታት የተመዘገበ የኬኖ ድል የለም።","ኣብ ዝሓለፉ 24 ሰዓታት ዝተመዝገበ ዓወት ኬኖ የለን።"],["How to play","አጨዋወት","ከመይ ይጻወት"],["✕ Close","✕ ዝጋ","✕ ዕጾ"],["Back to Games","ወደ ጨዋታዎች ተመለስ","ናብ ጸወታታት ተመለስ"],["ALL PAYOUTS (× YOUR BET)","ሁሉም ሽልማቶች (× ውርርድዎ)","ኩሎም ሽልማታት (× ውርርድኹም)"],["PAYTABLE","የሽልማት ሰንጠረዥ","ሰንጠረዥ ሽልማት"],["FAIRNESS","ፍትሃዊነት","ፍትሓውነት"],["Maximum 10 spots allowed.","ከ10 በላይ ቁጥሮች መምረጥ አይቻልም።","ልዕሊ 10 ቁጽርታት ምምራጽ ኣይከኣልን።"],["Choose 1 to 10 numbers.","ከ1 እስከ 10 ቁጥሮችን ይምረጡ።","ካብ 1 ክሳብ 10 ቁጽርታት ሕረዩ።"],["Wait for next round countdown.","ቀጣዩ ዙር እስኪጀምር ይጠብቁ።","ዝቕጽል ዙር ክሳብ ዝጅምር ተጸበዩ።"],["Match 3 symbols or lucky pairs to win","ለማሸነፍ 3 ምልክቶችን ወይም ዕድለኛ ጥንዶችን ያዛምዱ","ንምስዓር 3 ምልክታት ወይ ዕድለኛ ጽምዲ ኣዛምዱ"],["Spinning…","በማሽከርከር ላይ…","ይዘውር ኣሎ…"],["No match. Spin again!","አልተመሳሰለም። ዳግመኛ ያሽከርክሩ!","ኣይተማዓረየን። ዳግማይ ኣዙሩ!"],["GOOD LUCK!","መልካም ዕድል!","ጽቡቕ ዕድል!"],["TURBO","ፈጣን","ቅልጡፍ"],["SPIN","አሽከርክር","ኣዙር"],["AUTO","ራስ-ሰር","ባዕሉ"],["TOTAL BET","ጠቅላላ ውርርድ","ጠቕላላ ውርርድ"],["AUTOPLAY","ራስ-ሰር ጨዋታ","ባዕሉ ዝጻወት"],["NUMBER OF SPINS","የዙሮች ብዛት","ብዝሒ ዙራት"],["STOP IF ONE WIN IS AT LEAST","አንድ ድል ቢያንስ ሲደርስ አቁም","ሓደ ዓወት እንተወሓደ ምስ በጽሐ ኣቋርጽ"],["STOP IF LOSSES REACH","ኪሳራ ሲደርስ አቁም","ክሳራ ምስ በጽሐ ኣቋርጽ"],["Off","ዝጋ","ዕጹው"],["Stop when the coin bonus starts","የሳንቲም ቦነስ ሲጀምር አቁም","ናይ ሳንቲም ቦነስ ምስ ጀመረ ኣቋርጽ"],["Autoplay stopped.","ራስ-ሰር ጨዋታ ቆሟል።","ባዕሉ ዝጻወት ደው ኢሉ።"],["COIN BONUS JACKPOTS AT THIS BET","በዚህ ውርርድ የሳንቲም ቦነስ ጃክፖቶች","ኣብዚ ውርርድ ጃክፖታት ሳንቲም ቦነስ"],["THE 5 LINES","5ቱ መስመሮች","እቶም 5 መስመራት"],["Close","ዝጋ","ዕጾ"],["Other coins carry 1, 2, 3, 5, 8 × your bet.","ሌሎች ሳንቲሞች ከውርርድዎ 1፣ 2፣ 3፣ 5፣ 8 × ይይዛሉ።","ካልኦት ሳንቲማት 1፣ 2፣ 3፣ 5፣ 8 × ውርርድኹም ይሕዙ።"],["Coins pay when a magnet pulls them in, and in the coin bonus.","ሳንቲሞች የሚከፍሉት ማግኔት ሲስባቸው እና በሳንቲም ቦነስ ውስጥ ነው።","ሳንቲማት ዝኸፍሉ ማግኔት ምስ ሰሓቦምን ኣብ ሳንቲም ቦነስን እዩ።"],["Wallet","ቦርሳ","ቦርሳ"],["Register","ተመዝገብ","ተመዝገብ"],["Settings","ቅንብሮች","ቅንብራት"],["⚙ Settings","⚙ ቅንብሮች","⚙ ቅንብራት"],["🔔 Notifications","🔔 ማሳወቂያዎች","🔔 መፍለጢታት"],["ⓘ How to Play","ⓘ አጨዋወት","ⓘ ከመይ ይጻወት"],["? FAQs","? ተደጋጋሚ ጥያቄዎች","? ዝተደጋገሙ ሕቶታት"],["How to Play","አጨዋወት","ከመይ ይጻወት"],["FAQs","ተደጋጋሚ ጥያቄዎች","ዝተደጋገሙ ሕቶታት"],["Admin","አስተዳዳሪ","ኣመሓዳሪ"],["Sign Out","ውጣ","ውጻእ"],["☰ Menu","☰ ምናሌ","☰ ሜኑ"],
 ["☁ Connected","☁ ተገናኝቷል","☁ ተራኺቡ"],["⚠ Local mode (no cloud)","⚠ የአካባቢ ሁነታ (ያለ ክላውድ)","⚠ ናይ ከባቢ ኩነታት (ብዘይ ክላውድ)"],
 ["Rooms are open · join now","ክፍሎች ክፍት ናቸው · አሁን ይቀላቀሉ","ክፍልታት ክፉታት እዮም · ሕጂ ተሳተፉ"],["Round running · next rooms open in","ዙሩ እየተካሄደ ነው · ቀጣይ ክፍሎች የሚከፈቱት በ","ዙር ይካየድ ኣሎ · ዝቕጽሉ ክፍልታት ዝኽፈቱ ኣብ"],
 ["▶ Play in Stake Rooms","▶ በጨዋታ ክፍሎች ተጫወት","▶ ኣብ ክፍልታት ጸወታ ጻወት"],["⇥ Login","⇥ ግባ","⇥ እቶ"],["Login","ግባ","እቶ"],["Username","የተጠቃሚ ስም","ስም ተጠቃሚ"],["Password","የይለፍ ቃል","መሕለፊ ቃል"],["Enter Username","የተጠቃሚ ስም ያስገቡ","ስም ተጠቃሚ ኣእትው"],["Enter Password","የይለፍ ቃል ያስገቡ","መሕለፊ ቃል ኣእትው"],["✚ Register","✚ ተመዝገብ","✚ ተመዝገብ"],
@@ -3738,7 +3928,40 @@ var ROWS=[
 ["Rooms need 2 or more players. If fewer join, your stake is refunded automatically.","ክፍሎች 2 ወይም ከዚያ በላይ ተጫዋቾች ያስፈልጋቸዋል። ከዚያ ያነሱ ከተቀላቀሉ ገንዘብዎ በራስ-ሰር ይመለሳል።","ክፍልታት 2 ወይ ልዕሊኡ ተጻዋትቲ የድልዮም። ካብኡ ዝሑሱ እንተተሳተፉ ገንዘብኩም ብባዕሉ ይምለስ።"],
 ["Can I leave after joining?","ከተቀላቀልኩ በኋላ መውጣት እችላለሁ?","ድሕሪ ምስታፈይ ክወጽእ ይኽእል ድየ?"],["Your stake is held for the round. Leaving the game page does not refund it.","ገንዘብዎ ለዙሩ ተይዟል። የጨዋታ ገጹን መልቀቅ አይመልሰውም።","ገንዘብኩም ንዙር ተታሒዙ። ገጽ ጸወታ ምግዳፍ ኣይመልሶን።"],
 ["Where is my account stored?","መለያዬ የት ነው የሚቀመጠው?","ሕሳበይ ኣበይ እዩ ዝዕቆብ?"],["Online, so you can log in from any device. If the app is offline it is kept in this browser only.","በመስመር ላይ ስለሚቀመጥ ከማንኛውም መሳሪያ መግባት ይችላሉ። መተግበሪያው ከመስመር ውጭ ከሆነ በዚህ አሳሽ ላይ ብቻ ይቀመጣል።","ኣብ መስመር ስለዝዕቆብ ካብ ዝኾነ መሳርሒ ክትኣትዉ ትኽእሉ። እቲ ኣፕ ካብ መስመር ወጻኢ እንተኾይኑ ኣብዚ ብሮውዘር ጥራይ ይዕቆብ።"],
-["Target Goal:","የዒላማ ግብ፡","ዕላማ፡"],["Waiting for the first call…","የመጀመሪያው ቁጥር እየተጠበቀ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽበ ኣሎ…"],["Bingo!","ቢንጎ!","ቢንጎ!"],["BINGO!","ቢንጎ!","ቢንጎ!"],["Auto-mark","ራስ-ሰር ምልክት","ባዕሉ ምልክት ምግባር"],["🔊 Sound on","🔊 ድምጽ በርቷል","🔊 ድምጺ ተኸፊቱ"],["🔇 Sound off","🔇 ድምጽ ጠፍቷል","🔇 ድምጺ ተዓጽዩ"],
+["Target Goal:","የዒላማ ግብ፡","ዕላማ፡"],["🏅 How to win","🏅 እንዴት ይሸነፋል","🏅 ከመይ ይስዓር"],["Next example","ቀጣይ ምሳሌ","ዝቕጽል ኣብነት"],["↻ Replay","↻ ድጋሚ አሳይ","↻ ዳግማይ ኣርኢ"],["SHOW WHAT DOES NOT WIN","የማያሸንፉትን አሳይ","ዘይስዕሩ ኣርኢ"],["How to win target goal","የዒላማ ግብ እንዴት እንደሚሸነፍ","ዕላማ ከመይ ከምዝስዓር"],
+["Mark any 5 squares in a straight line — any horizontal row, any vertical column, or either main diagonal (center ★ is free).","በቀጥታ መስመር ማንኛውንም 5 ሳጥኖች ምልክት ያድርጉ — ማንኛውንም አግድም ረድፍ፣ ቋሚ አምድ ወይም ሰያፍ (መሃል ★ ነጻ ነው)።","ኣብ ቀጥታ መስመር ዝኾነ 5 ሳጹናት ምልክት ግበሩ — ዝኾነ ጋድም፣ ዓምዲ ወይ ሰያፍ (ማእከል ★ ነጻ እዩ)።"],
+["Only 4 squares in a row does NOT win — you need all 5.","በመስመር 4 ብቻ አያሸንፍም — ሁሉም 5ቱ መሞላት አለባቸው።","ኣብ መስመር 4 ጥራይ ኣይስዕርን — ኩሎም 5 ክማልኡ ኣለዎም።"],
+["Mark all 4 corner squares of the card (top-left B, top-right O, bottom-left B, bottom-right O).","የካርዱን 4ቱንም ማዕዘኖች ምልክት ያድርጉ (ላይ ግራ B፣ ላይ ቀኝ O፣ ታች ግራ B፣ ታች ቀኝ O)።","4ቲኦም ኩርናዓት እቲ ካርድ ምልክት ግበሩ (ላዕሊ ጸጋም B፣ ላዕሊ የማን O፣ ታሕቲ ጸጋም B፣ ታሕቲ የማን O)።"],
+["3 corners plus center ★ does NOT win — all 4 outer corners are required.","3 ማዕዘኖች እና መሃል ★ አያሸንፍም — 4ቱም ውጫዊ ማዕዘኖች ያስፈልጋሉ።","3 ኩርናዓትን ማእከል ★ን ኣይስዕርን — 4ቲኦም ደጋዊ ኩርናዓት የድልዩ።"],
+["Mark both full corner-to-corner diagonals intersecting as an X through center ★.","በመሃል ★ የሚያልፉ ሁለቱንም ሙሉ ሰያፎች (X ቅርጽ) ምልክት ያድርጉ።","ብማእከል ★ ዝሓልፉ ክልቲኦም ምሉኣት ሰያፋት (ቅርጺ X) ምልክት ግበሩ።"],
+["A single diagonal does NOT win — both diagonals must form a complete X.","አንድ ሰያፍ ብቻ አያሸንፍም — ሁለቱም ሰያፎች ሙሉ X መፍጠር አለባቸው።","ሓደ ሰያፍ ጥራይ ኣይስዕርን — ክልቲኦም ሰያፋት ምሉእ X ክፈጥሩ ኣለዎም።"],
+["Mark the entire middle row across and the entire middle (N) column down, forming a + through center ★.","መሃሉን ረድፍ እና መሃሉን (N) አምድ በመሙላት በመሃል ★ የመደመር (+) ምልክት ይፍጠሩ።","ማእከላይ መስመርን ማእከላይ (N) ዓምድን ብምምላእ ብማእከል ★ ምልክት (+) ፍጠሩ።"],
+["An X (Both Diagonals) does NOT win — mark the middle row and middle N column.","X (ሁለቱ ሰያፎች) አያሸንፍም — መሃሉን ረድፍ እና N አምድ ይሙሉ።","X (ክልቲኡ ሰያፍ) ኣይስዕርን — ማእከላይ መስመርን N ዓምድን ምልኡ።"],
+["Mark the entire top row across and the entire middle (N) column down through ★.","ሙሉውን የላይኛውን ረድፍ እና በ★ የሚያልፈውን የመሃሉን (N) አምድ ምልክት ያድርጉ።","ምሉእ ላዕለዋይ መስመርን ብ★ ዝሓልፍ ማእከላይ (N) ዓምድን ምልክት ግበሩ።"],
+["Upside-down or sideways T does NOT win — only the top row plus N column.","የተገለበጠ ወይም ጎን ለጎን T አያሸንፍም — የላይኛው ረድፍ እና N አምድ ብቻ።","ዝተገምጠለ ወይ ጎናዊ T ኣይስዕርን — ላዕለዋይ መስመርን N ዓምድን ጥራይ።"],
+["Mark the entire B (left) column, the entire O (right) column, and the middle row across ★.","ሙሉውን የB (ግራ) አምድ፣ የO (ቀኝ) አምድ እና በ★ የሚያልፈውን የመሃል ረድፍ ምልክት ያድርጉ።","ምሉእ B (ጸጋም) ዓምዲ፣ O (የማን) ዓምድን ብ★ ዝሓልፍ ማእከላይ መስመርን ምልክት ግበሩ።"],
+["Left + Right columns without the middle crossbar does NOT win Letter H.","ያለ መሃል መስመር ግራ እና ቀኝ አምዶች ብቻ ፊደል H አያሸንፉም።","ብዘይ ማእከላይ መስመር ጸጋምን የማንን ዓምድታት ጥራይ ፊደል H ኣይስዕሩን።"],
+["Mark the entire B (left) column and the entire bottom row to form a big L.","ትልቅ L ለመፍጠር ሙሉውን የB (ግራ) አምድ እና የታችኛውን ረድፍ ምልክት ያድርጉ።","ዓቢ L ንምፍጣር ምሉእ B (ጸጋም) ዓምድን ታሕተዋይ መስመርን ምልክት ግበሩ።"],
+["Reversed or upside-down L does NOT win — left B column + bottom row only.","የተገለበጠ L አያሸንፍም — የግራ B አምድ እና የታችኛው ረድፍ ብቻ።","ዝተገምጠለ L ኣይስዕርን — ጸጋማይ B ዓምድን ታሕተዋይ መስመርን ጥራይ።"],
+["Mark the top row, the diagonal from O top-right to B bottom-left (through ★), and the bottom row.","የላይኛውን ረድፍ፣ ከO ላይኛው ቀኝ ወደ B ታችኛው ግራ (በ★) የሚያልፈውን ሰያፍ እና የታችኛውን ረድፍ ይሙሉ።","ላዕለዋይ መስመር፣ ካብ O ላዕሊ የማን ናብ B ታሕቲ ጸጋም (ብ★) ዝሓልፍ ሰያፍን ታሕተዋይ መስመርን ምልኡ።"],
+["Using the opposite diagonal (B1 to O5) does NOT win Letter Z.","ተቃራኒውን ሰያፍ (ከB1 እስከ O5) መጠቀም ፊደል Z አያሸንፍም።","ኣንጻር ሰያፍ (ካብ B1 ናብ O5) ምጥቃም ፊደል Z ኣይስዕርን።"],
+["Mark all 16 outer border squares around the edge of the card (B column, O column, top row, and bottom row).","በካርዱ ዙሪያ ያሉትን ሁሉንም 16 ውጫዊ ጠርዝ ሳጥኖች (B አምድ፣ O አምድ፣ ላይ እና ታች ረድፍ) ይሙሉ።","ኣብ ዙርያ ካርድ ዘለዉ ኩሎም 16 ደጋዊ ጠርዚ ሳጹናት (B ዓምዲ፣ O ዓምዲ፣ ላዕልን ታሕትን መስመር) ምልኡ።"],
+["An inner 3×3 ring around ★ does NOT win — all 16 outer border cells are required.","በ★ ዙሪያ ያለው ውስጣዊ 3×3 ቀለበት አያሸንፍም — ሁሉም 16 ውጫዊ ጠርዞች ያስፈልጋሉ።","ኣብ ዙርያ ★ ዘሎ ውሽጣዊ 3×3 ቀለበት ኣይስዕርን — ኩሎም 16 ደጋዊ ጠርዝታት የድልዩ።"],
+["Mark any filled 3×2 or 2×3 block (6 squares) anywhere on the card.","በካርዱ ላይ በማንኛውም ቦታ የተሞላ 3×2 ወይም 2×3 አራት ማዕዘን (6 ሳጥኖች) ይሙሉ።","ኣብ ካርድ ኣብ ዝኾነ ቦታ ዝተመልአ 3×2 ወይም 2×3 ሳጹን (6 ሳጹናት) ምልኡ።"],
+["A 2×2 square (only 4 cells) does NOT win — you need a 3×2 or 2×3 block (6 cells).","2×2 ካሬ (4 ሳጥኖች ብቻ) አያሸንፍም — 3×2 ወይም 2×3 (6 ሳጥኖች) ያስፈልጋል።","2×2 ካሬ (4 ሳጹናት ጥራይ) ኣይስዕርን — 3×2 ወይም 2×3 (6 ሳጹናት) የድሊ።"],
+["Mark the 8 outer-ring diamond squares touching the midpoint of all 4 edges.","የ4ቱንም ጠርዞች መካከል የሚነኩ 8 የውጪ ዳይመንድ ሳጥኖችን ምልክት ያድርጉ።","ማእከል 4ቲኦም ጠርዝታት ዝትንክፉ 8 ደጋዊ ዳይመንድ ሳጹናት ምልክት ግበሩ።"],
+["A tight inner 4-cell diamond around ★ does NOT win — mark the outer 8-cell diamond.","በ★ ዙሪያ ያለው 4 ሳጥን ውስጣዊ ዳይመንድ አያሸንፍም — 8ቱን የውጪ ዳይመንድ ይሙሉ።","ኣብ ዙርያ ★ ዘሎ 4 ሳጹን ውሽጣዊ ዳይመንድ ኣይስዕርን — እቶም 8 ደጋዊ ዳይመንድ ምልኡ።"],
+["Mark one complete side of a center line/diagonal (10 squares), plus ★ and any 2 squares on that dividing line (13 total).","ከመሃል መስመር ወይም ሰያፍ አንዱን ጎን ሙሉ በሙሉ (10 ሳጥኖች)፣ ★ እና በዚያ መስመር ላይ 2 ሳጥኖች (በድምሩ 13) ይሙሉ።","ካብ ማእከላይ መስመር ወይ ሰያፍ ሓደ ጎኒ ምሉእ (10 ሳጹናት)፣ ★ ከምኡውን ኣብቲ መስመር 2 ሳጹናት (ብጠቕላላ 13) ምልኡ።"],
+["10 side squares + ★ without 2 extra squares on the center dividing line does NOT win.","10 የጎን ሳጥኖች + ★ በመሃል መስመር ላይ 2 ተጨማሪ ሳጥኖች ከሌሉ አያሸንፍም።","10 ናይ ጎኒ ሳጹናት + ★ ኣብ ማእከላይ መስመር 2 ተወሳኺ ሳጹናት እንተዘይብሎም ኣይስዕርን።"],
+["Mark any 2 complete lines (rows, columns, or diagonals) plus one 2×2 corner square in any of the four corners.","ማንኛውንም 2 ሙሉ መስመሮች (ረድፍ፣ አምድ ወይም ሰያፍ) እና በአንዱ ማዕዘን ላይ 2×2 ትንሽ ካሬ ይሙሉ።","ዝኾነ 2 ምሉኣት መስመራት (ጋድም፣ ዓምዲ ወይ ሰያፍ) ከምኡውን ኣብ ሓደ ኩርናዕ 2×2 ንእሽቶ ካሬ ምልኡ።"],
+["A middle 2×2 block (not in one of the 4 corners) or only 1 line does NOT win.","በመሃል ላይ ያለ 2×2 ሳጥን (በ4ቱ ማዕዘኖች ያልሆነ) ወይም 1 መስመር ብቻ አያሸንፍም።","ኣብ ማእከል ዘሎ 2×2 ሳጹን (ኣብ 4ቲኦም ኩርናዓት ዘይኮነ) ወይ 1 መስመር ጥራይ ኣይስዕርን።"],
+["Mark the entire leftmost (B) column and the entire rightmost (O) column.","ሙሉውን የግራ (B) አምድ እና ሙሉውን የቀኝ (O) አምድ ምልክት ያድርጉ።","ምሉእ ጸጋማይ (B) ዓምድን ምሉእ የማናይ (O) ዓምድን ምልክት ግበሩ።"],
+["Top + Bottom rows does NOT win — mark vertical B and O columns.","የላይ እና የታች ረድፎች አያሸንፉም — ቋሚዎቹን B እና O አምዶች ይሙሉ።","ላዕልን ታሕትን መስመራት ኣይስዕሩን — ዓምድታት Bን Oን ምልኡ።"],
+["Mark the entire top row and the entire bottom row across all columns.","በሁሉም አምዶች ላይ ሙሉውን የላይኛውን እና የታችኛውን ረድፍ ምልክት ያድርጉ።","ኣብ ኩሎም ዓምድታት ምሉእ ላዕለዋይን ታሕተዋይን መስመር ምልክት ግበሩ።"],
+["Left + Right columns does NOT win — mark horizontal top and bottom rows.","የግራ እና የቀኝ አምዶች አያሸንፉም — አግድም የላይ እና የታች ረድፎችን ይሙሉ።","ጸጋምን የማንን ዓምድታት ኣይስዕሩን — ላዕልን ታሕትን መስመራት ምልኡ።"],
+["Mark all 25 squares across the entire card (every number plus center ★).","በካርዱ ላይ ያሉትን ሁሉንም 25 ሳጥኖች (ሁሉም ቁጥሮች + መሃል ★) ምልክት ያድርጉ።","ኣብ ካርድ ዘለዉ ኩሎም 25 ሳጹናት (ኩሎም ቁጽርታት + ማእከል ★) ምልክት ግበሩ።"],
+["Missing even 1 square (24 of 25 marked) does NOT win Full House.","1 ሳጥን እንኳን ከቀረ (ከ25 ውስጥ 24) ሙሉ ቤት አያሸንፍም።","1 ሳጹን እኳ እንተተረፈ (24 ካብ 25) ምሉእ ገዛ ኣይስዕርን።"],
+["Waiting for the first call…","የመጀመሪያው ቁጥር እየተጠበቀ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽበ ኣሎ…"],["Bingo!","ቢንጎ!","ቢንጎ!"],["BINGO!","ቢንጎ!","ቢንጎ!"],["Auto-mark","ራስ-ሰር ምልክት","ባዕሉ ምልክት ምግባር"],["🔊 Sound on","🔊 ድምጽ በርቷል","🔊 ድምጺ ተኸፊቱ"],["🔇 Sound off","🔇 ድምጽ ጠፍቷል","🔇 ድምጺ ተዓጽዩ"],
 ["Too late: another player already won.","ዘግይተዋል፤ ሌላ ተጫዋች ጨዋታውን አሸንፏል።","ደንጉዩ፤ ካልእ ተጻዋታይ ነዚ ጸወታ ሰዒሩ ኣሎ።"],["A marked number has not been called yet.","ምልክት የተደረገበት ቁጥር ገና አልተጠራም።","ምልክት ዝተገበረሉ ቁጽሪ ገና ኣይተጸዋዕን።"],["All 75 balls called. No winner this round.","ሁሉም 75 ቁጥሮች ተጠርተዋል። በዚህ ዙር አሸናፊ የለም።","ኩሎም 75 ቁጽርታት ተጸዊዖም። ኣብዚ ዙር ዕዉት የለን።"],
 ["Game over","ጨዋታው አብቅቷል","ጸወታ ተወዲኡ"],["No winner in this game.","በዚህ ጨዋታ አሸናፊ የለም።","ኣብዚ ጸወታ ዕዉት የለን።"],["BINGO! You won","ቢንጎ! አሸንፈዋል","ቢንጎ! ሰዒርኩም"],["Back to rooms","ወደ ክፍሎች ተመለስ","ናብ ክፍልታት ተመለስ"],["Calls:","ጥሪዎች፡","ጥሪታት፡"],["Prize:","ሽልማት፡","ሽልማት፡"]
 ];

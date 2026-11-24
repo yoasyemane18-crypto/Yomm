@@ -385,6 +385,31 @@ div.cell{cursor:default}.cell.on,.cell.free{background:linear-gradient(135deg,#a
 .lrules-sec:first-of-type h4{margin-top:4px}
 .lrules-ul{margin:0;padding-left:18px;color:#e5ddf7;font-size:13.8px;line-height:1.55}
 .lrules-ul li{margin-bottom:8px}
+.lmode-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.lmode-tab{background:#190a36;border:1.5px solid #5a37a0;border-radius:12px;padding:9px 4px;color:var(--mut);font:700 12px/1.25 Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;text-align:center;transition:all .15s}
+.lmode-tab b{display:block;font-size:15px;margin-bottom:2px}
+.lmode-tab.on{background:linear-gradient(135deg,#fef08a,#f0c75e,#d99a1e);border-color:#fff3c4;color:#2a0f55;box-shadow:0 4px 14px #f0c75e44}
+.lresume{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,#14532d,#064e3b);border:1.5px solid #4ade80;border-radius:14px;padding:11px 12px;margin-bottom:12px;box-shadow:0 6px 16px #0007}
+.lresume b{display:block;color:#bbf7d0;font-size:13.5px}.lresume small{color:#86efac;font-size:11.5px}
+.lresume button{background:linear-gradient(135deg,#4ade80,#16a34a);border:0;border-radius:10px;padding:9px 13px;color:#052e16;font:800 13px Roboto,sans-serif;cursor:pointer;white-space:nowrap}
+.lopen-box{background:#14072a;border:1px solid #482780;border-radius:14px;padding:10px;margin-top:12px}
+.lopen-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font:700 11.5px Roboto,sans-serif;letter-spacing:.7px;color:#f6d77a}
+.lopen-hdr span{color:#4ade80;font-size:11px}
+.lopen-list{display:flex;flex-direction:column;gap:7px;max-height:210px;overflow-y:auto}
+.lopen-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#221045;border:1px solid #5a37a0;border-radius:11px;padding:8px 10px}
+.lopen-meta{min-width:0;flex:1}.lopen-meta b{display:block;font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lopen-meta small{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+.lopen-join{background:linear-gradient(135deg,#4ade80,#16a34a);border:0;border-radius:9px;padding:8px 12px;color:#052e16;font:800 12.5px Roboto,'Noto Sans Ethiopic',sans-serif;cursor:pointer;white-space:nowrap}
+.lopen-join.sec{background:linear-gradient(135deg,#f6d77a,#d99a1e);color:#2a0f55}
+.lopen-empty{text-align:center;font-size:12px;color:var(--mut);padding:10px 6px}
+.ltoggle{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#14072a;border:1px solid #482780;border-radius:11px;padding:9px 11px;margin-top:9px;font-size:12.5px;color:#e9dcff;cursor:pointer}
+.ltoggle input{width:18px;height:18px;accent-color:#f0c75e;flex:none}
+.lpinput-list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.lpinput-row{display:flex;align-items:center;gap:8px;background:#14072a;border:1.5px solid #5a37a0;border-radius:11px;padding:6px 10px}
+.lpinput{flex:1;min-width:0;border:0;background:transparent;color:#fff;font:600 14px Roboto,'Noto Sans Ethiopic',sans-serif;padding:5px 2px;outline:0}
+.lemotes{display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap}
+.lemote-btn{background:#1b0c38;border:1px solid #5a37a0;border-radius:16px;padding:6px 11px;color:#f6d77a;font:700 13px Roboto,sans-serif;cursor:pointer;min-height:36px}
+.lemote-btn:active{transform:scale(.94)}
+.lpchat{position:absolute;top:4px;right:6px;background:#f6d77a;color:#2a0f55;border-radius:9px;padding:1px 6px;font:800 11px Roboto,sans-serif;box-shadow:0 2px 6px #0008;animation:ldshake .25s ease}
 .hl-wrap{background:radial-gradient(circle at 50% 0,#4b1d8f,#240d4a 58%,#120526);border:1.5px solid #f0c75e66;border-radius:22px;padding:12px;box-shadow:0 14px 34px #000b;margin-bottom:14px;color:#fff}
 .hl-stage{background:repeating-linear-gradient(-45deg,#3a1773,#3a1773 10px,#2c105a 10px,#2c105a 20px);border:1.5px solid #f0c75e77;border-radius:18px;padding:12px;box-shadow:inset 0 0 28px #0d031f}
 .hl-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
@@ -484,6 +509,9 @@ div.cell{cursor:default}.cell.on,.cell.free{background:linear-gradient(135deg,#a
 .c8leg{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;font-size:12.5px;color:#e9dcff;line-height:1.5}
 .c8chipb{background:linear-gradient(135deg,#fef08a,#d99a1e);color:#2a0f55;font:800 12.5px Roboto,sans-serif;padding:2px 8px;border-radius:7px;display:inline-block}
 #c8modal{position:fixed;inset:0;background:#0a0316f2;z-index:55;display:none;overflow:auto;padding:16px}#c8modal.show{display:block}
+.c8shield{background:linear-gradient(160deg,#2d145c,#14072a);border:1.5px solid #f0c75e88;border-radius:16px;padding:18px 14px;text-align:center;margin:8px 0 4px;box-shadow:0 8px 22px #0009}
+.c8shield b{display:block;font-size:15px;color:#fef08a;margin-bottom:5px}
+.c8shield small{display:block;font-size:12px;color:#e9dcff;margin-bottom:12px}
 .gc.g8{background:linear-gradient(165deg,#7c2d12,#361306 70%,#1f0a03);border-color:#f59e0b55}
 .bnwrap{background:radial-gradient(circle at 50% 0,#5c220d,#2c0f06 60%,#160703);border:1.5px solid #f59e0b66;border-radius:22px;padding:12px;box-shadow:0 14px 34px #000b;margin-bottom:14px;color:#fff}
 .bnframe{background:repeating-linear-gradient(135deg,#9a3412 0 9px,#f5e6c8 9px 18px,#571e09 18px 27px,#1e0b04 27px 36px);padding:6px;border-radius:20px;box-shadow:0 12px 28px #000a;margin:8px 0 10px}
@@ -1321,10 +1349,10 @@ function speakTTS(am,en){if(!window.speechSynthesis||!window.SpeechSynthesisUtte
 function speak(am,en,num){if(!SND)return;stopAud();
   if(VL==='am'&&num>=1&&num<=75){try{var a=new Audio('am/'+num+'.mp3');AUD=a;a.onended=function(){if(AUD===a)AUD=null};a.onerror=function(){if(AUD===a){AUD=null;speakTTS(am,en)}};var p=a.play();if(p&&p.catch)p.catch(function(){if(AUD===a){AUD=null;speakTTS(am,en)}});return}catch(e){AUD=null}}
   speakTTS(am,en)}
-var FT=null,KT=null,HT=null,LT=null,LUDO_OFF=null,C8T=null,C8_OFF=null,BN_CYC=null,ST=[];
+var FT=null,KT=null,HT=null,LT=null,LUDO_OFF=null,LUDO_LOBBY_OFF=null,C8T=null,C8_OFF=null,C8_LOBBY_OFF=null,BN_CYC=null,ST=[];
 function tone(f,d,t){if(!SND)return;try{var A=window.AudioContext||window.webkitAudioContext;if(!A)return;var x=tone.c||(tone.c=new A()),o=x.createOscillator(),g=x.createGain();o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(.07,x.currentTime);g.gain.exponentialRampToValueAtTime(.001,x.currentTime+(d||.08));o.connect(g);g.connect(x.destination);o.start();o.stop(x.currentTime+(d||.08))}catch(e){}}
 var KENORENDER=null;
-function stopT(){clearInterval(RIV);RIV=null;stopGH();if(FT){clearInterval(FT);FT=null}if(KT){clearInterval(KT);KT=null}if(HT){clearInterval(HT);HT=null}if(LT){clearInterval(LT);LT=null}if(LUDO_OFF){try{LUDO_OFF()}catch(e){}LUDO_OFF=null}if(C8T){clearInterval(C8T);C8T=null}if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(BN_CYC){clearInterval(BN_CYC);BN_CYC=null}KENORENDER=null;['kmodal','smodal','amodal','lmodal','c8modal','bmodal','gmodal'].forEach(function(i){var e=$(i);if(e)e.classList.remove('show')});while(ST.length)clearTimeout(ST.pop());KST.busy=false;SST.busy=false;SST.autoRun=0;SST.sp=[0,0,0];BUNAST.busy=false;BUNAST.autoRun=0;BUNAST.sp=[0,0,0,0,0];BUNAST.fsLeft=0;FST.busy=false;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}stopAud()}
+function stopT(){clearInterval(RIV);RIV=null;stopGH();if(FT){clearInterval(FT);FT=null}if(KT){clearInterval(KT);KT=null}if(HT){clearInterval(HT);HT=null}if(LT){clearInterval(LT);LT=null}if(LUDO_OFF){try{LUDO_OFF()}catch(e){}LUDO_OFF=null}if(LUDO_LOBBY_OFF){try{LUDO_LOBBY_OFF()}catch(e){}LUDO_LOBBY_OFF=null}if(C8T){clearInterval(C8T);C8T=null}if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(C8_LOBBY_OFF){try{C8_LOBBY_OFF()}catch(e){}C8_LOBBY_OFF=null}if(BN_CYC){clearInterval(BN_CYC);BN_CYC=null}KENORENDER=null;['kmodal','smodal','amodal','lmodal','c8modal','bmodal','gmodal'].forEach(function(i){var e=$(i);if(e)e.classList.remove('show')});while(ST.length)clearTimeout(ST.pop());KST.busy=false;SST.busy=false;SST.autoRun=0;SST.sp=[0,0,0];BUNAST.busy=false;BUNAST.autoRun=0;BUNAST.sp=[0,0,0,0,0];BUNAST.fsLeft=0;FST.busy=false;if(G.off){G.off();G.off=null}if(G.t){clearInterval(G.t);G.t=null}stopAud()}
 function drawBoard(){var b=$('bd');if(!b)return;var t=G.called[G.called.length-1],x='';for(var n=1;n<=75;n++)x+='<div class="bn'+(G.called.indexOf(n)>-1?' c':'')+(n===t?' l':'')+'">'+n+'</div>';b.innerHTML=x;
   $('lst').textContent=G.called.length?'Called '+G.called.length+' of 75 · Last: '+'BINGO'[Math.floor((t-1)/15)]+' '+t:'Waiting for the first call…'}
 function drawCard(){var hd='';'BINGO'.split('').forEach(function(l){hd+='<div class="hdr">'+l+'</div>'});$('cg').innerHTML='<div class="gcard"><p class="last" style="margin:0 0 6px;color:#f6d77a">Ticket #'+G.n+'</p><div class="grid">'+hd+cellsHTML(G.card,G.m,'button',0)+'</div></div>';drawBoard()}
@@ -2086,7 +2114,7 @@ function initSlots(){var v=$('sv');if(!v)return;var rec=me();
 }
 
 /* ===== Ludo ===== */
-var LST={np:2,home:1,stk:10,mode:'lobby',gid:null,code:'',waitSince:0,msg:'',busy:false,anim:false};
+var LST={playType:'pvp',np:2,home:1,stk:10,mode:'lobby',gid:null,code:'',waitPath:'',openKey:'',pubRoom:true,waitSince:0,waitSeats:[],msg:'',busy:false,anim:false,localNames:['','Player 2','Player 3','Player 4'],openRooms:[],activeMatch:null};
 var LD_STAKES=[10,20,50,100,500],LD_MINS={1:3,2:6,3:9,4:12},LD_BOTS=['Mekdes (Bot)','Dawit (Bot)','Tigist (Bot)','Abebe (Bot)'];
 var LD_COLS=[
   {n:'Red',hex:'#dc2626',dk:'#991b1b',lt:'#fca5a5',start:1,home:[[1.8,1.8],[3.2,1.8],[1.8,3.2],[3.2,3.2]],fin:[6.35,7],lane:[[1,7],[2,7],[3,7],[4,7],[5,7]]},
@@ -2138,16 +2166,16 @@ function ldLegal(gm,si,dice){
   return out;
 }
 function ldResList(){return lg('sb_ld_res',[])}
-function ldAddRes(r){var l=ldResList();l.unshift(r);if(l.length>20)l.length=20;ls('sb_ld_res',l);if(DB)try{DB.ref('ludo_res/'+r.id).set(r)}catch(e){}}
+function ldAddRes(r){var l=ldResList();if(l.some(function(x){return x&&x.id===r.id}))return;l.unshift(r);if(l.length>20)l.length=20;ls('sb_ld_res',l);if(DB)try{DB.ref('ludo_res/'+r.id).set(r)}catch(e){}}
 function ldHowHTML(){
   var tbl=LD_STAKES.map(function(s){return '<tr><td>'+s+' ETB</td><td>'+ldPot(2,s).toLocaleString()+' ETB</td><td>'+ldPot(4,s).toLocaleString()+' ETB</td></tr>'}).join('');
   return '<div class="am-card" style="max-width:430px"><div class="am-top"><h3>Ludo · How to play</h3><button type="button" class="am-x" id="lmcls">×</button></div>'+
     '<button type="button" class="lfullbtn" id="ldfullrules">📜 Full game rules</button>'+
     '<div class="km-box"><b>HOW TO PLAY LUDO</b><ol style="padding-left:18px;margin:8px 0 0;line-height:1.55">'+
-    '<li><b>Choose 2 or 4 players</b>, how many tokens must get home to win (1 to 4; everyone always plays with all 4 tokens) and your stake, then tap Find a game. You only meet players who chose the same.</li>'+
-    '<li><b>If nobody else comes within a minute</b>, bot players (shown with 🤖 and "(Bot)" after their name) take the empty seats so you can still play. Leave before the start and your stake comes back.</li>'+
+    '<li><b>Choose your mode:</b> Play <b>Online PvP</b> (real person-to-person with open tables &amp; friend codes), <b>Pass &amp; Play</b> (2–4 players on one phone), or <b>Vs Bots</b>.</li>'+
+    '<li><b>Online PvP tables</b> match real players only (no forced bots). Pick 2 or 4 players, tokens home (1–4) and stake, then join an open table or share your code.</li>'+
     '<li><b>Roll the dice on your turn.</b> A six brings a token out and gives you another roll. Land on another colour to send it home, but not on the star squares.</li>'+
-    '<li><b>Get that many tokens home first</b> (the exact number is needed) to win the pot, minus the house cut. You have 15 seconds for each turn; miss 3 turns and you are out.</li></ol></div>'+
+    '<li><b>Get that many tokens home first</b> (exact roll needed) to win the pot, minus the 10% house cut. Online turns allow 20 seconds; miss 3 turns and you are out.</li></ol></div>'+
     '<div class="km-box"><b>PRIZES · what the winner gets</b><table class="lptbl"><tr><th>Stake</th><th>2 players</th><th>4 players</th></tr>'+tbl+'</table></div>'+
     '<p style="text-align:center;font-size:11.5px;color:var(--mut);margin:10px 0 12px">18+ only. Play responsibly.</p>'+
     '<button type="button" class="am-go" id="lmok">Close</button></div>';
@@ -2155,29 +2183,27 @@ function ldHowHTML(){
 function ldFullRulesHTML(){
   return '<div class="am-card" style="max-width:430px"><div class="lrules-top"><span>LUDO · GAME RULES</span><button type="button" class="lrules-cls" id="lmback">Close</button></div>'+
     '<div class="lrules-sec"><h4>The game</h4><ul class="lrules-ul">'+
-    '<li>Choose 2 or 4 players, how many tokens must get home to win (1 to 4; everyone always plays with all 4 tokens) and the stake (10, 20, 50, 100, 500 ETB). You only play with players who chose the same. The stake is taken when you join.</li>'+
-    '<li>If the table isn\'t full within 60 seconds, bot players (shown with 🤖 and "(Bot)" after their name) take the empty seats. Leave before the start and your stake comes back.</li>'+
+    '<li>Choose Online PvP (person vs person), Pass &amp; Play (same-device multiplayer), or Vs Bots. For staked matches, pick 2 or 4 players, tokens home to win (1 to 4), and stake (10, 20, 50, 100, 500 ETB).</li>'+
+    '<li>In Online PvP, your seat waits for real players and is also listed in Live Open Tables unless marked private. Leave before the match starts and your stake returns automatically.</li>'+
     '<li>The prize: the stake × the number of players, minus a 10% house cut. The first player to get that many of their tokens home wins it.</li>'+
     '</ul></div>'+
     '<div class="lrules-sec"><h4>Rules</h4><ul class="lrules-ul">'+
     '<li>A token leaves its base only on a six. A six, a capture or a token reaching home gives another roll; a third six in a row ends the turn.</li>'+
     '<li>Landing on another colour\'s token sends it back to its base, except on the safe squares (the stars and the start squares). Getting home needs the exact number.</li>'+
-    '<li>You have 15 seconds for each roll or move; after that the game plays for you. Miss 3 turns in a row and you are out. Leaving during the game counts as a loss.</li>'+
+    '<li>Online turns have 20 seconds (15 seconds vs bots); miss 3 turns in a row and you are out. Forfeiting mid-game awards the remaining player(s). Pass &amp; Play has no timer.</li>'+
     '<li>The dice are the same for everyone, computers included, and follow each turn\'s roll fairly.</li>'+
     '</ul></div>'+
     '<div class="lrules-sec"><h4>For all games</h4><ul class="lrules-ul">'+
     '<li>All games are played with ETB credits; 1 credit = 1 ETB.</li>'+
     '<li>Results are random and decided fairly for the round. What you see on the screen shows the official round outcome; if they ever differ, the saved game record counts.</li>'+
-    '<li>A malfunction voids all pays and plays. If a round can\'t be finished (for example a connection reset before completion), the bets of that round are refunded.</li>'+
-    '<li>A bet counts once your balance changes. If you lose connection, the bet still counts and is settled as normal.</li>'+
-    '<li>A bet can be refused while a game is paused, when you bet too fast, or when it exceeds your available wallet balance.</li>'+
+    '<li>A malfunction voids all pays and plays. If a round can\'t be finished, bets of that round are refunded.</li>'+
     '<li>Players must be 18 or older. The Terms apply.</li>'+
     '</ul></div>'+
     '<button type="button" class="am-go" id="lmback2" style="margin-top:10px">Back to How to play</button></div>';
 }
 function ldResHTML(){
   var l=ldResList();
-  var rows=l.length?l.map(function(x){return '<tr><td>'+esc(x.win)+'</td><td>'+x.np+'P · '+x.home+'H</td><td>'+x.stk+' ETB</td><td>+'+x.pot+' ETB</td></tr>'}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--mut);padding:16px">No Ludo matches finished yet.</td></tr>';
+  var rows=l.length?l.map(function(x){return '<tr><td>'+esc(x.win)+'</td><td>'+x.np+'P · '+x.home+'H</td><td>'+(x.stk?x.stk+' ETB':'Free')+'</td><td>'+(x.pot?'+'+x.pot+' ETB':'Local')+'</td></tr>'}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--mut);padding:16px">No Ludo matches finished yet.</td></tr>';
   return '<div class="am-card" style="max-width:430px"><div class="am-top"><h3>Ludo Results</h3><button type="button" class="am-x" id="lmcls">×</button></div>'+
     '<div class="km-box"><table class="lptbl"><tr><th>Winner</th><th>Mode</th><th>Stake</th><th>Pot</th></tr>'+rows+'</table></div>'+
     '<button type="button" class="am-go" id="lmok">Close</button></div>';
@@ -2185,15 +2211,74 @@ function ldResHTML(){
 function initLudo(){
   var v=$('ldv');if(!v)return;var rec=me();
   if(!rec){v.innerHTML='<div class="panel"><h2>Ludo</h2><p class="note">Log in to play Ludo.</p><button class="btn" data-go="home">Login</button></div>';return}
-  var CUR=null,ROLLING=false;
+  var CUR=null,ROLLING=false,ANIM_PENDING=null;
   function ldArr(x){return Array.isArray(x)?x:x?Object.values(x):[]}
   function clearGameConn(){if(LUDO_OFF){try{LUDO_OFF()}catch(e){}LUDO_OFF=null}if(LT){clearInterval(LT);LT=null}}
+  function clearLobbyConn(){if(LUDO_LOBBY_OFF){try{LUDO_LOBBY_OFF()}catch(e){}LUDO_LOBBY_OFF=null}}
+  function saveActiveRef(gid){var u=session();if(!u)return;if(gid)ls('sb_ld_active_'+u,{gid:gid,at:now()});else try{localStorage.removeItem('sb_ld_active_'+u)}catch(e){}}
+  function seatColsFor(np){return np===2?[0,2]:np===3?[0,1,2]:[0,1,2,3]}
+  function mySeat(gm){if(!gm)return -1;if(gm.localPvp)return gm.turn;var u=session();for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u)return i;return -1}
+  function canAct(gm){if(!gm||gm.phase==='done')return false;var s=gm.seats[gm.turn];if(!s||s.bot||s.out)return false;if(gm.localPvp)return true;return s.u===session()}
+  function cloneGm(gm){return JSON.parse(JSON.stringify(gm))}
+  function normalizeGm(v){
+    if(!v)return null;
+    v.seats=ldArr(v.seats).map(function(s){
+      if(s&&!Array.isArray(s.toks))s.toks=[0,1,2,3].map(function(k){return s.toks&&typeof s.toks[k]==='number'?s.toks[k]:-1});
+      return s;
+    });
+    return v;
+  }
+  function commitGame(gm,expectedVer,mutator,done){
+    if(gm.localPvp||!DB||!gm.gid){
+      var next=cloneGm(gm);
+      if(mutator(next)===false)return;
+      next.ver=(next.ver||0)+1;
+      CUR=next;
+      ls('sb_ld_cur_'+session(),next);
+      if(done)done(true,next);
+      return;
+    }
+    var ref=DB.ref('ludo_games/'+gm.gid),committed=null;
+    ref.transaction(function(cur){
+      cur=normalizeGm(cur);
+      if(!cur||cur.phase==='done')return;
+      if(typeof expectedVer==='number'&&(cur.ver||0)!==expectedVer)return;
+      if(mutator(cur)===false)return;
+      cur.ver=(cur.ver||0)+1;
+      committed=cur;
+      return cur;
+    },function(e,ok,sn){
+      var val=normalizeGm(sn&&sn.val())||committed;
+      if(!e&&ok&&val){CUR=val;if(done)done(true,val)}
+      else if(done)done(false,val);
+    });
+  }
+  function creditWinnerOnce(v){
+    if(!v||v.phase!=='done'||v.localPvp||!v.stk)return;
+    var u=session(),us=users(),ms=-1;
+    for(var i=0;i<v.seats.length;i++)if(v.seats[i]&&v.seats[i].u===u){ms=i;break}
+    if(ms<0||v.winner!==v.seats[ms].name||!us[u])return;
+    var pot=v.pot||ldPot(v.np,v.stk);
+    if(DB&&v.gid){
+      DB.ref('ludo_games/'+v.gid+'/paid/'+ukey(u)).transaction(function(c){return c?undefined:1},function(e,ok){
+        if(!e&&ok){
+          setBal(users(),u,bal(users()[u])+pot,'Ludo win ('+v.np+'P)',pot);
+          addWin({id:'ld_'+v.gid,u:u,phone:(users()[u]||{}).phone||'',time:'Ludo '+v.stk+' ETB',k:1,reward:pot,n:v.home,calls:v.np,at:now()});
+          tone(660,.14);setTimeout(function(){tone(880,.25)},120);
+        }
+      });
+    }else if(!v.paidLocal){
+      v.paidLocal=true;ls('sb_ld_cur_'+u,v);
+      setBal(us,u,bal(us[u])+pot,'Ludo win ('+v.np+'P)',pot);
+      addWin({id:'ld_'+v.gid,u:u,phone:(us[u]||{}).phone||'',time:'Ludo '+v.stk+' ETB',k:1,reward:pot,n:v.home,calls:v.np,at:now()});
+      tone(660,.14);setTimeout(function(){tone(880,.25)},120);
+    }
+  }
   function ldBoardSVG(gm,legal){
     var s='<svg viewBox="0 0 450 450" id="ld_svg"><defs><linearGradient id="ld_pin_b" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="55%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient>'+
       LD_COLS.map(function(C,i){return '<radialGradient id="ld_pc'+i+'" cx="35%" cy="28%"><stop offset="0%" stop-color="'+C.lt+'"/><stop offset="45%" stop-color="'+C.hex+'"/><stop offset="100%" stop-color="'+C.dk+'"/></radialGradient>'}).join('')+
       '</defs>',c=30;
     s+='<rect x="0" y="0" width="450" height="450" fill="#f8fafc"/>';
-    // Track squares grid
     for(var r=0;r<15;r++)for(var col=0;col<15;col++){
       if((col<6&&r<6)||(col>8&&r<6)||(col<6&&r>8)||(col>8&&r>8)||(col>=6&&col<=8&&r>=6&&r<=8))continue;
       var fill='#ffffff';
@@ -2207,30 +2292,25 @@ function initLudo(){
       else if(col===6&&r===13)fill=LD_COLS[3].hex;
       s+='<rect x="'+(col*c)+'" y="'+(r*c)+'" width="'+c+'" height="'+c+'" fill="'+fill+'" stroke="#cbd5e1" stroke-width="1"/>';
     }
-    // Star squares
     [[6,2],[12,6],[8,12],[2,8]].forEach(function(p){
       s+='<text x="'+(p[0]*c+15)+'" y="'+(p[1]*c+20)+'" text-anchor="middle" font-size="16" fill="#64748b">★</text>';
     });
-    // Base start directional arrows
     s+='<text x="'+(1*c+15)+'" y="'+(6*c+20)+'" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">→</text>';
     s+='<text x="'+(8*c+15)+'" y="'+(1*c+20)+'" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">↓</text>';
     s+='<text x="'+(13*c+15)+'" y="'+(8*c+20)+'" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">←</text>';
     s+='<text x="'+(6*c+15)+'" y="'+(13*c+20)+'" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">↑</text>';
-    // 4 Base yards
     [[0,0,0],[1,9,0],[2,9,9],[3,0,9]].forEach(function(y){
       var C=LD_COLS[y[0]],bx=y[1]*c,by=y[2]*c;
       s+='<rect x="'+bx+'" y="'+by+'" width="180" height="180" fill="'+C.hex+'" stroke="#1e293b" stroke-width="1"/>';
       s+='<rect x="'+(bx+24)+'" y="'+(by+24)+'" width="132" height="132" rx="14" fill="#ffffff" stroke="'+C.dk+'" stroke-width="2"/>';
       C.home.forEach(function(pt){s+='<circle cx="'+(pt[0]*c+15)+'" cy="'+(pt[1]*c+15)+'" r="17" fill="'+C.hex+'" stroke="'+C.dk+'" stroke-width="1.5"/>'});
     });
-    // Center home triangles
     s+='<polygon points="180,180 225,225 180,270" fill="'+LD_COLS[0].hex+'" stroke="#1e293b" stroke-width="1"/>';
     s+='<polygon points="180,180 270,180 225,225" fill="'+LD_COLS[1].hex+'" stroke="#1e293b" stroke-width="1"/>';
     s+='<polygon points="270,180 270,270 225,225" fill="'+LD_COLS[2].hex+'" stroke="#1e293b" stroke-width="1"/>';
     s+='<polygon points="180,270 225,225 270,270" fill="'+LD_COLS[3].hex+'" stroke="#1e293b" stroke-width="1"/>';
     s+='<circle cx="225" cy="225" r="14" fill="#14072a" stroke="#f6d77a" stroke-width="2"/><text x="225" y="229" text-anchor="middle" font-size="11" font-weight="900" fill="#f6d77a">👑</text>';
-    // Tokens grouped by cell so overlapping tokens fan neatly
-    var buckets={};
+    var buckets={},actNow=canAct(gm);
     gm.seats.forEach(function(st,si){
       if(!st||st.out)return;
       for(var ti=0;ti<4;ti++){
@@ -2250,7 +2330,7 @@ function initLudo(){
       }).sort(function(a,b){return a.py-b.py});
       items.forEach(function(it){
         var tk=it.tk,C=LD_COLS[tk.ci],px=it.px,py=it.py,sc=it.sc;
-        var mv=gm.turn===tk.si&&gm.phase==='move'&&legal.indexOf(tk.ti)>-1&&tk.si===mySeat(gm);
+        var mv=actNow&&gm.turn===tk.si&&gm.phase==='move'&&legal.indexOf(tk.ti)>-1;
         var ty=py+(tk.pr<0?-1:0);
         s+='<g class="ltok'+(mv?' mv':'')+'"'+(mv?' data-ltok="'+tk.ti+'"':'')+' transform="translate('+px+','+ty+') scale('+sc+')">';
         if(tk.pr>=0&&tk.pr<56)s+='<circle cx="0" cy="4.2" r="8.8" fill="none" stroke="#7f1d1d" stroke-width="2" opacity=".78"/>';
@@ -2266,32 +2346,25 @@ function initLudo(){
     });
     return s+'</svg>';
   }
-  function mySeat(gm){if(!gm)return -1;var u=session();for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u)return i;return -1}
-  function saveGame(gm){CUR=gm;if(DB&&gm.gid)DB.ref('ludo_games/'+gm.gid).set(gm);else ls('sb_ld_cur_'+session(),gm)}
-  function finishGame(gm,wSeat){
-    if(gm.winner)return;
-    var pot=ldPot(gm.np,gm.stk),winRec=gm.seats[wSeat];
-    gm.phase='done';gm.winner=winRec.name;gm.pot=pot;
-    saveGame(gm);
-    var us=users(),u=session();
-    if(winRec.u===u&&us[u]){
-      setBal(us,u,bal(us[u])+pot,'Ludo win ('+gm.np+'P)',pot);
-      addWin({id:'ld_'+gm.gid,u:u,phone:(us[u]||{}).phone||'',time:'Ludo '+gm.stk+' ETB',k:1,reward:pot,n:gm.home,calls:gm.np,at:now()});
-    }
-    ldAddRes({id:'ld_'+gm.gid,win:winRec.name,np:gm.np,home:gm.home,stk:gm.stk,pot:pot,at:now()});
-    if(winRec.u===u){tone(660,.14);setTimeout(function(){tone(880,.25)},120)}
-    render();
-  }
+  function turnDur(gm){return gm.noTimeout?999999:(gm.pvp?20000:15000)}
   function nextTurn(gm){
     var n=gm.seats.length,idx=gm.turn;
-    for(var k=1;k<=n;k++){var j=(idx+k)%n;if(!gm.seats[j].out){gm.turn=j;break}}
-    gm.phase='roll';gm.dice=0;gm.sixes=0;gm.deadline=now()+15000;
+    for(var k=1;k<=n;k++){var j=(idx+k)%n;if(gm.seats[j]&&!gm.seats[j].out){gm.turn=j;break}}
+    gm.phase='roll';gm.dice=0;gm.sixes=0;gm.deadline=now()+turnDur(gm);
   }
-  function applyMove(gm,si,ti){
+  function markWinner(gm,wSeat){
+    if(gm.winner)return;
+    var pot=gm.localPvp?0:ldPot(gm.np,gm.stk),winRec=gm.seats[wSeat];
+    gm.phase='done';gm.winner=winRec.name;gm.pot=pot;
+    if(!gm.note)gm.note=winRec.name+' wins!';
+    ldAddRes({id:'ld_'+gm.gid,win:winRec.name,np:gm.np,home:gm.home,stk:gm.stk,pot:pot,at:now()});
+    if(gm.localPvp){tone(660,.14);setTimeout(function(){tone(880,.25)},120)}
+  }
+  function applyMoveOn(gm,si,ti){
     var s=gm.seats[si],dice=gm.dice,old=s.toks[ti],np=old<0?0:old+dice,bonus=(dice===6);
     if(np===56)bonus=true;
-    s.toks[ti]=np;
-    // Check capture on outer track (0..50) excluding safe squares
+    s.toks[ti]=np;gm.note='';
+    gm.lastMove={si:si,ti:ti,from:old,to:np,dice:dice,at:now()};
     if(np>=0&&np<=50){
       var tr=(LD_COLS[s.ci].start+np)%52;
       if(!LD_SAFE[tr]){
@@ -2305,25 +2378,35 @@ function initLudo(){
         });
       }
     }
-    // Check victory
     var homed=s.toks.filter(function(x){return x===56}).length;
-    if(homed>=gm.home){finishGame(gm,si);return}
-    if(bonus){gm.phase='roll';gm.dice=0;gm.deadline=now()+15000;if(!gm.note)gm.note=s.name+' gets a bonus roll!'}
+    if(homed>=gm.home){markWinner(gm,si);return}
+    if(bonus){gm.phase='roll';gm.dice=0;gm.deadline=now()+turnDur(gm);if(!gm.note)gm.note=s.name+' gets a bonus roll!'}
     else nextTurn(gm);
-    saveGame(gm);
   }
   function animMove(gm,si,ti){
-    if(LST.anim)return;
-    var s=gm.seats[si],old=s.toks[ti],target=old<0?0:old+gm.dice;
-    if(old<0||target-old<=1){applyMove(gm,si,ti);render();return}
+    if(LST.anim||!gm||gm.phase!=='move'||gm.turn!==si)return;
+    var s=gm.seats[si],old=s.toks[ti],target=old<0?0:old+gm.dice,expVer=gm.ver||0;
+    function finishMove(){
+      commitGame(gm,expVer,function(next){
+        if(next.turn!==si||next.phase!=='move')return false;
+        applyMoveOn(next,si,ti);
+      },function(ok,val){
+        if(ok&&val&&val.phase==='done'){saveActiveRef(null);creditWinnerOnce(val)}
+        if(ANIM_PENDING){var p=ANIM_PENDING;ANIM_PENDING=null;CUR=p;if(p.phase==='done'){saveActiveRef(null);creditWinnerOnce(p)}}
+        render();
+      });
+    }
+    if(old<0||target-old<=1){finishMove();return}
     LST.anim=true;
     var cur=old;
     function hop(){
-      cur++;s.toks[ti]=cur;tone(420+(cur-old)*55,.04);render();
-      if(cur<target)ST.push(setTimeout(hop,95));
-      else{LST.anim=false;s.toks[ti]=old;applyMove(gm,si,ti);render()}
+      cur++;
+      if(CUR&&CUR.seats&&CUR.seats[si])CUR.seats[si].toks[ti]=cur;
+      tone(420+(cur-old)*55,.04);render();
+      if(cur<target)ST.push(setTimeout(hop,90));
+      else{LST.anim=false;if(CUR&&CUR.seats&&CUR.seats[si])CUR.seats[si].toks[ti]=old;finishMove()}
     }
-    ST.push(setTimeout(hop,95));
+    ST.push(setTimeout(hop,90));
   }
   function botChoose(gm,si,legal){
     var s=gm.seats[si],dice=gm.dice,best=legal[0],bestSc=-999;
@@ -2347,79 +2430,104 @@ function initLudo(){
   }
   function rollDice(si){
     if(!CUR||CUR.phase!=='roll'||CUR.turn!==si||ROLLING||LST.anim)return;
+    var expVer=CUR.ver||0;
     ROLLING=true;CUR.note='';tone(280,.06);render();
     ST.push(setTimeout(function(){
-      ROLLING=false;if(!CUR||CUR.phase!=='roll')return;
-      var d=1+Math.floor(Math.random()*6);
-      CUR.dice=d;
-      if(d===6)CUR.sixes=(CUR.sixes||0)+1;else CUR.sixes=0;
-      if(CUR.sixes>=3){CUR.note=CUR.seats[si].name+' rolled three 6s — turn passed!';nextTurn(CUR);saveGame(CUR);render();return}
-      var leg=ldLegal(CUR,si,d);
-      if(!leg.length){
-        CUR.note=CUR.seats[si].name+' rolled '+d+' — no legal move';
-        saveGame(CUR);render();
-        ST.push(setTimeout(function(){if(!CUR||CUR.phase==='done')return;nextTurn(CUR);saveGame(CUR);render()},550));
-        return;
-      }
-      CUR.phase='move';CUR.deadline=now()+15000;
-      if(CUR.seats[si].bot){
-        saveGame(CUR);render();
-        ST.push(setTimeout(function(){if(!CUR||CUR.phase!=='move'||CUR.turn!==si)return;animMove(CUR,si,botChoose(CUR,si,leg))},420));
-      }else{
-        // Auto-move if only 1 distinct progress option
-        var uniq={};leg.forEach(function(t){uniq[CUR.seats[si].toks[t]]=t});
-        saveGame(CUR);render();
-        if(Object.keys(uniq).length===1&&leg.length>0){
-          ST.push(setTimeout(function(){if(!CUR||CUR.phase!=='move'||CUR.turn!==si||LST.anim)return;animMove(CUR,si,leg[0])},320));
+      ROLLING=false;
+      if(!CUR||CUR.phase!=='roll'||CUR.turn!==si)return;
+      var d=1+Math.floor(Math.random()*6),noMoves=false,passMsg='';
+      commitGame(CUR,expVer,function(next){
+        if(next.turn!==si||next.phase!=='roll')return false;
+        next.dice=d;
+        if(d===6)next.sixes=(next.sixes||0)+1;else next.sixes=0;
+        if(next.sixes>=3){next.note=next.seats[si].name+' rolled three 6s — turn passed!';nextTurn(next);return}
+        var leg=ldLegal(next,si,d);
+        if(!leg.length){
+          noMoves=true;passMsg=next.seats[si].name+' rolled '+d+' — no legal move';
+          next.note=passMsg;
+          return;
         }
-      }
-    },480));
+        next.phase='move';next.deadline=now()+turnDur(next);
+      },function(ok,val){
+        if(!ok||!val){render();return}
+        if(noMoves){
+          render();
+          var v2=val.ver||0;
+          ST.push(setTimeout(function(){
+            if(!CUR||CUR.phase==='done'||(CUR.ver||0)!==v2)return;
+            commitGame(CUR,v2,function(n2){if(n2.turn!==si)return false;nextTurn(n2)},function(){render()});
+          },600));
+          return;
+        }
+        if(val.phase==='move'&&val.turn===si){
+          var leg=ldLegal(val,si,val.dice);
+          if(val.seats[si].bot){
+            render();
+            ST.push(setTimeout(function(){if(!CUR||CUR.phase!=='move'||CUR.turn!==si)return;animMove(CUR,si,botChoose(CUR,si,leg))},420));
+          }else{
+            var uniq={};leg.forEach(function(t){uniq[val.seats[si].toks[t]]=t});
+            render();
+            if(Object.keys(uniq).length===1&&leg.length>0){
+              ST.push(setTimeout(function(){if(!CUR||CUR.phase!=='move'||CUR.turn!==si||LST.anim)return;animMove(CUR,si,leg[0])},320));
+            }
+          }
+        }else render();
+      });
+    },440));
   }
-  function isDriver(gm){
-    var u=session();
-    for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&!gm.seats[i].bot&&!gm.seats[i].out)return gm.seats[i].u===u;
-    return false;
+  function isTimeoutDriver(gm){
+    var u=session(),activeIdx=[];
+    for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&!gm.seats[i].bot&&!gm.seats[i].out)activeIdx.push(i);
+    return activeIdx.indexOf(mySeat(gm));
   }
-  function fillWithBots(seats,np){
+  function buildSeats(seats,np,fillBots){
     seats=ldArr(seats);
-    var cis=np===2?[0,2]:[0,1,2,3],out=[];
-    for(var i=0;i<np;i++){
-      if(seats[i])out.push({u:seats[i].u,name:seats[i].name,bot:false,ci:cis[i],toks:[-1,-1,-1,-1],miss:0,out:false});
-      else out.push({u:'bot_'+i,name:'🤖 '+LD_BOTS[i],bot:true,ci:cis[i],toks:[-1,-1,-1,-1],miss:0,out:false});
+    var actualNp=fillBots?np:Math.max(2,seats.length);
+    var cis=seatColsFor(actualNp),out=[];
+    for(var i=0;i<actualNp;i++){
+      if(seats[i])out.push({u:seats[i].u,name:seats[i].name,bot:!!seats[i].bot,ci:cis[i],toks:[-1,-1,-1,-1],miss:0,out:false});
+      else if(fillBots)out.push({u:'bot_'+i,name:'🤖 '+LD_BOTS[i],bot:true,ci:cis[i],toks:[-1,-1,-1,-1],miss:0,out:false});
     }
     return out;
   }
-  function launchGame(gid,seats,np,home,stk){
-    var gm={gid:gid,np:np,home:home,stk:stk,seats:fillWithBots(seats,np),turn:0,phase:'roll',dice:0,sixes:0,deadline:now()+15000,note:'Match started! Roll the dice.',winner:null};
-    LST.mode='play';LST.gid=gid;
-    saveGame(gm);
-    subscribeGame(gid);
-    startTurnLoop();
-    render();
+  function createGameOnce(gid,seats,np,home,stk,fillBots,localNames){
+    var built=localNames?localNames.map(function(nm,i){var cis=seatColsFor(localNames.length);return {u:'local_'+i,name:nm,bot:false,ci:cis[i],toks:[-1,-1,-1,-1],miss:0,out:false}}):buildSeats(seats,np,fillBots);
+    var actualNp=built.length,hasBot=built.some(function(s){return s.bot});
+    var gm={gid:gid,np:actualNp,home:home,stk:localNames?0:stk,pvp:!hasBot,localPvp:!!localNames,noTimeout:!!localNames,ver:1,seats:built,turn:0,phase:'roll',dice:0,sixes:0,deadline:now()+(localNames?999999:(!hasBot?20000:15000)),note:localNames?'Pass & Play started! '+built[0].name+' rolls first.':'Match started! Roll the dice.',winner:null,createdAt:now()};
+    LST.mode='play';LST.gid=gid;LST.openKey='';LST.waitPath='';
+    if(!localNames)saveActiveRef(gid);
+    if(!localNames&&DB){
+      DB.ref('ludo_games/'+gid).transaction(function(cur){return cur?undefined:gm},function(e,ok,sn){
+        CUR=normalizeGm((sn&&sn.val())||gm);
+        subscribeGame(gid);
+        startTurnLoop();
+        render();
+      });
+    }else{
+      CUR=gm;
+      ls('sb_ld_cur_'+session(),gm);
+      startTurnLoop();
+      render();
+    }
   }
   function subscribeGame(gid){
     if(!DB)return;
-    clearGameConn();
+    clearGameConn();clearLobbyConn();
     var ref=DB.ref('ludo_games/'+gid),fn=function(sn){
-      var v=sn.val();if(!v)return;
-      v.seats=ldArr(v.seats).map(function(s){
-        if(s&&!Array.isArray(s.toks))s.toks=[0,1,2,3].map(function(k){return s.toks&&typeof s.toks[k]==='number'?s.toks[k]:-1});
-        return s;
-      });
+      var v=normalizeGm(sn.val());if(!v)return;
+      if(LST.anim){ANIM_PENDING=v;return}
       var wasDone=CUR&&CUR.phase==='done';
+      var prevVer=CUR?(CUR.ver||0):0;
       CUR=v;
-      if(v.phase==='done'&&!wasDone){
+      if(v.phase==='done'){
+        saveActiveRef(null);
+        if(!wasDone)creditWinnerOnce(v);
+      }else{
         var ms=mySeat(v);
-        if(ms>-1&&v.winner===v.seats[ms].name){
-          var us=users(),u=session();
-          if(us[u]&&!(v.paid&&v.paid[ukey(u)])){
-            var pot=ldPot(v.np,v.stk);
-            DB.ref('ludo_games/'+gid+'/paid/'+ukey(u)).set(1);
-            setBal(us,u,bal(us[u])+pot,'Ludo win ('+v.np+'P)',pot);
-            addWin({id:'ld_'+gid,u:u,phone:(us[u]||{}).phone||'',time:'Ludo '+v.stk+' ETB',k:1,reward:pot,n:v.home,calls:v.np,at:now()});
-          }
-        }
+        if(ms>-1&&v.seats[ms]&&!v.seats[ms].out)saveActiveRef(gid);
+        else saveActiveRef(null);
       }
+      if(v.lastMove&&v.ver>prevVer&&v.lastMove.si!==mySeat(v))tone(500,.04);
       if(LST.mode==='play')render();
     };
     ref.on('value',fn);
@@ -2430,170 +2538,328 @@ function initLudo(){
     LT=setInterval(function(){
       if(LST.mode!=='play'||!CUR||CUR.phase==='done'||ROLLING||LST.anim)return;
       var s=CUR.seats[CUR.turn];if(!s)return;
-      if(s.bot&&isDriver(CUR)){
-        if(CUR.phase==='roll')rollDice(CUR.turn);
+      if(s.bot){
+        var drvRank=isTimeoutDriver(CUR);
+        if(drvRank===0&&CUR.phase==='roll')rollDice(CUR.turn);
         return;
       }
-      var rem=Math.ceil((CUR.deadline-now())/1000);
-      var bar=$('ld_bar_'+CUR.turn);if(bar)bar.style.width=Math.max(0,Math.min(100,rem/15*100))+'%';
-      var tm=$('ld_tm');if(tm)tm.textContent=rem>0?rem+'s':'0s';
-      if(rem<=0&&isDriver(CUR)){
-        s.miss=(s.miss||0)+1;
-        if(s.miss>=3){
-          s.out=true;CUR.note=s.name+' missed 3 turns and is out.';
-          var alive=[];CUR.seats.forEach(function(x,i){if(!x.out)alive.push(i)});
-          if(alive.length===1){finishGame(CUR,alive[0]);return}
-        }else CUR.note=s.name+' timed out ('+s.miss+'/3)';
-        nextTurn(CUR);saveGame(CUR);render();
+      if(CUR.noTimeout)return;
+      var dur=turnDur(CUR),rem=Math.ceil((CUR.deadline-now())/1000);
+      var bar=$('ld_bar_'+CUR.turn);if(bar)bar.style.width=Math.max(0,Math.min(100,rem/(dur/1000)*100))+'%';
+      var tm=$('ld_tm');if(tm)tm.textContent=(rem>0?rem:0)+'s';
+      var rank=isTimeoutDriver(CUR);
+      if(rank<0)return;
+      var grace=rank*900+800;
+      if(now()>CUR.deadline+grace){
+        var expVer=CUR.ver||0,tSeat=CUR.turn,tPhase=CUR.phase;
+        commitGame(CUR,expVer,function(next){
+          if(next.turn!==tSeat||next.phase!==tPhase||now()<=next.deadline+500)return false;
+          var ns=next.seats[tSeat];if(!ns||ns.out)return false;
+          ns.miss=(ns.miss||0)+1;
+          if(ns.miss>=3){
+            ns.out=true;next.note=ns.name+' missed 3 turns and is out.';
+            var alive=[];next.seats.forEach(function(x,i){if(x&&!x.out)alive.push(i)});
+            if(alive.length===1){markWinner(next,alive[0]);return}
+          }else next.note=ns.name+' timed out ('+ns.miss+'/3)';
+          nextTurn(next);
+        },function(ok,val){
+          if(ok&&val&&val.phase==='done'){saveActiveRef(null);creditWinnerOnce(val)}
+          if(ok)render();
+        });
       }
     },350);
   }
-  function startMatchmaking(){
-    if(LST.busy)return;
-    var r=me(),stk=LST.stk;
-    if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
-    LST.busy=true;LST.msg='';
-    var us=users(),u=session();
-    setBal(us,u,bal(r)-stk,'Ludo stake ('+LST.np+'P · '+stk+' ETB)',-stk,function(ok){
-      LST.busy=false;
-      if(!ok){LST.msg='Could not deduct stake.';render();return}
-      var gid='ld_'+now()+'_'+Math.random().toString(36).slice(2,6);
-      LST.mode='wait';LST.waitSince=now();LST.gid=gid;LST.code='';
-      if(DB){
-        var qKey='q_'+LST.np+'_'+LST.home+'_'+stk,qRef=DB.ref('ludo_q/'+qKey);
-        qRef.transaction(function(cur){
-          if(!cur||cur.started||now()-cur.at>65000)return{gid:gid,at:now(),np:LST.np,home:LST.home,stk:stk,seats:[{u:u,name:u}],started:false};
-          var arr=Array.isArray(cur.seats)?cur.seats:Object.values(cur.seats||{});
-          if(!arr.some(function(x){return x.u===u}))arr.push({u:u,name:u});
-          cur.seats=arr;if(arr.length>=cur.np)cur.started=true;
-          return cur;
-        },function(e,ok2,sn){
-          var val=sn&&sn.val();
-          if(!ok2||!val){launchGame(gid,[{u:u,name:u}],LST.np,LST.home,stk);return}
-          LST.gid=val.gid;LST.waitSince=val.at||now();
-          if(val.started){launchGame(val.gid,val.seats,val.np,val.home,val.stk);return}
-          var fn=function(s2){
-            var v=s2.val();if(!v)return;
-            var seats=ldArr(v.seats);
-            if(v.started&&LST.mode==='wait'){
-              clearGameConn();
-              if((seats[0]||{}).u===u)launchGame(v.gid,seats,v.np,v.home,v.stk);
-              else{LST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-            }else if(LST.mode==='wait')renderWaitSeats(seats);
-          };
-          qRef.on('value',fn);
-          LUDO_OFF=function(){qRef.off('value',fn)};
-          LT=setInterval(function(){
-            if(LST.mode!=='wait')return;
-            var rem=Math.max(0,60-Math.floor((now()-LST.waitSince)/1000));
-            var el=$('ld_wcd');if(el)el.textContent='00:'+('0'+rem).slice(-2);
-            if(rem<=0){
-              qRef.once('value',function(s3){
-                var v=s3.val()||{seats:[{u:u,name:u}],np:LST.np,home:LST.home,stk:stk,gid:LST.gid};
-                qRef.update({started:true});
-                clearGameConn();
-                launchGame(v.gid||LST.gid,v.seats||[{u:u,name:u}],LST.np,LST.home,stk);
-              });
-            }
-          },1000);
-          render();
-        });
-      }else{
-        LT=setInterval(function(){
-          if(LST.mode!=='wait')return;
-          var rem=Math.max(0,60-Math.floor((now()-LST.waitSince)/1000));
-          var el=$('ld_wcd');if(el)el.textContent='00:'+('0'+rem).slice(-2);
-          if(rem<=0){clearGameConn();launchGame(gid,[{u:u,name:u}],LST.np,LST.home,stk)}
-        },1000);
+  function publishOpenEntry(entry){
+    if(!DB||!entry||!entry.key)return;
+    DB.ref('ludo_open/'+entry.key).set(entry);
+  }
+  function removeOpenEntry(key){
+    if(DB&&key)try{DB.ref('ludo_open/'+key).remove()}catch(e){}
+  }
+  function subscribeWaitTarget(targetPath,openKey,isQueue){
+    clearGameConn();clearLobbyConn();
+    if(!DB)return;
+    var ref=DB.ref(targetPath),u=session(),selfHealTimer=null;
+    var fn=function(sn){
+      var v=sn.val();if(!v)return;
+      var seats=ldArr(v.seats);
+      LST.waitSeats=seats;
+      if(v.started&&LST.mode==='wait'){
+        clearGameConn();removeOpenEntry(openKey);
+        if(selfHealTimer)clearTimeout(selfHealTimer);
+        var hostSeat=(seats[0]||{}).u===u;
+        if(hostSeat){
+          createGameOnce(v.gid,seats,v.np,v.home,v.stk,!!v.bots,null);
+        }else{
+          LST.mode='play';LST.gid=v.gid;saveActiveRef(v.gid);
+          subscribeGame(v.gid);startTurnLoop();render();
+          ST.push(setTimeout(function(){
+            if(LST.mode==='play'&&!CUR)createGameOnce(v.gid,seats,v.np,v.home,v.stk,!!v.bots,null);
+          },1800));
+        }
+      }else if(LST.mode==='wait'){
+        if(openKey&&seats[0]&&seats[0].u===u)DB.ref('ludo_open/'+openKey+'/seats').set(seats);
         render();
       }
-    });
+    };
+    ref.on('value',fn);
+    LUDO_OFF=function(){ref.off('value',fn);if(selfHealTimer)clearTimeout(selfHealTimer)};
   }
-  function openPrivate(){
+  function startOnlinePvpSearch(){
     if(LST.busy)return;
-    var r=me(),stk=LST.stk;
+    if(!DB){LST.msg='Cloud connection required for Online PvP. Use Pass & Play for 2–4 players on this device.';render();return}
+    var r=me(),stk=LST.stk,u=session(),us=users();
     if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     LST.busy=true;LST.msg='';
-    var us=users(),u=session(),code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='ldp_'+code+'_'+now();
-    setBal(us,u,bal(r)-stk,'Ludo private ('+code+')',-stk,function(ok){
+    var gid='ld_'+now()+'_'+Math.random().toString(36).slice(2,6);
+    var code=Math.random().toString(36).slice(2,8).toUpperCase();
+    setBal(us,u,bal(r)-stk,'Ludo PvP stake ('+LST.np+'P · '+stk+' ETB)',-stk,function(ok){
+      LST.busy=false;
+      if(!ok){LST.msg='Could not deduct stake.';render();return}
+      var qKey='pvp_'+LST.np+'_'+LST.home+'_'+stk,qPath='ludo_q/'+qKey,qRef=DB.ref(qPath);
+      qRef.transaction(function(cur){
+        if(!cur||cur.started||now()-(cur.at||0)>1800000)return{gid:gid,code:code,at:now(),np:LST.np,home:LST.home,stk:stk,pvpOnly:true,bots:false,seats:[{u:u,name:u}],started:false};
+        var arr=ldArr(cur.seats);
+        if(!arr.some(function(x){return x&&x.u===u}))arr.push({u:u,name:u});
+        cur.seats=arr;cur.at=now();
+        if(arr.length>=cur.np)cur.started=true;
+        return cur;
+      },function(e,ok2,sn){
+        var val=sn&&sn.val();
+        if(e||!ok2||!val){
+          setBal(users(),u,bal(me())+stk,'Ludo stake refund',stk);
+          LST.msg='Could not join matchmaking queue. Try again.';render();return;
+        }
+        var seats=ldArr(val.seats);
+        LST.gid=val.gid;LST.code=val.code||'';LST.waitSince=val.at||now();LST.waitSeats=seats;LST.waitPath=qPath;LST.openKey=qKey;
+        if(val.started){
+          removeOpenEntry(qKey);
+          createGameOnce(val.gid,seats,val.np,val.home,val.stk,false,null);
+          return;
+        }
+        publishOpenEntry({key:qKey,kind:'q',path:qPath,gid:val.gid,code:val.code||'',host:(seats[0]||{}).name||u,np:val.np,home:val.home,stk:val.stk,seats:seats,at:val.at||now()});
+        LST.mode='wait';
+        subscribeWaitTarget(qPath,qKey,true);
+        LT=setInterval(function(){
+          if(LST.mode!=='wait')return;
+          var sec=Math.max(0,Math.floor((now()-LST.waitSince)/1000));
+          var el=$('ld_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+        },1000);
+        render();
+      });
+    });
+  }
+  function startBotMatch(){
+    if(LST.busy)return;
+    var r=me(),stk=LST.stk,u=session(),us=users();
+    if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
+    LST.busy=true;LST.msg='';
+    setBal(us,u,bal(r)-stk,'Ludo vs Bots ('+LST.np+'P · '+stk+' ETB)',-stk,function(ok){
       LST.busy=false;if(!ok){LST.msg='Could not deduct stake.';render();return}
-      LST.mode='wait';LST.waitSince=now();LST.gid=gid;LST.code=code;
-      var room={code:code,gid:gid,at:now(),np:LST.np,home:LST.home,stk:stk,seats:[{u:u,name:u}],started:false};
-      if(DB){
-        var rRef=DB.ref('ludo_rooms/'+code);rRef.set(room);
-        var fn=function(sn){
-          var v=sn.val();if(!v)return;
-          var seats=ldArr(v.seats);
-          if(v.started&&LST.mode==='wait'){
-            clearGameConn();
-            if((seats[0]||{}).u===u)launchGame(v.gid,seats,v.np,v.home,v.stk);
-            else{LST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-          }else if(LST.mode==='wait')renderWaitSeats(seats);
-        };
-        rRef.on('value',fn);LUDO_OFF=function(){rRef.off('value',fn)};
-      }else ls('sb_ld_priv_'+code,room);
+      var gid='ld_'+now()+'_'+Math.random().toString(36).slice(2,6);
+      createGameOnce(gid,[{u:u,name:u}],LST.np,LST.home,stk,true,null);
+    });
+  }
+  function openFriendTable(){
+    if(LST.busy)return;
+    if(!DB){LST.msg='Cloud connection required for online friend tables. Use Pass & Play on this device.';render();return}
+    var r=me(),stk=LST.stk,u=session(),us=users();
+    if(bal(r)<stk){LST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
+    LST.busy=true;LST.msg='';
+    var code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='ldp_'+code+'_'+now(),rPath='ludo_rooms/'+code;
+    setBal(us,u,bal(r)-stk,'Ludo table ('+code+')',-stk,function(ok){
+      LST.busy=false;if(!ok){LST.msg='Could not deduct stake.';render();return}
+      var seats=[{u:u,name:u}],room={code:code,gid:gid,at:now(),np:LST.np,home:LST.home,stk:stk,pub:!!LST.pubRoom,pvpOnly:true,bots:false,seats:seats,started:false};
+      LST.mode='wait';LST.waitSince=room.at;LST.gid=gid;LST.code=code;LST.waitPath=rPath;LST.waitSeats=seats;LST.openKey=LST.pubRoom?('rm_'+code):'';
+      DB.ref(rPath).set(room);
+      if(LST.pubRoom)publishOpenEntry({key:'rm_'+code,kind:'room',path:rPath,gid:gid,code:code,host:u,np:LST.np,home:LST.home,stk:stk,seats:seats,at:room.at});
+      subscribeWaitTarget(rPath,LST.openKey,false);
+      LT=setInterval(function(){
+        if(LST.mode!=='wait')return;
+        var sec=Math.max(0,Math.floor((now()-LST.waitSince)/1000));
+        var el=$('ld_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+      },1000);
       render();
     });
+  }
+  function joinByPath(targetPath,openKey,expectedCode){
+    if(LST.busy)return;
+    if(!DB){LST.msg='Cloud connection required for online PvP.';render();return}
+    var r=me(),u=session();
+    LST.busy=true;LST.msg='';render();
+    var rRef=DB.ref(targetPath);
+    rRef.once('value',function(sn){
+      var rm=sn.val();
+      if(!rm){LST.busy=false;if(openKey)removeOpenEntry(openKey);LST.msg='Table not found or closed.';render();return}
+      var curSeats=ldArr(rm.seats);
+      if(curSeats.some(function(x){return x&&x.u===u})){
+        LST.busy=false;LST.np=rm.np;LST.home=rm.home;LST.stk=rm.stk;LST.code=rm.code||expectedCode||'';LST.gid=rm.gid;LST.waitPath=targetPath;LST.openKey=openKey||'';LST.waitSince=rm.at||now();LST.waitSeats=curSeats;
+        if(rm.started){LST.mode='play';saveActiveRef(rm.gid);subscribeGame(rm.gid);startTurnLoop();render();return}
+        LST.mode='wait';subscribeWaitTarget(targetPath,LST.openKey,false);render();return;
+      }
+      if(rm.started){LST.busy=false;if(openKey)removeOpenEntry(openKey);LST.msg='Table already started.';render();return}
+      if(bal(r)<rm.stk){LST.busy=false;LST.msg='Need '+rm.stk+' ETB to join this table.';render();return}
+      setBal(users(),u,bal(r)-rm.stk,'Ludo PvP ('+(rm.code||'Open')+')',-rm.stk,function(ok){
+        if(!ok){LST.busy=false;LST.msg='Could not deduct stake.';render();return}
+        rRef.transaction(function(cur){
+          if(!cur||cur.started)return;
+          var arr=ldArr(cur.seats);
+          if(arr.length>=cur.np)return;
+          if(!arr.some(function(x){return x&&x.u===u}))arr.push({u:u,name:u});
+          cur.seats=arr;cur.at=now();
+          if(arr.length>=cur.np)cur.started=true;
+          return cur;
+        },function(e,ok2,s2){
+          LST.busy=false;
+          if(e||!ok2){setBal(users(),u,bal(me())+rm.stk,'Ludo refund',rm.stk);LST.msg='Table was just filled or closed.';render();return}
+          var v=s2.val(),seats=ldArr(v.seats);
+          LST.np=v.np;LST.home=v.home;LST.stk=v.stk;LST.code=v.code||expectedCode||'';LST.gid=v.gid;LST.waitPath=targetPath;LST.openKey=openKey||'';LST.waitSince=v.at||now();LST.waitSeats=seats;
+          if(v.started){
+            if(openKey)removeOpenEntry(openKey);
+            createGameOnce(v.gid,seats,v.np,v.home,v.stk,false,null);
+          }else{
+            if(openKey)DB.ref('ludo_open/'+openKey+'/seats').set(seats);
+            LST.mode='wait';
+            subscribeWaitTarget(targetPath,LST.openKey,false);
+            LT=setInterval(function(){
+              if(LST.mode!=='wait')return;
+              var sec=Math.max(0,Math.floor((now()-LST.waitSince)/1000));
+              var el=$('ld_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+            },1000);
+            render();
+          }
+        });
+      });
+    },function(){LST.busy=false;LST.msg='Connection error. Try again.';render()});
   }
   function joinPrivate(code){
     code=(code||'').trim().toUpperCase();
     if(code.length<4){LST.msg='Enter a valid table code.';render();return}
-    var r=me(),u=session();
-    if(!DB){
-      var rm=lg('sb_ld_priv_'+code,null);
-      if(!rm||rm.started){LST.msg='Table code not found or already started.';render();return}
-      if(bal(r)<rm.stk){LST.msg='Need '+rm.stk+' ETB to join table '+code+'.';render();return}
-      var us=users();
-      setBal(us,u,bal(r)-rm.stk,'Ludo private ('+code+')',-rm.stk,function(ok){
-        if(!ok)return;
-        LST.np=rm.np;LST.home=rm.home;LST.stk=rm.stk;LST.code=code;
-        rm.seats.push({u:u,name:u});
-        launchGame(rm.gid,rm.seats,rm.np,rm.home,rm.stk);
-      });
-      return;
-    }
-    var rRef=DB.ref('ludo_rooms/'+code);
-    rRef.once('value',function(sn){
-      var rm=sn.val();
-      if(!rm||rm.started){LST.msg='Table code not found or already started.';render();return}
-      if(bal(r)<rm.stk){LST.msg='Need '+rm.stk+' ETB to join table '+code+'.';render();return}
-      var us=users();
-      setBal(us,u,bal(r)-rm.stk,'Ludo private ('+code+')',-rm.stk,function(ok){
-        if(!ok)return;
-        rRef.transaction(function(cur){
-          if(!cur||cur.started)return;
-          var arr=Array.isArray(cur.seats)?cur.seats:Object.values(cur.seats||{});
-          if(!arr.some(function(x){return x.u===u}))arr.push({u:u,name:u});
-          cur.seats=arr;if(arr.length>=cur.np)cur.started=true;
-          return cur;
-        },function(e,ok2,s2){
-          if(!ok2){setBal(users(),u,bal(me())+rm.stk,'Ludo refund',rm.stk);LST.msg='Could not join table.';render();return}
-          var v=s2.val();LST.np=v.np;LST.home=v.home;LST.stk=v.stk;LST.code=code;LST.gid=v.gid;
-          if(v.started){LST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-          else{LST.mode='wait';LST.waitSince=now();var fn=function(s3){var w=s3.val();if(w&&w.started&&LST.mode==='wait'){clearGameConn();LST.mode='play';subscribeGame(w.gid);startTurnLoop();render()}else if(w&&LST.mode==='wait')renderWaitSeats(w.seats||[])};rRef.on('value',fn);LUDO_OFF=function(){rRef.off('value',fn)};render()}
-        });
-      });
+    joinByPath('ludo_rooms/'+code,'rm_'+code,code);
+  }
+  function startWaitWithSeated(fillBots){
+    if(!LST.waitPath||!DB)return;
+    var u=session(),ref=DB.ref(LST.waitPath);
+    ref.transaction(function(cur){
+      if(!cur||cur.started)return;
+      var arr=ldArr(cur.seats);
+      if(!arr.some(function(x){return x&&x.u===u}))return;
+      if(!fillBots&&arr.length<2)return;
+      if(!fillBots)cur.np=arr.length;
+      cur.bots=!!fillBots;
+      cur.started=true;
+      return cur;
+    },function(e,ok,sn){
+      if(!ok)return;
+      var v=sn.val(),seats=ldArr(v.seats);
+      removeOpenEntry(LST.openKey);clearGameConn();
+      createGameOnce(v.gid,seats,v.np,v.home,v.stk,!!v.bots,null);
     });
   }
   function leaveWait(){
+    var u=session(),r=me(),wPath=LST.waitPath,oKey=LST.openKey,stk=LST.stk;
+    if(DB&&wPath){
+      DB.ref(wPath).transaction(function(cur){
+        if(!cur||cur.started)return;
+        var arr=ldArr(cur.seats).filter(function(x){return x&&x.u!==u});
+        if(!arr.length)return null;
+        cur.seats=arr;return cur;
+      },function(e,ok,sn){
+        var v=sn&&sn.val();
+        if(e||!ok){
+          if(v&&v.started&&v.gid){
+            clearGameConn();if(oKey)removeOpenEntry(oKey);
+            LST.mode='play';LST.gid=v.gid;saveActiveRef(v.gid);
+            subscribeGame(v.gid);startTurnLoop();render();
+            toast('Match just started!');
+            return;
+          }
+          clearGameConn();LST.mode='lobby';LST.code='';LST.waitPath='';LST.openKey='';LST.waitSeats=[];render();
+          return;
+        }
+        clearGameConn();
+        if(!v||!ldArr(v.seats).length)removeOpenEntry(oKey);
+        else if(oKey)DB.ref('ludo_open/'+oKey+'/seats').set(ldArr(v.seats));
+        if(r)setBal(users(),u,bal(r)+stk,'Ludo stake refund',stk,function(){LST.mode='lobby';LST.code='';LST.waitPath='';LST.openKey='';LST.waitSeats=[];LST.msg='Stake refunded ('+stk+' ETB).';render()});
+        else{LST.mode='lobby';LST.code='';LST.waitPath='';LST.openKey='';LST.waitSeats=[];render()}
+      });
+      return;
+    }
     clearGameConn();
-    var u=session(),us=users(),r=me();
-    if(DB){
-      if(LST.code)DB.ref('ludo_rooms/'+LST.code).once('value',function(sn){var v=sn.val();if(v&&!v.started){var arr=ldArr(v.seats).filter(function(x){return x&&x.u!==u});if(!arr.length)DB.ref('ludo_rooms/'+LST.code).remove();else DB.ref('ludo_rooms/'+LST.code+'/seats').set(arr)}});
-      else{var qKey='q_'+LST.np+'_'+LST.home+'_'+LST.stk;DB.ref('ludo_q/'+qKey).once('value',function(sn){var v=sn.val();if(v&&!v.started){var arr=ldArr(v.seats).filter(function(x){return x&&x.u!==u});if(!arr.length)DB.ref('ludo_q/'+qKey).remove();else DB.ref('ludo_q/'+qKey+'/seats').set(arr)}})}
-    }
-    if(r)setBal(us,u,bal(r)+LST.stk,'Ludo stake refund',LST.stk,function(){LST.mode='lobby';LST.code='';LST.msg='Stake refunded ('+LST.stk+' ETB).';render()});
-    else{LST.mode='lobby';render()}
+    LST.mode='lobby';LST.code='';LST.waitPath='';LST.openKey='';LST.waitSeats=[];render();
   }
-  function renderWaitSeats(seats){
-    seats=ldArr(seats);
-    var el=$('ld_wseats');if(!el)return;
-    var cis=LST.np===2?[0,2]:[0,1,2,3],h='';
+  function startPassAndPlay(){
+    var names=[];
     for(var i=0;i<LST.np;i++){
-      var s=seats[i],C=LD_COLS[cis[i]];
-      h+='<div class="lseat'+(s?' ok':'')+'">'+ldMiniPin(C,20)+'<span>'+(s?esc(s.name):'Waiting…')+'</span></div>';
+      var fallback=i===0?session():('Player '+(i+1));
+      var nm=String(LST.localNames[i]||fallback).trim().slice(0,18)||fallback;
+      names.push(nm);
     }
-    el.innerHTML=h;
+    var gid='ldloc_'+now()+'_'+Math.random().toString(36).slice(2,6);
+    createGameOnce(gid,[],LST.np,LST.home,0,false,names);
+  }
+  function forfeitMatch(){
+    if(!CUR||CUR.phase==='done')return;
+    var ms=mySeat(CUR);
+    if(CUR.localPvp||ms<0){clearGameConn();saveActiveRef(null);CUR=null;LST.mode='lobby';render();return}
+    var expVer=CUR.ver||0,sName=(CUR.seats[ms]||{}).name||session();
+    commitGame(CUR,expVer,function(next){
+      if(!next.seats[ms]||next.seats[ms].out)return false;
+      next.seats[ms].out=true;
+      next.note=sName+' forfeited the match.';
+      var alive=[];next.seats.forEach(function(x,i){if(x&&!x.out)alive.push(i)});
+      if(alive.length===1)markWinner(next,alive[0]);
+      else if(next.turn===ms)nextTurn(next);
+    },function(){
+      clearGameConn();saveActiveRef(null);CUR=null;LST.mode='lobby';LST.msg='You forfeited the match.';render();
+    });
+  }
+  function sendQuickEmote(txt){
+    if(!CUR||CUR.phase==='done')return;
+    var who=CUR.localPvp?(CUR.seats[CUR.turn].name):session();
+    var ch={who:who,txt:txt,at:now()};
+    if(CUR.localPvp||!DB||!CUR.gid){CUR.chat=ch;render();return}
+    DB.ref('ludo_games/'+CUR.gid+'/chat').set(ch);
+  }
+  function subscribeOpenTables(){
+    clearLobbyConn();
+    if(!DB)return;
+    var ref=DB.ref('ludo_open'),fn=function(sn){
+      var v=sn.val()||{},arr=[];
+      Object.keys(v).forEach(function(k){
+        var x=v[k];if(!x||!x.path)return;
+        if(now()-(x.at||0)>1800000)return;
+        x.seats=ldArr(x.seats);
+        if(x.seats.length<x.np)arr.push(x);
+      });
+      arr.sort(function(a,b){return (b.at||0)-(a.at||0)});
+      LST.openRooms=arr;
+      var box=$('ld_open_list');
+      if(box&&LST.mode==='lobby'&&LST.playType==='pvp')box.innerHTML=openTablesHTML();
+    };
+    ref.on('value',fn);
+    LUDO_LOBBY_OFF=function(){ref.off('value',fn)};
+    // Check if player has an active unfinished online match to rejoin
+    var saved=lg('sb_ld_active_'+session(),null);
+    if(saved&&saved.gid){
+      DB.ref('ludo_games/'+saved.gid).once('value',function(sn){
+        var gm=normalizeGm(sn.val());
+        var u=session(),ms=-1;
+        if(gm&&gm.phase!=='done'){for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u&&!gm.seats[i].out)ms=i}
+        if(ms>-1){LST.activeMatch=gm;if(LST.mode==='lobby')render()}
+        else{LST.activeMatch=null;saveActiveRef(null)}
+      });
+    }else LST.activeMatch=null;
+  }
+  function openTablesHTML(){
+    var u=session();
+    if(!DB)return '<div class="lopen-empty">Cloud connection required to browse online tables.</div>';
+    if(!LST.openRooms.length)return '<div class="lopen-empty">No open tables right now — tap Find Real Player or Create Friend Table to start one!</div>';
+    return LST.openRooms.map(function(rm){
+      var seated=rm.seats.some(function(x){return x&&x.u===u});
+      return '<div class="lopen-item"><div class="lopen-meta"><b>👤 '+esc(rm.host)+' · '+rm.np+'P · '+rm.home+'H</b><small>'+rm.seats.length+'/'+rm.np+' seated · Prize '+ldPot(rm.np,rm.stk).toLocaleString()+' ETB</small></div>'+
+        '<button type="button" class="lopen-join'+(seated?' sec':'')+'" data-ljoinpath="'+esc(rm.path)+'" data-ljoinkey="'+esc(rm.key)+'" data-ljoincode="'+esc(rm.code||'')+'">'+(seated?'Waiting (You)':'Join · '+rm.stk+' ETB')+'</button></div>';
+    }).join('');
   }
   function openModal(html){
     var m=$('lmodal');if(!m)return;m.innerHTML=html;m.classList.add('show');m.scrollTop=0;
@@ -2603,30 +2869,74 @@ function initLudo(){
     if($('lmback'))$('lmback').onclick=function(){openModal(ldHowHTML())};
     if($('lmback2'))$('lmback2').onclick=function(){openModal(ldHowHTML())};
   }
+  function openLeaveModal(){
+    var html='<div class="am-card" style="max-width:390px"><div class="am-top"><h3>Leave Match?</h3><button type="button" class="am-x" id="lmcls">×</button></div>'+
+      '<div class="km-box" style="text-align:center"><p style="margin:0;line-height:1.5">You are in an active Person-to-Person match. You can keep your seat and resume shortly, or forfeit the match.</p></div>'+
+      '<button type="button" class="am-go" id="lmstay">Stay in Match</button>'+
+      '<button type="button" class="lpriv" id="lmmin" style="margin-top:9px">Back to Lobby (Resume Later)</button>'+
+      '<button type="button" class="lpriv" id="lmforf" style="margin-top:9px;border-color:#ef4444;color:#fca5a5">Forfeit &amp; Leave Match</button></div>';
+    openModal(html);
+    if($('lmstay'))$('lmstay').onclick=function(){$('lmodal').classList.remove('show')};
+    if($('lmmin'))$('lmmin').onclick=function(){$('lmodal').classList.remove('show');clearGameConn();LST.mode='lobby';render()};
+    if($('lmforf'))$('lmforf').onclick=function(){$('lmodal').classList.remove('show');forfeitMatch()};
+  }
   function render(){
     var b=bal(me()||rec),pot=ldPot(LST.np,LST.stk);
     var hdr='<div class="lhdr"><button type="button" class="kback" id="ldbk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="ldsnd">'+(SND?'🔊':'🔇')+'</button></div>';
+    if(LST.mode!=='lobby')v.onclick=null;
     if(LST.mode==='lobby'){
+      if(DB&&!LUDO_LOBBY_OFF)subscribeOpenTables();
+      if(LST.playType==='pass'&&LST.np<2)LST.np=2;
+      if(LST.playType!=='pass'&&LST.np===3)LST.np=4;
       var dots=function(n){var d='';for(var i=0;i<n;i++)d+='<i></i>';return '<div class="ldots">'+d+'</div>'};
+      var modeTabs='<div class="lmode-tabs">'+
+        '<button type="button" class="lmode-tab'+(LST.playType==='pvp'?' on':'')+'" data-lpt="pvp"><b>👥</b>Online PvP</button>'+
+        '<button type="button" class="lmode-tab'+(LST.playType==='pass'?' on':'')+'" data-lpt="pass"><b>📱</b>Pass &amp; Play</button>'+
+        '<button type="button" class="lmode-tab'+(LST.playType==='bot'?' on':'')+'" data-lpt="bot"><b>🤖</b>Vs Bots</button></div>';
+      var resumeBanner=(LST.activeMatch&&LST.activeMatch.phase!=='done')?'<div class="lresume"><div><b>⚡ Live Match in Progress</b><small>'+LST.activeMatch.np+'P · '+LST.activeMatch.stk+' ETB · '+esc(LST.activeMatch.note||'Your table is waiting')+'</small></div><button type="button" id="ldresume">Resume</button></div>':'';
+      var playerPicker=LST.playType==='pass'
+        ? '<div class="lgrid3">'+[2,3,4].map(function(n){return '<button type="button" class="lopt'+(LST.np===n?' on':'')+'" data-lnp="'+n+'">'+n+' players<small>same phone</small></button>'}).join('')+'</div>'
+        : '<div class="lgrid2"><button type="button" class="lopt'+(LST.np===2?' on':'')+'" data-lnp="2">2 players<small>face to face</small></button><button type="button" class="lopt'+(LST.np===4?' on':'')+'" data-lnp="4">4 players<small>all four colours</small></button></div>';
+      var modeBody='';
+      if(LST.playType==='pvp'){
+        modeBody='<div class="llbl">STAKE</div><div class="lgrid3">'+LD_STAKES.map(function(s){return '<button type="button" class="lopt'+(LST.stk===s?' on':'')+'" data-lstk="'+s+'">'+s+'</button>'}).join('')+'</div>'+
+          '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b> · real players only</div>'+
+          '<button type="button" class="lfind" id="ldfind"'+(LST.busy?' disabled':'')+'>FIND REAL PLAYER</button>'+
+          '<p class="note" style="margin:7px 0 0;font-size:12px">Person-to-person matchmaking · bots never auto-join</p>'+
+          (LST.msg?'<div class="err" style="margin-top:8px">'+esc(LST.msg)+'</div>':'')+
+          '<div class="lopen-box"><div class="lopen-hdr"><span>LIVE OPEN TABLES</span><span>● Real Players</span></div><div class="lopen-list" id="ld_open_list">'+openTablesHTML()+'</div></div>'+
+          '<div class="ldiv"><span>OR PLAY WITH FRIENDS</span></div>'+
+          '<button type="button" class="lpriv" id="ldpriv"'+(LST.busy?' disabled':'')+'>👥 Create Friend Table<small>get a room code to share with friends</small></button>'+
+          '<label class="ltoggle"><span>List table in Live Open Tables so anyone can join</span><input type="checkbox" id="ldpub"'+(LST.pubRoom?' checked':'')+'></label>'+
+          '<div class="ljrow"><input id="ldcode" maxlength="8" placeholder="Friend\'s code"><button type="button" id="ldjoin">Join</button></div>';
+      }else if(LST.playType==='pass'){
+        var pCols=seatColsFor(LST.np),nameInputs='';
+        for(var pi=0;pi<LST.np;pi++){
+          var pC=LD_COLS[pCols[pi]],defNm=pi===0?session():('Player '+(pi+1));
+          if(!LST.localNames[pi])LST.localNames[pi]=defNm;
+          nameInputs+='<div class="lpinput-row">'+ldMiniPin(pC,20)+'<input class="lpinput" data-lpn="'+pi+'" maxlength="18" value="'+esc(LST.localNames[pi])+'" placeholder="'+esc(defNm)+'"></div>';
+        }
+        modeBody='<div class="llbl">PLAYER NAMES (SAME DEVICE)</div><div class="lpinput-list">'+nameInputs+'</div>'+
+          '<div class="lsum">Free Friendly Match · <b>Pass the phone</b> each turn</div>'+
+          '<button type="button" class="lfind" id="ldpassgo">START PASS &amp; PLAY</button>'+
+          (LST.msg?'<div class="err" style="margin-top:8px">'+esc(LST.msg)+'</div>':'');
+      }else{
+        modeBody='<div class="llbl">STAKE</div><div class="lgrid3">'+LD_STAKES.map(function(s){return '<button type="button" class="lopt'+(LST.stk===s?' on':'')+'" data-lstk="'+s+'">'+s+'</button>'}).join('')+'</div>'+
+          '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b> · instant AI bots</div>'+
+          '<button type="button" class="lfind" id="ldbotgo"'+(LST.busy?' disabled':'')+'>PLAY VS BOTS</button>'+
+          (LST.msg?'<div class="err" style="margin-top:8px">'+esc(LST.msg)+'</div>':'');
+      }
       v.innerHTML='<div class="lwrap">'+hdr+
         '<div class="ltopacts"><button type="button" class="lpillbtn" id="ldhow">? How to play</button><button type="button" class="lpillbtn" id="ldres">🧾 Results</button></div>'+
-        '<div class="lcard"><h2 class="ltitle">LUDO</h2><p class="lsub">Play other players for the pot</p>'+
-        '<div class="llbl">PLAYERS</div><div class="lgrid2">'+
-        '<button type="button" class="lopt'+(LST.np===2?' on':'')+'" data-lnp="2">2 players<small>face to face</small></button>'+
-        '<button type="button" class="lopt'+(LST.np===4?' on':'')+'" data-lnp="4">4 players<small>all four colours</small></button></div>'+
+        resumeBanner+
+        '<div class="lcard"><h2 class="ltitle">LUDO</h2><p class="lsub">Person-to-person &amp; Arcade Ludo</p>'+
+        modeTabs+
+        '<div class="llbl">PLAYERS</div>'+playerPicker+
         '<div class="llbl">TOKENS HOME TO WIN</div><div class="lgrid4">'+
         [1,2,3,4].map(function(h){return '<button type="button" class="lopt'+(LST.home===h?' on':'')+'" data-lhm="'+h+'">'+dots(h)+h+' home</button>'}).join('')+'</div>'+
-        '<div class="llbl">STAKE</div><div class="lgrid3">'+
-        LD_STAKES.map(function(s){return '<button type="button" class="lopt'+(LST.stk===s?' on':'')+'" data-lstk="'+s+'">'+s+'</button>'}).join('')+'</div>'+
-        '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b> · about '+LD_MINS[LST.home]+' min</div>'+
-        '<button type="button" class="lfind" id="ldfind"'+(LST.busy?' disabled':'')+'>FIND A GAME</button>'+
-        '<p class="note" style="margin:7px 0 0;font-size:12px">Nobody waiting yet · a bot joins after 60 s</p>'+
-        (LST.msg?'<div class="err" style="margin-top:8px">'+esc(LST.msg)+'</div>':'')+
-        '<div class="ldiv"><span>OR PLAY WITH FRIENDS</span></div>'+
-        '<button type="button" class="lpriv" id="ldpriv">👥 Open a private table<small>you get a code to send your friends</small></button>'+
-        '<div class="ljrow"><input id="ldcode" maxlength="8" placeholder="Friend\'s code"><button type="button" id="ldjoin">Join</button></div>'+
+        modeBody+
         '</div></div><div id="lmodal"></div>';
-      $('ldbk').onclick=function(){go('home')};
+      $('ldbk').onclick=function(){clearLobbyConn();go('home')};
       $('ldsnd').onclick=function(){SND=!SND;ls('sb_snd',SND);if(!SND)stopAud();render()};
       $('ldhow').onclick=function(){openModal(ldHowHTML())};
       $('ldres').onclick=function(){
@@ -2638,61 +2948,107 @@ function initLudo(){
           var m=$('lmodal');if(m&&m.classList.contains('show'))openModal(ldResHTML());
         });
       };
+      if($('ldresume'))$('ldresume').onclick=function(){
+        var am=LST.activeMatch;if(!am)return;
+        CUR=am;LST.mode='play';LST.gid=am.gid;
+        subscribeGame(am.gid);startTurnLoop();render();
+      };
+      v.querySelectorAll('[data-lpt]').forEach(function(el){el.onclick=function(){LST.playType=el.dataset.lpt;LST.msg='';render()}});
       v.querySelectorAll('[data-lnp]').forEach(function(el){el.onclick=function(){LST.np=+el.dataset.lnp;LST.msg='';render()}});
       v.querySelectorAll('[data-lhm]').forEach(function(el){el.onclick=function(){LST.home=+el.dataset.lhm;LST.msg='';render()}});
       v.querySelectorAll('[data-lstk]').forEach(function(el){el.onclick=function(){LST.stk=+el.dataset.lstk;LST.msg='';render()}});
-      $('ldfind').onclick=startMatchmaking;
-      $('ldpriv').onclick=openPrivate;
-      $('ldjoin').onclick=function(){joinPrivate($('ldcode').value)};
+      v.querySelectorAll('[data-lpn]').forEach(function(el){el.oninput=function(){LST.localNames[+el.dataset.lpn]=el.value}});
+      if($('ldfind'))$('ldfind').onclick=startOnlinePvpSearch;
+      if($('ldpriv'))$('ldpriv').onclick=openFriendTable;
+      if($('ldpub'))$('ldpub').onchange=function(){LST.pubRoom=!!this.checked};
+      if($('ldjoin'))$('ldjoin').onclick=function(){joinPrivate($('ldcode').value)};
+      if($('ldpassgo'))$('ldpassgo').onclick=startPassAndPlay;
+      if($('ldbotgo'))$('ldbotgo').onclick=startBotMatch;
+      v.onclick=function(e){
+        var jb=e.target.closest('[data-ljoinpath]');
+        if(jb)joinByPath(jb.dataset.ljoinpath,jb.dataset.ljoinkey,jb.dataset.ljoincode);
+      };
       return;
     }
     if(LST.mode==='wait'){
+      var seats=ldArr(LST.waitSeats);if(!seats.length)seats=[{u:session(),name:session()}];
+      var cis=seatColsFor(LST.np),seatsHtml='';
+      for(var si=0;si<LST.np;si++){
+        var ws=seats[si],wC=LD_COLS[cis[si]];
+        seatsHtml+='<div class="lseat'+(ws?' ok':'')+'">'+ldMiniPin(wC,20)+'<span>'+(ws?esc(ws.name):'Waiting for player…')+'</span></div>';
+      }
+      var isHost=(seats[0]||{}).u===session(),canStartSeated=isHost&&seats.length>=2&&seats.length<LST.np;
       v.innerHTML='<div class="lwrap">'+hdr+'<div class="lcard lwait">'+
-        '<h3 style="margin:0;color:#f6d77a">'+(LST.code?'Private Table':'Finding Players…')+'</h3>'+
-        (LST.code?'<p class="note" style="margin:6px 0">Share this code with your friends:</p><div class="lcode" id="ldcp">'+LST.code+' 📋</div>':'<p class="note" style="margin:6px 0">Bot players join automatically in <b id="ld_wcd" style="color:#f6d77a">01:00</b></p>')+
-        '<div class="lseats" id="ld_wseats"></div>'+
-        '<button type="button" class="lfind" id="ldnow">Play vs Bots Now</button>'+
-        '<button type="button" class="lpriv" id="ldleave" style="margin-top:8px">Leave & Refund ('+LST.stk+' ETB)</button>'+
+        '<h3 style="margin:0;color:#f6d77a">'+(LST.code?'Person-to-Person Table':'Waiting for Real Players…')+'</h3>'+
+        (LST.code?'<p class="note" style="margin:6px 0">Share this code with a friend (tap to copy):</p><div class="lcode" id="ldcp">'+esc(LST.code)+' 📋</div>':'')+
+        '<p class="note" style="margin:4px 0">'+seats.length+'/'+LST.np+' real players seated · Waiting <b id="ld_wcd" style="color:#f6d77a">00:00</b></p>'+
+        '<div class="lseats" id="ld_wseats">'+seatsHtml+'</div>'+
+        (canStartSeated?'<button type="button" class="lfind" id="ldstart_pvp">Start Now with '+seats.length+' Players</button>':'')+
+        (isHost?'<button type="button" class="lpriv" id="ldnow" style="margin-top:8px">Play with Bots Instead</button>':'')+
+        '<button type="button" class="lpriv" id="ldleave" style="margin-top:8px">Leave &amp; Refund ('+LST.stk+' ETB)</button>'+
         '</div></div><div id="lmodal"></div>';
-      renderWaitSeats([{u:session(),name:session()}]);
       $('ldbk').onclick=leaveWait;$('ldleave').onclick=leaveWait;
       $('ldsnd').onclick=function(){SND=!SND;ls('sb_snd',SND);render()};
       if($('ldcp'))$('ldcp').onclick=function(){try{navigator.clipboard.writeText(LST.code)}catch(e){}toast('Code '+LST.code+' copied!')};
-      $('ldnow').onclick=function(){clearGameConn();launchGame(LST.gid||('ld_'+now()),[{u:session(),name:session()}],LST.np,LST.home,LST.stk)};
+      if($('ldstart_pvp'))$('ldstart_pvp').onclick=function(){startWaitWithSeated(false)};
+      if($('ldnow'))$('ldnow').onclick=function(){startWaitWithSeated(true)};
       return;
     }
-    // Playing view
     if(!CUR){
-      v.innerHTML='<div class="lwrap">'+hdr+'<div class="lcard lwait"><h3 style="margin:0;color:#f6d77a">Connecting to table…</h3><p class="note">Setting up your Ludo board.</p></div></div><div id="lmodal"></div>';
+      v.innerHTML='<div class="lwrap">'+hdr+'<div class="lcard lwait"><h3 style="margin:0;color:#f6d77a">Connecting to table…</h3><p class="note">Syncing your Ludo board with players.</p><button type="button" class="lpriv" id="ldcancel" style="margin-top:10px">Back to Lobby</button></div></div><div id="lmodal"></div>';
       $('ldbk').onclick=function(){clearGameConn();LST.mode='lobby';render()};
+      if($('ldcancel'))$('ldcancel').onclick=function(){clearGameConn();LST.mode='lobby';render()};
       $('ldsnd').onclick=function(){SND=!SND;ls('sb_snd',SND);render()};
       return;
     }
-    var ms=mySeat(CUR),curS=CUR.seats[CUR.turn],myTurn=(CUR.phase!=='done'&&ms===CUR.turn);
-    var legal=myTurn&&CUR.phase==='move'?ldLegal(CUR,ms,CUR.dice):[];
+    var actorSeat=CUR.localPvp?CUR.turn:mySeat(CUR);
+    var curS=CUR.seats[CUR.turn],myTurn=(CUR.phase!=='done'&&actorSeat===CUR.turn&&canAct(CUR));
+    var legal=myTurn&&CUR.phase==='move'?ldLegal(CUR,actorSeat,CUR.dice):[];
+    var chatFresh=CUR.chat&&(now()-(CUR.chat.at||0)<5000)?CUR.chat:null;
     var pCards=CUR.seats.map(function(s,i){
       var C=LD_COLS[s.ci],hm=s.toks.filter(function(x){return x===56}).length,isT=(CUR.phase!=='done'&&CUR.turn===i);
-      return '<div class="lpcard'+(isT?' turn':'')+(s.out?' out':'')+'">'+ldMiniPin(C,22)+'<div class="lpname"><b>'+esc(s.name)+'</b><small>'+(s.out?'Eliminated':isT?(CUR.phase==='roll'?'Rolling…':'Choose token'):'Waiting')+'</small></div><span class="lphm">'+hm+'/'+CUR.home+'</span>'+(isT?'<div class="lpbar" id="ld_bar_'+i+'" style="width:100%"></div>':'')+'</div>';
+      var bubble=(chatFresh&&chatFresh.who===s.name)?'<span class="lpchat">'+esc(chatFresh.txt)+'</span>':'';
+      return '<div class="lpcard'+(isT?' turn':'')+(s.out?' out':'')+'">'+ldMiniPin(C,22)+'<div class="lpname"><b>'+esc(s.name)+'</b><small>'+(s.out?'Eliminated':isT?(CUR.phase==='roll'?'Rolling…':'Choose token'):'Waiting')+'</small></div><span class="lphm">'+hm+'/'+CUR.home+'</span>'+bubble+(isT&&!CUR.noTimeout?'<div class="lpbar" id="ld_bar_'+i+'" style="width:100%"></div>':'')+'</div>';
     }).join('');
     var diceCol=curS?LD_COLS[curS.ci].dk:'#1e0a3c';
+    var potTxt=CUR.localPvp?'👥 Pass &amp; Play':('🏆 Pot: '+ldPot(CUR.np,CUR.stk).toLocaleString()+' ETB');
+    var tmTxt=CUR.noTimeout?'👥 No Timer':('⏱ <span id="ld_tm">'+(CUR.pvp?'20s':'15s')+'</span>');
+    var doneWinTxt=CUR.localPvp?('🏆 '+esc(CUR.winner)+' wins!'):('🏆 '+esc(CUR.winner)+' won '+ldPot(CUR.np,CUR.stk)+' ETB!');
+    var emotesHtml=(CUR.pvp&&CUR.phase!=='done')?'<div class="lemotes">'+['👍','🔥','😂','🍀','GG!'].map(function(em){return '<button type="button" class="lemote-btn" data-lem="'+em+'">'+em+'</button>'}).join('')+'</div>':'';
     v.innerHTML='<div class="lwrap">'+hdr+
-      '<div class="lgamehdr"><div class="lpotpill">🏆 Pot: '+ldPot(CUR.np,CUR.stk).toLocaleString()+' ETB</div><div class="lpotpill">🎯 First to '+CUR.home+' · ⏱ <span id="ld_tm">15s</span></div></div>'+
+      '<div class="lgamehdr"><div class="lpotpill">'+potTxt+'</div><div class="lpotpill">🎯 First to '+CUR.home+' · '+tmTxt+'</div></div>'+
       '<div class="lplayers">'+pCards+'</div>'+
       '<div class="lboardbox">'+ldBoardSVG(CUR,legal)+'</div>'+
       '<div class="ldeck">'+
       '<button type="button" class="ldicebtn'+(ROLLING?' roll':'')+'" id="lddice"'+(myTurn&&CUR.phase==='roll'&&!ROLLING?'':' disabled')+'>'+ldDiceSVG(CUR.dice||6,diceCol)+'</button>'+
-      '<div class="ldstat"><b>'+(CUR.phase==='done'?'🏆 '+esc(CUR.winner)+' won '+ldPot(CUR.np,CUR.stk)+' ETB!':curS.name+"'s turn")+'</b><small>'+(CUR.note||(myTurn?(CUR.phase==='roll'?'Tap ROLL to cast the dice':'Tap a glowing token to move'):'Please wait…'))+'</small></div>'+
-      (CUR.phase==='done'?'<button type="button" class="lrollbtn" id="ldagain">New Game</button>':'<button type="button" class="lrollbtn" id="ldroll"'+(myTurn&&CUR.phase==='roll'&&!ROLLING?'':' disabled')+'>ROLL</button>')+
-      '</div></div><div id="lmodal"></div>';
-    $('ldbk').onclick=function(){clearGameConn();LST.mode='lobby';render()};
+      '<div class="ldstat"><b>'+(CUR.phase==='done'?doneWinTxt:esc(curS.name)+"'s turn")+'</b><small>'+(CUR.note||(myTurn?(CUR.phase==='roll'?'Tap ROLL to cast the dice':'Tap a glowing token to move'):'Waiting for '+esc(curS.name)+'…'))+'</small></div>'+
+      (CUR.phase==='done'?'<button type="button" class="lrollbtn" id="ldagain">'+(CUR.localPvp?'Rematch':'New Game')+'</button>':'<button type="button" class="lrollbtn" id="ldroll"'+(myTurn&&CUR.phase==='roll'&&!ROLLING?'':' disabled')+'>ROLL</button>')+
+      '</div>'+emotesHtml+'</div><div id="lmodal"></div>';
+    $('ldbk').onclick=function(){
+      if(CUR&&CUR.phase!=='done'&&!CUR.localPvp&&CUR.pvp){openLeaveModal();return}
+      clearGameConn();CUR=null;LST.mode='lobby';render();
+    };
     $('ldsnd').onclick=function(){SND=!SND;ls('sb_snd',SND);if(!SND)stopAud();render()};
-    if($('ldroll'))$('ldroll').onclick=function(){rollDice(ms)};
-    if($('lddice'))$('lddice').onclick=function(){rollDice(ms)};
-    if($('ldagain'))$('ldagain').onclick=function(){clearGameConn();CUR=null;LST.mode='lobby';render()};
+    if($('ldroll'))$('ldroll').onclick=function(){rollDice(actorSeat)};
+    if($('lddice'))$('lddice').onclick=function(){rollDice(actorSeat)};
+    if($('ldagain'))$('ldagain').onclick=function(){
+      if(CUR&&CUR.localPvp){
+        var prevNames=CUR.seats.map(function(x){return x.name}),prevHome=CUR.home;
+        clearGameConn();CUR=null;
+        var gid='ldloc_'+now()+'_'+Math.random().toString(36).slice(2,6);
+        createGameOnce(gid,[],prevNames.length,prevHome,0,false,prevNames);
+        return;
+      }
+      clearGameConn();CUR=null;LST.mode='lobby';render();
+    };
     v.querySelectorAll('[data-ltok]').forEach(function(el){
-      el.onclick=function(){if(!myTurn||CUR.phase!=='move'||LST.anim)return;animMove(CUR,ms,+el.dataset.ltok)};
+      el.onclick=function(){if(!myTurn||CUR.phase!=='move'||LST.anim)return;animMove(CUR,actorSeat,+el.dataset.ltok)};
+    });
+    v.querySelectorAll('[data-lem]').forEach(function(el){
+      el.onclick=function(){sendQuickEmote(el.dataset.lem)};
     });
   }
+  subscribeOpenTables();
   render();
 }
 /* ===== Hi-Lo ===== */
@@ -2920,7 +3276,7 @@ function initHiLo(){
   render();
 }
 /* ===== Crazy 8 ===== */
-var C8ST={np:2,stk:10,mode:'lobby',gid:null,code:'',waitSince:0,msg:'',busy:false,pickWild:null};
+var C8ST={playType:'pvp',np:2,stk:10,mode:'lobby',gid:null,code:'',waitPath:'',openKey:'',pubRoom:true,waitSince:0,waitSeats:[],msg:'',busy:false,pickWild:null,localNames:['','Player 2','Player 3','Player 4'],openRooms:[],activeMatch:null,seenTurnSeq:-1};
 var C8_STAKES=[10,20,50,100,500],C8_BOTS=['Selam (Bot)','Yohannes (Bot)','Hanna (Bot)','Bereket (Bot)'];
 var C8_SUITS=[{s:'♠',n:'Spades',red:false},{s:'♥',n:'Hearts',red:true},{s:'♦',n:'Diamonds',red:true},{s:'♣',n:'Clubs',red:false}];
 var C8_RANKS=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
@@ -2960,17 +3316,18 @@ function c8CanPlay(gm,card,idx){
   return card.s===gm.curSuit||card.r===top.r;
 }
 function c8ResList(){return lg('sb_c8_res',[])}
-function c8AddRes(r){var l=c8ResList();l.unshift(r);if(l.length>20)l.length=20;ls('sb_c8_res',l);if(DB)try{DB.ref('c8_res/'+r.id).set(r)}catch(e){}}
+function c8AddRes(r){var l=c8ResList();if(l.some(function(x){return x&&x.id===r.id}))return;l.unshift(r);if(l.length>20)l.length=20;ls('sb_c8_res',l);if(DB)try{DB.ref('c8_res/'+r.id).set(r)}catch(e){}}
 function c8HowHTML(){
   var tbl=C8_STAKES.map(function(s){return '<tr><td>'+s+' ETB</td><td>'+c8Pot(2,s).toLocaleString()+'</td><td>'+c8Pot(3,s).toLocaleString()+'</td><td>'+c8Pot(4,s).toLocaleString()+'</td></tr>'}).join('');
   return '<div class="am-card" style="max-width:430px"><div class="am-top"><h3>Crazy 8 · How to play</h3><button type="button" class="am-x" id="c8mcls">×</button></div>'+
     '<button type="button" class="lfullbtn" id="c8fullrules">📜 Full game rules</button>'+
     '<div class="km-box"><b>HOW TO PLAY CRAZY 8</b><ol style="padding-left:18px;margin:8px 0 0;line-height:1.55">'+
-    '<li><b>Choose 2, 3 or 4 players and your stake</b>, then tap Find a game. If nobody else comes within a minute, bot players (shown with 🤖 and "(Bot)" after their name) take the empty seats. Leave before the start and your stake comes back.</li>'+
+    '<li><b>Choose your mode:</b> Play <b>Online PvP</b> (real person-to-person with open tables &amp; friend codes), <b>Pass &amp; Play</b> (2–4 players on one phone with a privacy hand shield), or <b>Vs Bots</b>.</li>'+
+    '<li><b>Online PvP tables</b> match real players only (no forced bots). Pick 2, 3 or 4 players and your stake, then join an open table or share your room code. Leave before the start and your stake comes back.</li>'+
     '<li><b>Everyone gets 7 cards.</b> On your turn play a card of the same suit or the same number as the top card. Can\'t play? Draw one: if it fits you may play it, otherwise the turn passes.</li>'+
     '<li><b>8 and J are wild:</b> they go on anything and you choose the next suit. The next player can\'t change it again: on that turn an 8 or J goes only in the chosen suit. <b>2:</b> the next player draws 2, unless they answer with a 2 (it adds up). <b>A♠:</b> the next player draws 5; it stacks only with the 2♠ (5 + 2 = 7).</li>'+
     '<li><b>7 and 5:</b> with 2 players, a 7 lets you play again (one card of its suit, all your cards of that suit at once, or another 7) and a 5 lets you play one more card. With 3 or 4 players, a 7 skips the next player and a 5 turns the direction round.</li>'+
-    '<li><b>Empty your hand first</b> to win the pot, minus the house cut. Your last card can be any card. You have 20 seconds for each turn; miss 3 turns and you are out.</li></ol>'+
+    '<li><b>Empty your hand first</b> to win the pot, minus the 10% house cut. Your last card can be any card. Online turns allow 20 seconds; miss 3 turns and you are out.</li></ol>'+
     '<div class="c8leg"><span class="c8chipb">8 J</span> wild · <span class="c8chipb">2</span> +2 · <span class="c8chipb">A♠</span> +5 · <span class="c8chipb">7</span> again / skip · <span class="c8chipb">5</span> again / reverse</div></div>'+
     '<div class="km-box"><b>PRIZES · what the winner gets</b><table class="lptbl"><tr><th>Stake</th><th>2P</th><th>3P</th><th>4P</th></tr>'+tbl+'</table></div>'+
     '<p style="text-align:center;font-size:11.5px;color:var(--mut);margin:10px 0 12px">18+ only. Play responsibly.</p>'+
@@ -2979,8 +3336,8 @@ function c8HowHTML(){
 function c8FullRulesHTML(){
   return '<div class="am-card" style="max-width:430px"><div class="lrules-top"><span>CRAZY 8 · GAME RULES</span><button type="button" class="lrules-cls" id="c8mback">Close</button></div>'+
     '<div class="lrules-sec"><h4>The game</h4><ul class="lrules-ul">'+
-    '<li>Choose 2, 3 or 4 players and the stake (10, 20, 50, 100, 500 ETB). You only play with players who chose the same. The stake is taken when you join.</li>'+
-    '<li>If the table isn\'t full within 60 seconds, bot players (shown with 🤖 and "(Bot)" after their name) take the empty seats. Leave before the start and your stake comes back.</li>'+
+    '<li>Choose Online PvP (person vs person), Pass &amp; Play (same-device multiplayer with hidden hands between turns), or Vs Bots. For staked matches, pick 2, 3 or 4 players and the stake (10, 20, 50, 100, 500 ETB).</li>'+
+    '<li>In Online PvP, your seat waits for real players and is listed in Live Open Tables unless marked private. Leave before the start and your stake comes back automatically.</li>'+
     '<li>The prize: the stake × the number of players, minus a 10% house cut. The first player to play all their cards wins it.</li>'+
     '</ul></div>'+
     '<div class="lrules-sec"><h4>Rules</h4><ul class="lrules-ul">'+
@@ -2990,22 +3347,20 @@ function c8FullRulesHTML(){
     '<li>A♠: the next player draws 5 cards. It stacks only with the 2♠, either way round (5 + 2 = 7). Other aces and other spades are normal cards.</li>'+
     '<li>With 2 players: a 7 means play again: one card of the same suit, or all your cards of that suit at once, or another 7. A 5 means play again with one card only. With no card for it you draw 1 and the turn passes. When you drop several cards, the last one counts.</li>'+
     '<li>With 3 or 4 players: a 7 makes the next player miss a turn; a 5 turns the direction of play round.</li>'+
-    '<li>Can\'t play? Draw 1 card: if it fits you may play it, otherwise the turn passes. You have 20 seconds for each turn; after that the game plays for you. Miss 3 turns in a row and you are out. Leaving during the game counts as a loss.</li>'+
+    '<li>Can\'t play? Draw 1 card: if it fits you may play it, otherwise the turn passes. Online turns have 20 seconds; after that the game plays for you. Miss 3 turns in a row and you are out. Leaving/forfeiting during a match counts as a loss. Pass &amp; Play has no timer.</li>'+
     '<li>The cards are shuffled when the game starts; when the draw pile runs out, the played cards are shuffled into a new one.</li>'+
     '</ul></div>'+
     '<div class="lrules-sec"><h4>For all games</h4><ul class="lrules-ul">'+
     '<li>All games are played with ETB credits; 1 credit = 1 ETB.</li>'+
     '<li>Results are random and decided fairly for the round. What you see on the screen shows the official round outcome; if they ever differ, the saved game record counts.</li>'+
     '<li>A malfunction voids all pays and plays. If a round can\'t be finished (for example a connection reset before completion), the bets of that round are refunded.</li>'+
-    '<li>A bet counts once your balance changes. If you lose connection, the bet still counts and is settled as normal.</li>'+
-    '<li>A bet can be refused while a game is paused, when you bet too fast, or when it exceeds your available wallet balance.</li>'+
     '<li>Players must be 18 or older. The Terms apply.</li>'+
     '</ul></div>'+
     '<button type="button" class="am-go" id="c8mback2" style="margin-top:10px">Back to How to play</button></div>';
 }
 function c8ResHTML(){
   var l=c8ResList();
-  var rows=l.length?l.map(function(x){return '<tr><td>'+esc(x.win)+'</td><td>'+x.np+'P</td><td>'+x.stk+' ETB</td><td>+'+x.pot+' ETB</td></tr>'}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--mut);padding:16px">No Crazy 8 matches finished yet.</td></tr>';
+  var rows=l.length?l.map(function(x){return '<tr><td>'+esc(x.win)+'</td><td>'+x.np+'P</td><td>'+(x.stk?x.stk+' ETB':'Free')+'</td><td>'+(x.pot?'+'+x.pot+' ETB':'Local')+'</td></tr>'}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--mut);padding:16px">No Crazy 8 matches finished yet.</td></tr>';
   return '<div class="am-card" style="max-width:430px"><div class="am-top"><h3>Crazy 8 Results</h3><button type="button" class="am-x" id="c8mcls">×</button></div>'+
     '<div class="km-box"><table class="lptbl"><tr><th>Winner</th><th>Mode</th><th>Stake</th><th>Pot</th></tr>'+rows+'</table></div>'+
     '<button type="button" class="am-go" id="c8mok">Close</button></div>';
@@ -3015,15 +3370,90 @@ function initCrazy8(){
   if(!rec){v.innerHTML='<div class="panel"><h2>Crazy 8</h2><p class="note">Log in to play Crazy 8.</p><button class="btn" data-go="home">Login</button></div>';return}
   var CUR=null;
   function arr(x){return Array.isArray(x)?x:x?Object.values(x):[]}
-  function clearConn(){if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(C8T){clearInterval(C8T);C8T=null}}
-  function mySeat(gm){if(!gm)return -1;var u=session();for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u)return i;return -1}
-  function saveGame(gm){CUR=gm;if(DB&&gm.gid)DB.ref('c8_games/'+gm.gid).set(gm);else ls('sb_c8_cur_'+session(),gm)}
+  function clearGameConn(){if(C8_OFF){try{C8_OFF()}catch(e){}C8_OFF=null}if(C8T){clearInterval(C8T);C8T=null}}
+  function clearLobbyConn(){if(C8_LOBBY_OFF){try{C8_LOBBY_OFF()}catch(e){}C8_LOBBY_OFF=null}}
+  function saveActiveRef(gid){var u=session();if(!u)return;if(gid)ls('sb_c8_active_'+u,{gid:gid,at:now()});else try{localStorage.removeItem('sb_c8_active_'+u)}catch(e){}}
+  function normalizeGm(v){
+    if(!v)return null;
+    v.seats=arr(v.seats).map(function(s){if(s&&!Array.isArray(s.hand))s.hand=arr(s.hand);return s});
+    v.deck=arr(v.deck);v.discard=arr(v.discard);
+    return v;
+  }
+  function cloneGm(gm){return JSON.parse(JSON.stringify(gm))}
+  function mySeat(gm){
+    if(!gm)return -1;
+    if(gm.localPvp)return gm.turn;
+    var u=session();
+    for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u)return i;
+    return -1;
+  }
+  function canAct(gm){
+    if(!gm||gm.phase==='done')return false;
+    var s=gm.seats[gm.turn];if(!s||s.bot||s.out)return false;
+    if(gm.localPvp)return true;
+    return s.u===session();
+  }
+  function turnDur(gm){return gm.noTimeout?999999:20000}
+  function isTimeoutDriver(gm){
+    var u=session(),humans=[];
+    for(var i=0;i<gm.seats.length;i++){
+      var s=gm.seats[i];
+      if(s&&!s.bot&&!s.out)humans.push(s.u);
+    }
+    return humans.indexOf(u);
+  }
+  function commitGame(gm,expectedVer,mutator,done){
+    if(gm.localPvp||!DB||!gm.gid){
+      var next=cloneGm(gm);
+      if(mutator(next)===false)return;
+      next.ver=(next.ver||0)+1;
+      CUR=next;
+      ls('sb_c8_cur_'+session(),next);
+      if(done)done(true,next);
+      return;
+    }
+    var ref=DB.ref('c8_games/'+gm.gid),committed=null;
+    ref.transaction(function(cur){
+      cur=normalizeGm(cur);
+      if(!cur||cur.phase==='done')return;
+      if(typeof expectedVer==='number'&&(cur.ver||0)!==expectedVer)return;
+      if(mutator(cur)===false)return;
+      cur.ver=(cur.ver||0)+1;
+      committed=cur;
+      return cur;
+    },function(e,ok,sn){
+      var val=normalizeGm(sn&&sn.val())||committed;
+      if(!e&&ok&&val){CUR=val;if(done)done(true,val)}
+      else if(done)done(false,val);
+    });
+  }
+  function creditWinnerOnce(v){
+    if(!v||v.phase!=='done'||v.localPvp||!v.stk)return;
+    var u=session(),us=users(),ms=-1;
+    for(var i=0;i<v.seats.length;i++)if(v.seats[i]&&v.seats[i].u===u){ms=i;break}
+    if(ms<0||v.winner!==v.seats[ms].name||!us[u])return;
+    var pot=v.pot||c8Pot(v.np,v.stk);
+    if(DB&&v.gid){
+      DB.ref('c8_games/'+v.gid+'/paid/'+ukey(u)).transaction(function(c){return c?undefined:1},function(e,ok){
+        if(!e&&ok){
+          setBal(users(),u,bal(users()[u])+pot,'Crazy 8 win ('+v.np+'P)',pot);
+          addWin({id:'c8_'+v.gid,u:u,phone:(users()[u]||{}).phone||'',time:'Crazy 8 '+v.stk+' ETB',k:1,reward:pot,n:v.np,calls:v.discard.length,at:now()});
+          tone(660,.14);setTimeout(function(){tone(880,.25)},120);
+        }
+      });
+    }else if(!v.paidLocal){
+      v.paidLocal=true;ls('sb_c8_cur_'+u,v);
+      setBal(us,u,bal(us[u])+pot,'Crazy 8 win ('+v.np+'P)',pot);
+      addWin({id:'c8_'+v.gid,u:u,phone:(us[u]||{}).phone||'',time:'Crazy 8 '+v.stk+' ETB',k:1,reward:pot,n:v.np,calls:v.discard.length,at:now()});
+      tone(660,.14);setTimeout(function(){tone(880,.25)},120);
+    }
+  }
   function advIdx(gm,steps){
     var n=gm.seats.length,idx=gm.turn,d=gm.dir||1;
     while(steps>0){
       for(var k=1;k<=n;k++){
         var j=(idx+d*k+n*10)%n;
-        if(!gm.seats[j].out){idx=j;break}
+        if(gm.seats[j]&&!gm.seats[j].out){idx=j;break}
       }
       steps--;
     }
@@ -3031,25 +3461,20 @@ function initCrazy8(){
   }
   function finishGame(gm,wSeat){
     if(gm.winner)return;
-    var pot=c8Pot(gm.np,gm.stk),winRec=gm.seats[wSeat];
+    var pot=gm.localPvp?0:c8Pot(gm.np,gm.stk),winRec=gm.seats[wSeat];
     gm.phase='done';gm.winner=winRec.name;gm.pot=pot;
-    saveGame(gm);
-    var us=users(),u=session();
-    if(winRec.u===u&&us[u]){
-      setBal(us,u,bal(us[u])+pot,'Crazy 8 win ('+gm.np+'P)',pot);
-      addWin({id:'c8_'+gm.gid,u:u,phone:(us[u]||{}).phone||'',time:'Crazy 8 '+gm.stk+' ETB',k:1,reward:pot,n:gm.np,calls:gm.discard.length,at:now()});
-    }
     c8AddRes({id:'c8_'+gm.gid,win:winRec.name,np:gm.np,stk:gm.stk,pot:pot,at:now()});
-    if(winRec.u===u){tone(660,.14);setTimeout(function(){tone(880,.25)},120)}
-    render();
+    if(gm.localPvp){tone(660,.14);setTimeout(function(){tone(880,.25)},120)}
   }
   function nextTurn(gm,steps){
     gm.turn=advIdx(gm,steps||1);
     gm.drawnIdx=-1;gm.combo=null;gm.comboSuit=-1;
-    gm.deadline=now()+20000;
+    gm.turnSeq=(gm.turnSeq||0)+1;
+    gm.deadline=now()+turnDur(gm);
   }
   function resolveCardEffect(gm,si,card,chosenSuit){
     var s=gm.seats[si];
+    gm.lastMove={si:si,at:now()};
     if(s.hand.length===0){finishGame(gm,si);return}
     if(card.r==='8'||card.r==='J'){
       if(gm.wildLock){
@@ -3072,7 +3497,7 @@ function initCrazy8(){
     }else if(card.r==='7'){
       gm.curSuit=card.s;gm.wildLock=false;
       if(gm.np===2){
-        gm.drawnIdx=-1;gm.combo='7';gm.comboSuit=card.s;gm.deadline=now()+20000;
+        gm.drawnIdx=-1;gm.combo='7';gm.comboSuit=card.s;gm.deadline=now()+turnDur(gm);
         gm.note=s.name+' played '+c8Label(card)+' · play again!';
       }else{
         gm.note=s.name+' played '+c8Label(card)+' · next player skipped!';
@@ -3081,7 +3506,7 @@ function initCrazy8(){
     }else if(card.r==='5'){
       gm.curSuit=card.s;gm.wildLock=false;
       if(gm.np===2){
-        gm.drawnIdx=-1;gm.combo='5';gm.comboSuit=card.s;gm.deadline=now()+20000;
+        gm.drawnIdx=-1;gm.combo='5';gm.comboSuit=card.s;gm.deadline=now()+turnDur(gm);
         gm.note=s.name+' played '+c8Label(card)+' · play 1 more card!';
       }else{
         gm.dir=(gm.dir||1)*-1;
@@ -3093,84 +3518,110 @@ function initCrazy8(){
       gm.note=s.name+' played '+c8Label(card);
       nextTurn(gm,1);
     }
-    saveGame(gm);
+  }
+  function onCommitted(ok,val){
+    if(!ok||!val)return;
+    if(val.phase==='done'){saveActiveRef(null);creditWinnerOnce(val)}
     render();
-    scheduleBot(gm);
+    scheduleBot(val);
   }
   function playSingle(gm,si,idx,chosenSuit){
     var s=gm.seats[si];if(!s||gm.turn!==si||gm.phase==='done')return;
     var card=s.hand[idx];if(!c8CanPlay(gm,card,idx))return;
-    s.hand.splice(idx,1);
-    gm.discard.push(card);
-    gm.drawnIdx=-1;gm.combo=null;gm.comboSuit=-1;
     tone(520,.05);
-    resolveCardEffect(gm,si,card,chosenSuit);
+    var expVer=gm.ver||0;
+    commitGame(gm,expVer,function(next){
+      if(next.turn!==si||next.phase==='done')return false;
+      var ns=next.seats[si];if(!ns||ns.out)return false;
+      var nc=ns.hand[idx];if(!c8CanPlay(next,nc,idx))return false;
+      ns.hand.splice(idx,1);
+      ns.miss=0;
+      next.discard.push(nc);
+      next.drawnIdx=-1;next.combo=null;next.comboSuit=-1;
+      resolveCardEffect(next,si,nc,chosenSuit);
+    },onCommitted);
   }
-  function playAllSuit(gm,si){
+  function playAllSuit(gm,si,chosenSuit){
     if(!gm||gm.phase==='done'||gm.turn!==si||gm.combo!=='7')return;
     var s=gm.seats[si],cs=gm.comboSuit,keep=[],drop=[];
     s.hand.forEach(function(c){if(c.s===cs)drop.push(c);else keep.push(c)});
     if(!drop.length)return;
     var pri=function(c){return c.r==='A'&&c.s===0?5:c.r==='2'?4:c.r==='7'?3:c.r==='5'?2:(c.r==='8'||c.r==='J')?0:1};
-    drop.sort(function(a,b){return pri(a)-pri(b)});
-    s.hand=keep;
-    drop.forEach(function(c){gm.discard.push(c)});
-    var last=drop[drop.length-1];
-    gm.combo=null;gm.comboSuit=-1;gm.drawnIdx=-1;
-    tone(620,.08);
-    if(s.hand.length===0){finishGame(gm,si);return}
-    if((last.r==='8'||last.r==='J')&&!gm.wildLock&&si===mySeat(gm)&&!s.bot){
-      C8ST.pickWild={multi:true,last:last};render();return;
+    var sortedDrop=drop.slice().sort(function(a,b){return pri(a)-pri(b)});
+    var previewLast=sortedDrop[sortedDrop.length-1];
+    if(typeof chosenSuit!=='number'&&(previewLast.r==='8'||previewLast.r==='J')&&!gm.wildLock&&keep.length>0&&!s.bot){
+      C8ST.pickWild={multi:true};render();return;
     }
-    resolveCardEffect(gm,si,last,cs);
+    tone(620,.08);
+    var expVer=gm.ver||0;
+    commitGame(gm,expVer,function(next){
+      if(next.turn!==si||next.phase==='done'||next.combo!=='7')return false;
+      var ns=next.seats[si],ncs=next.comboSuit,nkeep=[],ndrop=[];
+      ns.hand.forEach(function(c){if(c.s===ncs)ndrop.push(c);else nkeep.push(c)});
+      if(!ndrop.length)return false;
+      ndrop.sort(function(a,b){return pri(a)-pri(b)});
+      ns.hand=nkeep;ns.miss=0;
+      ndrop.forEach(function(c){next.discard.push(c)});
+      var last=ndrop[ndrop.length-1];
+      next.combo=null;next.comboSuit=-1;next.drawnIdx=-1;
+      if(ns.hand.length===0){next.lastMove={si:si,at:now()};finishGame(next,si);return}
+      resolveCardEffect(next,si,last,typeof chosenSuit==='number'?chosenSuit:ncs);
+    },onCommitted);
   }
   function doDraw(gm,si){
     if(!gm||gm.phase==='done'||gm.turn!==si)return;
-    var s=gm.seats[si];
-    if(gm.pen>0){
-      var cnt=gm.pen;
-      for(var i=0;i<cnt;i++)s.hand.push(c8DrawOne(gm));
-      gm.pen=0;gm.penKind='';gm.note=s.name+' drew '+cnt+' cards.';
-      tone(280,.08);nextTurn(gm,1);saveGame(gm);render();scheduleBot(gm);return;
-    }
-    if(gm.combo==='7'||gm.combo==='5'){
-      s.hand.push(c8DrawOne(gm));
-      gm.note=s.name+' had no card and drew 1.';
-      tone(300,.06);nextTurn(gm,1);saveGame(gm);render();scheduleBot(gm);return;
-    }
-    if(gm.drawnIdx>-1)return;
-    var c=c8DrawOne(gm);
-    s.hand.push(c);
-    var nIdx=s.hand.length-1;
-    tone(380,.05);
-    if(c8CanPlay(gm,c,nIdx)){
-      gm.drawnIdx=nIdx;gm.note=s.name+' drew '+c8Label(c)+' — fits!';
-      saveGame(gm);render();scheduleBot(gm);
-    }else{
-      gm.note=s.name+' drew a card and passed.';
-      nextTurn(gm,1);saveGame(gm);render();scheduleBot(gm);
-    }
+    var expVer=gm.ver||0;
+    commitGame(gm,expVer,function(next){
+      if(next.turn!==si||next.phase==='done')return false;
+      var ns=next.seats[si];if(!ns||ns.out)return false;
+      ns.miss=0;
+      next.lastMove={si:si,at:now()};
+      if(next.pen>0){
+        var cnt=next.pen;
+        for(var i=0;i<cnt;i++)ns.hand.push(c8DrawOne(next));
+        next.pen=0;next.penKind='';next.note=ns.name+' drew '+cnt+' cards.';
+        tone(280,.08);nextTurn(next,1);return;
+      }
+      if(next.combo==='7'||next.combo==='5'){
+        ns.hand.push(c8DrawOne(next));
+        next.note=ns.name+' had no card and drew 1.';
+        tone(300,.06);nextTurn(next,1);return;
+      }
+      if(next.drawnIdx>-1)return false;
+      var c=c8DrawOne(next);
+      ns.hand.push(c);
+      var nIdx=ns.hand.length-1;
+      tone(380,.05);
+      if(c8CanPlay(next,c,nIdx)){
+        next.drawnIdx=nIdx;next.deadline=now()+turnDur(next);
+        next.note=ns.name+' drew '+c8Label(c)+' — fits!';
+      }else{
+        next.note=ns.name+' drew a card and passed.';
+        nextTurn(next,1);
+      }
+    },onCommitted);
   }
   function passDrawn(gm,si){
     if(!gm||gm.phase==='done'||gm.turn!==si||gm.drawnIdx<0)return;
-    gm.note=gm.seats[si].name+' kept card and passed.';
-    nextTurn(gm,1);saveGame(gm);render();scheduleBot(gm);
+    var expVer=gm.ver||0;
+    commitGame(gm,expVer,function(next){
+      if(next.turn!==si||next.phase==='done'||next.drawnIdx<0)return false;
+      next.seats[si].miss=0;
+      next.lastMove={si:si,at:now()};
+      next.note=next.seats[si].name+' kept card and passed.';
+      nextTurn(next,1);
+    },onCommitted);
   }
   function botSuitChoice(hand){
     var cnt=[0,0,0,0];hand.forEach(function(c){cnt[c.s]++});
     var best=0;for(var i=1;i<4;i++)if(cnt[i]>cnt[best])best=i;return best;
   }
-  function isDriver(gm){
-    var u=session();
-    for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&!gm.seats[i].bot&&!gm.seats[i].out)return gm.seats[i].u===u;
-    return false;
-  }
   function botStep(gm,si){
     if(!gm||gm.phase==='done'||gm.turn!==si)return;
-    var s=gm.seats[si];
+    var s=gm.seats[si];if(!s||s.out)return;
     if(gm.combo==='7'){
       var same=s.hand.filter(function(c){return c.s===gm.comboSuit});
-      if(same.length>=2){playAllSuit(gm,si);return}
+      if(same.length>=2){playAllSuit(gm,si,botSuitChoice(s.hand));return}
     }
     var leg=[];
     s.hand.forEach(function(c,i){if(c8CanPlay(gm,c,i))leg.push(i)});
@@ -3188,7 +3639,7 @@ function initCrazy8(){
   function scheduleBot(gm){
     if(!gm||gm.phase==='done')return;
     var s=gm.seats[gm.turn];
-    if(s&&s.bot&&isDriver(gm)){
+    if(s&&s.bot&&isTimeoutDriver(gm)===0){
       ST.push(setTimeout(function(){if(CUR&&CUR.gid===gm.gid&&CUR.turn===gm.turn&&CUR.phase!=='done')botStep(CUR,CUR.turn)},620));
     }
   }
@@ -3196,31 +3647,73 @@ function initCrazy8(){
     if(C8T)clearInterval(C8T);
     C8T=setInterval(function(){
       if(C8ST.mode!=='play'||!CUR||CUR.phase==='done')return;
+      if(CUR.noTimeout)return;
       var s=CUR.seats[CUR.turn];if(!s)return;
       var rem=Math.ceil((CUR.deadline-now())/1000);
       var bar=$('c8_bar_'+CUR.turn);if(bar)bar.style.width=Math.max(0,Math.min(100,rem/20*100))+'%';
-      var tm=$('c8_tm');if(tm)tm.textContent=rem>0?rem+'s':'0s';
-      if(rem<=0&&isDriver(CUR)){
-        s.miss=(s.miss||0)+1;
-        if(s.miss>=3){
-          s.out=true;CUR.note=s.name+' missed 3 turns and is out.';
-          var alive=[];CUR.seats.forEach(function(x,i){if(!x.out)alive.push(i)});
-          if(alive.length===1){finishGame(CUR,alive[0]);return}
-          nextTurn(CUR,1);saveGame(CUR);render();scheduleBot(CUR);
+      var tm=$('c8_tm');if(tm)tm.textContent=(rem>0?rem:0)+'s';
+      var rank=isTimeoutDriver(CUR);
+      if(rank<0)return;
+      var grace=rank*900+800;
+      if(now()>CUR.deadline+grace){
+        var expVer=CUR.ver||0,tSeat=CUR.turn;
+        if((s.miss||0)+1>=3){
+          commitGame(CUR,expVer,function(next){
+            if(next.turn!==tSeat||next.phase==='done'||now()<=next.deadline+500)return false;
+            var ns=next.seats[tSeat];if(!ns||ns.out)return false;
+            ns.miss=(ns.miss||0)+1;
+            ns.out=true;next.note=ns.name+' missed 3 turns and is out.';
+            var alive=[];next.seats.forEach(function(x,i){if(x&&!x.out)alive.push(i)});
+            if(alive.length===1){finishGame(next,alive[0]);return}
+            nextTurn(next,1);
+          },onCommitted);
         }else{
           C8ST.pickWild=null;
-          botStep(CUR,CUR.turn);
+          var preMiss=(s.miss||0)+1;
+          commitGame(CUR,expVer,function(next){
+            if(next.turn!==tSeat||next.phase==='done'||now()<=next.deadline+500)return false;
+            var ns=next.seats[tSeat];if(!ns||ns.out)return false;
+            ns.miss=preMiss;
+            var leg=[];ns.hand.forEach(function(c,i){if(c8CanPlay(next,c,i))leg.push(i)});
+            if(leg.length){
+              leg.sort(function(a,b){
+                var ca=ns.hand[a],cb=ns.hand[b],wa=(ca.r==='8'||ca.r==='J')?1:0,wb=(cb.r==='8'||cb.r==='J')?1:0;
+                return wa-wb;
+              });
+              var pick=leg[0],card=ns.hand[pick],suit=(card.r==='8'||card.r==='J')?botSuitChoice(ns.hand):card.s;
+              ns.hand.splice(pick,1);
+              next.discard.push(card);
+              next.drawnIdx=-1;next.combo=null;next.comboSuit=-1;
+              resolveCardEffect(next,tSeat,card,suit);
+              next.note=ns.name+' timed out ('+preMiss+'/3) · auto-played '+c8Label(card);
+            }else if(next.pen>0){
+              var cnt=next.pen;for(var k=0;k<cnt;k++)ns.hand.push(c8DrawOne(next));
+              next.pen=0;next.penKind='';next.note=ns.name+' timed out ('+preMiss+'/3) · drew '+cnt;
+              nextTurn(next,1);
+            }else if(next.drawnIdx>-1){
+              next.note=ns.name+' timed out ('+preMiss+'/3)';nextTurn(next,1);
+            }else{
+              var dc=c8DrawOne(next);ns.hand.push(dc);
+              next.note=ns.name+' timed out ('+preMiss+'/3) · drew 1';
+              nextTurn(next,1);
+            }
+          },onCommitted);
         }
       }
     },350);
   }
-  function fillSeats(seats,np){
+  function fillSeats(seats,np,withBots,localNames){
     seats=arr(seats);
     var out=[],d=c8Deck(),starter=null;
     for(var i=0;i<np;i++){
       var h=[];for(var k=0;k<7;k++)h.push(d.pop());
-      if(seats[i])out.push({u:seats[i].u,name:seats[i].name,bot:false,hand:h,miss:0,out:false});
-      else out.push({u:'c8bot_'+i,name:'🤖 '+C8_BOTS[i],bot:true,hand:h,miss:0,out:false});
+      if(localNames){
+        out.push({u:'local_'+i,name:localNames[i]||('Player '+(i+1)),bot:false,hand:h,miss:0,out:false});
+      }else if(seats[i]){
+        out.push({u:seats[i].u,name:seats[i].name,bot:false,hand:h,miss:0,out:false});
+      }else if(withBots){
+        out.push({u:'c8bot_'+i,name:'🤖 '+C8_BOTS[i],bot:true,hand:h,miss:0,out:false});
+      }
     }
     for(var p=d.length-1;p>=0;p--){
       var c=d[p];
@@ -3229,171 +3722,338 @@ function initCrazy8(){
     if(!starter)starter=d.pop();
     return{seats:out,deck:d,discard:[starter],curSuit:starter.s};
   }
-  function launchGame(gid,seats,np,stk){
-    var deal=fillSeats(seats,np);
-    var gm={gid:gid,np:np,stk:stk,seats:deal.seats,deck:deal.deck,discard:deal.discard,curSuit:deal.curSuit,wildLock:false,pen:0,penKind:'',combo:null,comboSuit:-1,drawnIdx:-1,dir:1,turn:0,phase:'play',deadline:now()+20000,note:'Match suit or number!',winner:null};
-    C8ST.mode='play';C8ST.gid=gid;C8ST.pickWild=null;
-    saveGame(gm);subscribeGame(gid);startTurnLoop();render();scheduleBot(gm);
+  function createGameOnce(gid,seats,np,stk,withBots,localNames){
+    var deal=fillSeats(seats,np,withBots,localNames),isLocal=!!localNames;
+    var gm={gid:gid,np:deal.seats.length,stk:stk,pvp:!withBots&&!isLocal,localPvp:isLocal,noTimeout:isLocal,ver:1,turnSeq:0,seats:deal.seats,deck:deal.deck,discard:deal.discard,curSuit:deal.curSuit,wildLock:false,pen:0,penKind:'',combo:null,comboSuit:-1,drawnIdx:-1,dir:1,turn:0,phase:'play',deadline:now()+(isLocal?999999:20000),note:'Match suit or number!',winner:null};
+    C8ST.mode='play';C8ST.gid=gid;C8ST.pickWild=null;C8ST.seenTurnSeq=-1;
+    if(!isLocal)saveActiveRef(gid);
+    if(DB&&!isLocal){
+      DB.ref('c8_games/'+gid).transaction(function(cur){
+        if(cur)return;
+        return gm;
+      },function(e,ok,sn){
+        CUR=normalizeGm(sn&&sn.val())||gm;
+        subscribeGame(gid);
+        startTurnLoop();
+        render();
+        scheduleBot(CUR);
+      });
+    }else{
+      CUR=gm;
+      ls('sb_c8_cur_'+session(),gm);
+      startTurnLoop();
+      render();
+      scheduleBot(gm);
+    }
   }
   function subscribeGame(gid){
     if(!DB)return;
-    clearConn();
+    clearGameConn();clearLobbyConn();
     var ref=DB.ref('c8_games/'+gid),fn=function(sn){
-      var v=sn.val();if(!v)return;
-      v.seats=arr(v.seats).map(function(s){if(s&&!Array.isArray(s.hand))s.hand=arr(s.hand);return s});
-      v.deck=arr(v.deck);v.discard=arr(v.discard);
-      var wasDone=CUR&&CUR.phase==='done';
+      var v=normalizeGm(sn.val());if(!v)return;
+      var wasDone=CUR&&CUR.phase==='done',prevVer=CUR?(CUR.ver||0):0;
       CUR=v;
-      if(v.phase==='done'&&!wasDone){
+      if(v.phase==='done'){
+        saveActiveRef(null);
+        if(!wasDone)creditWinnerOnce(v);
+      }else{
         var ms=mySeat(v);
-        if(ms>-1&&v.winner===v.seats[ms].name){
-          var us=users(),u=session();
-          if(us[u]&&!(v.paid&&v.paid[ukey(u)])){
-            var pot=c8Pot(v.np,v.stk);
-            DB.ref('c8_games/'+gid+'/paid/'+ukey(u)).set(1);
-            setBal(us,u,bal(us[u])+pot,'Crazy 8 win ('+v.np+'P)',pot);
-            addWin({id:'c8_'+gid,u:u,phone:(us[u]||{}).phone||'',time:'Crazy 8 '+v.stk+' ETB',k:1,reward:pot,n:v.np,calls:v.discard.length,at:now()});
-          }
-        }
+        if(ms>-1&&v.seats[ms]&&!v.seats[ms].out)saveActiveRef(gid);
+        else saveActiveRef(null);
       }
+      if(v.lastMove&&v.ver>prevVer&&v.lastMove.si!==mySeat(v))tone(500,.04);
       if(C8ST.mode==='play'){render();scheduleBot(v)}
     };
     ref.on('value',fn);C8_OFF=function(){ref.off('value',fn)};
   }
-  function startMatchmaking(){
-    if(C8ST.busy)return;
-    var r=me(),stk=C8ST.stk;
-    if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
-    C8ST.busy=true;C8ST.msg='';
-    var us=users(),u=session();
-    setBal(us,u,bal(r)-stk,'Crazy 8 stake ('+C8ST.np+'P · '+stk+' ETB)',-stk,function(ok){
-      C8ST.busy=false;if(!ok){C8ST.msg='Could not deduct stake.';render();return}
-      var gid='c8_'+now()+'_'+Math.random().toString(36).slice(2,6);
-      C8ST.mode='wait';C8ST.waitSince=now();C8ST.gid=gid;C8ST.code='';
-      if(DB){
-        var qKey='q_'+C8ST.np+'_'+stk,qRef=DB.ref('c8_q/'+qKey);
-        qRef.transaction(function(cur){
-          if(!cur||cur.started||now()-cur.at>65000)return{gid:gid,at:now(),np:C8ST.np,stk:stk,seats:[{u:u,name:u}],started:false};
-          var a=arr(cur.seats);if(!a.some(function(x){return x.u===u}))a.push({u:u,name:u});
-          cur.seats=a;if(a.length>=cur.np)cur.started=true;
-          return cur;
-        },function(e,ok2,sn){
-          var val=sn&&sn.val();
-          if(!ok2||!val){launchGame(gid,[{u:u,name:u}],C8ST.np,stk);return}
-          C8ST.gid=val.gid;C8ST.waitSince=val.at||now();
-          if(val.started){launchGame(val.gid,val.seats,val.np,val.stk);return}
-          var fn=function(s2){
-            var v=s2.val();if(!v)return;
-            var seats=arr(v.seats);
-            if(v.started&&C8ST.mode==='wait'){
-              clearConn();
-              if((seats[0]||{}).u===u)launchGame(v.gid,seats,v.np,v.stk);
-              else{C8ST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-            }else if(C8ST.mode==='wait')renderWaitSeats(seats);
-          };
-          qRef.on('value',fn);C8_OFF=function(){qRef.off('value',fn)};
-          C8T=setInterval(function(){
-            if(C8ST.mode!=='wait')return;
-            var rem=Math.max(0,60-Math.floor((now()-C8ST.waitSince)/1000));
-            var el=$('c8_wcd');if(el)el.textContent='00:'+('0'+rem).slice(-2);
-            if(rem<=0){
-              qRef.once('value',function(s3){
-                var v=s3.val()||{seats:[{u:u,name:u}],np:C8ST.np,stk:stk,gid:C8ST.gid};
-                qRef.update({started:true});clearConn();
-                launchGame(v.gid||C8ST.gid,v.seats||[{u:u,name:u}],C8ST.np,stk);
-              });
-            }
-          },1000);
-          render();
-        });
-      }else{
-        C8T=setInterval(function(){
-          if(C8ST.mode!=='wait')return;
-          var rem=Math.max(0,60-Math.floor((now()-C8ST.waitSince)/1000));
-          var el=$('c8_wcd');if(el)el.textContent='00:'+('0'+rem).slice(-2);
-          if(rem<=0){clearConn();launchGame(gid,[{u:u,name:u}],C8ST.np,stk)}
-        },1000);
+  function publishOpenEntry(entry){
+    if(!DB||!entry||!entry.key)return;
+    DB.ref('c8_open/'+entry.key).set(entry);
+  }
+  function removeOpenEntry(key){
+    if(DB&&key)try{DB.ref('c8_open/'+key).remove()}catch(e){}
+  }
+  function subscribeWaitTarget(targetPath,openKey){
+    clearGameConn();clearLobbyConn();
+    if(!DB)return;
+    var ref=DB.ref(targetPath),u=session();
+    var fn=function(sn){
+      var v=sn.val();if(!v)return;
+      var seats=arr(v.seats);
+      C8ST.waitSeats=seats;
+      if(v.started&&C8ST.mode==='wait'){
+        clearGameConn();removeOpenEntry(openKey);
+        if((seats[0]||{}).u===u){
+          createGameOnce(v.gid,seats,v.np,v.stk,!!v.bots,null);
+        }else{
+          C8ST.mode='play';C8ST.gid=v.gid;saveActiveRef(v.gid);
+          subscribeGame(v.gid);startTurnLoop();render();
+          ST.push(setTimeout(function(){
+            if(C8ST.mode==='play'&&!CUR)createGameOnce(v.gid,seats,v.np,v.stk,!!v.bots,null);
+          },1800));
+        }
+      }else if(C8ST.mode==='wait'){
+        if(openKey&&seats[0]&&seats[0].u===u)DB.ref('c8_open/'+openKey+'/seats').set(seats);
         render();
       }
-    });
+    };
+    ref.on('value',fn);
+    C8_OFF=function(){ref.off('value',fn)};
   }
-  function openPrivate(){
+  function startOnlinePvpSearch(){
     if(C8ST.busy)return;
-    var r=me(),stk=C8ST.stk;
+    if(!DB){C8ST.msg='Cloud connection required for Online PvP. Use Pass & Play for 2–4 players on this device.';render();return}
+    var r=me(),stk=C8ST.stk,u=session(),us=users();
     if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
     C8ST.busy=true;C8ST.msg='';
-    var us=users(),u=session(),code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='c8p_'+code+'_'+now();
-    setBal(us,u,bal(r)-stk,'Crazy 8 private ('+code+')',-stk,function(ok){
+    var gid='c8_'+now()+'_'+Math.random().toString(36).slice(2,6);
+    var code=Math.random().toString(36).slice(2,8).toUpperCase();
+    setBal(us,u,bal(r)-stk,'Crazy 8 PvP stake ('+C8ST.np+'P · '+stk+' ETB)',-stk,function(ok){
+      C8ST.busy=false;
+      if(!ok){C8ST.msg='Could not deduct stake.';render();return}
+      var qKey='pvp_'+C8ST.np+'_'+stk,qPath='c8_q/'+qKey,qRef=DB.ref(qPath);
+      qRef.transaction(function(cur){
+        if(!cur||cur.started||now()-(cur.at||0)>1800000)return{gid:gid,code:code,at:now(),np:C8ST.np,stk:stk,pvpOnly:true,bots:false,seats:[{u:u,name:u}],started:false};
+        var a=arr(cur.seats);
+        if(a.length>=cur.np)return;
+        if(!a.some(function(x){return x&&x.u===u}))a.push({u:u,name:u});
+        cur.seats=a;cur.at=now();
+        if(a.length>=cur.np)cur.started=true;
+        return cur;
+      },function(e,ok2,sn){
+        var val=sn&&sn.val();
+        if(e||!ok2||!val){
+          setBal(users(),u,bal(me())+stk,'Crazy 8 stake refund',stk);
+          C8ST.msg='Could not join matchmaking queue. Try again.';render();return;
+        }
+        var seats=arr(val.seats);
+        C8ST.gid=val.gid;C8ST.code=val.code||'';C8ST.waitSince=val.at||now();C8ST.waitSeats=seats;C8ST.waitPath=qPath;C8ST.openKey=qKey;
+        if(val.started){
+          removeOpenEntry(qKey);
+          createGameOnce(val.gid,seats,val.np,val.stk,false,null);
+          return;
+        }
+        publishOpenEntry({key:qKey,kind:'q',path:qPath,gid:val.gid,code:val.code||'',host:(seats[0]||{}).name||u,np:val.np,stk:val.stk,seats:seats,at:val.at||now()});
+        C8ST.mode='wait';
+        subscribeWaitTarget(qPath,qKey);
+        C8T=setInterval(function(){
+          if(C8ST.mode!=='wait')return;
+          var sec=Math.max(0,Math.floor((now()-C8ST.waitSince)/1000));
+          var el=$('c8_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+        },1000);
+        render();
+      });
+    });
+  }
+  function startBotMatch(){
+    if(C8ST.busy)return;
+    var r=me(),stk=C8ST.stk,u=session(),us=users();
+    if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
+    C8ST.busy=true;C8ST.msg='';
+    setBal(us,u,bal(r)-stk,'Crazy 8 vs Bots ('+C8ST.np+'P · '+stk+' ETB)',-stk,function(ok){
       C8ST.busy=false;if(!ok){C8ST.msg='Could not deduct stake.';render();return}
-      C8ST.mode='wait';C8ST.waitSince=now();C8ST.gid=gid;C8ST.code=code;
-      var room={code:code,gid:gid,at:now(),np:C8ST.np,stk:stk,seats:[{u:u,name:u}],started:false};
-      if(DB){
-        var rRef=DB.ref('c8_rooms/'+code);rRef.set(room);
-        var fn=function(sn){
-          var v=sn.val();if(!v)return;
-          var seats=arr(v.seats);
-          if(v.started&&C8ST.mode==='wait'){
-            clearConn();
-            if((seats[0]||{}).u===u)launchGame(v.gid,seats,v.np,v.stk);
-            else{C8ST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-          }else if(C8ST.mode==='wait')renderWaitSeats(seats);
-        };
-        rRef.on('value',fn);C8_OFF=function(){rRef.off('value',fn)};
-      }else ls('sb_c8_priv_'+code,room);
+      var gid='c8_'+now()+'_'+Math.random().toString(36).slice(2,6);
+      createGameOnce(gid,[{u:u,name:u}],C8ST.np,stk,true,null);
+    });
+  }
+  function openFriendTable(){
+    if(C8ST.busy)return;
+    if(!DB){C8ST.msg='Cloud connection required for online friend tables. Use Pass & Play on this device.';render();return}
+    var r=me(),stk=C8ST.stk,u=session(),us=users();
+    if(bal(r)<stk){C8ST.msg='Not enough balance ('+balFmt(bal(r))+' ETB). Deposit first.';render();return}
+    C8ST.busy=true;C8ST.msg='';
+    var code=Math.random().toString(36).slice(2,8).toUpperCase(),gid='c8p_'+code+'_'+now(),rPath='c8_rooms/'+code;
+    setBal(us,u,bal(r)-stk,'Crazy 8 table ('+code+')',-stk,function(ok){
+      C8ST.busy=false;if(!ok){C8ST.msg='Could not deduct stake.';render();return}
+      var seats=[{u:u,name:u}],room={code:code,gid:gid,at:now(),np:C8ST.np,stk:stk,pub:!!C8ST.pubRoom,pvpOnly:true,bots:false,seats:seats,started:false};
+      C8ST.mode='wait';C8ST.waitSince=room.at;C8ST.gid=gid;C8ST.code=code;C8ST.waitPath=rPath;C8ST.waitSeats=seats;C8ST.openKey=C8ST.pubRoom?('rm_'+code):'';
+      DB.ref(rPath).set(room);
+      if(C8ST.pubRoom)publishOpenEntry({key:'rm_'+code,kind:'room',path:rPath,gid:gid,code:code,host:u,np:C8ST.np,stk:stk,seats:seats,at:room.at});
+      subscribeWaitTarget(rPath,C8ST.openKey);
+      C8T=setInterval(function(){
+        if(C8ST.mode!=='wait')return;
+        var sec=Math.max(0,Math.floor((now()-C8ST.waitSince)/1000));
+        var el=$('c8_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+      },1000);
       render();
     });
+  }
+  function joinByPath(targetPath,openKey,expectedCode){
+    if(C8ST.busy)return;
+    if(!DB){C8ST.msg='Cloud connection required for Online PvP.';render();return}
+    var r=me(),u=session();
+    C8ST.busy=true;C8ST.msg='';render();
+    var rRef=DB.ref(targetPath);
+    rRef.once('value',function(sn){
+      var rm=sn.val();
+      if(!rm){C8ST.busy=false;if(openKey)removeOpenEntry(openKey);C8ST.msg='Table not found or closed.';render();return}
+      var curSeats=arr(rm.seats);
+      if(curSeats.some(function(x){return x&&x.u===u})){
+        C8ST.busy=false;C8ST.np=rm.np;C8ST.stk=rm.stk;C8ST.code=rm.code||expectedCode||'';C8ST.gid=rm.gid;C8ST.waitPath=targetPath;C8ST.openKey=openKey||'';C8ST.waitSince=rm.at||now();C8ST.waitSeats=curSeats;
+        if(rm.started){C8ST.mode='play';saveActiveRef(rm.gid);subscribeGame(rm.gid);startTurnLoop();render();return}
+        C8ST.mode='wait';subscribeWaitTarget(targetPath,C8ST.openKey);render();return;
+      }
+      if(rm.started){C8ST.busy=false;if(openKey)removeOpenEntry(openKey);C8ST.msg='Table already started.';render();return}
+      if(bal(r)<rm.stk){C8ST.busy=false;C8ST.msg='Need '+rm.stk+' ETB to join this table.';render();return}
+      setBal(users(),u,bal(r)-rm.stk,'Crazy 8 PvP ('+(rm.code||'Open')+')',-rm.stk,function(ok){
+        if(!ok){C8ST.busy=false;C8ST.msg='Could not deduct stake.';render();return}
+        rRef.transaction(function(cur){
+          if(!cur||cur.started)return;
+          var a=arr(cur.seats);
+          if(a.length>=cur.np)return;
+          if(!a.some(function(x){return x&&x.u===u}))a.push({u:u,name:u});
+          cur.seats=a;cur.at=now();
+          if(a.length>=cur.np)cur.started=true;
+          return cur;
+        },function(e,ok2,s2){
+          C8ST.busy=false;
+          if(e||!ok2){setBal(users(),u,bal(me())+rm.stk,'Crazy 8 refund',rm.stk);C8ST.msg='Table was just filled or closed.';render();return}
+          var v=s2.val(),seats=arr(v.seats);
+          C8ST.np=v.np;C8ST.stk=v.stk;C8ST.code=v.code||expectedCode||'';C8ST.gid=v.gid;C8ST.waitPath=targetPath;C8ST.openKey=openKey||'';C8ST.waitSince=v.at||now();C8ST.waitSeats=seats;
+          if(v.started){
+            if(openKey)removeOpenEntry(openKey);
+            createGameOnce(v.gid,seats,v.np,v.stk,false,null);
+          }else{
+            if(openKey)DB.ref('c8_open/'+openKey+'/seats').set(seats);
+            C8ST.mode='wait';
+            subscribeWaitTarget(targetPath,C8ST.openKey);
+            C8T=setInterval(function(){
+              if(C8ST.mode!=='wait')return;
+              var sec=Math.max(0,Math.floor((now()-C8ST.waitSince)/1000));
+              var el=$('c8_wcd');if(el)el.textContent=('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+(sec%60)).slice(-2);
+            },1000);
+            render();
+          }
+        });
+      });
+    },function(){C8ST.busy=false;C8ST.msg='Connection error. Try again.';render()});
   }
   function joinPrivate(code){
     code=(code||'').trim().toUpperCase();
     if(code.length<4){C8ST.msg='Enter a valid table code.';render();return}
-    var r=me(),u=session();
-    if(!DB){
-      var rm=lg('sb_c8_priv_'+code,null);
-      if(!rm||rm.started){C8ST.msg='Table code not found or already started.';render();return}
-      if(bal(r)<rm.stk){C8ST.msg='Need '+rm.stk+' ETB to join table '+code+'.';render();return}
-      setBal(users(),u,bal(r)-rm.stk,'Crazy 8 private ('+code+')',-rm.stk,function(ok){
-        if(!ok)return;C8ST.np=rm.np;C8ST.stk=rm.stk;C8ST.code=code;
-        rm.seats.push({u:u,name:u});launchGame(rm.gid,rm.seats,rm.np,rm.stk);
-      });
-      return;
-    }
-    var rRef=DB.ref('c8_rooms/'+code);
-    rRef.once('value',function(sn){
-      var rm=sn.val();
-      if(!rm||rm.started){C8ST.msg='Table code not found or already started.';render();return}
-      if(bal(r)<rm.stk){C8ST.msg='Need '+rm.stk+' ETB to join table '+code+'.';render();return}
-      setBal(users(),u,bal(r)-rm.stk,'Crazy 8 private ('+code+')',-rm.stk,function(ok){
-        if(!ok)return;
-        rRef.transaction(function(cur){
-          if(!cur||cur.started)return;
-          var a=arr(cur.seats);if(!a.some(function(x){return x.u===u}))a.push({u:u,name:u});
-          cur.seats=a;if(a.length>=cur.np)cur.started=true;
-          return cur;
-        },function(e,ok2,s2){
-          if(!ok2){setBal(users(),u,bal(me())+rm.stk,'Crazy 8 refund',rm.stk);C8ST.msg='Could not join table.';render();return}
-          var v=s2.val();C8ST.np=v.np;C8ST.stk=v.stk;C8ST.code=code;C8ST.gid=v.gid;
-          if(v.started){C8ST.mode='play';subscribeGame(v.gid);startTurnLoop();render()}
-          else{C8ST.mode='wait';C8ST.waitSince=now();var fn=function(s3){var w=s3.val();if(w&&w.started&&C8ST.mode==='wait'){clearConn();C8ST.mode='play';subscribeGame(w.gid);startTurnLoop();render()}else if(w&&C8ST.mode==='wait')renderWaitSeats(w.seats||[])};rRef.on('value',fn);C8_OFF=function(){rRef.off('value',fn)};render()}
-        });
-      });
+    joinByPath('c8_rooms/'+code,'rm_'+code,code);
+  }
+  function startWaitWithSeated(fillBots){
+    if(!C8ST.waitPath||!DB)return;
+    var u=session(),ref=DB.ref(C8ST.waitPath);
+    ref.transaction(function(cur){
+      if(!cur||cur.started)return;
+      var a=arr(cur.seats);
+      if(!a.some(function(x){return x&&x.u===u}))return;
+      if(!fillBots&&a.length<2)return;
+      if(!fillBots)cur.np=a.length;
+      cur.bots=!!fillBots;
+      cur.started=true;
+      return cur;
+    },function(e,ok,sn){
+      if(!ok)return;
+      var v=sn.val(),seats=arr(v.seats);
+      removeOpenEntry(C8ST.openKey);clearGameConn();
+      createGameOnce(v.gid,seats,v.np,v.stk,!!v.bots,null);
     });
   }
   function leaveWait(){
-    clearConn();var u=session(),us=users(),r=me();
-    if(DB){
-      if(C8ST.code)DB.ref('c8_rooms/'+C8ST.code).once('value',function(sn){var v=sn.val();if(v&&!v.started){var a=arr(v.seats).filter(function(x){return x&&x.u!==u});if(!a.length)DB.ref('c8_rooms/'+C8ST.code).remove();else DB.ref('c8_rooms/'+C8ST.code+'/seats').set(a)}});
-      else{var qKey='q_'+C8ST.np+'_'+C8ST.stk;DB.ref('c8_q/'+qKey).once('value',function(sn){var v=sn.val();if(v&&!v.started){var a=arr(v.seats).filter(function(x){return x&&x.u!==u});if(!a.length)DB.ref('c8_q/'+qKey).remove();else DB.ref('c8_q/'+qKey+'/seats').set(a)}})}
+    var u=session(),r=me(),wPath=C8ST.waitPath,oKey=C8ST.openKey,stk=C8ST.stk;
+    if(DB&&wPath){
+      DB.ref(wPath).transaction(function(cur){
+        if(!cur||cur.started)return;
+        var a=arr(cur.seats).filter(function(x){return x&&x.u!==u});
+        if(!a.length)return null;
+        cur.seats=a;return cur;
+      },function(e,ok,sn){
+        var v=sn&&sn.val();
+        if(e||!ok){
+          if(v&&v.started&&v.gid){
+            clearGameConn();if(oKey)removeOpenEntry(oKey);
+            C8ST.mode='play';C8ST.gid=v.gid;saveActiveRef(v.gid);
+            subscribeGame(v.gid);startTurnLoop();render();
+            toast('Match just started!');
+            return;
+          }
+          clearGameConn();C8ST.mode='lobby';C8ST.code='';C8ST.waitPath='';C8ST.openKey='';C8ST.waitSeats=[];render();
+          return;
+        }
+        clearGameConn();
+        if(!v||!arr(v.seats).length)removeOpenEntry(oKey);
+        else if(oKey)DB.ref('c8_open/'+oKey+'/seats').set(arr(v.seats));
+        if(r)setBal(users(),u,bal(r)+stk,'Crazy 8 stake refund',stk,function(){C8ST.mode='lobby';C8ST.code='';C8ST.waitPath='';C8ST.openKey='';C8ST.waitSeats=[];C8ST.msg='Stake refunded ('+stk+' ETB).';render()});
+        else{C8ST.mode='lobby';C8ST.code='';C8ST.waitPath='';C8ST.openKey='';C8ST.waitSeats=[];render()}
+      });
+      return;
     }
-    if(r)setBal(us,u,bal(r)+C8ST.stk,'Crazy 8 stake refund',C8ST.stk,function(){C8ST.mode='lobby';C8ST.code='';C8ST.msg='Stake refunded ('+C8ST.stk+' ETB).';render()});
-    else{C8ST.mode='lobby';render()}
+    clearGameConn();
+    C8ST.mode='lobby';C8ST.code='';C8ST.waitPath='';C8ST.openKey='';C8ST.waitSeats=[];render();
   }
-  function renderWaitSeats(seats){
-    seats=arr(seats);var el=$('c8_wseats');if(!el)return;var h='';
+  function startPassAndPlay(){
+    var names=[];
     for(var i=0;i<C8ST.np;i++){
-      var s=seats[i];
-      h+='<div class="lseat'+(s?' ok':'')+'"><span class="lscol" style="background:'+(s?'#f6d77a':'#5a37a0')+'"></span><span>'+(s?esc(s.name):'Waiting…')+'</span></div>';
+      var fallback=i===0?session():('Player '+(i+1));
+      var nm=String(C8ST.localNames[i]||fallback).trim().slice(0,18)||fallback;
+      names.push(nm);
     }
-    el.innerHTML=h;
+    var gid='c8loc_'+now()+'_'+Math.random().toString(36).slice(2,6);
+    createGameOnce(gid,[],C8ST.np,0,false,names);
+  }
+  function forfeitMatch(){
+    if(!CUR||CUR.phase==='done')return;
+    var ms=mySeat(CUR);
+    if(CUR.localPvp||ms<0){clearGameConn();saveActiveRef(null);CUR=null;C8ST.mode='lobby';render();return}
+    var expVer=CUR.ver||0,sName=(CUR.seats[ms]||{}).name||session();
+    commitGame(CUR,expVer,function(next){
+      if(!next.seats[ms]||next.seats[ms].out)return false;
+      next.seats[ms].out=true;
+      next.note=sName+' forfeited the match.';
+      var alive=[];next.seats.forEach(function(x,i){if(x&&!x.out)alive.push(i)});
+      if(alive.length===1)finishGame(next,alive[0]);
+      else if(next.turn===ms)nextTurn(next,1);
+    },function(){
+      clearGameConn();saveActiveRef(null);CUR=null;C8ST.mode='lobby';C8ST.msg='You forfeited the match.';render();
+    });
+  }
+  function sendQuickEmote(txt){
+    if(!CUR||CUR.phase==='done')return;
+    var who=CUR.localPvp?(CUR.seats[CUR.turn].name):session();
+    var ch={who:who,txt:txt,at:now()};
+    if(CUR.localPvp||!DB||!CUR.gid){CUR.chat=ch;render();return}
+    DB.ref('c8_games/'+CUR.gid+'/chat').set(ch);
+  }
+  function subscribeOpenTables(){
+    clearLobbyConn();
+    if(!DB)return;
+    var ref=DB.ref('c8_open'),fn=function(sn){
+      var v=sn.val()||{},list=[];
+      Object.keys(v).forEach(function(k){
+        var x=v[k];if(!x||!x.path)return;
+        if(now()-(x.at||0)>1800000)return;
+        x.seats=arr(x.seats);
+        if(x.seats.length<x.np)list.push(x);
+      });
+      list.sort(function(a,b){return (b.at||0)-(a.at||0)});
+      C8ST.openRooms=list;
+      var box=$('c8_open_list');
+      if(box&&C8ST.mode==='lobby'&&C8ST.playType==='pvp')box.innerHTML=openTablesHTML();
+    };
+    ref.on('value',fn);
+    C8_LOBBY_OFF=function(){ref.off('value',fn)};
+    var saved=lg('sb_c8_active_'+session(),null);
+    if(saved&&saved.gid){
+      DB.ref('c8_games/'+saved.gid).once('value',function(sn){
+        var gm=normalizeGm(sn.val()),u=session(),ms=-1;
+        if(gm&&gm.phase!=='done'){for(var i=0;i<gm.seats.length;i++)if(gm.seats[i]&&gm.seats[i].u===u&&!gm.seats[i].out)ms=i}
+        if(ms>-1){C8ST.activeMatch=gm;if(C8ST.mode==='lobby')render()}
+        else{C8ST.activeMatch=null;saveActiveRef(null)}
+      });
+    }else C8ST.activeMatch=null;
+  }
+  function openTablesHTML(){
+    var u=session();
+    if(!DB)return '<div class="lopen-empty">Cloud connection required to browse online tables.</div>';
+    if(!C8ST.openRooms.length)return '<div class="lopen-empty">No open tables right now — tap Find Real Player or Create Friend Table to start one!</div>';
+    return C8ST.openRooms.map(function(rm){
+      var seated=rm.seats.some(function(x){return x&&x.u===u});
+      return '<div class="lopen-item"><div class="lopen-meta"><b>👤 '+esc(rm.host)+' · '+rm.np+'P</b><small>'+rm.seats.length+'/'+rm.np+' seated · Prize '+c8Pot(rm.np,rm.stk).toLocaleString()+' ETB</small></div>'+
+        '<button type="button" class="lopen-join'+(seated?' sec':'')+'" data-c8joinpath="'+esc(rm.path)+'" data-c8joinkey="'+esc(rm.key)+'" data-c8joincode="'+esc(rm.code||'')+'">'+(seated?'Waiting (You)':'Join · '+rm.stk+' ETB')+'</button></div>';
+    }).join('');
   }
   function openModal(html){
     var m=$('c8modal');if(!m)return;m.innerHTML=html;m.classList.add('show');m.scrollTop=0;
@@ -3403,27 +4063,70 @@ function initCrazy8(){
     if($('c8mback'))$('c8mback').onclick=function(){openModal(c8HowHTML())};
     if($('c8mback2'))$('c8mback2').onclick=function(){openModal(c8HowHTML())};
   }
+  function openLeaveModal(){
+    var html='<div class="am-card" style="max-width:390px"><div class="am-top"><h3>Leave Match?</h3><button type="button" class="am-x" id="c8mcls">×</button></div>'+
+      '<div class="km-box" style="text-align:center"><p style="margin:0;line-height:1.5">You are in an active Person-to-Person match. You can keep your seat and resume shortly, or forfeit the match.</p></div>'+
+      '<button type="button" class="am-go" id="c8mstay">Stay in Match</button>'+
+      '<button type="button" class="lpriv" id="c8mmin" style="margin-top:9px">Back to Lobby (Resume Later)</button>'+
+      '<button type="button" class="lpriv" id="c8mforf" style="margin-top:9px;border-color:#ef4444;color:#fca5a5">Forfeit &amp; Leave Match</button></div>';
+    openModal(html);
+    if($('c8mstay'))$('c8mstay').onclick=function(){$('c8modal').classList.remove('show')};
+    if($('c8mmin'))$('c8mmin').onclick=function(){$('c8modal').classList.remove('show');clearGameConn();C8ST.mode='lobby';render()};
+    if($('c8mforf'))$('c8mforf').onclick=function(){$('c8modal').classList.remove('show');forfeitMatch()};
+  }
   function render(){
     var b=bal(me()||rec),pot=c8Pot(C8ST.np,C8ST.stk);
     var hdr='<div class="lhdr"><button type="button" class="kback" id="c8bk">‹ Back</button><div class="kpill" data-dep="1"><b>'+balFmt(b)+' ETB</b><span>+ Deposit</span></div><button type="button" class="ksnd" id="c8snd">'+(SND?'🔊':'🔇')+'</button></div>';
+    if(C8ST.mode!=='lobby')v.onclick=null;
     if(C8ST.mode==='lobby'){
+      if(DB&&!C8_LOBBY_OFF)subscribeOpenTables();
       var hero='<div class="c8hero"><svg viewBox="0 0 180 112" width="160" height="100"><g transform="rotate(-14 55 58)"><rect x="26" y="16" width="54" height="78" rx="8" fill="#fffdf7" stroke="#f6d77a" stroke-width="2"/><text x="34" y="34" font-size="15" font-weight="900" fill="#1e1b4b">2</text><text x="34" y="47" font-size="13" fill="#1e1b4b">♣</text><rect x="33" y="55" width="32" height="15" rx="4" fill="#f6d77a" stroke="#1e0a3c" stroke-width="1"/><text x="49" y="66" text-anchor="middle" font-size="10" font-weight="900" fill="#1e0a3c">+2</text></g><g transform="rotate(14 125 58)"><rect x="100" y="16" width="54" height="78" rx="8" fill="#fffdf7" stroke="#f6d77a" stroke-width="2"/><text x="142" y="34" text-anchor="end" font-size="14" font-weight="900" fill="#b45309">★</text></g><g><rect x="61" y="10" width="58" height="84" rx="9" fill="#fffdf7" stroke="#f6d77a" stroke-width="2.4"/><text x="69" y="27" font-size="15" font-weight="900" fill="#d97706">8</text><text x="90" y="42" text-anchor="middle" font-size="18" fill="#dc2626">♥</text><rect x="69" y="47" width="42" height="17" rx="5" fill="#dc2626" stroke="#fff" stroke-width="1.2"/><text x="90" y="59" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff">WILD</text><text x="90" y="80" text-anchor="middle" font-size="16" fill="#dc2626">♥</text></g></svg></div>';
+      var modeTabs='<div class="lmode-tabs">'+
+        '<button type="button" class="lmode-tab'+(C8ST.playType==='pvp'?' on':'')+'" data-c8pt="pvp"><b>👥</b>Online PvP</button>'+
+        '<button type="button" class="lmode-tab'+(C8ST.playType==='pass'?' on':'')+'" data-c8pt="pass"><b>📱</b>Pass &amp; Play</button>'+
+        '<button type="button" class="lmode-tab'+(C8ST.playType==='bot'?' on':'')+'" data-c8pt="bot"><b>🤖</b>Vs Bots</button></div>';
+      var resumeBanner=(C8ST.activeMatch&&C8ST.activeMatch.phase!=='done')?'<div class="lresume"><div><b>⚡ Live Match in Progress</b><small>'+C8ST.activeMatch.np+'P · '+C8ST.activeMatch.stk+' ETB · '+esc(C8ST.activeMatch.note||'Your table is waiting')+'</small></div><button type="button" id="c8resume">Resume</button></div>':'';
+      var stakeChips='<div class="llbl">STAKE</div><div class="c8chips">'+
+        C8_STAKES.map(function(s){return '<button type="button" class="c8chip s'+s+(C8ST.stk===s?' on':'')+'" data-c8stk="'+s+'"><span>'+s+'</span></button>'}).join('')+'</div>';
+      var modeBody='';
+      if(C8ST.playType==='pvp'){
+        modeBody=stakeChips+
+          '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b> · real players only</div>'+
+          '<button type="button" class="lfind" id="c8find"'+(C8ST.busy?' disabled':'')+'>FIND REAL PLAYER</button>'+
+          '<p class="note" style="margin:7px 0 0;font-size:12px">Person-to-person matchmaking · bots never auto-join</p>'+
+          (C8ST.msg?'<div class="err" style="margin-top:8px">'+esc(C8ST.msg)+'</div>':'')+
+          '<div class="lopen-box"><div class="lopen-hdr"><span>LIVE OPEN TABLES</span><span>● Real Players</span></div><div class="lopen-list" id="c8_open_list">'+openTablesHTML()+'</div></div>'+
+          '<div class="ldiv"><span>OR PLAY WITH FRIENDS</span></div>'+
+          '<button type="button" class="lpriv" id="c8priv"'+(C8ST.busy?' disabled':'')+'>👥 Create Friend Table<small>get a room code to share with friends</small></button>'+
+          '<label class="ltoggle"><span>List table in Live Open Tables so anyone can join</span><input type="checkbox" id="c8pub"'+(C8ST.pubRoom?' checked':'')+'></label>'+
+          '<div class="ljrow"><input id="c8code" maxlength="8" placeholder="Friend\'s code"><button type="button" id="c8join">Join</button></div>';
+      }else if(C8ST.playType==='pass'){
+        var nameInputs='';
+        for(var pi=0;pi<C8ST.np;pi++){
+          var defNm=pi===0?session():('Player '+(pi+1));
+          if(!C8ST.localNames[pi])C8ST.localNames[pi]=defNm;
+          nameInputs+='<div class="lpinput-row"><span style="font-size:16px">🃏</span><input class="lpinput" data-c8pn="'+pi+'" maxlength="18" value="'+esc(C8ST.localNames[pi])+'" placeholder="'+esc(defNm)+'"></div>';
+        }
+        modeBody='<div class="llbl">PLAYER NAMES (SAME DEVICE)</div><div class="lpinput-list">'+nameInputs+'</div>'+
+          '<div class="lsum">Free Friendly Match · <b>Pass the phone</b> each turn</div>'+
+          '<button type="button" class="lfind" id="c8passgo">START PASS &amp; PLAY</button>'+
+          (C8ST.msg?'<div class="err" style="margin-top:8px">'+esc(C8ST.msg)+'</div>':'');
+      }else{
+        modeBody=stakeChips+
+          '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b> · instant AI bots</div>'+
+          '<button type="button" class="lfind" id="c8botgo"'+(C8ST.busy?' disabled':'')+'>PLAY VS BOTS</button>'+
+          (C8ST.msg?'<div class="err" style="margin-top:8px">'+esc(C8ST.msg)+'</div>':'');
+      }
       v.innerHTML='<div class="c8wrap">'+hdr+
         '<div class="ltopacts"><button type="button" class="lpillbtn" id="c8how">? How to play</button><button type="button" class="lpillbtn" id="c8res">🧾 Results</button></div>'+
-        '<div class="c8card">'+hero+'<h2 class="c8title">Crazy 8</h2><p class="lsub">Empty your hand first and win the pot</p>'+
+        resumeBanner+
+        '<div class="c8card">'+hero+'<h2 class="c8title">Crazy 8</h2><p class="lsub">Person-to-person &amp; Arcade Crazy 8</p>'+
+        modeTabs+
         '<div class="llbl">PLAYERS</div><div class="lgrid3">'+
         [2,3,4].map(function(n){return '<button type="button" class="lopt'+(C8ST.np===n?' on':'')+'" data-c8np="'+n+'">'+n+'<small>players</small></button>'}).join('')+'</div>'+
-        '<div class="llbl">STAKE</div><div class="c8chips">'+
-        C8_STAKES.map(function(s){return '<button type="button" class="c8chip s'+s+(C8ST.stk===s?' on':'')+'" data-c8stk="'+s+'"><span>'+s+'</span></button>'}).join('')+'</div>'+
-        '<div class="lsum">Winner takes <b>'+pot.toLocaleString()+' ETB</b></div>'+
-        '<button type="button" class="lfind" id="c8find"'+(C8ST.busy?' disabled':'')+'>FIND A GAME</button>'+
-        '<p class="note" style="margin:7px 0 0;font-size:12px">Nobody waiting yet · a bot joins after 60 s</p>'+
-        (C8ST.msg?'<div class="err" style="margin-top:8px">'+esc(C8ST.msg)+'</div>':'')+
-        '<div class="ldiv"><span>OR PLAY WITH FRIENDS</span></div>'+
-        '<button type="button" class="lpriv" id="c8priv">👥 Open a private table<small>you get a code to send your friends</small></button>'+
-        '<div class="ljrow"><input id="c8code" maxlength="8" placeholder="Friend\'s code"><button type="button" id="c8join">Join</button></div>'+
+        modeBody+
         '</div></div><div id="c8modal"></div>';
-      $('c8bk').onclick=function(){go('home')};
+      $('c8bk').onclick=function(){clearLobbyConn();go('home')};
       $('c8snd').onclick=function(){SND=!SND;ls('sb_snd',SND);if(!SND)stopAud();render()};
       $('c8how').onclick=function(){openModal(c8HowHTML())};
       $('c8res').onclick=function(){
@@ -3435,48 +4138,76 @@ function initCrazy8(){
           var m=$('c8modal');if(m&&m.classList.contains('show'))openModal(c8ResHTML());
         });
       };
+      if($('c8resume'))$('c8resume').onclick=function(){
+        var am=C8ST.activeMatch;if(!am)return;
+        CUR=am;C8ST.mode='play';C8ST.gid=am.gid;C8ST.pickWild=null;
+        subscribeGame(am.gid);startTurnLoop();render();
+      };
+      v.querySelectorAll('[data-c8pt]').forEach(function(el){el.onclick=function(){C8ST.playType=el.dataset.c8pt;C8ST.msg='';render()}});
       v.querySelectorAll('[data-c8np]').forEach(function(el){el.onclick=function(){C8ST.np=+el.dataset.c8np;C8ST.msg='';render()}});
       v.querySelectorAll('[data-c8stk]').forEach(function(el){el.onclick=function(){C8ST.stk=+el.dataset.c8stk;C8ST.msg='';render()}});
-      $('c8find').onclick=startMatchmaking;
-      $('c8priv').onclick=openPrivate;
-      $('c8join').onclick=function(){joinPrivate($('c8code').value)};
+      v.querySelectorAll('[data-c8pn]').forEach(function(el){el.oninput=function(){C8ST.localNames[+el.dataset.c8pn]=el.value}});
+      if($('c8find'))$('c8find').onclick=startOnlinePvpSearch;
+      if($('c8priv'))$('c8priv').onclick=openFriendTable;
+      if($('c8pub'))$('c8pub').onchange=function(){C8ST.pubRoom=!!this.checked};
+      if($('c8join'))$('c8join').onclick=function(){joinPrivate($('c8code').value)};
+      if($('c8passgo'))$('c8passgo').onclick=startPassAndPlay;
+      if($('c8botgo'))$('c8botgo').onclick=startBotMatch;
+      v.onclick=function(e){
+        var jb=e.target.closest('[data-c8joinpath]');
+        if(jb)joinByPath(jb.dataset.c8joinpath,jb.dataset.c8joinkey,jb.dataset.c8joincode);
+      };
       return;
     }
     if(C8ST.mode==='wait'){
+      var seats=arr(C8ST.waitSeats);if(!seats.length)seats=[{u:session(),name:session()}];
+      var seatsHtml='';
+      for(var wi=0;wi<C8ST.np;wi++){
+        var ws=seats[wi];
+        seatsHtml+='<div class="lseat'+(ws?' ok':'')+'"><span class="lscol" style="background:'+(ws?'#f6d77a':'#5a37a0')+'"></span><span>'+(ws?esc(ws.name):'Waiting for player…')+'</span></div>';
+      }
+      var isHost=(seats[0]||{}).u===session(),canStartSeated=isHost&&seats.length>=2&&seats.length<C8ST.np;
       v.innerHTML='<div class="c8wrap">'+hdr+'<div class="c8card lwait">'+
-        '<h3 style="margin:0;color:#f6d77a">'+(C8ST.code?'Private Table':'Finding Players…')+'</h3>'+
-        (C8ST.code?'<p class="note" style="margin:6px 0">Share this code with your friends:</p><div class="lcode" id="c8cp">'+C8ST.code+' 📋</div>':'<p class="note" style="margin:6px 0">Bot players join automatically in <b id="c8_wcd" style="color:#f6d77a">01:00</b></p>')+
-        '<div class="lseats" id="c8_wseats"></div>'+
-        '<button type="button" class="lfind" id="c8now">Play vs Bots Now</button>'+
-        '<button type="button" class="lpriv" id="c8leave" style="margin-top:8px">Leave & Refund ('+C8ST.stk+' ETB)</button>'+
+        '<h3 style="margin:0;color:#f6d77a">'+(C8ST.code?'Person-to-Person Table':'Waiting for Real Players…')+'</h3>'+
+        (C8ST.code?'<p class="note" style="margin:6px 0">Share this code with a friend (tap to copy):</p><div class="lcode" id="c8cp">'+esc(C8ST.code)+' 📋</div>':'')+
+        '<p class="note" style="margin:4px 0">'+seats.length+'/'+C8ST.np+' real players seated · Waiting <b id="c8_wcd" style="color:#f6d77a">00:00</b></p>'+
+        '<div class="lseats" id="c8_wseats">'+seatsHtml+'</div>'+
+        (canStartSeated?'<button type="button" class="lfind" id="c8start_pvp">Start Now with '+seats.length+' Players</button>':'')+
+        (isHost?'<button type="button" class="lpriv" id="c8now" style="margin-top:8px">Play with Bots Instead</button>':'')+
+        '<button type="button" class="lpriv" id="c8leave" style="margin-top:8px">Leave &amp; Refund ('+C8ST.stk+' ETB)</button>'+
         '</div></div><div id="c8modal"></div>';
-      renderWaitSeats([{u:session(),name:session()}]);
       $('c8bk').onclick=leaveWait;$('c8leave').onclick=leaveWait;
       $('c8snd').onclick=function(){SND=!SND;ls('sb_snd',SND);render()};
       if($('c8cp'))$('c8cp').onclick=function(){try{navigator.clipboard.writeText(C8ST.code)}catch(e){}toast('Code '+C8ST.code+' copied!')};
-      $('c8now').onclick=function(){clearConn();launchGame(C8ST.gid||('c8_'+now()),[{u:session(),name:session()}],C8ST.np,C8ST.stk)};
+      if($('c8start_pvp'))$('c8start_pvp').onclick=function(){startWaitWithSeated(false)};
+      if($('c8now'))$('c8now').onclick=function(){startWaitWithSeated(true)};
       return;
     }
     if(!CUR){
-      v.innerHTML='<div class="c8wrap">'+hdr+'<div class="c8card lwait"><h3 style="margin:0;color:#f6d77a">Connecting to table…</h3><p class="note">Dealing cards.</p></div></div><div id="c8modal"></div>';
-      $('c8bk').onclick=function(){clearConn();C8ST.mode='lobby';render()};
+      v.innerHTML='<div class="c8wrap">'+hdr+'<div class="c8card lwait"><h3 style="margin:0;color:#f6d77a">Connecting to table…</h3><p class="note">Syncing your Crazy 8 table with players.</p><button type="button" class="lpriv" id="c8cancel" style="margin-top:10px">Back to Lobby</button></div></div><div id="c8modal"></div>';
+      $('c8bk').onclick=function(){clearGameConn();C8ST.mode='lobby';render()};
+      if($('c8cancel'))$('c8cancel').onclick=function(){clearGameConn();C8ST.mode='lobby';render()};
       $('c8snd').onclick=function(){SND=!SND;ls('sb_snd',SND);render()};
       return;
     }
-    var ms=mySeat(CUR),curS=CUR.seats[CUR.turn],myTurn=(CUR.phase!=='done'&&ms===CUR.turn);
+    var actorSeat=CUR.localPvp?CUR.turn:mySeat(CUR);
+    var curS=CUR.seats[CUR.turn],myTurn=(CUR.phase!=='done'&&actorSeat===CUR.turn&&canAct(CUR));
+    var shielded=!!(CUR.localPvp&&CUR.phase!=='done'&&C8ST.seenTurnSeq!==(CUR.turnSeq||0));
+    var chatFresh=CUR.chat&&(now()-(CUR.chat.at||0)<5000)?CUR.chat:null;
     var pCards=CUR.seats.map(function(s,i){
       var isT=(CUR.phase!=='done'&&CUR.turn===i);
-      return '<div class="lpcard'+(isT?' turn':'')+(s.out?' out':'')+'"><span class="lscol" style="background:'+(isT?'#f6d77a':'#5a37a0')+'"></span><div class="lpname"><b>'+esc(s.name)+'</b><small>'+(s.out?'Eliminated':isT?'Playing…':'Waiting')+'</small></div><span class="lphm">🃏 '+s.hand.length+'</span>'+(isT?'<div class="lpbar" id="c8_bar_'+i+'" style="width:100%"></div>':'')+'</div>';
+      var bubble=(chatFresh&&chatFresh.who===s.name)?'<span class="lpchat">'+esc(chatFresh.txt)+'</span>':'';
+      return '<div class="lpcard'+(isT?' turn':'')+(s.out?' out':'')+'"><span class="lscol" style="background:'+(isT?'#f6d77a':'#5a37a0')+'"></span><div class="lpname"><b>'+esc(s.name)+'</b><small>'+(s.out?'Eliminated':isT?'Playing…':'Waiting')+'</small></div><span class="lphm">🃏 '+s.hand.length+'</span>'+bubble+(isT&&!CUR.noTimeout?'<div class="lpbar" id="c8_bar_'+i+'" style="width:100%"></div>':'')+'</div>';
     }).join('');
     var top=CUR.discard[CUR.discard.length-1],tst=C8_SUITS[top.s],cst=C8_SUITS[CUR.curSuit];
     var topTag=(top.r==='8'||top.r==='J')?'WILD':(top.r==='2'?'+2':(top.r==='A'&&top.s===0?'+5':(top.r==='7'?(CUR.np===2?'AGAIN':'SKIP'):(top.r==='5'?(CUR.np===2?'+1':'REV'):''))));
-    var myHand=ms>-1?CUR.seats[ms].hand:[];
-    var legalIdxs=[];if(myTurn)myHand.forEach(function(c,i){if(c8CanPlay(CUR,c,i))legalIdxs.push(i)});
+    var myHand=actorSeat>-1?CUR.seats[actorSeat].hand:[];
+    var legalIdxs=[];if(myTurn&&!shielded)myHand.forEach(function(c,i){if(c8CanPlay(CUR,c,i))legalIdxs.push(i)});
     var sameSuitCount=CUR.combo==='7'?myHand.filter(function(c){return c.s===CUR.comboSuit}).length:0;
-    var wildPicker=C8ST.pickWild?'<div class="c8suits"><p>Choose the next suit:</p><div class="c8sgrid">'+
+    var wildPicker=(!shielded&&C8ST.pickWild)?'<div class="c8suits"><p>Choose the next suit:</p><div class="c8sgrid">'+
       C8_SUITS.map(function(st,idx){return '<button type="button" class="c8sbtn'+(st.red?' red':'')+'" data-c8suit="'+idx+'">'+st.s+'<small>'+st.n+'</small></button>'}).join('')+'</div></div>':'';
     var actBtns='';
-    if(myTurn&&!C8ST.pickWild){
+    if(myTurn&&!shielded&&!C8ST.pickWild){
       if(CUR.pen>0)actBtns+='<button type="button" class="c8abtn" id="c8draw">Draw +'+CUR.pen+'</button>';
       else if(CUR.combo==='7'||CUR.combo==='5'){
         if(CUR.combo==='7'&&sameSuitCount>=2)actBtns+='<button type="button" class="c8abtn" id="c8dropall">Drop All '+C8_SUITS[CUR.comboSuit].s+' ('+sameSuitCount+')</button>';
@@ -3488,17 +4219,32 @@ function initCrazy8(){
       }
     }
     var handHTML=myHand.map(function(c,i){
-      var st=C8_SUITS[c.s],ok=myTurn&&!C8ST.pickWild&&c8CanPlay(CUR,c,i);
+      var st=C8_SUITS[c.s],ok=myTurn&&!shielded&&!C8ST.pickWild&&c8CanPlay(CUR,c,i);
       var bdg=(c.r==='8'||c.r==='J')?'WILD':(c.r==='2'?'+2':(c.r==='A'&&c.s===0?'+5':(c.r==='7'||c.r==='5'?c.r:'')));
       return '<button type="button" class="c8pc'+(st.red?' red':'')+(ok?' play':'')+'"'+(ok?' data-c8c="'+i+'"':' disabled')+'>'+
         '<span class="cr">'+c.r+'</span><span class="cs">'+st.s+'</span>'+(bdg==='WILD'||bdg==='+2'||bdg==='+5'?'<span class="cb">'+bdg+'</span>':'')+'</button>';
     }).join('');
+    var potTxt=CUR.localPvp?'👥 Pass &amp; Play':('🏆 Pot: '+c8Pot(CUR.np,CUR.stk).toLocaleString()+' ETB');
+    var tmTxt=CUR.noTimeout?'👥 No Timer':'⏱ <span id="c8_tm">20s</span>';
+    var doneWinTxt=CUR.localPvp?('🏆 '+esc(CUR.winner)+' wins!'):('🏆 '+esc(CUR.winner)+' won '+c8Pot(CUR.np,CUR.stk)+' ETB!');
+    var emotesHtml=(CUR.pvp&&CUR.phase!=='done')?'<div class="lemotes">'+['👍','🔥','😂','🍀','GG!'].map(function(em){return '<button type="button" class="lemote-btn" data-c8em="'+em+'">'+em+'</button>'}).join('')+'</div>':'';
+    var bottomArea='';
+    if(CUR.phase==='done'){
+      bottomArea='<button type="button" class="lfind" id="c8again" style="margin-top:6px">'+(CUR.localPvp?'Rematch':'New Game')+'</button>';
+    }else if(shielded){
+      bottomArea='<div class="c8shield"><b>🔒 Pass device to '+esc(curS.name)+'</b><small>Only '+esc(curS.name)+' should look at the screen ('+myHand.length+' cards)</small><button type="button" class="c8abtn" id="c8reveal">👁 Show '+esc(curS.name)+'\'s Cards</button></div>';
+    }else{
+      var handLabel=CUR.localPvp?(esc(curS.name)+'\'S HAND ('+myHand.length+')'):('YOUR HAND ('+myHand.length+')');
+      bottomArea='<div class="c8handhdr"><span>'+handLabel+'</span><span>'+(myTurn?(C8ST.pickWild?'Pick a suit':'Your turn'):esc(curS.name)+'\'s turn')+'</span></div>'+
+        (actBtns?'<div class="c8actbar">'+actBtns+'</div>':'')+
+        '<div class="c8hand">'+handHTML+'</div>';
+    }
     v.innerHTML='<div class="c8wrap">'+hdr+
-      '<div class="lgamehdr"><div class="lpotpill">🏆 Pot: '+c8Pot(CUR.np,CUR.stk).toLocaleString()+' ETB</div><div class="lpotpill">'+(CUR.dir<0?'↺ Rev':'↻')+' · ⏱ <span id="c8_tm">20s</span></div></div>'+
+      '<div class="lgamehdr"><div class="lpotpill">'+potTxt+'</div><div class="lpotpill">'+(CUR.dir<0?'↺ Rev':'↻')+' · '+tmTxt+'</div></div>'+
       '<div class="lplayers">'+pCards+'</div>'+
       '<div class="c8table">'+
         '<div class="c8piles">'+
-          '<button type="button" class="c8deck" id="c8deck"'+(myTurn&&!C8ST.pickWild&&CUR.drawnIdx<0?'':' disabled')+'><b>'+CUR.deck.length+'</b><small>'+(CUR.pen>0?'Draw +'+CUR.pen:'DRAW')+'</small></button>'+
+          '<button type="button" class="c8deck" id="c8deck"'+(myTurn&&!shielded&&!C8ST.pickWild&&CUR.drawnIdx<0?'':' disabled')+'><b>'+CUR.deck.length+'</b><small>'+(CUR.pen>0?'Draw +'+CUR.pen:'DRAW')+'</small></button>'+
           '<div class="c8topcard'+(tst.red?' red':'')+'">'+(topTag?'<span class="c8tag">'+topTag+'</span>':'')+'<span class="tl">'+top.r+'<br>'+tst.s+'</span><span class="mid">'+tst.s+'</span><span class="br">'+top.r+'<br>'+tst.s+'</span></div>'+
         '</div>'+
         '<div class="c8pills">'+
@@ -3506,40 +4252,54 @@ function initCrazy8(){
           (CUR.pen>0?'<span class="c8pill pen">Draw Penalty: +'+CUR.pen+'</span>':'')+
           (CUR.combo?'<span class="c8pill cmb">'+(CUR.combo==='7'?'7 Bonus: Play same suit, Drop All, or 7':'5 Bonus: Play 1 more card')+'</span>':'')+
         '</div>'+
-        '<p class="hl-msg'+(CUR.phase==='done'?' win':'')+'" style="margin-top:8px">'+(CUR.phase==='done'?'🏆 '+esc(CUR.winner)+' won '+c8Pot(CUR.np,CUR.stk)+' ETB!':esc(CUR.note||''))+'</p>'+
+        '<p class="hl-msg'+(CUR.phase==='done'?' win':'')+'" style="margin-top:8px">'+(CUR.phase==='done'?doneWinTxt:esc(CUR.note||''))+'</p>'+
       '</div>'+
       wildPicker+
-      (CUR.phase==='done'?'<button type="button" class="lfind" id="c8again" style="margin-top:6px">New Game</button>':
-        '<div class="c8handhdr"><span>YOUR HAND ('+myHand.length+')</span><span>'+(myTurn?(C8ST.pickWild?'Pick a suit':'Your turn'):curS.name+"'s turn")+'</span></div>'+
-        (actBtns?'<div class="c8actbar">'+actBtns+'</div>':'')+
-        '<div class="c8hand">'+handHTML+'</div>')+
-      '</div><div id="c8modal"></div>';
-    $('c8bk').onclick=function(){clearConn();C8ST.mode='lobby';C8ST.pickWild=null;render()};
+      bottomArea+
+      emotesHtml+'</div><div id="c8modal"></div>';
+    $('c8bk').onclick=function(){
+      if(CUR&&CUR.phase!=='done'&&!CUR.localPvp&&CUR.pvp){openLeaveModal();return}
+      clearGameConn();CUR=null;C8ST.mode='lobby';C8ST.pickWild=null;render();
+    };
     $('c8snd').onclick=function(){SND=!SND;ls('sb_snd',SND);if(!SND)stopAud();render()};
-    if($('c8again'))$('c8again').onclick=function(){clearConn();CUR=null;C8ST.mode='lobby';render()};
-    if($('c8deck'))$('c8deck').onclick=function(){if(myTurn&&!C8ST.pickWild)doDraw(CUR,ms)};
-    if($('c8draw'))$('c8draw').onclick=function(){if(myTurn&&!C8ST.pickWild)doDraw(CUR,ms)};
-    if($('c8pass'))$('c8pass').onclick=function(){if(myTurn&&!C8ST.pickWild)passDrawn(CUR,ms)};
-    if($('c8dropall'))$('c8dropall').onclick=function(){if(myTurn&&!C8ST.pickWild)playAllSuit(CUR,ms)};
+    if($('c8reveal'))$('c8reveal').onclick=function(){C8ST.seenTurnSeq=CUR.turnSeq||0;render()};
+    if($('c8again'))$('c8again').onclick=function(){
+      if(CUR&&CUR.localPvp){
+        var prevNames=CUR.seats.map(function(x){return x.name});
+        clearGameConn();CUR=null;
+        var gid='c8loc_'+now()+'_'+Math.random().toString(36).slice(2,6);
+        createGameOnce(gid,[],prevNames.length,0,false,prevNames);
+        return;
+      }
+      clearGameConn();CUR=null;C8ST.mode='lobby';render();
+    };
+    if($('c8deck'))$('c8deck').onclick=function(){if(myTurn&&!shielded&&!C8ST.pickWild)doDraw(CUR,actorSeat)};
+    if($('c8draw'))$('c8draw').onclick=function(){if(myTurn&&!shielded&&!C8ST.pickWild)doDraw(CUR,actorSeat)};
+    if($('c8pass'))$('c8pass').onclick=function(){if(myTurn&&!shielded&&!C8ST.pickWild)passDrawn(CUR,actorSeat)};
+    if($('c8dropall'))$('c8dropall').onclick=function(){if(myTurn&&!shielded&&!C8ST.pickWild)playAllSuit(CUR,actorSeat)};
     v.querySelectorAll('[data-c8suit]').forEach(function(el){
       el.onclick=function(){
         var st=+el.dataset.c8suit,pw=C8ST.pickWild;C8ST.pickWild=null;
         if(!pw)return;
-        if(pw.multi)resolveCardEffect(CUR,ms,pw.last,st);
-        else playSingle(CUR,ms,pw.idx,st);
+        if(pw.multi)playAllSuit(CUR,actorSeat,st);
+        else playSingle(CUR,actorSeat,pw.idx,st);
       };
     });
     v.querySelectorAll('[data-c8c]').forEach(function(el){
       el.onclick=function(){
-        if(!myTurn||C8ST.pickWild)return;
-        var idx=+el.dataset.c8c,card=CUR.seats[ms].hand[idx];
-        if((card.r==='8'||card.r==='J')&&!CUR.wildLock&&CUR.seats[ms].hand.length>1){
+        if(!myTurn||shielded||C8ST.pickWild)return;
+        var idx=+el.dataset.c8c,card=CUR.seats[actorSeat].hand[idx];
+        if((card.r==='8'||card.r==='J')&&!CUR.wildLock&&CUR.seats[actorSeat].hand.length>1){
           C8ST.pickWild={idx:idx};render();return;
         }
-        playSingle(CUR,ms,idx,CUR.curSuit);
+        playSingle(CUR,actorSeat,idx,CUR.curSuit);
       };
     });
+    v.querySelectorAll('[data-c8em]').forEach(function(el){
+      el.onclick=function(){sendQuickEmote(el.dataset.c8em)};
+    });
   }
+  subscribeOpenTables();
   render();
 }
 /* ===== Buna Time (243-ways Coffee Ceremony Slot) ===== */
@@ -3973,7 +4733,33 @@ var ROWS=[
 ["Missing even 1 square (24 of 25 marked) does NOT win Full House.","1 ሳጥን እንኳን ከቀረ (ከ25 ውስጥ 24) ሙሉ ቤት አያሸንፍም።","1 ሳጹን እኳ እንተተረፈ (24 ካብ 25) ምሉእ ገዛ ኣይስዕርን።"],
 ["Waiting for the first call…","የመጀመሪያው ቁጥር እየተጠበቀ ነው…","እቲ ናይ መጀመሪያ ቁጽሪ ይጽበ ኣሎ…"],["Bingo!","ቢንጎ!","ቢንጎ!"],["BINGO!","ቢንጎ!","ቢንጎ!"],["Auto-mark","ራስ-ሰር ምልክት","ባዕሉ ምልክት ምግባር"],["🔊 Sound on","🔊 ድምጽ በርቷል","🔊 ድምጺ ተኸፊቱ"],["🔇 Sound off","🔇 ድምጽ ጠፍቷል","🔇 ድምጺ ተዓጽዩ"],
 ["Too late: another player already won.","ዘግይተዋል፤ ሌላ ተጫዋች ጨዋታውን አሸንፏል።","ደንጉዩ፤ ካልእ ተጻዋታይ ነዚ ጸወታ ሰዒሩ ኣሎ።"],["A marked number has not been called yet.","ምልክት የተደረገበት ቁጥር ገና አልተጠራም።","ምልክት ዝተገበረሉ ቁጽሪ ገና ኣይተጸዋዕን።"],["All 75 balls called. No winner this round.","ሁሉም 75 ቁጥሮች ተጠርተዋል። በዚህ ዙር አሸናፊ የለም።","ኩሎም 75 ቁጽርታት ተጸዊዖም። ኣብዚ ዙር ዕዉት የለን።"],
-["Game over","ጨዋታው አብቅቷል","ጸወታ ተወዲኡ"],["No winner in this game.","በዚህ ጨዋታ አሸናፊ የለም።","ኣብዚ ጸወታ ዕዉት የለን።"],["BINGO! You won","ቢንጎ! አሸንፈዋል","ቢንጎ! ሰዒርኩም"],["Back to rooms","ወደ ክፍሎች ተመለስ","ናብ ክፍልታት ተመለስ"],["Calls:","ጥሪዎች፡","ጥሪታት፡"],["Prize:","ሽልማት፡","ሽልማት፡"]
+["Game over","ጨዋታው አብቅቷል","ጸወታ ተወዲኡ"],["No winner in this game.","በዚህ ጨዋታ አሸናፊ የለም።","ኣብዚ ጸወታ ዕዉት የለን።"],["BINGO! You won","ቢንጎ! አሸንፈዋል","ቢንጎ! ሰዒርኩም"],["Back to rooms","ወደ ክፍሎች ተመለስ","ናብ ክፍልታት ተመለስ"],["Calls:","ጥሪዎች፡","ጥሪታት፡"],["Prize:","ሽልማት፡","ሽልማት፡"],
+["Online PvP","በመስመር PvP","ብመስመር PvP"],["Pass & Play","በአንድ ስልክ","ኣብ ሓደ ስልክ"],["Vs Bots","ከቦት ጋር","ምስ ቦት"],
+["Person-to-person & Arcade Ludo","ከሰው ከሰው እና የአርኬድ ሉዶ","ሰብ ምስ ሰብን ኣርኬድ ሉዶን"],
+["FIND REAL PLAYER","እውነተኛ ተጫዋች ፈልግ","ሓቀኛ ተጻዋታይ ድለ"],
+["Person-to-person matchmaking · bots never auto-join","ከሰው ከሰው ማገናኛ · ቦቶች በራሳቸው አይገቡም","ምርኻብ ሰብ ምስ ሰብ · ቦት ብባዕሉ ኣይኣቱን"],
+["LIVE OPEN TABLES","ክፍት የመጫወቻ ጠረጴዛዎች","ክፉታት ጣውላታት ጸወታ"],
+["● Real Players","● እውነተኛ ተጫዋቾች","● ሓቀኛ ተጻዋትቲ"],
+["OR PLAY WITH FRIENDS","ወይም ከጓደኞች ጋር ይጫወቱ","ወይ ምስ ኣዕሩኽ ተጻወቱ"],
+["👥 Create Friend Table","👥 የጓደኛ ጠረጴዛ ክፈት","👥 ናይ ዓርኪ ጣውላ ክፈት"],
+["List table in Live Open Tables so anyone can join","ማንም ሰው እንዲቀላቀል በክፍት ጠረጴዛዎች ዝርዝር ውስጥ አሳይ","ዝኾነ ሰብ ክጽንበር ኣብ ዝርዝር ክፉታት ጣውላታት ኣርኢ"],
+["Friend's code","የጓደኛ ኮድ","ኮድ ዓርኪ"],["Join","ተቀላቀል","ተሳተፍ"],
+["PLAYER NAMES (SAME DEVICE)","የተጫዋቾች ስም (በአንድ ስልክ)","ኣስማት ተጻዋትቲ (ኣብ ሓደ ስልኪ)"],
+["START PASS & PLAY","በአንድ ስልክ ጀምር","ኣብ ሓደ ስልኪ ጀምር"],
+["PLAY VS BOTS","ከቦት ጋር ተጫወት","ምስ ቦት ጻወት"],
+["Waiting for Real Players…","እውነተኛ ተጫዋቾችን በመጠበቅ ላይ…","ሓቀኛ ተጻዋትቲ ይጽበ ኣሎ…"],
+["Person-to-Person Table","የሰው ከሰው ጠረጴዛ","ጣውላ ሰብ ምስ ሰብ"],
+["Play with Bots Instead","በቦቶች ተጫወት","ኣብ ክንዲኡ ምስ ቦት ጻወት"],
+["Leave Match?","ጨዋታውን ይውጡ?","ጸወታ ክትወጽእ?"],
+["Stay in Match","በጨዋታው ቆይ","ኣብ ጸወታ ጽናሕ"],
+["Back to Lobby (Resume Later)","ወደ ሎቢ ተመለስ (በኋላ ቀጥል)","ናብ ሎቢ ተመለስ (ድሓር ቀጽል)"],
+["Forfeit & Leave Match","ተሸንፈው ይውጡ","ተሳዒርካ ውጻእ"],
+["⚡ Live Match in Progress","⚡ ቀጥታ ጨዋታ በመካሄድ ላይ","⚡ ህያው ጸወታ ይካየድ ኣሎ"],["Resume","ቀጥል","ቀጽል"],
+["Person-to-person & Arcade Crazy 8","ከሰው ከሰው እና የአርኬድ ክሬዚ 8","ሰብ ምስ ሰብን ኣርኬድ ክሬዚ 8ን"],
+["Match suit or number!","ተመሳሳይ ዓይነት ወይም ቁጥር ይጣሉ!","ዝመሳሰል ዓይነት ወይ ቁጽሪ ተጻወቱ!"],
+["Choose the next suit:","ቀጣዩን ዓይነት ይምረጡ፡","ዝቕጽል ዓይነት ሕረዩ፡"],
+["Syncing your Crazy 8 table with players.","የክሬዚ 8 ጠረጴዛዎን ከተጫዋቾች ጋር በማገናኘት ላይ።","ጣውላ ክሬዚ 8 ምስ ተጻዋትቲ ይራኸብ ኣሎ።"],
+["Rematch","ድጋሚ ተጫወት","ዳግማይ ጻወት"]
 ];
 var RX=[
 [/^Welcome, (.*)$/,"እንኳን ደህና መጡ፣ $1","እንኳዕ ደሓን መጻእኩም፣ $1"],
@@ -4051,7 +4837,10 @@ var RX=[
 [/^🧲 MAGNET! WIN (.*) ETB!$/,"🧲 ማግኔት! $1 ብር አሸነፉ!","🧲 ማግኔት! $1 ብር ሰዒርኩም!"],
 [/^🪙 COIN BONUS · RE-SPINS: (\d+)(.*)$/,"🪙 ሳንቲም ቦነስ · ቀሪ ዙር፡ $1$2","🪙 ሳንቲም ቦነስ · ዝተረፈ ዙር፡ $1$2"],
 [/^🪙 COIN PILE 60\/60! COIN BONUS · 3 RE-SPINS$/,"🪙 ሳንቲም 60/60! ሳንቲም ቦነስ · 3 ዙሮች","🪙 ሳንቲም 60/60! ሳንቲም ቦነስ · 3 ዙራት"],
-[/^3 ON A LINE PAYS \(BET (.*)\)$/,"በመስመር 3 ሲመጣ የሚከፍለው (ውርርድ $1)","3 ኣብ መስመር ዝኸፍሎ (ውርርድ $1)"]
+[/^3 ON A LINE PAYS \(BET (.*)\)$/,"በመስመር 3 ሲመጣ የሚከፍለው (ውርርድ $1)","3 ኣብ መስመር ዝኸፍሎ (ውርርድ $1)"],
+[/^🔒 Pass device to (.*)$/,"🔒 ስልኩን ለ$1 ያስተላልፉ","🔒 ስልኪ ናብ $1 ኣሕልፉ"],
+[/^Only (.*) should look at the screen \((\d+) cards\)$/,"ማያ ገጹን ማየት ያለበት $1 ብቻ ነው ($2 ካርዶች)","ነዚ ስክሪን ክርኢ ዘለዎ $1 ጥራይ እዩ ($2 ካርድታት)"],
+[/^👁 Show (.*)'s Cards$/,"👁 የ$1ን ካርዶች አሳይ","👁 ካርድታት $1 ኣርኢ"]
 ];
 var PH=[[" ETB"," ብር"," ብር"],[" birr"," ብር"," ብር"],[" Reward: "," ሽልማት፡ "," ሽልማት፡ "],["Any Line","ማንኛውም መስመር","ዝኾነ መስመር"],["Four Corners","አራቱ ማዕዘኖች","ኣርባዕተ ማዕዘናት"],["Both Diagonals","ሁለቱም ሰያፎች","ክልቲኡ ሰያፍ"],["Plus Sign","የመደመር ምልክት","ምልክት ምውሳኽ"],["Letter T","ፊደል T","ፊደል T"],["Letter H","ፊደል H","ፊደል H"],["Letter L","ፊደል L","ፊደል L"],["Letter Z","ፊደል Z","ፊደል Z"],["Large Square","ትልቅ ካሬ","ዓቢ ካሬ"],["Small Rectangle","ትንሽ አራት ማዕዘን","ንእሽቶ ኣርባዕተ ኩርናዕ"],["Diamond","ዳይመንድ","ዳይመንድ"],["Half House","ግማሽ ቤት","ፍርቂ ገዛ"],["Two Lines + Small Square","ሁለት መስመር + ትንሽ ካሬ","ክልተ መስመር + ንእሽቶ ካሬ"],["Left + Right Columns","ግራ + ቀኝ አምዶች","ጸጋም + የማን ዓምድታት"],["Top + Bottom Rows","ላይ + ታች ረድፎች","ላዕሊ + ታሕቲ መስመራት"],["Full House","ሙሉ ቤት","ምሉእ ገዛ"]];
 var EX=Object.create(null);ROWS.forEach(function(r){EX[r[0]]=[r[1],r[2]]});

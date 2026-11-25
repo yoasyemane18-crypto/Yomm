@@ -3045,17 +3045,33 @@ function initLudo(){
 var HL_RANKS=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 var HL_SUITS=[{s:'♠',c:'#1e1b4b',red:false},{s:'♥',c:'#dc2626',red:true},{s:'♦',c:'#dc2626',red:true},{s:'♣',c:'#1e1b4b',red:false}];
 var HL_STAKES=[10,20,50,100,200,500,1000];
-var HST={stkIdx:0,active:false,cur:null,mult:1,streak:0,skips:52,trail:[],msg:'Choose your stake and deal the first card.',mtype:'',busy:false,flip:false,outcome:''};
+var HL_WIN_SCALE=0.62,HL_MAX_SKIPS=3;
+var HST={stkIdx:0,active:false,cur:null,mult:1,streak:0,skips:HL_MAX_SKIPS,trail:[],msg:'Choose your stake and deal the first card.',mtype:'',busy:false,flip:false,outcome:''};
 function hlDraw(){return{r:Math.floor(Math.random()*13),su:Math.floor(Math.random()*4)}}
-function hlMultFor(cnt){return Math.floor((0.97*13/cnt)*100)/100}
+function hlIsWinRank(curR,nxtR,dir){
+  if(curR===0)return dir==='hi'?(nxtR>0):(nxtR===0);
+  if(curR===12)return dir==='hi'?(nxtR===12):(nxtR<12);
+  return dir==='hi'?(nxtR>curR):(nxtR<curR);
+}
+function hlDrawForGuess(curR,dir){
+  var nxt=hlDraw();
+  if(hlIsWinRank(curR,nxt.r,dir)&&Math.random()>HL_WIN_SCALE){
+    var loseRanks=[];
+    for(var i=0;i<13;i++)if(!hlIsWinRank(curR,i,dir))loseRanks.push(i);
+    if(loseRanks.length)nxt={r:loseRanks[Math.floor(Math.random()*loseRanks.length)],su:Math.floor(Math.random()*4)};
+  }
+  return nxt;
+}
+function hlMultFor(cnt){return Math.floor((0.90*13/cnt)*100)/100}
 function hlOdds(r){
-  var hiCnt=r===0?12:(r===12?1:13-r);
-  var loCnt=r===0?1:(r===12?12:r+1);
+  var hiCnt=r===0?12:(r===12?1:12-r);
+  var loCnt=r===12?12:(r===0?1:r);
   return{
-    hiLbl:r===0?'Higher':(r===12?'Same':'Higher or same'),
-    loLbl:r===12?'Lower':(r===0?'Same':'Lower or same'),
+    hiLbl:r===12?'Same':'Higher',
+    loLbl:r===0?'Same':'Lower',
     hiCnt:hiCnt,loCnt:loCnt,
-    hiPct:Math.round(hiCnt/13*100),loPct:Math.round(loCnt/13*100),
+    hiPct:Math.max(1,Math.round(hiCnt/13*HL_WIN_SCALE*100)),
+    loPct:Math.max(1,Math.round(loCnt/13*HL_WIN_SCALE*100)),
     hiMult:hlMultFor(hiCnt),loMult:hlMultFor(loCnt)
   };
 }
@@ -3094,13 +3110,13 @@ function hlHowHTML(){
     '<button type="button" class="lfullbtn" id="hlfullrules">📜 Full game rules</button>'+
     '<div class="km-box"><b>HOW TO PLAY HI-LO</b><ol style="padding-left:18px;margin:8px 0 0;line-height:1.55">'+
     '<li><b>Choose your stake and tap Deal.</b> One card is turned face up.</li>'+
-    '<li><b>Guess the next card:</b> Higher or same, or Lower or same. Card order is 2 (lowest) up to 10, J, Q, K and A (highest). Suits don\'t matter.</li>'+
-    '<li><b>Every right guess raises your multiplier.</b> The less likely guess pays more; each button shows what it pays. A wrong guess loses the stake.</li>'+
-    '<li><b>Don\'t like the card? Skip it.</b> Your multiplier stays the same. Every card comes from a full 52-card shoe, so any card can come again.</li>'+
+    '<li><b>Guess the next card:</b> Higher or Lower. Card order is 2 (lowest) up to 10, J, Q, K and A (highest). Suits don\'t matter.</li>'+
+    '<li><b>Every right guess raises your multiplier.</b> The less likely guess pays more; each button shows its win chance and payout. A wrong guess or matching rank (except Same on 2 or A) loses the stake.</li>'+
+    '<li><b>Don\'t like the card? Skip it</b> (up to '+HL_MAX_SKIPS+' times per round). Your multiplier stays the same.</li>'+
     '<li><b>Cash out any time</b> after your first right guess to win stake × multiplier.</li></ol></div>'+
     '<div class="km-box"><b>CHANCES</b><span style="display:block;font-size:12px;color:var(--mut);margin-bottom:6px">for the next card, and what one right guess pays</span>'+
     '<table class="lptbl"><tr><th>Card</th><th>▲ Higher</th><th>▼ Lower</th></tr>'+rows+'</table>'+
-    '<p style="font-size:12px;color:var(--mut);line-height:1.45;margin:10px 0 0">"Higher" and "lower" include the same rank, except on a 2 (strictly higher, or the same) and an ace (strictly lower, or the same). Right guesses multiply together.</p></div>'+
+    '<p style="font-size:12px;color:var(--mut);line-height:1.45;margin:10px 0 0">Next card must be strictly higher or strictly lower (same rank loses, except Same on a 2 or an Ace). Right guesses multiply together.</p></div>'+
     '<p style="text-align:center;font-size:11.5px;color:var(--mut);margin:10px 0 12px">18+ only. Play responsibly.</p>'+
     '<button type="button" class="am-go" id="hlmok">Close</button></div>';
 }
@@ -3108,9 +3124,9 @@ function hlFullRulesHTML(){
   return '<div class="am-card" style="max-width:430px"><div class="lrules-top"><span>HI-LO · GAME RULES</span><button type="button" class="lrules-cls" id="hlback">Close</button></div>'+
     '<div class="lrules-sec"><h4>The game</h4><ul class="lrules-ul">'+
     '<li>Choose your stake (10 to 1,000 ETB) and start. One card is turned face up.</li>'+
-    '<li>Guess whether the next card is "higher or same" or "lower or same". Card order: 2 (lowest) … 10, J, Q, K, A (highest). The same rank wins either guess. Suits (♠ ♥ ♦ ♣) are only for looks.</li>'+
-    '<li>Every card is drawn from 52 with the same chance each time (a card can come again). Guess right and your multiplier rises; guess wrong and the stake is lost. Each button shows what it would pay; the less likely guess pays more.</li>'+
-    '<li>You can skip a card you don\'t like (up to 52 per game); the multiplier stays the same.</li>'+
+    '<li>Guess whether the next card is "higher" or "lower". Card order: 2 (lowest) … 10, J, Q, K, A (highest). Matching the same rank loses unless you pick Same on a 2 or an Ace. Suits (♠ ♥ ♦ ♣) are only for looks.</li>'+
+    '<li>Guess right and your multiplier rises; guess wrong and the stake is lost. Each button shows its win chance and what it would pay; the less likely guess pays more.</li>'+
+    '<li>You can skip a card you don\'t like (up to '+HL_MAX_SKIPS+' per game); the multiplier stays the same.</li>'+
     '<li>After your first right guess you can cash out at any time: stake × the current multiplier. Reach ×5,000 and you are cashed out automatically.</li>'+
     '<li>A game left unfinished is preserved while you remain on the table until cashed out or settled.</li>'+
     '</ul></div>'+
@@ -3158,8 +3174,8 @@ function initHiLo(){
       '<button type="button" class="hl-gbtn hi" id="hlhi"'+(HST.busy?' disabled':'')+'><span class="ic">▲</span><span><b>'+o.hiLbl+'</b><small>×'+o.hiMult.toFixed(2)+' · '+o.hiPct+'%</small></span></button>'+
       '<button type="button" class="hl-gbtn lo" id="hllo"'+(HST.busy?' disabled':'')+'><span class="ic">▼</span><span><b>'+o.loLbl+'</b><small>×'+o.loMult.toFixed(2)+' · '+o.loPct+'%</small></span></button>'
       :
-      '<button type="button" class="hl-gbtn" disabled><span class="ic">▲</span><span><b>Higher or same</b><small>deal first</small></span></button>'+
-      '<button type="button" class="hl-gbtn" disabled><span class="ic">▼</span><span><b>Lower or same</b><small>deal first</small></span></button>';
+      '<button type="button" class="hl-gbtn" disabled><span class="ic">▲</span><span><b>Higher</b><small>deal first</small></span></button>'+
+      '<button type="button" class="hl-gbtn" disabled><span class="ic">▼</span><span><b>Lower</b><small>deal first</small></span></button>';
     var act=HST.active?
       '<div class="hl-actrow"><button type="button" class="hl-skip" id="hlskip"'+(HST.busy||HST.skips<=0?' disabled':'')+'>Skip ↷ ('+HST.skips+')</button>'+
       (HST.streak>=1?'<button type="button" class="hl-cash" id="hlcash"'+(HST.busy?' disabled':'')+'>Cash out · '+hlFmt(stk*HST.mult)+' ETB</button>':'')+
@@ -3210,7 +3226,7 @@ function initHiLo(){
       HST.busy=false;
       if(!ok){HST.mtype='err';HST.msg='Could not place bet.';render();return}
       var c=hlDraw();
-      HST.active=true;HST.cur=c;HST.mult=1;HST.streak=0;HST.skips=52;HST.outcome='';
+      HST.active=true;HST.cur=c;HST.mult=1;HST.streak=0;HST.skips=HL_MAX_SKIPS;HST.outcome='';
       HST.trail=[{c:c,tag:'start'}];HST.mtype='';HST.msg='Higher or lower? Make your guess, or skip this card.';
       tone(520,.06);render();
     });
@@ -3229,10 +3245,7 @@ function initHiLo(){
     HST.busy=true;HST.flip=true;tone(400,.05);render();
     ST.push(setTimeout(function(){
       HST.busy=false;HST.flip=false;
-      var curR=HST.cur.r,nxt=hlDraw(),o=hlOdds(curR),win=false,stepMult=dir==='hi'?o.hiMult:o.loMult;
-      if(curR===0)win=(dir==='hi')?(nxt.r>0):(nxt.r===0);
-      else if(curR===12)win=(dir==='hi')?(nxt.r===12):(nxt.r<12);
-      else win=(dir==='hi')?(nxt.r>=curR):(nxt.r<=curR);
+      var curR=HST.cur.r,nxt=hlDrawForGuess(curR,dir),o=hlOdds(curR),win=hlIsWinRank(curR,nxt.r,dir),stepMult=dir==='hi'?o.hiMult:o.loMult;
       HST.cur=nxt;
       if(win){
         HST.streak++;
